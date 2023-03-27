@@ -157,11 +157,12 @@ class EvalHand : Card
         // Sorting and relove duplicate values
         Array.Sort(straightcheck);
         var reduced = straightcheck.Distinct().ToArray();
-
+        //foreach(var x in reduced)
+        //    Debug.Log(x + ", ");
         //Console.Write("straigh stat, first to last " + straightcheck[0] + " " + straightcheck[straightcheck.Length - 1] + " \n\n");
 
         // check for wheel (lowest straight with ace as 1)
-        if (reduced[0] == 2 && reduced[1] == 3 &&
+        if (cardsShown>3 && reduced[0] == 2 && reduced[1] == 3 && 
             reduced[2] == 4 && reduced[3] == 5 && reduced[reduced.Length - 1] == 14)
         {
             straight = true;

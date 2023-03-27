@@ -20,7 +20,7 @@ public class PokerCardManager : MonoBehaviour
     }
     public Sprite GetCardSprite(Card.SUIT cardSuit, Card.VALUE cardValue)
     {
-        int cardIndex = (int)cardValue - 2;
+        int cardIndex = (int)cardValue - 2;  // [0]Two, [1]Three, [2]Four, [3]Five, [4]Six, [5]Seven, [6]Eight, [7]Nine, [8]Ten, [9]Jack, [10]Queen [11]King, [12]Ace
         switch (cardSuit)
         {
             case Card.SUIT.CLUBS:

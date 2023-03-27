@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TestPoker : MonoBehaviour
+public class HandWinTest : MonoBehaviour
 {
     EvalHand Eval = new EvalHand();
     public Card[] PlayerHand1 = new Card[2];
@@ -62,21 +62,26 @@ public class TestPoker : MonoBehaviour
     }
     private void Start()
     {
-        PlayerHand1[0].Suit = Card.SUIT.DIAMONDS; PlayerHand1[0].Value = Card.VALUE.FIVE;
-        PlayerHand1[1].Suit = Card.SUIT.SPADES; PlayerHand1[1].Value = Card.VALUE.TEN;
+        PlayerHand1[0] = new Card();
+        PlayerHand1[0].Suit = Card.SUIT.DIAMONDS; PlayerHand1[0].Value = Card.VALUE.TWO;
+        PlayerHand1[1] = new Card();
+        PlayerHand1[1].Suit = Card.SUIT.CLUBS; PlayerHand1[1].Value = Card.VALUE.FOUR;
 
-        PlayerHand2[0].Suit = Card.SUIT.DIAMONDS; PlayerHand2[0].Value = Card.VALUE.SEVEN;
-        PlayerHand2[1].Suit = Card.SUIT.SPADES; PlayerHand2[1].Value = Card.VALUE.JACK;
+        PlayerHand2[0].Suit = Card.SUIT.SPADES; PlayerHand2[0].Value = Card.VALUE.TWO;
+        PlayerHand2[1].Suit = Card.SUIT.HEARTS; PlayerHand2[1].Value = Card.VALUE.THREE;
 
-        Board[0].Suit = Card.SUIT.SPADES; Board[0].Value = Card.VALUE.FIVE;
-        Board[1].Suit = Card.SUIT.DIAMONDS; Board[1].Value = Card.VALUE.TEN;
-        //Board[2].Suit = Card.SUIT.SPADES; Board[2].Value = Card.VALUE.FOUR;
-        //Board[3].Suit = Card.SUIT.CLUBS; Board[3].Value = Card.VALUE.NINE;
+        Board[0].Suit = Card.SUIT.DIAMONDS; Board[0].Value = Card.VALUE.THREE;
+        Board[1].Suit = Card.SUIT.SPADES; Board[1].Value = Card.VALUE.THREE;
+        Board[2].Suit = Card.SUIT.SPADES; Board[2].Value = Card.VALUE.FIVE;
+        Board[3].Suit = Card.SUIT.CLUBS; Board[3].Value = Card.VALUE.ACE;
         //Board[4].Suit = Card.SUIT.DIAMONDS; Board[4].Value = Card.VALUE.TWO;
 
-        int[] rank = Eval.Evaluate(PlayerHand1, Board, 2);
-        Debug.Log(rank[0] + " -" + RankName.getString(rank[0]) + "...highcard: " + rank[1] + "second high:" + rank[2]);
-        CheckWinner();
+        int[] rank = Eval.Evaluate(PlayerHand1, Board, 4);
+        int[] rank2 = Eval.Evaluate(PlayerHand2, Board, 4);
+        Debug.Log("Player1: " + rank[0] + " -" + RankName.getString(rank[0]) + "...highcard: " + rank[1] + "second high:" + rank[2]);
+        Debug.Log("Player2: " + rank2[0] + " -" + RankName.getString(rank2[0]) + "...highcard: " + rank2[1] + "second high:" + rank2[2]);
+
+        //CheckWinner();
     }
     class Ranks
     {

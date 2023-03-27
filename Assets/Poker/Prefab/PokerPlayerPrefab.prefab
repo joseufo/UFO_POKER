@@ -17,7 +17,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1105846855216677324
 Transform:
   m_ObjectHideFlags: 0
@@ -114,7 +114,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1105846855255175850
 Transform:
   m_ObjectHideFlags: 0
@@ -272,7 +272,7 @@ MeshRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 3
+  m_SortingOrder: 4
   m_AdditionalVertexStreams: {fileID: 0}
 --- !u!114 &1105846855328292161
 MonoBehaviour:
@@ -416,6 +416,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a4f7d1e9a04f5b0438b536f8b00f069d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  PlayerName: 
   playerText: {fileID: 1105846855328292161}
   rankingText: {fileID: 695218191886609351}
   PlayerHand: []
@@ -605,7 +606,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: High Card
+  m_text: '-'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -688,7 +689,7 @@ GameObject:
   - component: {fileID: 2672654701722929456}
   - component: {fileID: 336071497343986614}
   m_Layer: 0
-  m_Name: PlayerData (1)
+  m_Name: BG
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

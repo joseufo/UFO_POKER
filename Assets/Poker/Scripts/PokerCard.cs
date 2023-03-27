@@ -7,6 +7,7 @@ public class PokerCard : MonoBehaviour
     // Start is called before the first frame update
 
     //public Sprite cardSprite;
+   
     public Card CardData;
 
     
@@ -17,24 +18,28 @@ public class PokerCard : MonoBehaviour
        
 
     }
-    public void SetCardData(Card.SUIT suit, Card.VALUE cardValue)
+    public void SetAndShowCard(Card cardData)
     {
-        CardData.Suit = suit;
-        CardData.Value = cardValue;
-        SetCardSprite(suit, cardValue);
-    }
-    //public (Card.Suit, int) GetCardData()
-    //{
-    //    return (CardData.suit, CardData.rank);
-    //}
+        this.CardData = cardData;
+        SetCardSprite();
+        this.gameObject.SetActive(true); 
 
-    void SetCardSprite(Card.SUIT suit, Card.VALUE cardValue)
-    {
-        GetComponent<SpriteRenderer>().sprite = PokerCardManager.instance.GetCardSprite(suit, cardValue);
     }
-    // Update is called once per frame
-    void Update()
+
+    public void SetCard(Card cardData)
     {
-        
+        this.CardData = cardData;
+        SetCardSprite();       
+
     }
+    public void UnshowCard()
+    {
+        GetComponent<SpriteRenderer>().sprite = null;
+    }
+    public void SetCardSprite()
+    {
+        GetComponent<SpriteRenderer>().sprite = PokerCardManager.instance.GetCardSprite(CardData.Suit, CardData.Value);
+    }
+    
+    
 }

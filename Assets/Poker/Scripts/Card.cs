@@ -2,10 +2,11 @@ using System;
 using UnityEngine;
 
 
-[Serializable]
+//[Serializable]
+[SerializableAttribute]
 public class Card
 {
-    [Flags]
+    //[Flags]
     public enum SUIT { SPADES, CLUBS, DIAMONDS, HEARTS }
     public enum VALUE
     {
