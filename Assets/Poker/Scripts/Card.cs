@@ -18,7 +18,7 @@ public class Card
     public SUIT Suit { get; set; }
     public VALUE Value { get; set; }
 
-
+    public int rank { get => (int)Value; }
 
     public override string ToString()
     {

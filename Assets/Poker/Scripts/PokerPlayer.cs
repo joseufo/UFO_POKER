@@ -50,6 +50,12 @@ public class PokerPlayer : MonoBehaviour
     
     public void SetAndShowPlayerCards(Card cardData1, Card cardData2)
     {
+        if(cardData2.Value>cardData1.Value)
+        {
+            var temp = cardData1;
+            cardData1 = cardData2;
+            cardData2 = temp;            
+        }
         Card1.SetAndShowCard(cardData1);
         PlayerHand[0] = new Card();
         PlayerHand[0] = cardData1;

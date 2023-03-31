@@ -43,13 +43,23 @@ public class PokerServManager : MonoBehaviour
     {
         PokerClientManager.instance.AddOpponent();
     }
-
+    public void PlayerJoinAddMax()
+    {
+        for(int i=0; i<5; i++)
+            PokerClientManager.instance.AddOpponent();
+    }
+    public void RestartGame()
+    {
+        UnityEngine.SceneManagement.SceneManager.LoadScene(0);
+    }
+    public void ExitGame() => Application.Quit();
     public void StartGame()
     {
         isGameStarted = true;
         SetCardAndShuffle();
         DistributeCards();
     }
+    
     void DistributeCards()
     {
         var playerlist = PokerClientManager.instance.PlayerList;
@@ -95,7 +105,7 @@ public class PokerServManager : MonoBehaviour
     public void SetCardAndShuffle()
     {
         //int i = 0;
-        int xOffset = 0;
+        int xOffset = 10;
         foreach (Card.SUIT suit in Enum.GetValues(typeof(Card.SUIT)))
         {
 
@@ -134,17 +144,7 @@ public class PokerServManager : MonoBehaviour
         //    CardDeck[n] = temp;
         //}
 
-        //for (int shuffleCount = 0; shuffleCount < 1776; shuffleCount++)
-        //{
-        //    for (int i = 0; i < 52; i++)
-        //    {
-        //        int index = rand.Next(52);
-        //        hold = CardDeck[i];
-        //        CardDeck[i] = CardDeck[index];
-        //        CardDeck[index] = hold;
-        //        //Debug.Log(CardDeck[i].suit + " : " + CardDeck[i].rank);
-        //    }
-        //}
+       
 
 
         //SetTableCard();

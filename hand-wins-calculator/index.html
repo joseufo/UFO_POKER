@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="shortcut icon" href="favicon.ico" />
+    <link
+      href="https://fonts.googleapis.com/css?family=Open+Sans:400,700&display=swap"
+      rel="stylesheet"
+    />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="theme-color" content="#000000" />
+    <link
+      rel="manifest"
+      href="D:\WebDev\PokerWeb\hand-wins-calculator\manifest.json"
+    />
+    <title>Hand Wins Calculator</title>
+    <link href="static/css/2.5659c01f.chunk.css" rel="stylesheet" />
+    <link href="static/css/main.34a9b430.chunk.css" rel="stylesheet" />
+  </head>
+  <body>
+    <noscript>You need to enable JavaScript to run this app.</noscript>
+    <div id="scale-container">
+      <div id="scale-content" class="active"><div id="root"></div></div>
+    </div>
+    <style>
+      #scale-container {
+        position: absolute;
+        left: 0;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        background: #181619;
+      }
+      #scale-content {
+        height: 100%;
+      }
+      #scale-content.active {
+        width: 1600px;
+        height: 965px;
+        -ms-transform-origin: top left;
+        -webkit-transform-origin: top left;
+        transform-origin: top left;
+        margin: 0 auto;
+        position: absolute;
+      }
+      @media (max-width: 834px) {
+        #scale-content {
+          transform: none !important;
+          left: auto !important;
+          top: auto !important;
+        }
+      }
+    </style>
+    <script>
+      var isDisabledScale = !1,
+        basePage = { width: 1600, height: 965, scale: 1, scaleX: 1, scaleY: 1 },
+        page = document.getElementById("scale-content");
+      if (isDisabledScale)
+        hasClass(page, "active") && removeClass(page, "active");
+      else {
+        var size = getElemSize(document.getElementById("scale-container"));
+        scaleContent(page, size.pageWidth, size.pageHeight),
+          window.addEventListener("resize", function () {
+            var e = getElemSize(document.getElementById("scale-container"));
+            scaleContent(page, e.pageWidth, e.pageHeight);
+          });
+      }
+      function getElemSize(e) {
+        return {
+          pageHeight: parseInt(getComputedStyle(e, null).height, 10),
+          pageWidth: parseInt(getComputedStyle(e, null).width, 10),
+        };
+      }
+      function scaleContent(e, a, s) {
+        var t = a <= 834;
+        t
+          ? hasClass(e, "active") && removeClass(e, "active")
+          : hasClass(e, "active") || addClass(e, "active");
+        var l = 1,
+          c = 1;
+        (l = t ? l : a / basePage.width),
+          (c = t ? c : s / basePage.height),
+          (basePage.scaleX = l),
+          (basePage.scaleY = c),
+          (basePage.scale = c < l ? c : l);
+        var i = Math.abs(Math.floor((basePage.width * basePage.scale - a) / 2)),
+          n = Math.abs(Math.floor((basePage.height * basePage.scale - s) / 2)),
+          g =
+            "transform:scale(" +
+            basePage.scale +
+            ");-moz-transform:scale(" +
+            basePage.scale +
+            ");-webkit-transform:scale(" +
+            basePage.scale +
+            ");-ms-transform:scale(" +
+            basePage.scale +
+            ");";
+        e.setAttribute("style", g + "left:" + i + "px;top:" + n + "px;");
+      }
+      function hasClass(e, a) {
+        return new RegExp(" " + a + " ").test(" " + e.className + " ");
+      }
+      function addClass(e, a) {
+        hasClass(e, a) || (e.className += " " + a);
+      }
+      function removeClass(e, a) {
+        var s = " " + e.className.replace(/[\t\r\n]/g, " ") + " ";
+        if (hasClass(e, a)) {
+          for (; 0 <= s.indexOf(" " + a + " "); )
+            s = s.replace(" " + a + " ", " ");
+          e.className = s.replace(/^\s+|\s+$/g, "");
+        }
+      }
+    </script>
+    <script>
+      !(function (l) {
+        function e(e) {
+          for (
+            var r, t, n = e[0], o = e[1], u = e[2], f = 0, i = [];
+            f < n.length;
+            f++
+          )
+            (t = n[f]), p[t] && i.push(p[t][0]), (p[t] = 0);
+          for (r in o)
+            Object.prototype.hasOwnProperty.call(o, r) && (l[r] = o[r]);
+          for (s && s(e); i.length; ) i.shift()();
+          return c.push.apply(c, u || []), a();
+        }
+        function a() {
+          for (var e, r = 0; r < c.length; r++) {
+            for (var t = c[r], n = !0, o = 1; o < t.length; o++) {
+              var u = t[o];
+              0 !== p[u] && (n = !1);
+            }
+            n && (c.splice(r--, 1), (e = f((f.s = t[0]))));
+          }
+          return e;
+        }
+        var t = {},
+          p = { 1: 0 },
+          c = [];
+        function f(e) {
+          if (t[e]) return t[e].exports;
+          var r = (t[e] = { i: e, l: !1, exports: {} });
+          return l[e].call(r.exports, r, r.exports, f), (r.l = !0), r.exports;
+        }
+        (f.m = l),
+          (f.c = t),
+          (f.d = function (e, r, t) {
+            f.o(e, r) ||
+              Object.defineProperty(e, r, { enumerable: !0, get: t });
+          }),
+          (f.r = function (e) {
+            "undefined" != typeof Symbol &&
+              Symbol.toStringTag &&
+              Object.defineProperty(e, Symbol.toStringTag, { value: "Module" }),
+              Object.defineProperty(e, "__esModule", { value: !0 });
+          }),
+          (f.t = function (r, e) {
+            if ((1 & e && (r = f(r)), 8 & e)) return r;
+            if (4 & e && "object" == typeof r && r && r.__esModule) return r;
+            var t = Object.create(null);
+            if (
+              (f.r(t),
+              Object.defineProperty(t, "default", { enumerable: !0, value: r }),
+              2 & e && "string" != typeof r)
+            )
+              for (var n in r)
+                f.d(
+                  t,
+                  n,
+                  function (e) {
+                    return r[e];
+                  }.bind(null, n)
+                );
+            return t;
+          }),
+          (f.n = function (e) {
+            var r =
+              e && e.__esModule
+                ? function () {
+                    return e.default;
+                  }
+                : function () {
+                    return e;
+                  };
+            return f.d(r, "a", r), r;
+          }),
+          (f.o = function (e, r) {
+            return Object.prototype.hasOwnProperty.call(e, r);
+          }),
+          (f.p = "./");
+        var r = (window.webpackJsonp = window.webpackJsonp || []),
+          n = r.push.bind(r);
+        (r.push = e), (r = r.slice());
+        for (var o = 0; o < r.length; o++) e(r[o]);
+        var s = n;
+        a();
+      })([]);
+    </script>
+    <script src="static/js/2.99ae621b.chunk.js"></script>
+    <script src="static/js/main.72e239b9.chunk.js"></script>
+  </body>
+</html>

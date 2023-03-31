@@ -37,6 +37,7 @@ class EvalHand : Card
         handVal[0] = 0;
         handVal[1] = (int)playerHand[0].Value;
         handVal[2] = (int)playerHand[1].Value;
+        Debug.LogError(handVal[1] + ",  " + handVal[2]);
         #endregion
 
         #region Pair and 2Pair
@@ -85,7 +86,7 @@ class EvalHand : Card
             }
         }
 
-
+        Debug.Log("Twopair" + twopair);
         #endregion
 
         #region Three
@@ -221,8 +222,8 @@ class EvalHand : Card
         {
             flush = true;
             handVal[0] = 5;
-            handVal[1] = 0;
-            handVal[2] = 0;
+            //handVal[1] = 0;
+            //handVal[2] = 0;
         }
 
         #endregion

@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using System.Linq;
 public class HandWinTest : MonoBehaviour
 {
     EvalHand Eval = new EvalHand();
@@ -60,29 +60,105 @@ public class HandWinTest : MonoBehaviour
 
 
     }
+    public PokerPlayer player1, player2;
     private void Start()
     {
-        PlayerHand1[0] = new Card();
-        PlayerHand1[0].Suit = Card.SUIT.DIAMONDS; PlayerHand1[0].Value = Card.VALUE.TWO;
-        PlayerHand1[1] = new Card();
-        PlayerHand1[1].Suit = Card.SUIT.CLUBS; PlayerHand1[1].Value = Card.VALUE.FOUR;
+        List<PokerPlayer> testPlayers = new List<PokerPlayer>();
+        //GameObject p1 = new GameObject();
+        //p1.AddComponent(typeof(PokerPlayer));
+        //PokerPlayer player1 = p1.GetComponent<PokerPlayer>();
 
-        PlayerHand2[0].Suit = Card.SUIT.SPADES; PlayerHand2[0].Value = Card.VALUE.TWO;
-        PlayerHand2[1].Suit = Card.SUIT.HEARTS; PlayerHand2[1].Value = Card.VALUE.THREE;
+        player1.PlayerName = "Player001"; 
+        //player1.PlayerHand = new Card[2];
+        player1.PlayerHand[0] = new Card { Suit = Card.SUIT.HEARTS, Value = Card.VALUE.KING };
+        player1.PlayerHand[1] = new Card { Suit = Card.SUIT.HEARTS, Value = Card.VALUE.JACK };
+        testPlayers.Add(player1);
 
-        Board[0].Suit = Card.SUIT.DIAMONDS; Board[0].Value = Card.VALUE.THREE;
-        Board[1].Suit = Card.SUIT.SPADES; Board[1].Value = Card.VALUE.THREE;
-        Board[2].Suit = Card.SUIT.SPADES; Board[2].Value = Card.VALUE.FIVE;
-        Board[3].Suit = Card.SUIT.CLUBS; Board[3].Value = Card.VALUE.ACE;
-        //Board[4].Suit = Card.SUIT.DIAMONDS; Board[4].Value = Card.VALUE.TWO;
+        //GameObject p2 = new GameObject();
+        //p2.AddComponent(typeof(PokerPlayer));
+        //PokerPlayer player2 = p2.GetComponent<PokerPlayer>();
+        player2.PlayerName = "Player002";
+        //player2.PlayerHand = new Card[2];
+        player2.PlayerHand[0] = new Card { Suit = Card.SUIT.CLUBS, Value = Card.VALUE.KING };
+        player2.PlayerHand[1] = new Card { Suit = Card.SUIT.HEARTS, Value = Card.VALUE.NINE };
+        testPlayers.Add(player2);
+        
 
-        int[] rank = Eval.Evaluate(PlayerHand1, Board, 4);
-        int[] rank2 = Eval.Evaluate(PlayerHand2, Board, 4);
-        Debug.Log("Player1: " + rank[0] + " -" + RankName.getString(rank[0]) + "...highcard: " + rank[1] + "second high:" + rank[2]);
-        Debug.Log("Player2: " + rank2[0] + " -" + RankName.getString(rank2[0]) + "...highcard: " + rank2[1] + "second high:" + rank2[2]);
+        Board = new Card[5];
+        Board[0] = new Card { Suit = Card.SUIT.DIAMONDS, Value = Card.VALUE.KING };
+        Board[1] = new Card { Suit = Card.SUIT.DIAMONDS, Value = Card.VALUE.TWO };
+        Board[2] = new Card { Suit = Card.SUIT.SPADES, Value = Card.VALUE.KING };
+        Board[3] = new Card { Suit = Card.SUIT.DIAMONDS, Value = Card.VALUE.SIX };
+        Board[4] = new Card { Suit = Card.SUIT.SPADES, Value = Card.VALUE.TWO };
+
+        player1.rankScores = Eval.Evaluate(player1.PlayerHand, Board, 5);
+        player2.rankScores = Eval.Evaluate(player2.PlayerHand, Board, 5);
+        Debug.Log("Player1: " + player1.rankScores[0] + " -" + RankName.getString(player1.rankScores[0]) + "...highcard: " + player1.rankScores[1] + "second high:" + player1.rankScores[2]);
+        Debug.Log("Player2: " + player2.rankScores[0] + " -" + RankName.getString(player2.rankScores[0]) + "...highcard: " + player2.rankScores[1] + "second high:" + player2.rankScores[2]);
 
         //CheckWinner();
+        
+       
+        FindWinner(testPlayers);
     }
+    bool isDraw;
+    public void FindWinner(List<PokerPlayer> players)
+    {
+
+        List<PokerPlayer> sortedPlayers = players.OrderByDescending(p => p.rankScores[0]).ToList();
+
+        int topPlayerCardRank = sortedPlayers[0].rankScores[0];
+        
+        List<PokerPlayer> topPlayers = sortedPlayers.TakeWhile(p => p.rankScores[0] == topPlayerCardRank).ToList();
+
+        //foreach (PokerPlayer pl in topPlayers)
+        //    Debug.Log(pl.PlayerName + "--" + pl.rankScores[1]);
+
+        if (topPlayers.Count == 1)
+        {
+            //Debug.Log("Winner: Player " + (players.IndexOf(topPlayers[0]) + 1));
+            Debug.Log("Winner Player : " + (topPlayers[0]).PlayerName);
+            //ResultText.text = "Winner Player : " + (topPlayers[0]).PlayerName;
+            return;
+        }
+
+
+        topPlayers = topPlayers.OrderByDescending(p => p.rankScores[1]).ToList();
+        int topPlayerHighCard1 = topPlayers[0].rankScores[1];
+        topPlayers = topPlayers.TakeWhile(p => p.rankScores[1] == topPlayerHighCard1).ToList();
+
+        if (topPlayers.Count == 1)
+        {
+            //Debug.Log("Winner: Player " + (players.IndexOf(topPlayers[0]) + 1));
+            Debug.Log("Winner Player : " + (topPlayers[0]).PlayerName);
+            //ResultText.text = "Winner Player : " + (topPlayers[0]).PlayerName;
+            return;
+        }
+        
+
+        topPlayers = topPlayers.OrderByDescending(p => p.rankScores[2]).ToList();
+        int topPlayerHighCard2 = topPlayers[0].rankScores[2];
+        topPlayers = topPlayers.TakeWhile(p => p.rankScores[2] == topPlayerHighCard2).ToList();
+
+        if (topPlayers.Count == 1)
+        {
+            Debug.Log("Winner: Player " + (players.IndexOf(topPlayers[0]) + 1));
+            //ResultText.text = "Winner Player : " + (topPlayers[0]).PlayerName;
+        }
+        else
+        {
+            string playersWinners = "";
+            foreach (var player in topPlayers)
+                playersWinners += player.PlayerName + ", ";
+            //Debug.Log(player.PlayerName);
+            isDraw = true;
+            Debug.Log("Draw!, Split pot with" + playersWinners);
+            //ResultText.text = "Draw!, Split pot with " + playersWinners;
+
+        }
+    }
+    
+
     class Ranks
     {
         public string getString(int num)

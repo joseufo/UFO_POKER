@@ -32,17 +32,19 @@ public class PokerClientManager : MonoBehaviour
     }
     private void Start()
     {
-        JoinGame();
+        OnJoinedGame();
+        //StartCoroutine(StartSim());
     }
     
 
 
-    public void JoinGame()
+    public void OnJoinedGame()
     {
         var player = Instantiate(PokerPlayerPrefab, PlayersTransform[0], false);
         player.GetComponent<PokerPlayer>().isLocalPlayer = true;
         player.GetComponent<PokerPlayer>().PlayerName = "Player0";
         PlayerList.Add(player.GetComponent<PokerPlayer>());
+
     }
 
     public void AddOpponent()
@@ -81,7 +83,7 @@ public class PokerClientManager : MonoBehaviour
         //IEnumerable<PokerPlayer> query = PlayerList.OrderBy(player => player.PlayerHand[0]);
         FindWinner(PlayerList);
     }
-    public static void FindWinner(List<PokerPlayer> players)
+    public void FindWinner(List<PokerPlayer> players)
     {
         
         List<PokerPlayer> sortedPlayers = players.OrderByDescending(p => p.rankScores[0]).ToList();
@@ -96,6 +98,7 @@ public class PokerClientManager : MonoBehaviour
         {
             //Debug.Log("Winner: Player " + (players.IndexOf(topPlayers[0]) + 1));
             Debug.Log("Winner Player : " + (topPlayers[0]).PlayerName);
+            ResultText.text = "Winner Player : " + (topPlayers[0]).PlayerName;
             return;
         }
 
@@ -108,6 +111,7 @@ public class PokerClientManager : MonoBehaviour
         {
             //Debug.Log("Winner: Player " + (players.IndexOf(topPlayers[0]) + 1));
             Debug.Log("Winner Player : " + (topPlayers[0]).PlayerName);
+            ResultText.text = "Winner Player : " + (topPlayers[0]).PlayerName;
             return;
         }
 
@@ -119,13 +123,35 @@ public class PokerClientManager : MonoBehaviour
         if (topPlayers.Count == 1)
         {
             //Debug.Log("Winner: Player " + (players.IndexOf(topPlayers[0]) + 1));
+            ResultText.text = "Winner Player : " + (topPlayers[0]).PlayerName;
         }
         else
         {
-            Debug.Log("Draw!, Split pot with");
+            string playersWinners = "";
             foreach (var player in topPlayers)
-                Debug.Log(player.PlayerName);
+                playersWinners += player.PlayerName + ", ";
+                //Debug.Log(player.PlayerName);
+            Debug.Log("Draw!, Split pot with");
+            ResultText.text = "Draw!, Split pot with " + playersWinners;
+            isDraw = true;
+
         }
+    }
+
+    bool isDraw;
+    IEnumerator StartSim()
+    {
+        PokerServManager.instance.PlayerJoinAddMax();
+        yield return new WaitForSeconds(0.2f);
+        PokerServManager.instance.StartGame();
+        yield return new WaitForSeconds(0.2f);
+        for (int i = 0; i < 4; i++)
+            PokerServManager.instance.NextDeal();
+        yield return new WaitForSeconds(0.2f);
+        if (isDraw)
+            yield break;
+        else
+            PokerServManager.instance.RestartGame();
     }
     void AddTestPlayers()
     {
