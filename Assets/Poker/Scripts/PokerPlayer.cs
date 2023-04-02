@@ -26,6 +26,7 @@ public class PokerPlayer : MonoBehaviour
     public int PotSize { get; set; } = 0;
 
     public bool isLocalPlayer;
+    public PlayerData playerData = new PlayerData();
     // Start is called before the first frame update
     [SerializeField] PokerCard Card1, Card2;
 
@@ -34,11 +35,12 @@ public class PokerPlayer : MonoBehaviour
     void Start()
     {
         PlayerHand = new Card[2];
-
+        playerData = new PlayerData();
         if (!isLocalPlayer)
         {
             PlayerName = "Player" + Random.Range(1, 100);
             playerText.text = PlayerName;
+            playerData.playerName = PlayerName;
         }
             
         //handCards = new Hand();
@@ -48,19 +50,18 @@ public class PokerPlayer : MonoBehaviour
     }
     //public List<PokerCard> PlayerHand = new List<PokerCard>();
     
-    public void SetAndShowPlayerCards(Card cardData1, Card cardData2)
+    public void SetAndShowPlayerCards(Card cardData1, Card cardData2 , int playerPos)
     {
-        if(cardData2.Value>cardData1.Value)
-        {
-            var temp = cardData1;
-            cardData1 = cardData2;
-            cardData2 = temp;            
-        }
+        playerData.playerPosition = playerPos;
         Card1.SetAndShowCard(cardData1);
-        PlayerHand[0] = new Card();
+        //PlayerHand[0] = new Card();
+        playerData.card1data = cardData1;
+        
         PlayerHand[0] = cardData1;
+        playerData.card2data = cardData2;
         Card2.SetAndShowCard(cardData2);
-        PlayerHand[1] = new Card();
+
+        //PlayerHand[1] = new Card();
         PlayerHand[1] = cardData2;
     }
 

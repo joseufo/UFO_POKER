@@ -20,6 +20,7 @@ public class PokerCard : MonoBehaviour
     }
     public void SetAndShowCard(Card cardData)
     {
+        this.name = cardData.ToString();
         this.CardData = cardData;
         SetCardSprite();
         this.gameObject.SetActive(true); 

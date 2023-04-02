@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.1273174, g: 0.13414761, b: 0.12107885, a: 1}
+  m_IndirectSpecularColor: {r: 0.12731749, g: 0.13414757, b: 0.1210787, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -256,9 +256,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f09c5c8bbb03c64882dbf3697a3b515, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PlayerHand1: []
-  PlayerHand2: []
-  Board: []
   cardsShown: 0
   player1: {fileID: 1334167164}
   player2: {fileID: 100267439}
@@ -1666,7 +1663,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 0, y: -90}
+  m_AnchoredPosition: {x: -346, y: -90}
   m_SizeDelta: {x: 200, y: 80}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &996257930
@@ -3262,6 +3259,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1644745822}
   - component: {fileID: 1644745821}
+  - component: {fileID: 1644745823}
   m_Layer: 0
   m_Name: PokerClientManager
   m_TagString: Untagged
@@ -3281,6 +3279,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e4bf0e43a1f7ad40ab9242f61e5896b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  GameCardControl: {fileID: 1644745823}
   ResultText: {fileID: 607808162}
   PlayersTransform:
   - {fileID: 1635168348}
@@ -3312,6 +3311,21 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1644745823
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1644745820}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 99281653eabd42d488699a627b673f9b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerFinalResultUIList: []
+  finalResultPanel: {fileID: 0}
+  PanelLocalPlayerWon: {fileID: 0}
 --- !u!1 &1675377275
 GameObject:
   m_ObjectHideFlags: 0

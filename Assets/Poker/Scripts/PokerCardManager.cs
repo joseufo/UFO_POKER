@@ -18,18 +18,20 @@ public class PokerCardManager : MonoBehaviour
     {
         
     }
-    public Sprite GetCardSprite(Card.SUIT cardSuit, Card.VALUE cardValue)
-    {
+    public Sprite GetCardSprite(SUIT cardSuit, VALUE cardValue)
+    {   
+        //if((int)cardValue == 1) cardValue = (VALUE)
         int cardIndex = (int)cardValue - 2;  // [0]Two, [1]Three, [2]Four, [3]Five, [4]Six, [5]Seven, [6]Eight, [7]Nine, [8]Ten, [9]Jack, [10]Queen [11]King, [12]Ace
+        if (cardIndex < 0) cardIndex = 12;
         switch (cardSuit)
         {
-            case Card.SUIT.CLUBS:
+            case SUIT.CLUBS:
                 return ClubSprites[cardIndex];                
-            case Card.SUIT.DIAMONDS:
+            case SUIT.DIAMONDS:
                 return DiamondSprites[cardIndex];
-            case Card.SUIT.HEARTS:
+            case SUIT.HEARTS:
                 return HeartSprites[cardIndex];
-            case Card.SUIT.SPADES:
+            case SUIT.SPADES:
                 return SpadeSprites[cardIndex];                
         }
         return null;

@@ -1,143 +1,124 @@
 using System;
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 
 //[Serializable]
-[SerializableAttribute]
-public class Card
-{
-    //[Flags]
-    public enum SUIT { SPADES, CLUBS, DIAMONDS, HEARTS }
-    public enum VALUE
-    {
-        TWO = 2, THREE, FOUR,
-        FIVE, SIX, SEVEN, EIGHT,
-        NINE, TEN, JACK, QUEEN, KING, ACE
-    }
+//[SerializableAttribute]
+//public struct Card
+//{
+   
 
-    public SUIT Suit { get; set; }
-    public VALUE Value { get; set; }
+//    public int suit;
+//    public int rank;
 
-    public int rank { get => (int)Value; }
+//    public Card(int s, int r) : this()
+//    {
+//        this.suit = s;
+//        this.rank = r;
+//    }
 
-    public override string ToString()
-    {
+//    public static Card nullCard
+//    {
+//        get { return new Card(0, 0); }
+//    }
+//    public enum SUIT { SPADES, CLUBS, DIAMONDS, HEARTS }
+//    public enum VALUE
+//    {
+//        TWO = 2, THREE, FOUR,
+//        FIVE, SIX, SEVEN, EIGHT,
+//        NINE, TEN, JACK, QUEEN, KING, ACE
+//    }
 
-        var suitLabel = Suit.ToString();
-        var rankLabel = ((int)Value).ToString();
+//    public SUIT Suit { get; set; }
+//    public VALUE Value { get; set; }
 
-        switch (Suit)
-        {
-            case SUIT.CLUBS:
-                suitLabel = "♣";
+//    //public int rank { get => (int)Value; }
 
-                break;
-            case SUIT.DIAMONDS:
-                suitLabel = "♦";
+//    public override string ToString()
+//    {
 
-                break;
-            case SUIT.HEARTS:
-                suitLabel = "♥";
+//        var suitLabel = Suit.ToString();
+//        var rankLabel = ((int)Value).ToString();
 
-                break;
-            case SUIT.SPADES:
-                suitLabel = "♠";
+//        switch (Suit)
+//        {
+//            case SUIT.CLUBS:
+//                suitLabel = "♣";
 
-                break;
-        }
+//                break;
+//            case SUIT.DIAMONDS:
+//                suitLabel = "♦";
 
-        switch ((int)Value)
-        {
-            case 11:
-                rankLabel = "J";
+//                break;
+//            case SUIT.HEARTS:
+//                suitLabel = "♥";
 
-                break;
-            case 12:
-                rankLabel = "Q";
+//                break;
+//            case SUIT.SPADES:
+//                suitLabel = "♠";
 
-                break;
-            case 13:
-                rankLabel = "K";
+//                break;
+//        }
 
-                break;
-            case 14:
-                rankLabel = "A";
+//        switch ((int)Value)
+//        {
+//            case 11:
+//                rankLabel = "J";
 
-                break;
-        }
+//                break;
+//            case 12:
+//                rankLabel = "Q";
 
-        return $"{suitLabel} {rankLabel}";
+//                break;
+//            case 13:
+//                rankLabel = "K";
 
-    }
+//                break;
+//            case 14:
+//                rankLabel = "A";
+
+//                break;
+//        }
+
+//        return $"{suitLabel} {rankLabel}";
+
+//    }
+
+//    public static bool operator ==(Card a, Card b)
+//    {
+//        //if (ReferenceEquals(a, b))
+//        //{
+//        //    return true;
+//        //}
+//        //if (a is null || b is null)
+//        //{
+//        //    return false;
+//        //}
+//        return a.suit == b.suit && a.rank == b.rank;
+//    }
+
+//    public static bool operator !=(Card a, Card b)
+//    {
+//        return !(a == b);
+//    }
+
+//    public override bool Equals(object obj)
+//    {
+//        if (!(obj is Card))
+//            return false;
+
+//        Card other = (Card)obj;
+//        return this == other;
+//    }
+
+//    public override int GetHashCode()
+//    {
+//        return suit.GetHashCode() ^ rank.GetHashCode();
+//    }
 
 
 
-    //[Flags]
-    //public enum CSuit
-    //{
-
-    //    Clubs = 1 << 0,
-
-    //    Diamonds = 1 << 1,
-
-    //    Hearts = 1 << 2,
-
-    //    Spades = 1 << 3
-
-    //}
-
-    //public int rank;
-
-    //public CSuit suit;
-    //public override string ToString()
-    //{
-
-    //    var suitLabel = suit.ToString();
-    //    var rankLabel = rank.ToString();
-
-    //    switch (suit)
-    //    {
-    //        case CSuit.Clubs:
-    //            suitLabel = "♣";
-
-    //            break;
-    //        case CSuit.Diamonds:
-    //            suitLabel = "♦";
-
-    //            break;
-    //        case CSuit.Hearts:
-    //            suitLabel = "♥";
-
-    //            break;
-    //        case CSuit.Spades:
-    //            suitLabel = "♠";
-
-    //            break;
-    //    }
-
-    //    switch (rank)
-    //    {
-    //        case 11:
-    //            rankLabel = "J";
-
-    //            break;
-    //        case 12:
-    //            rankLabel = "Q";
-
-    //            break;
-    //        case 13:
-    //            rankLabel = "K";
-
-    //            break;
-    //        case 14:
-    //            rankLabel = "A";
-
-    //            break;
-    //    }
-
-    //    return $"{suitLabel} {rankLabel}";
-
-    //}
-
-}
+//}
 

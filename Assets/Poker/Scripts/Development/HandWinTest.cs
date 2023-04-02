@@ -4,7 +4,7 @@ using UnityEngine;
 using System.Linq;
 public class HandWinTest : MonoBehaviour
 {
-    EvalHand Eval = new EvalHand();
+    //EvalHand Eval = new EvalHand();
     public Card[] PlayerHand1 = new Card[2];
     public Card[] PlayerHand2 = new Card[2];
     public Card[] Board = new Card[5];
@@ -14,8 +14,8 @@ public class HandWinTest : MonoBehaviour
     Ranks RankName = new Ranks();
     private void CheckWinner()//int[] rank, int[] opp_rank
     {
-        int[] rank = Eval.Evaluate(PlayerHand1, Board, cardsShown);
-        int[] opp_rank = Eval.Evaluate(PlayerHand2, Board, cardsShown);
+        int[] rank = new int[10];// = Eval.Evaluate(PlayerHand1, Board, cardsShown);
+        int[] opp_rank = new int[10]; ;//= Eval.Evaluate(PlayerHand2, Board, cardsShown);
         //StopDraws();
 
         if (rank[0] > opp_rank[0])
@@ -70,8 +70,8 @@ public class HandWinTest : MonoBehaviour
 
         player1.PlayerName = "Player001"; 
         //player1.PlayerHand = new Card[2];
-        player1.PlayerHand[0] = new Card { Suit = Card.SUIT.HEARTS, Value = Card.VALUE.KING };
-        player1.PlayerHand[1] = new Card { Suit = Card.SUIT.HEARTS, Value = Card.VALUE.JACK };
+        //player1.PlayerHand[0] = new Card { Suit = Card.SUIT.HEARTS, Value = Card.VALUE.KING };
+        //player1.PlayerHand[1] = new Card { Suit = Card.SUIT.HEARTS, Value = Card.VALUE.JACK };
         testPlayers.Add(player1);
 
         //GameObject p2 = new GameObject();
@@ -79,20 +79,20 @@ public class HandWinTest : MonoBehaviour
         //PokerPlayer player2 = p2.GetComponent<PokerPlayer>();
         player2.PlayerName = "Player002";
         //player2.PlayerHand = new Card[2];
-        player2.PlayerHand[0] = new Card { Suit = Card.SUIT.CLUBS, Value = Card.VALUE.KING };
-        player2.PlayerHand[1] = new Card { Suit = Card.SUIT.HEARTS, Value = Card.VALUE.NINE };
+        //player2.PlayerHand[0] = new Card { Suit = Card.SUIT.CLUBS, Value = Card.VALUE.KING };
+        //player2.PlayerHand[1] = new Card { Suit = Card.SUIT.HEARTS, Value = Card.VALUE.NINE };
         testPlayers.Add(player2);
         
 
-        Board = new Card[5];
-        Board[0] = new Card { Suit = Card.SUIT.DIAMONDS, Value = Card.VALUE.KING };
-        Board[1] = new Card { Suit = Card.SUIT.DIAMONDS, Value = Card.VALUE.TWO };
-        Board[2] = new Card { Suit = Card.SUIT.SPADES, Value = Card.VALUE.KING };
-        Board[3] = new Card { Suit = Card.SUIT.DIAMONDS, Value = Card.VALUE.SIX };
-        Board[4] = new Card { Suit = Card.SUIT.SPADES, Value = Card.VALUE.TWO };
+        //Board = new Card[5];
+        //Board[0] = new Card { Suit = Card.SUIT.DIAMONDS, Value = Card.VALUE.KING };
+        //Board[1] = new Card { Suit = Card.SUIT.DIAMONDS, Value = Card.VALUE.TWO };
+        //Board[2] = new Card { Suit = Card.SUIT.SPADES, Value = Card.VALUE.KING };
+        //Board[3] = new Card { Suit = Card.SUIT.DIAMONDS, Value = Card.VALUE.SIX };
+        //Board[4] = new Card { Suit = Card.SUIT.SPADES, Value = Card.VALUE.TWO };
 
-        player1.rankScores = Eval.Evaluate(player1.PlayerHand, Board, 5);
-        player2.rankScores = Eval.Evaluate(player2.PlayerHand, Board, 5);
+        //player1.rankScores = Eval.Evaluate(player1.PlayerHand, Board, 5);
+        //player2.rankScores = Eval.Evaluate(player2.PlayerHand, Board, 5);
         Debug.Log("Player1: " + player1.rankScores[0] + " -" + RankName.getString(player1.rankScores[0]) + "...highcard: " + player1.rankScores[1] + "second high:" + player1.rankScores[2]);
         Debug.Log("Player2: " + player2.rankScores[0] + " -" + RankName.getString(player2.rankScores[0]) + "...highcard: " + player2.rankScores[1] + "second high:" + player2.rankScores[2]);
 

@@ -67,7 +67,7 @@ public class PokerServManager : MonoBehaviour
         for(int i=0; i<playerlist.Count; i++)
         {
 
-            playerlist[i].SetAndShowPlayerCards(CardDeck[i], CardDeck[i+1]);
+            playerlist[i].SetAndShowPlayerCards(CardDeck[i], CardDeck[i+1], i);
             Debug.Log(playerlist[i].playerText.text + " Cards : " + CardDeck[i].ToString() + " , " + CardDeck[i + 1].ToString());
             
             CardDeck.RemoveAt(i); CardDeck.RemoveAt(i);
@@ -106,17 +106,17 @@ public class PokerServManager : MonoBehaviour
     {
         //int i = 0;
         int xOffset = 10;
-        foreach (Card.SUIT suit in Enum.GetValues(typeof(Card.SUIT)))
+        foreach (SUIT suit in Enum.GetValues(typeof(SUIT)))
         {
 
-            foreach (Card.VALUE value in Enum.GetValues(typeof(Card.VALUE)))
+            foreach (VALUE value in Enum.GetValues(typeof(VALUE)))
             {
                 //Deck[i] = new Card { Suit = suit, Value = value };
                 //i++;
-                CardDeck.Add(new Card { Suit = suit, Value = value });
+                CardDeck.Add(new Card(suit, value));
                 var x = Instantiate(cardPrefab, new Vector3(xOffset, 5f, 0f), Quaternion.identity);
                 pokerCardList.Add(x.GetComponent<PokerCard>());
-                x.GetComponent<PokerCard>().SetAndShowCard(new Card { Suit = suit, Value = value });
+                x.GetComponent<PokerCard>().SetAndShowCard(new Card (suit, value));
                 xOffset += 2;
             }
            
@@ -198,7 +198,7 @@ public class PokerServManager : MonoBehaviour
             //TableCards[i].SetCardData(Ca)
             cardShown++;
         }
-        PokerClientManager.instance.SetBoardTableCard(cardlist);
+        PokerClientManager.instance.SetBoardTableCard(cardlist,1);
         gameState = PokerGameState.Turn;
 
     }
@@ -211,7 +211,7 @@ public class PokerServManager : MonoBehaviour
         //cardlist[0] = TableCards[3];
         cardlist.Add(TableCards[3]);
         cardShown++;
-        PokerClientManager.instance.SetBoardTableCard(cardlist);
+        PokerClientManager.instance.SetBoardTableCard(cardlist,2);
         gameState = PokerGameState.River;
 
     }
@@ -222,7 +222,7 @@ public class PokerServManager : MonoBehaviour
         List<Card> cardlist = new List<Card>();
         cardlist.Add(TableCards[4]);
         cardShown++;
-        PokerClientManager.instance.SetBoardTableCard(cardlist);
+        PokerClientManager.instance.SetBoardTableCard(cardlist,3);
         gameState = PokerGameState.End;
     }
     private void Update()
