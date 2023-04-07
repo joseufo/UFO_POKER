@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028334, g: 0.2257134, b: 0.30692226, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -194,7 +194,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Cuori
+  m_Text: Hearts
 --- !u!222 &3405138
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1168,9 +1168,9 @@ MonoBehaviour:
   m_Value: 0
   m_Options:
     m_Options:
-    - m_Text: Cuori
+    - m_Text: Hearts
       m_Image: {fileID: 0}
-    - m_Text: Quadri
+    - m_Text: Diamonds
       m_Image: {fileID: 0}
     - m_Text: Fiori
       m_Image: {fileID: 0}
@@ -1401,9 +1401,9 @@ MonoBehaviour:
   m_Value: 0
   m_Options:
     m_Options:
-    - m_Text: Cuori
+    - m_Text: Hearts
       m_Image: {fileID: 0}
-    - m_Text: Quadri
+    - m_Text: Diamonds
       m_Image: {fileID: 0}
     - m_Text: Fiori
       m_Image: {fileID: 0}
@@ -5611,9 +5611,9 @@ MonoBehaviour:
   m_Value: 0
   m_Options:
     m_Options:
-    - m_Text: Cuori
+    - m_Text: Hearts
       m_Image: {fileID: 0}
-    - m_Text: Quadri
+    - m_Text: Diamonds
       m_Image: {fileID: 0}
     - m_Text: Fiori
       m_Image: {fileID: 0}
@@ -5900,7 +5900,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Cuori
+  m_Text: Hearts
 --- !u!222 &454515093
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -6089,7 +6089,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Cuori
+  m_Text: Hearts
 --- !u!222 &494798747
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -6280,9 +6280,9 @@ MonoBehaviour:
   m_Value: 0
   m_Options:
     m_Options:
-    - m_Text: Cuori
+    - m_Text: Hearts
       m_Image: {fileID: 0}
-    - m_Text: Quadri
+    - m_Text: Diamonds
       m_Image: {fileID: 0}
     - m_Text: Fiori
       m_Image: {fileID: 0}
@@ -7179,13 +7179,13 @@ MonoBehaviour:
   m_Value: 0
   m_Options:
     m_Options:
-    - m_Text: Cuori
+    - m_Text: Hearts
       m_Image: {fileID: 0}
-    - m_Text: Quadri
+    - m_Text: Diamonds
       m_Image: {fileID: 0}
-    - m_Text: Fiori
+    - m_Text: Clubs
       m_Image: {fileID: 0}
-    - m_Text: Picche
+    - m_Text: Spades
       m_Image: {fileID: 0}
   m_OnValueChanged:
     m_PersistentCalls:
@@ -8880,7 +8880,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Cuori
+  m_Text: Hearts
 --- !u!222 &651517081
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -9701,7 +9701,7 @@ MonoBehaviour:
     m_Options:
     - m_Text: Cuori
       m_Image: {fileID: 0}
-    - m_Text: Quadri
+    - m_Text: Diamonds
       m_Image: {fileID: 0}
     - m_Text: Fiori
       m_Image: {fileID: 0}
@@ -9890,9 +9890,9 @@ MonoBehaviour:
   m_Value: 0
   m_Options:
     m_Options:
-    - m_Text: Cuori
+    - m_Text: Hearts
       m_Image: {fileID: 0}
-    - m_Text: Quadri
+    - m_Text: Diamonds
       m_Image: {fileID: 0}
     - m_Text: Fiori
       m_Image: {fileID: 0}
@@ -12687,9 +12687,9 @@ MonoBehaviour:
   m_Value: 0
   m_Options:
     m_Options:
-    - m_Text: Cuori
+    - m_Text: Hearts
       m_Image: {fileID: 0}
-    - m_Text: Quadri
+    - m_Text: Diamonds
       m_Image: {fileID: 0}
     - m_Text: Fiori
       m_Image: {fileID: 0}
@@ -14944,9 +14944,9 @@ MonoBehaviour:
   m_Value: 0
   m_Options:
     m_Options:
-    - m_Text: Cuori
+    - m_Text: Hearts
       m_Image: {fileID: 0}
-    - m_Text: Quadri
+    - m_Text: Diamonds
       m_Image: {fileID: 0}
     - m_Text: Fiori
       m_Image: {fileID: 0}
@@ -15281,7 +15281,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Cuori
+  m_Text: Hearts
 --- !u!222 &1141164732
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -15999,7 +15999,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Cuori
+  m_Text: Hearts
 --- !u!222 &1203486653
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -17795,7 +17795,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Cuori
+  m_Text: Hearts
 --- !u!222 &1307755831
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -21389,12 +21389,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 800, y: 600}
+  m_ReferenceResolution: {x: 1080, y: 1080}
   m_ScreenMatchMode: 0
-  m_MatchWidthOrHeight: 0
+  m_MatchWidthOrHeight: 0.464
   m_PhysicalUnit: 3
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
@@ -24435,6 +24435,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1846959392}
   - component: {fileID: 1846959391}
+  - component: {fileID: 1846959393}
   m_Layer: 0
   m_Name: GameObject
   m_TagString: Untagged
@@ -24470,6 +24471,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1846959393
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1846959390}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 48b27666ba6a566479f79315a2b3cf41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1848380892
 GameObject:
   m_ObjectHideFlags: 0
@@ -25921,9 +25934,9 @@ MonoBehaviour:
   m_Value: 0
   m_Options:
     m_Options:
-    - m_Text: Cuori
+    - m_Text: Hearts
       m_Image: {fileID: 0}
-    - m_Text: Quadri
+    - m_Text: Diamonds
       m_Image: {fileID: 0}
     - m_Text: Fiori
       m_Image: {fileID: 0}
@@ -28072,7 +28085,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Cuori
+  m_Text: Hearts
 --- !u!222 &2040224996
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -29185,7 +29198,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Cuori
+  m_Text: Hearts
 --- !u!222 &2131220810
 CanvasRenderer:
   m_ObjectHideFlags: 0

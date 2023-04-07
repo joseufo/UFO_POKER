@@ -34,11 +34,18 @@ public class PokerPlayer : MonoBehaviour
     public int[] rankScores = new int[3] { 0, 0, 0, };
     void Start()
     {
+        return;
         PlayerHand = new Card[2];
         playerData = new PlayerData();
         if (!isLocalPlayer)
         {
             PlayerName = "Player" + Random.Range(1, 100);
+            playerText.text = PlayerName;
+            playerData.playerName = PlayerName;
+        }
+        else
+        {
+            PlayerName = "Player0";
             playerText.text = PlayerName;
             playerData.playerName = PlayerName;
         }
@@ -49,10 +56,15 @@ public class PokerPlayer : MonoBehaviour
 
     }
     //public List<PokerCard> PlayerHand = new List<PokerCard>();
-    
-    public void SetAndShowPlayerCards(Card cardData1, Card cardData2 , int playerPos)
+    public void DisplayData()
     {
-        playerData.playerPosition = playerPos;
+        playerText.text = playerData.playerName;
+    }
+    
+    public void SetAndShowPlayerCards(Card cardData1, Card cardData2)
+    {
+       
+
         Card1.SetAndShowCard(cardData1);
         //PlayerHand[0] = new Card();
         playerData.card1data = cardData1;
@@ -64,6 +76,12 @@ public class PokerPlayer : MonoBehaviour
         //PlayerHand[1] = new Card();
         PlayerHand[1] = cardData2;
     }
+    public void ShowBackCards()
+    {
+        Card1.ShowBack();
+        Card2.ShowBack();
+    }
+
 
     public void SetCardRankingText(string cardRanking)
     {

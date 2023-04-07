@@ -37,7 +37,7 @@ namespace TestPoker
             player2.card2data = new Card(1, 4);
 
             player3.card1data = new Card(2, 12);
-            player3.card2data = new Card(1, 7);
+            player3.card2data = new Card(1, 1);
 
             pdList.Add(player1);
             pdList.Add(player2);
@@ -49,14 +49,19 @@ namespace TestPoker
             AddPlayersDatas();
 
             List<Card> flopCardsList = new List<Card>();
-            flopCardsList.Add(new Card(3, 10));
+            flopCardsList.Add(new Card(3, 7));
             flopCardsList.Add(new Card(4, 8));
             flopCardsList.Add(new Card(1, 10));
-            Card TurnCard = new Card(2, 5);
+            Card TurnCard = new Card(2, 13);
             Card RiverCard = new Card(3, 11);
+            string tableCards = "TableCards: ";
             foreach (var cdata in flopCardsList)
-                Debug.Log(cdata);
-            Debug.Log(TurnCard + ",  " + RiverCard);
+                tableCards += cdata + " | ";
+            //Debug.Log("Flop: " + cdata);
+            tableCards += TurnCard + " | "; 
+            tableCards += RiverCard;
+            Debug.Log(tableCards);
+            //Debug.Log(TurnCard + ",  " + RiverCard);
 
             for (int x = 0; x < pdList.Count; x++)
             {
@@ -76,7 +81,7 @@ namespace TestPoker
 
                 data.playerIdx = pdList[x].playerPosition;
 
-                Debug.Log("playerCard_1 : " + data.playerCard_1 + "  playerCard_2 : " + data.playerCard_2);
+                Debug.Log("playerCards"+(x+1)+": " + data.playerCard_1 + "  |  " + data.playerCard_2);
                 //Debug.Log("data.flopCards[0] : " + data.flopCards[0] + "  data.flopCards[1] : " + data.flopCards[1] + "  data.flopCards[2] : " + data.flopCards[2]);
                 // Debug.Log("data.turnCard : " + data.turnCard + "  data.riverCard : " + data.riverCard);
 
@@ -89,7 +94,7 @@ namespace TestPoker
             int bestResult = 10;
             for (int x = 0; x < pdList.Count; x++)
             {
-                Debug.Log("-----------------------------------------------");
+                //Debug.Log("-----------------------------------------------");
                 Debug.Log("++++++++++ Result idx : " + pdList[x].playerPosition);
                 Debug.Log("++++++++++ Result result : " + pdList[x].completeResultStruct.cardsResultValues);
                 //TextResult.text = TextResult.text + "[" + pdList[x].playerPosition + "] cardsResultValues : " + pdList[x].completeResultStruct.cardsResultValues + "\n";
@@ -98,7 +103,7 @@ namespace TestPoker
                 {
                     bestFive = bestFive + i + " : ";
                 }
-                Debug.Log("player" + x + " bestfive:" + bestFive);
+                Debug.Log("player" + (x+1) + " bestfive:" + bestFive);
                 // TextResult.text = TextResult.text + "[" + pdList[x].playerPosition + "] bestFive : " + bestFive + " kiker :" + pdList[x].completeResultStruct.kikers.ToString() + "\n";
                 Debug.Log("-----------------------------------------------");
                 if ((int)pdList[x].completeResultStruct.cardsResultValues < bestResult) bestResult = (int)pdList[x].completeResultStruct.cardsResultValues;

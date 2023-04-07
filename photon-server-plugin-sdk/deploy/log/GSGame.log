@@ -1,759 +1,315 @@
-﻿2023-02-26 17:09:41,652 [1] INFO  Photon.LoadBalancing.GameServer.GameApplication - Using Server GC:True
-2023-02-26 17:09:41,665 [1] INFO  Photon.LoadBalancing.GameServer.GameApplication - Using GC LatencyMode:Interactive
-2023-02-26 17:09:41,665 [1] INFO  Photon.LoadBalancing.GameServer.GameApplication - Setup: serverId=cc57c0c5-1c6e-4084-80c0-154da416d2f3
-2023-02-26 17:09:41,678 [1] INFO  Photon.Hive.Plugin.PluginManager - Plugin configured: name=ServerPlugin
-2023-02-26 17:09:41,681 [1] DEBUG Photon.Hive.Plugin.PluginManager - Plugin path is set to 'D:\Projects\Unity\MultiPlayerProjects\photon-server-plugin-sdk\deploy\Plugins/ServerPlugin//bin/ServerPlugin.dll'
-2023-02-26 17:09:41,685 [1] INFO  Photon.Hive.Plugin.PluginManager - Loaded Assembly Name=ServerPlugin, Version=1.0.0.0, Culture=, PublicKey token=, Path=D:\Projects\Unity\MultiPlayerProjects\photon-server-plugin-sdk\deploy\Plugins/ServerPlugin//bin/ServerPlugin.dll
-2023-02-26 17:09:41,685 [1] INFO  Photon.Hive.Plugin.PluginManager - Referenced Assembly Name=mscorlib, Version=4.0.0.0, Culture=, PublicKey token=B7-7A-5C-56-19-34-E0-89, Path=
-2023-02-26 17:09:41,685 [1] INFO  Photon.Hive.Plugin.PluginManager - Referenced Assembly Name=PhotonHivePlugin, Version=1.1.0.24499, Culture=, PublicKey token=, Path=
-2023-02-26 17:09:41,686 [1] INFO  Photon.Hive.Plugin.PluginManager - Plugin Type ServerPlugin.ServerPluginFactory from assembly ServerPlugin, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null was successfuly created
-2023-02-26 17:09:41,686 [1] INFO  Photon.Hive.Plugin.PluginManager - Plugin manager (version=1.1.0.24499) is setup. type=ServerPlugin.ServerPluginFactory;path=D:\Projects\Unity\MultiPlayerProjects\photon-server-plugin-sdk\deploy\Plugins/ServerPlugin//bin/ServerPlugin.dll;version=1.1.0.24499
-2023-02-26 17:09:42,584 [1] INFO  Photon.LoadBalancing.GameServer.GameApplication - TokenCreator initialized with an expiration of 01:00:00
-2023-02-26 17:09:42,596 [1] WARN  Photon.Common.LoadBalancer.LoadShedding.WorkloadController - Bandwidth counters are not valid
-2023-02-26 17:09:42,597 [1] WARN  Photon.Common.LoadBalancer.LoadShedding.WorkloadController - Did not find counter Business Logic Queue
-2023-02-26 17:09:42,597 [1] WARN  Photon.Common.LoadBalancer.LoadShedding.WorkloadController - Did not find counter ENet Queue
-2023-02-26 17:09:42,597 [1] WARN  Photon.Common.LoadBalancer.LoadShedding.WorkloadController - Did not find counter ENet Threads Processing
-2023-02-26 17:09:42,597 [1] WARN  Photon.Common.LoadBalancer.LoadShedding.WorkloadController - Did not find counter ENet Threads Active
-2023-02-26 17:09:42,598 [1] WARN  Photon.Common.LoadBalancer.LoadShedding.WorkloadController - Did not find counter TCP: Disconnected Peers +/sec
-2023-02-26 17:09:42,598 [1] WARN  Photon.Common.LoadBalancer.LoadShedding.WorkloadController - Did not find counter TCP: Disconnected Peers (C) +/sec
-2023-02-26 17:09:42,598 [1] WARN  Photon.Common.LoadBalancer.LoadShedding.WorkloadController - Did not find counter TCP: Peers
-2023-02-26 17:09:42,598 [1] WARN  Photon.Common.LoadBalancer.LoadShedding.WorkloadController - Did not find counter UDP: Disconnected Peers +/sec
-2023-02-26 17:09:42,598 [1] WARN  Photon.Common.LoadBalancer.LoadShedding.WorkloadController - Did not find counter UDP: Disconnected Peers (C) +/sec
-2023-02-26 17:09:42,598 [1] WARN  Photon.Common.LoadBalancer.LoadShedding.WorkloadController - Did not find counter UDP: Peers
-2023-02-26 17:09:42,608 [1] INFO  Photon.Common.LoadBalancer.LoadShedding.FeedbackControlSystem - Initialized FeedbackControlSystem with 1 controllers from config file.
-2023-02-26 17:09:42,616 [1] INFO  Photon.Common.LoadBalancer.ServerStateManager - Watching for application state file in D:\Projects\Unity\MultiPlayerProjects\photon-server-plugin-sdk\deploy\ServerState.txt
-2023-02-26 17:09:42,617 [1] INFO  Photon.Common.LoadBalancer.ServerStateManager - Server state is set to online
-2023-02-26 17:09:42,618 [1] INFO  Photon.LoadBalancing.GameServer.GameApplication - Initializing master server connection ...
-2023-02-26 17:09:42,618 [1] DEBUG Photon.LoadBalancing.GameServer.MasterServerConnectionBase - ConnectionId=37ac9efa-7be9-49f9-8e7a-64bb378db8a6
-2023-02-26 17:09:42,622 [1] DEBUG Photon.LoadBalancing.GameServer.MasterServerConnectionBase - s2s MS connection: MasterServer endpoint for address 127.0.0.1 updated to 127.0.0.1:4520
-2023-02-26 17:09:42,631 [1] INFO  Photon.LoadBalancing.GameServer.MasterServerConnectionBase - s2s MS connection: Parameters to register on master: address 127.0.0.1, TCP 4531, UDP 5056, WebSocket 9091, Secure WebSocket 19091, ServerID cc57c0c5-1c6e-4084-80c0-154da416d2f3, Hostname localhost, IPv6Address , WebRTC 7072
-2023-02-26 17:09:42,643 [1] INFO  Photon.LoadBalancing.GameServer.MasterServerConnectionBase - s2s MS connection: Connecting to master at 127.0.0.1:4520, serverId=cc57c0c5-1c6e-4084-80c0-154da416d2f3
-2023-02-26 17:09:42,644 [1] INFO  Photon.SocketServer.ApplicationBase - Application start: AppId=Game; AppPath=D:\Projects\Unity\MultiPlayerProjects\photon-server-plugin-sdk\deploy\LoadBalancing\GameServer, Type=Photon.LoadBalancing.GameServer.GameApplication 
-2023-02-26 17:09:42,644 [1] INFO  Photon.SocketServer.ApplicationBase - Using Server GC:True
-2023-02-26 17:09:42,644 [1] INFO  Photon.SocketServer.ApplicationBase - Using GC LatencyMode:Interactive
-2023-02-26 17:09:45,693 [24] INFO  Photon.LoadBalancing.GameServer.MasterServerConnectionBase - s2s MS connection: connection established: address:127.0.0.1, ConnectionId:37ac9efa-7be9-49f9-8e7a-64bb378db8a6
-2023-02-26 17:09:45,693 [24] INFO  Photon.Common.LoadBalancer.ServerStateManager - Server state is set to online
-2023-02-26 17:09:45,697 [24] INFO  Photon.LoadBalancing.GameServer.OutgoingMasterServerPeer - Successfully registered at master server: serverId=cc57c0c5-1c6e-4084-80c0-154da416d2f3
-2023-02-26 17:09:45,698 [24] INFO  Photon.LoadBalancing.GameServer.MasterServerConnectionBase - s2s MS connection: connection registered on master: address:127.0.0.1
-2023-02-26 17:09:45,699 [24] DEBUG Photon.LoadBalancing.GameServer.MasterServerConnection - Update Expected Games Count event sent. endpoint:127.0.0.1:4520, connectionId:37ac9efa-7be9-49f9-8e7a-64bb378db8a6
-2023-02-26 17:10:48,857 [20] DEBUG Photon.LoadBalancing.GameServer.GameApplication - CreatePeer for 69ae0d10-03a7-46cf-bde8-8b39e812
-2023-02-26 17:10:48,858 [20] DEBUG Photon.LoadBalancing.GameServer.GameApplication - incoming game peer at 127.0.0.1:5056 from 127.0.0.1:62907
-2023-02-26 17:10:48,862 [20] DEBUG Photon.LoadBalancing.GameServer.GameClientPeer - Auth Timeout Checker scheduled. authTimeout:20000 p:GameClientPeer: PID: 0, IsConnected: False, IsDisposed: False, Last Activity: Operation 0 at UTC 0001-01-01T00:00:00, in Room '', IP 127.0.0.1:62907, NetworkProtocol Udp, Protocol GpBinaryV18, JoinStage: 0 
-2023-02-26 17:10:48,864 [20] INFO  Photon.SocketServer.Diagnostics.HttpQueuePerformanceCounters - Performance counters successfully initialized: instanceName=_Total
-2023-02-26 17:10:48,979 [20] INFO  Photon.SocketServer.Diagnostics.HttpQueuePerformanceCounters - Performance counters successfully initialized: instanceName=LoadBalancing_rpc
-2023-02-26 17:10:49,190 [10] DEBUG Photon.LoadBalancing.GameServer.GameClientPeer - OnOperationRequest: conId=0, opCode=230
-2023-02-26 17:10:49,193 [10] DEBUG Photon.LoadBalancing.GameServer.GameClientPeer - Auth Timeout Checker stopped. authTimeout:20000 p:GameClientPeer: PID: 0, IsConnected: True, IsDisposed: False, Last Activity: Operation 230 at UTC 2023-02-26T11:40:49, in Room '', IP 127.0.0.1:62907, NetworkProtocol Udp, Protocol GpBinaryV18, JoinStage: 0 
-2023-02-26 17:10:49,235 [21] DEBUG Photon.LoadBalancing.GameServer.GameClientPeer - Auth Timeout Checker stopped. authTimeout:20000 p:GameClientPeer: PID: 0, IsConnected: False, IsDisposed: False, Last Activity: Operation 230 at UTC 2023-02-26T11:40:49, in Room '', IP 127.0.0.1:62907, NetworkProtocol Udp, Protocol GpBinaryV18, JoinStage: 0 
-2023-02-26 17:10:49,235 [21] DEBUG Photon.Hive.HivePeer - OnDisconnect: conId=0, reason=0, reasonDetail=
-2023-02-26 17:10:49,236 [21] DEBUG Photon.Hive.HivePeer - RemovePeerFromCurrentRoom: Room Reference is null for p:GameClientPeer: PID: 0, IsConnected: False, IsDisposed: False, Last Activity: Operation 230 at UTC 2023-02-26T11:40:49, in Room '', IP 127.0.0.1:62907, NetworkProtocol Udp, Protocol GpBinaryV18, JoinStage: 0 
-2023-02-26 17:10:49,866 [25] DEBUG Photon.LoadBalancing.GameServer.MasterServerConnectionBase - Sending event to master. EventCode=2, ConnectionId=37ac9efa-7be9-49f9-8e7a-64bb378db8a6
-2023-02-26 17:11:04,856 [26] DEBUG Photon.LoadBalancing.GameServer.GameApplication - CreatePeer for 69ae0d10-03a7-46cf-bde8-8b39e812
-2023-02-26 17:11:04,857 [26] DEBUG Photon.LoadBalancing.GameServer.GameApplication - incoming game peer at 127.0.0.1:5056 from 127.0.0.1:58287
-2023-02-26 17:11:04,857 [26] DEBUG Photon.LoadBalancing.GameServer.GameClientPeer - Auth Timeout Checker scheduled. authTimeout:20000 p:GameClientPeer: PID: 1, IsConnected: False, IsDisposed: False, Last Activity: Operation 0 at UTC 0001-01-01T00:00:00, in Room '', IP 127.0.0.1:58287, NetworkProtocol Udp, Protocol GpBinaryV18, JoinStage: 0 
-2023-02-26 17:11:04,951 [21] DEBUG Photon.LoadBalancing.GameServer.GameClientPeer - OnOperationRequest: conId=1, opCode=230
-2023-02-26 17:11:04,951 [21] DEBUG Photon.LoadBalancing.GameServer.GameClientPeer - Auth Timeout Checker stopped. authTimeout:20000 p:GameClientPeer: PID: 1, IsConnected: True, IsDisposed: False, Last Activity: Operation 230 at UTC 2023-02-26T11:41:04, in Room '', IP 127.0.0.1:58287, NetworkProtocol Udp, Protocol GpBinaryV18, JoinStage: 0 
-2023-02-26 17:11:04,982 [22] DEBUG Photon.LoadBalancing.GameServer.GameClientPeer - Auth Timeout Checker stopped. authTimeout:20000 p:GameClientPeer: PID: 1, IsConnected: False, IsDisposed: False, Last Activity: Operation 230 at UTC 2023-02-26T11:41:04, in Room '', IP 127.0.0.1:58287, NetworkProtocol Udp, Protocol GpBinaryV18, JoinStage: 0 
-2023-02-26 17:11:04,982 [22] DEBUG Photon.Hive.HivePeer - OnDisconnect: conId=1, reason=0, reasonDetail=
-2023-02-26 17:11:04,983 [22] DEBUG Photon.Hive.HivePeer - RemovePeerFromCurrentRoom: Room Reference is null for p:GameClientPeer: PID: 1, IsConnected: False, IsDisposed: False, Last Activity: Operation 230 at UTC 2023-02-26T11:41:04, in Room '', IP 127.0.0.1:58287, NetworkProtocol Udp, Protocol GpBinaryV18, JoinStage: 0 
-2023-02-26 17:11:05,873 [28] DEBUG Photon.LoadBalancing.GameServer.MasterServerConnectionBase - Sending event to master. EventCode=2, ConnectionId=37ac9efa-7be9-49f9-8e7a-64bb378db8a6
-2023-02-26 17:11:27,703 [28] DEBUG Photon.LoadBalancing.GameServer.GameApplication - CreatePeer for 69ae0d10-03a7-46cf-bde8-8b39e812
-2023-02-26 17:11:27,703 [28] DEBUG Photon.LoadBalancing.GameServer.GameApplication - incoming game peer at 127.0.0.1:5056 from 127.0.0.1:58292
-2023-02-26 17:11:27,703 [28] DEBUG Photon.LoadBalancing.GameServer.GameClientPeer - Auth Timeout Checker scheduled. authTimeout:20000 p:GameClientPeer: PID: 4, IsConnected: False, IsDisposed: False, Last Activity: Operation 0 at UTC 0001-01-01T00:00:00, in Room '', IP 127.0.0.1:58292, NetworkProtocol Udp, Protocol GpBinaryV18, JoinStage: 0 
-2023-02-26 17:11:27,753 [17] DEBUG Photon.LoadBalancing.GameServer.GameClientPeer - OnOperationRequest: conId=4, opCode=230
-2023-02-26 17:11:27,753 [17] DEBUG Photon.LoadBalancing.GameServer.GameClientPeer - Auth Timeout Checker stopped. authTimeout:20000 p:GameClientPeer: PID: 4, IsConnected: True, IsDisposed: False, Last Activity: Operation 230 at UTC 2023-02-26T11:41:27, in Room '', IP 127.0.0.1:58292, NetworkProtocol Udp, Protocol GpBinaryV18, JoinStage: 0 
-2023-02-26 17:11:27,759 [17] DEBUG Photon.LoadBalancing.GameServer.GameClientPeer - Token Validation: checking token with GS: localhost and GameId:44abdc20-6ca0-40e6-9fca-52275327008f
-2023-02-26 17:11:27,794 [29] DEBUG Photon.LoadBalancing.GameServer.GameClientPeer - OnOperationRequest: conId=4, opCode=227
-2023-02-26 17:11:27,795 [29] DEBUG Photon.Hive.HivePeer - OnOperationRequest. Code=227
-2023-02-26 17:11:27,804 [29] INFO  Photon.SocketServer.Diagnostics.HttpQueuePerformanceCounters - Performance counters successfully initialized: instanceName=LoadBalancing_game
-2023-02-26 17:11:27,916 [29] DEBUG Photon.Hive.Caching.RoomCacheBase - Created room instance reference: roomName=44abdc20-6ca0-40e6-9fca-52275327008f, referenceCount=1
-2023-02-26 17:11:27,920 [21] INFO  Photon.Hive.Plugin.PluginManager - Plugin successfully created:Type:ServerPlugin.ServerPluginFactory, path:D:\Projects\Unity\MultiPlayerProjects\photon-server-plugin-sdk\deploy\Plugins/ServerPlugin//bin/ServerPlugin.dll
-2023-02-26 17:11:27,932 [21] INFO  Plugin.ServerPlugin - 
+﻿2023-04-07 17:33:36,265 [25] DEBUG Photon.LoadBalancing.GameServer.GameApplication - CreatePeer for LoadBalancing
+2023-04-07 17:33:36,266 [25] DEBUG Photon.LoadBalancing.GameServer.GameApplication - incoming game peer at 192.168.0.174:5056 from 192.168.0.19:57348
+2023-04-07 17:33:36,266 [25] DEBUG Photon.LoadBalancing.GameServer.GameClientPeer - Auth Timeout Checker scheduled. authTimeout:20000 p:GameClientPeer: PID: 32, IsConnected: False, IsDisposed: False, Last Activity: Operation 0 at UTC 0001-01-01T00:00:00, in Room '', IP 192.168.0.19:57348, NetworkProtocol Udp, Protocol GpBinaryV18, JoinStage: 0 
+2023-04-07 17:33:36,383 [10] DEBUG Photon.LoadBalancing.GameServer.GameClientPeer - OnOperationRequest: conId=32, opCode=230
+2023-04-07 17:33:36,384 [10] DEBUG Photon.LoadBalancing.GameServer.GameClientPeer - Auth Timeout Checker stopped. authTimeout:20000 p:GameClientPeer: PID: 32, IsConnected: True, IsDisposed: False, Last Activity: Operation 230 at UTC 2023-04-07T12:03:36, in Room '', IP 192.168.0.19:57348, NetworkProtocol Udp, Protocol GpBinaryV18, JoinStage: 0 
+2023-04-07 17:33:36,384 [10] DEBUG Photon.LoadBalancing.GameServer.GameClientPeer - Token Validation: checking token with GS: localhost and GameId:46babee9-0962-4b57-a3ad-2474e97d4f16
+2023-04-07 17:33:36,435 [22] DEBUG Photon.LoadBalancing.GameServer.GameClientPeer - OnOperationRequest: conId=32, opCode=226
+2023-04-07 17:33:36,435 [22] DEBUG Photon.Hive.HivePeer - OnOperationRequest. Code=226
+2023-04-07 17:33:36,435 [22] DEBUG Photon.Hive.Caching.RoomCacheBase - Creating room instance: roomName=46babee9-0962-4b57-a3ad-2474e97d4f16
+2023-04-07 17:33:36,436 [22] DEBUG Photon.Hive.Caching.RoomCacheBase - Created room instance reference: roomName=46babee9-0962-4b57-a3ad-2474e97d4f16, referenceCount=1
+2023-04-07 17:33:36,436 [22] INFO  Photon.Hive.Plugin.PluginManager - Plugin successfully created:Type:ServerPlugin.ServerPluginFactory, path:D:\Unity\UFO_POKER\photon-server-plugin-sdk\deploy\Plugins/ServerPlugin//bin/ServerPlugin.dll
+2023-04-07 17:33:36,436 [22] WARN  Photon.Hive.HiveHostGame - Usage of SetProperties is prohibited before calling ICrateGameCallInfo.Coninue
+2023-04-07 17:33:36,436 [22] DEBUG Photon.LoadBalancing.GameServer.Game - MaxPlayer=, IsOpen=, IsVisible=, #LobbyProperties=0, #GameProperties=1
+2023-04-07 17:33:36,437 [22] DEBUG Photon.LoadBalancing.GameServer.Game - UpdateGameStateOnMaster: game - '46babee9-0962-4b57-a3ad-2474e97d4f16', reinitialize:False, replication:0
+2023-04-07 17:33:36,437 [22] DEBUG Photon.LoadBalancing.GameServer.GameUpdatesBatcher - Message was sent directly
+2023-04-07 17:33:36,437 [22] DEBUG Photon.LoadBalancing.GameServer.MasterServerConnectionBase - Sending event to master. EventCode=3, ConnectionId=6a55cf45-837f-47ca-ae5c-69bb60905d14
+2023-04-07 17:33:36,437 [22] DEBUG Photon.Hive.Plugin.CreateGameCallInfo - Continue.
+2023-04-07 17:33:36,437 [22] DEBUG Photon.Hive.HiveGame - Processing Join from IP: 192.168.0.19 to port: 5056
+2023-04-07 17:33:36,438 [22] DEBUG Photon.Hive.Collections.ActorsManager - Actor added: 1 33d3c200-309a-40d6-a33b-e908e562ab47 to game: 46babee9-0962-4b57-a3ad-2474e97d4f16 -- peer:GameClientPeer: PID: 32, IsConnected: True, IsDisposed: False, Last Activity: Operation 226 at UTC 2023-04-07T12:03:36, in Room '46babee9-0962-4b57-a3ad-2474e97d4f16', IP 192.168.0.19:57348, NetworkProtocol Udp, Protocol GpBinaryV18, JoinStage: 4 
+2023-04-07 17:33:36,438 [22] DEBUG Photon.Hive.HiveGame - JoinApplyGameStateChanges: Actor 1 is added. MasterClientId is 1
+2023-04-07 17:33:36,438 [22] DEBUG Photon.Hive.HiveGame - Created Game - name=46babee9-0962-4b57-a3ad-2474e97d4f16, lobbyName=, lobbyType=Default, maxPlayers=0, IsOpen=True, IsVisible=True, EmptyRoomLiveTime=0, PlayerTTL=0, CheckUserOnJoin=True, PublishUserId=False, ExpectedUsers=
+2023-04-07 17:33:36,438 [22] DEBUG Photon.LoadBalancing.GameServer.Game - UpdateGameStateOnMasterOnCreate: game - '46babee9-0962-4b57-a3ad-2474e97d4f16'
+2023-04-07 17:33:36,438 [22] DEBUG Photon.LoadBalancing.GameServer.GameUpdatesBatcher - Message was batched
+2023-04-07 17:33:36,439 [22] INFO  Plugin.ServerPlugin - 
 
- OnCreateGame 44abdc20-6ca0-40e6-9fca-52275327008f by user f8799bcb-2da4-49d4-8e47-acf4c0a5eee0 
+ OnCreateGame 46babee9-0962-4b57-a3ad-2474e97d4f16 by user 33d3c200-309a-40d6-a33b-e908e562ab47 - 
+ Actor-1, Name: aslam   
 ...................
 
-2023-02-26 17:11:27,932 [21] DEBUG Photon.Hive.Plugin.CreateGameCallInfo - Continue.
-2023-02-26 17:11:27,933 [21] DEBUG Photon.Hive.HiveGame - Processing Join from IP: 127.0.0.1 to port: 5056
-2023-02-26 17:11:27,942 [21] DEBUG Photon.Hive.Collections.ActorsManager - Actor added: 1 f8799bcb-2da4-49d4-8e47-acf4c0a5eee0 to game: 44abdc20-6ca0-40e6-9fca-52275327008f -- peer:GameClientPeer: PID: 4, IsConnected: True, IsDisposed: False, Last Activity: Operation 227 at UTC 2023-02-26T11:41:27, in Room '44abdc20-6ca0-40e6-9fca-52275327008f', IP 127.0.0.1:58292, NetworkProtocol Udp, Protocol GpBinaryV18, JoinStage: 4 
-2023-02-26 17:11:27,943 [21] DEBUG Photon.Hive.HiveGame - JoinApplyGameStateChanges: Actor 1 is added. MasterClientId is 1
-2023-02-26 17:11:27,944 [21] DEBUG Photon.Hive.HiveGame - Created Game - name=44abdc20-6ca0-40e6-9fca-52275327008f, lobbyName=, lobbyType=Default, maxPlayers=4, IsOpen=True, IsVisible=True, EmptyRoomLiveTime=0, PlayerTTL=0, CheckUserOnJoin=True, PublishUserId=False, ExpectedUsers=
-2023-02-26 17:11:27,964 [21] DEBUG Photon.LoadBalancing.GameServer.Game - UpdateGameStateOnMasterOnCreate: game - '44abdc20-6ca0-40e6-9fca-52275327008f'
-2023-02-26 17:11:27,965 [21] DEBUG Photon.LoadBalancing.GameServer.GameUpdatesBatcher - Message was sent directly
-2023-02-26 17:11:27,967 [21] DEBUG Photon.LoadBalancing.GameServer.MasterServerConnectionBase - Sending event to master. EventCode=3, ConnectionId=37ac9efa-7be9-49f9-8e7a-64bb378db8a6
-2023-02-26 17:11:27,981 [10] DEBUG Photon.LoadBalancing.GameServer.GameClientPeer - OnOperationRequest: conId=4, opCode=252
-2023-02-26 17:11:27,982 [10] DEBUG Photon.Hive.HivePeer - OnOperationRequest. Code=252
-2023-02-26 17:11:27,984 [10] DEBUG Photon.LoadBalancing.GameServer.GameClientPeer - OnOperationRequest: conId=4, opCode=252
-2023-02-26 17:11:27,984 [10] DEBUG Photon.Hive.HivePeer - OnOperationRequest. Code=252
-2023-02-26 17:11:27,985 [18] DEBUG Photon.Hive.Plugin.BeforeSetPropertiesCallInfo - Continue.
-2023-02-26 17:11:27,989 [18] DEBUG Photon.Hive.Plugin.SetPropertiesCallInfo - Continue.
-2023-02-26 17:11:27,991 [18] DEBUG Photon.Hive.Plugin.BeforeSetPropertiesCallInfo - Continue.
-2023-02-26 17:11:27,991 [18] DEBUG Photon.Hive.Plugin.SetPropertiesCallInfo - Continue.
-2023-02-26 17:11:28,050 [12] DEBUG Photon.Hive.HivePeer - OnOperationRequest. Code=253
-2023-02-26 17:11:28,052 [29] DEBUG Photon.Hive.HiveHostGame - Broadcasting: Got RaiseEvent from 1/'f8799bcb-2da4-49d4-8e47-acf4c0a5eee0', targetActors=-1, Group=0, ReceiverGroup=0
-2023-02-26 17:11:28,054 [29] ERROR Photon.Hive.HiveGame.HiveHostGame.Plugin - MissingCallProcessing for type:Photon.Hive.Plugin.RaiseEventCallInfo in Plugin:'Name:ServerPlugin, Version:1.0 AppId:C339-38F4-AE0A-52D5-A910-706E, AppVersion:'.
-2023-02-26 17:11:28,054 [29] DEBUG Photon.Hive.Plugin.RaiseEventCallInfo - Fail: none of Photon.Hive.Plugin.RaiseEventCallInfo's method were called
-2023-02-26 17:11:28,704 [24] DEBUG Photon.LoadBalancing.GameServer.MasterServerConnectionBase - Sending event to master. EventCode=2, ConnectionId=37ac9efa-7be9-49f9-8e7a-64bb378db8a6
-2023-02-26 17:12:03,492 [26] DEBUG Photon.LoadBalancing.GameServer.GameApplication - CreatePeer for 69ae0d10-03a7-46cf-bde8-8b39e812
-2023-02-26 17:12:03,492 [26] DEBUG Photon.LoadBalancing.GameServer.GameApplication - incoming game peer at 127.0.0.1:5056 from 127.0.0.1:49932
-2023-02-26 17:12:03,492 [26] DEBUG Photon.LoadBalancing.GameServer.GameClientPeer - Auth Timeout Checker scheduled. authTimeout:20000 p:GameClientPeer: PID: 7, IsConnected: False, IsDisposed: False, Last Activity: Operation 0 at UTC 0001-01-01T00:00:00, in Room '', IP 127.0.0.1:49932, NetworkProtocol Udp, Protocol GpBinaryV18, JoinStage: 0 
-2023-02-26 17:12:03,548 [27] DEBUG Photon.LoadBalancing.GameServer.GameClientPeer - OnOperationRequest: conId=7, opCode=230
-2023-02-26 17:12:03,548 [27] DEBUG Photon.LoadBalancing.GameServer.GameClientPeer - Auth Timeout Checker stopped. authTimeout:20000 p:GameClientPeer: PID: 7, IsConnected: True, IsDisposed: False, Last Activity: Operation 230 at UTC 2023-02-26T11:42:03, in Room '', IP 127.0.0.1:49932, NetworkProtocol Udp, Protocol GpBinaryV18, JoinStage: 0 
-2023-02-26 17:12:03,549 [27] DEBUG Photon.LoadBalancing.GameServer.GameClientPeer - Token Validation: checking token with GS: localhost and GameId:44abdc20-6ca0-40e6-9fca-52275327008f
-2023-02-26 17:12:03,616 [19] DEBUG Photon.LoadBalancing.GameServer.GameClientPeer - OnOperationRequest: conId=7, opCode=226
-2023-02-26 17:12:03,616 [19] DEBUG Photon.Hive.HivePeer - OnOperationRequest. Code=226
-2023-02-26 17:12:03,617 [19] DEBUG Photon.Hive.Caching.RoomCacheBase - Created room instance reference: roomName=44abdc20-6ca0-40e6-9fca-52275327008f, referenceCount=2
-2023-02-26 17:12:03,618 [19] DEBUG Photon.Hive.Plugin.BeforeJoinGameCallInfo - Continue.
-2023-02-26 17:12:03,621 [19] DEBUG Photon.Hive.Collections.ActorsManager - Actor added: 2 794abc04-ff8d-4e17-b57c-924e8f761f7e to game: 44abdc20-6ca0-40e6-9fca-52275327008f -- peer:GameClientPeer: PID: 7, IsConnected: True, IsDisposed: False, Last Activity: Operation 226 at UTC 2023-02-26T11:42:03, in Room '44abdc20-6ca0-40e6-9fca-52275327008f', IP 127.0.0.1:49932, NetworkProtocol Udp, Protocol GpBinaryV18, JoinStage: 4 
-2023-02-26 17:12:03,622 [19] DEBUG Photon.Hive.HiveGame - JoinApplyGameStateChanges: Actor 2 is added. MasterClientId is 1
-2023-02-26 17:12:03,623 [19] DEBUG Photon.Hive.Plugin.JoinGameCallInfo - Continue.
-2023-02-26 17:12:03,623 [19] DEBUG Photon.LoadBalancing.GameServer.GameUpdatesBatcher - Message was sent directly
-2023-02-26 17:12:03,623 [19] DEBUG Photon.LoadBalancing.GameServer.MasterServerConnectionBase - Sending event to master. EventCode=3, ConnectionId=37ac9efa-7be9-49f9-8e7a-64bb378db8a6
-2023-02-26 17:12:03,679 [20] DEBUG Photon.LoadBalancing.GameServer.GameClientPeer - OnOperationRequest: conId=4, opCode=252
-2023-02-26 17:12:03,679 [20] DEBUG Photon.Hive.HivePeer - OnOperationRequest. Code=252
-2023-02-26 17:12:03,679 [16] DEBUG Photon.Hive.Plugin.BeforeSetPropertiesCallInfo - Continue.
-2023-02-26 17:12:03,680 [16] DEBUG Photon.Hive.Plugin.SetPropertiesCallInfo - Continue.
-2023-02-26 17:12:03,751 [21] DEBUG Photon.Hive.HivePeer - OnOperationRequest. Code=253
-2023-02-26 17:12:03,752 [12] DEBUG Photon.Hive.HiveHostGame - Broadcasting: Got RaiseEvent from 1/'f8799bcb-2da4-49d4-8e47-acf4c0a5eee0', targetActors=-1, Group=0, ReceiverGroup=0
-2023-02-26 17:12:03,752 [12] ERROR Photon.Hive.HiveGame.HiveHostGame.Plugin - MissingCallProcessing for type:Photon.Hive.Plugin.RaiseEventCallInfo in Plugin:'Name:ServerPlugin, Version:1.0 AppId:C339-38F4-AE0A-52D5-A910-706E, AppVersion:'.
-2023-02-26 17:12:03,752 [12] DEBUG Photon.Hive.Plugin.RaiseEventCallInfo - Fail: none of Photon.Hive.Plugin.RaiseEventCallInfo's method were called
-2023-02-26 17:12:03,770 [23] DEBUG Photon.Hive.HivePeer - OnOperationRequest. Code=253
-2023-02-26 17:12:03,770 [23] DEBUG Photon.Hive.HivePeer - OnOperationRequest. Code=253
-2023-02-26 17:12:03,770 [13] DEBUG Photon.Hive.HiveHostGame - Broadcasting: Got RaiseEvent from 2/'794abc04-ff8d-4e17-b57c-924e8f761f7e', targetActors=-1, Group=0, ReceiverGroup=0
-2023-02-26 17:12:03,771 [13] ERROR Photon.Hive.HiveGame.HiveHostGame.Plugin - MissingCallProcessing for type:Photon.Hive.Plugin.RaiseEventCallInfo in Plugin:'Name:ServerPlugin, Version:1.0 AppId:C339-38F4-AE0A-52D5-A910-706E, AppVersion:'.
-2023-02-26 17:12:03,771 [13] DEBUG Photon.Hive.Plugin.RaiseEventCallInfo - Fail: none of Photon.Hive.Plugin.RaiseEventCallInfo's method were called
-2023-02-26 17:12:03,771 [13] DEBUG Photon.Hive.HiveHostGame - Broadcasting: Got RaiseEvent from 2/'794abc04-ff8d-4e17-b57c-924e8f761f7e', targetActors=-1, Group=0, ReceiverGroup=0
-2023-02-26 17:12:03,771 [13] ERROR Photon.Hive.HiveGame.HiveHostGame.Plugin - MissingCallProcessing for type:Photon.Hive.Plugin.RaiseEventCallInfo in Plugin:'Name:ServerPlugin, Version:1.0 AppId:C339-38F4-AE0A-52D5-A910-706E, AppVersion:'.
-2023-02-26 17:12:03,771 [13] DEBUG Photon.Hive.Plugin.RaiseEventCallInfo - Fail: none of Photon.Hive.Plugin.RaiseEventCallInfo's method were called
-2023-02-26 17:12:03,841 [22] DEBUG Photon.Hive.HivePeer - OnOperationRequest. Code=253
-2023-02-26 17:12:03,842 [22] DEBUG Photon.Hive.HiveHostGame - Broadcasting: Got RaiseEvent from 1/'f8799bcb-2da4-49d4-8e47-acf4c0a5eee0', targetActors=-1, Group=0, ReceiverGroup=0
-2023-02-26 17:12:03,842 [22] ERROR Photon.Hive.HiveGame.HiveHostGame.Plugin - MissingCallProcessing for type:Photon.Hive.Plugin.RaiseEventCallInfo in Plugin:'Name:ServerPlugin, Version:1.0 AppId:C339-38F4-AE0A-52D5-A910-706E, AppVersion:'.
-2023-02-26 17:12:03,842 [22] DEBUG Photon.Hive.Plugin.RaiseEventCallInfo - Fail: none of Photon.Hive.Plugin.RaiseEventCallInfo's method were called
-2023-02-26 17:12:03,861 [17] DEBUG Photon.Hive.HivePeer - OnOperationRequest. Code=253
-2023-02-26 17:12:03,862 [17] DEBUG Photon.Hive.HiveHostGame - Broadcasting: Got RaiseEvent from 2/'794abc04-ff8d-4e17-b57c-924e8f761f7e', targetActors=-1, Group=0, ReceiverGroup=0
-2023-02-26 17:12:03,862 [17] ERROR Photon.Hive.HiveGame.HiveHostGame.Plugin - MissingCallProcessing for type:Photon.Hive.Plugin.RaiseEventCallInfo in Plugin:'Name:ServerPlugin, Version:1.0 AppId:C339-38F4-AE0A-52D5-A910-706E, AppVersion:'.
-2023-02-26 17:12:03,862 [17] DEBUG Photon.Hive.Plugin.RaiseEventCallInfo - Fail: none of Photon.Hive.Plugin.RaiseEventCallInfo's method were called
-2023-02-26 17:12:03,936 [28] DEBUG Photon.Hive.HivePeer - OnOperationRequest. Code=253
-2023-02-26 17:12:03,937 [27] DEBUG Photon.Hive.HiveHostGame - Broadcasting: Got RaiseEvent from 1/'f8799bcb-2da4-49d4-8e47-acf4c0a5eee0', targetActors=-1, Group=0, ReceiverGroup=0
-2023-02-26 17:12:03,937 [27] ERROR Photon.Hive.HiveGame.HiveHostGame.Plugin - MissingCallProcessing for type:Photon.Hive.Plugin.RaiseEventCallInfo in Plugin:'Name:ServerPlugin, Version:1.0 AppId:C339-38F4-AE0A-52D5-A910-706E, AppVersion:'.
-2023-02-26 17:12:03,937 [27] DEBUG Photon.Hive.Plugin.RaiseEventCallInfo - Fail: none of Photon.Hive.Plugin.RaiseEventCallInfo's method were called
-2023-02-26 17:12:03,956 [21] DEBUG Photon.Hive.HivePeer - OnOperationRequest. Code=253
-2023-02-26 17:12:03,956 [21] DEBUG Photon.Hive.HiveHostGame - Broadcasting: Got RaiseEvent from 2/'794abc04-ff8d-4e17-b57c-924e8f761f7e', targetActors=-1, Group=0, ReceiverGroup=0
-2023-02-26 17:12:03,956 [21] ERROR Photon.Hive.HiveGame.HiveHostGame.Plugin - MissingCallProcessing for type:Photon.Hive.Plugin.RaiseEventCallInfo in Plugin:'Name:ServerPlugin, Version:1.0 AppId:C339-38F4-AE0A-52D5-A910-706E, AppVersion:'.
-2023-02-26 17:12:03,956 [21] DEBUG Photon.Hive.Plugin.RaiseEventCallInfo - Fail: none of Photon.Hive.Plugin.RaiseEventCallInfo's method were called
-2023-02-26 17:12:04,048 [23] DEBUG Photon.Hive.HivePeer - OnOperationRequest. Code=253
-2023-02-26 17:12:04,049 [18] DEBUG Photon.Hive.HiveHostGame - Broadcasting: Got RaiseEvent from 2/'794abc04-ff8d-4e17-b57c-924e8f761f7e', targetActors=-1, Group=0, ReceiverGroup=0
-2023-02-26 17:12:04,049 [18] ERROR Photon.Hive.HiveGame.HiveHostGame.Plugin - MissingCallProcessing for type:Photon.Hive.Plugin.RaiseEventCallInfo in Plugin:'Name:ServerPlugin, Version:1.0 AppId:C339-38F4-AE0A-52D5-A910-706E, AppVersion:'.
-2023-02-26 17:12:04,049 [18] DEBUG Photon.Hive.Plugin.RaiseEventCallInfo - Fail: none of Photon.Hive.Plugin.RaiseEventCallInfo's method were called
-2023-02-26 17:12:04,143 [15] DEBUG Photon.Hive.HivePeer - OnOperationRequest. Code=253
-2023-02-26 17:12:04,143 [25] DEBUG Photon.Hive.HiveHostGame - Broadcasting: Got RaiseEvent from 2/'794abc04-ff8d-4e17-b57c-924e8f761f7e', targetActors=-1, Group=0, ReceiverGroup=0
-2023-02-26 17:12:04,143 [25] ERROR Photon.Hive.HiveGame.HiveHostGame.Plugin - MissingCallProcessing for type:Photon.Hive.Plugin.RaiseEventCallInfo in Plugin:'Name:ServerPlugin, Version:1.0 AppId:C339-38F4-AE0A-52D5-A910-706E, AppVersion:'.
-2023-02-26 17:12:04,143 [25] DEBUG Photon.Hive.Plugin.RaiseEventCallInfo - Fail: none of Photon.Hive.Plugin.RaiseEventCallInfo's method were called
-2023-02-26 17:12:04,237 [27] DEBUG Photon.Hive.HivePeer - OnOperationRequest. Code=253
-2023-02-26 17:12:04,237 [11] DEBUG Photon.Hive.HiveHostGame - Broadcasting: Got RaiseEvent from 2/'794abc04-ff8d-4e17-b57c-924e8f761f7e', targetActors=-1, Group=0, ReceiverGroup=0
-2023-02-26 17:12:04,238 [11] ERROR Photon.Hive.HiveGame.HiveHostGame.Plugin - MissingCallProcessing for type:Photon.Hive.Plugin.RaiseEventCallInfo in Plugin:'Name:ServerPlugin, Version:1.0 AppId:C339-38F4-AE0A-52D5-A910-706E, AppVersion:'.
-2023-02-26 17:12:04,238 [11] DEBUG Photon.Hive.Plugin.RaiseEventCallInfo - Fail: none of Photon.Hive.Plugin.RaiseEventCallInfo's method were called
-2023-02-26 17:12:04,332 [21] DEBUG Photon.Hive.HivePeer - OnOperationRequest. Code=253
-2023-02-26 17:12:04,332 [23] DEBUG Photon.Hive.HiveHostGame - Broadcasting: Got RaiseEvent from 2/'794abc04-ff8d-4e17-b57c-924e8f761f7e', targetActors=-1, Group=0, ReceiverGroup=0
-2023-02-26 17:12:04,332 [23] ERROR Photon.Hive.HiveGame.HiveHostGame.Plugin - MissingCallProcessing for type:Photon.Hive.Plugin.RaiseEventCallInfo in Plugin:'Name:ServerPlugin, Version:1.0 AppId:C339-38F4-AE0A-52D5-A910-706E, AppVersion:'.
-2023-02-26 17:12:04,332 [23] DEBUG Photon.Hive.Plugin.RaiseEventCallInfo - Fail: none of Photon.Hive.Plugin.RaiseEventCallInfo's method were called
-2023-02-26 17:12:04,428 [18] DEBUG Photon.Hive.HivePeer - OnOperationRequest. Code=253
-2023-02-26 17:12:04,428 [22] DEBUG Photon.Hive.HiveHostGame - Broadcasting: Got RaiseEvent from 2/'794abc04-ff8d-4e17-b57c-924e8f761f7e', targetActors=-1, Group=0, ReceiverGroup=0
-2023-02-26 17:12:04,428 [22] ERROR Photon.Hive.HiveGame.HiveHostGame.Plugin - MissingCallProcessing for type:Photon.Hive.Plugin.RaiseEventCallInfo in Plugin:'Name:ServerPlugin, Version:1.0 AppId:C339-38F4-AE0A-52D5-A910-706E, AppVersion:'.
-2023-02-26 17:12:04,428 [22] DEBUG Photon.Hive.Plugin.RaiseEventCallInfo - Fail: none of Photon.Hive.Plugin.RaiseEventCallInfo's method were called
-2023-02-26 17:12:04,505 [25] DEBUG Photon.LoadBalancing.GameServer.MasterServerConnectionBase - Sending event to master. EventCode=2, ConnectionId=37ac9efa-7be9-49f9-8e7a-64bb378db8a6
-2023-02-26 17:12:04,523 [16] DEBUG Photon.Hive.HivePeer - OnOperationRequest. Code=253
-2023-02-26 17:12:04,523 [16] DEBUG Photon.Hive.HiveHostGame - Broadcasting: Got RaiseEvent from 2/'794abc04-ff8d-4e17-b57c-924e8f761f7e', targetActors=-1, Group=0, ReceiverGroup=0
-2023-02-26 17:12:04,523 [16] ERROR Photon.Hive.HiveGame.HiveHostGame.Plugin - MissingCallProcessing for type:Photon.Hive.Plugin.RaiseEventCallInfo in Plugin:'Name:ServerPlugin, Version:1.0 AppId:C339-38F4-AE0A-52D5-A910-706E, AppVersion:'.
-2023-02-26 17:12:04,523 [16] DEBUG Photon.Hive.Plugin.RaiseEventCallInfo - Fail: none of Photon.Hive.Plugin.RaiseEventCallInfo's method were called
-2023-02-26 17:12:04,620 [27] DEBUG Photon.Hive.HivePeer - OnOperationRequest. Code=253
-2023-02-26 17:12:04,620 [11] DEBUG Photon.Hive.HiveHostGame - Broadcasting: Got RaiseEvent from 2/'794abc04-ff8d-4e17-b57c-924e8f761f7e', targetActors=-1, Group=0, ReceiverGroup=0
-2023-02-26 17:12:04,620 [11] ERROR Photon.Hive.HiveGame.HiveHostGame.Plugin - MissingCallProcessing for type:Photon.Hive.Plugin.RaiseEventCallInfo in Plugin:'Name:ServerPlugin, Version:1.0 AppId:C339-38F4-AE0A-52D5-A910-706E, AppVersion:'.
-2023-02-26 17:12:04,620 [11] DEBUG Photon.Hive.Plugin.RaiseEventCallInfo - Fail: none of Photon.Hive.Plugin.RaiseEventCallInfo's method were called
-2023-02-26 17:12:04,714 [24] DEBUG Photon.Hive.HivePeer - OnOperationRequest. Code=253
-2023-02-26 17:12:04,714 [15] DEBUG Photon.Hive.HiveHostGame - Broadcasting: Got RaiseEvent from 2/'794abc04-ff8d-4e17-b57c-924e8f761f7e', targetActors=-1, Group=0, ReceiverGroup=0
-2023-02-26 17:12:04,715 [15] ERROR Photon.Hive.HiveGame.HiveHostGame.Plugin - MissingCallProcessing for type:Photon.Hive.Plugin.RaiseEventCallInfo in Plugin:'Name:ServerPlugin, Version:1.0 AppId:C339-38F4-AE0A-52D5-A910-706E, AppVersion:'.
-2023-02-26 17:12:04,715 [15] DEBUG Photon.Hive.Plugin.RaiseEventCallInfo - Fail: none of Photon.Hive.Plugin.RaiseEventCallInfo's method were called
-2023-02-26 17:12:04,808 [28] DEBUG Photon.Hive.HivePeer - OnOperationRequest. Code=253
-2023-02-26 17:12:04,808 [20] DEBUG Photon.Hive.HiveHostGame - Broadcasting: Got RaiseEvent from 2/'794abc04-ff8d-4e17-b57c-924e8f761f7e', targetActors=-1, Group=0, ReceiverGroup=0
-2023-02-26 17:12:04,808 [20] ERROR Photon.Hive.HiveGame.HiveHostGame.Plugin - MissingCallProcessing for type:Photon.Hive.Plugin.RaiseEventCallInfo in Plugin:'Name:ServerPlugin, Version:1.0 AppId:C339-38F4-AE0A-52D5-A910-706E, AppVersion:'.
-2023-02-26 17:12:04,809 [20] DEBUG Photon.Hive.Plugin.RaiseEventCallInfo - Fail: none of Photon.Hive.Plugin.RaiseEventCallInfo's method were called
-2023-02-26 17:12:04,906 [25] DEBUG Photon.Hive.HivePeer - OnOperationRequest. Code=253
-2023-02-26 17:12:04,906 [12] DEBUG Photon.Hive.HiveHostGame - Broadcasting: Got RaiseEvent from 2/'794abc04-ff8d-4e17-b57c-924e8f761f7e', targetActors=-1, Group=0, ReceiverGroup=0
-2023-02-26 17:12:04,906 [12] ERROR Photon.Hive.HiveGame.HiveHostGame.Plugin - MissingCallProcessing for type:Photon.Hive.Plugin.RaiseEventCallInfo in Plugin:'Name:ServerPlugin, Version:1.0 AppId:C339-38F4-AE0A-52D5-A910-706E, AppVersion:'.
-2023-02-26 17:12:04,906 [12] DEBUG Photon.Hive.Plugin.RaiseEventCallInfo - Fail: none of Photon.Hive.Plugin.RaiseEventCallInfo's method were called
-2023-02-26 17:12:07,930 [16] DEBUG Photon.Hive.HivePeer - OnOperationRequest. Code=253
-2023-02-26 17:12:07,930 [16] DEBUG Photon.Hive.HiveHostGame - Broadcasting: Got RaiseEvent from 2/'794abc04-ff8d-4e17-b57c-924e8f761f7e', targetActors=-1, Group=0, ReceiverGroup=0
-2023-02-26 17:12:07,930 [16] ERROR Photon.Hive.HiveGame.HiveHostGame.Plugin - MissingCallProcessing for type:Photon.Hive.Plugin.RaiseEventCallInfo in Plugin:'Name:ServerPlugin, Version:1.0 AppId:C339-38F4-AE0A-52D5-A910-706E, AppVersion:'.
-2023-02-26 17:12:07,930 [16] DEBUG Photon.Hive.Plugin.RaiseEventCallInfo - Fail: none of Photon.Hive.Plugin.RaiseEventCallInfo's method were called
-2023-02-26 17:12:08,027 [23] DEBUG Photon.Hive.HivePeer - OnOperationRequest. Code=253
-2023-02-26 17:12:08,027 [23] DEBUG Photon.Hive.HiveHostGame - Broadcasting: Got RaiseEvent from 2/'794abc04-ff8d-4e17-b57c-924e8f761f7e', targetActors=-1, Group=0, ReceiverGroup=0
-2023-02-26 17:12:08,028 [23] ERROR Photon.Hive.HiveGame.HiveHostGame.Plugin - MissingCallProcessing for type:Photon.Hive.Plugin.RaiseEventCallInfo in Plugin:'Name:ServerPlugin, Version:1.0 AppId:C339-38F4-AE0A-52D5-A910-706E, AppVersion:'.
-2023-02-26 17:12:08,028 [23] DEBUG Photon.Hive.Plugin.RaiseEventCallInfo - Fail: none of Photon.Hive.Plugin.RaiseEventCallInfo's method were called
-2023-02-26 17:12:08,314 [20] DEBUG Photon.Hive.HivePeer - OnOperationRequest. Code=253
-2023-02-26 17:12:08,314 [20] DEBUG Photon.Hive.HiveHostGame - Broadcasting: Got RaiseEvent from 2/'794abc04-ff8d-4e17-b57c-924e8f761f7e', targetActors=-1, Group=0, ReceiverGroup=0
-2023-02-26 17:12:08,314 [20] ERROR Photon.Hive.HiveGame.HiveHostGame.Plugin - MissingCallProcessing for type:Photon.Hive.Plugin.RaiseEventCallInfo in Plugin:'Name:ServerPlugin, Version:1.0 AppId:C339-38F4-AE0A-52D5-A910-706E, AppVersion:'.
-2023-02-26 17:12:08,314 [20] DEBUG Photon.Hive.Plugin.RaiseEventCallInfo - Fail: none of Photon.Hive.Plugin.RaiseEventCallInfo's method were called
-2023-02-26 17:12:08,409 [29] DEBUG Photon.Hive.HivePeer - OnOperationRequest. Code=253
-2023-02-26 17:12:08,409 [29] DEBUG Photon.Hive.HiveHostGame - Broadcasting: Got RaiseEvent from 2/'794abc04-ff8d-4e17-b57c-924e8f761f7e', targetActors=-1, Group=0, ReceiverGroup=0
-2023-02-26 17:12:08,409 [29] ERROR Photon.Hive.HiveGame.HiveHostGame.Plugin - MissingCallProcessing for type:Photon.Hive.Plugin.RaiseEventCallInfo in Plugin:'Name:ServerPlugin, Version:1.0 AppId:C339-38F4-AE0A-52D5-A910-706E, AppVersion:'.
-2023-02-26 17:12:08,409 [29] DEBUG Photon.Hive.Plugin.RaiseEventCallInfo - Fail: none of Photon.Hive.Plugin.RaiseEventCallInfo's method were called
-2023-02-26 17:12:08,596 [15] DEBUG Photon.Hive.HivePeer - OnOperationRequest. Code=253
-2023-02-26 17:12:08,597 [15] DEBUG Photon.Hive.HiveHostGame - Broadcasting: Got RaiseEvent from 2/'794abc04-ff8d-4e17-b57c-924e8f761f7e', targetActors=-1, Group=0, ReceiverGroup=0
-2023-02-26 17:12:08,597 [15] ERROR Photon.Hive.HiveGame.HiveHostGame.Plugin - MissingCallProcessing for type:Photon.Hive.Plugin.RaiseEventCallInfo in Plugin:'Name:ServerPlugin, Version:1.0 AppId:C339-38F4-AE0A-52D5-A910-706E, AppVersion:'.
-2023-02-26 17:12:08,597 [15] DEBUG Photon.Hive.Plugin.RaiseEventCallInfo - Fail: none of Photon.Hive.Plugin.RaiseEventCallInfo's method were called
-2023-02-26 17:12:08,692 [24] DEBUG Photon.Hive.HivePeer - OnOperationRequest. Code=253
-2023-02-26 17:12:08,692 [24] DEBUG Photon.Hive.HiveHostGame - Broadcasting: Got RaiseEvent from 2/'794abc04-ff8d-4e17-b57c-924e8f761f7e', targetActors=-1, Group=0, ReceiverGroup=0
-2023-02-26 17:12:08,692 [24] ERROR Photon.Hive.HiveGame.HiveHostGame.Plugin - MissingCallProcessing for type:Photon.Hive.Plugin.RaiseEventCallInfo in Plugin:'Name:ServerPlugin, Version:1.0 AppId:C339-38F4-AE0A-52D5-A910-706E, AppVersion:'.
-2023-02-26 17:12:08,692 [24] DEBUG Photon.Hive.Plugin.RaiseEventCallInfo - Fail: none of Photon.Hive.Plugin.RaiseEventCallInfo's method were called
-2023-02-26 17:12:08,788 [20] DEBUG Photon.Hive.HivePeer - OnOperationRequest. Code=253
-2023-02-26 17:12:08,788 [20] DEBUG Photon.Hive.HiveHostGame - Broadcasting: Got RaiseEvent from 2/'794abc04-ff8d-4e17-b57c-924e8f761f7e', targetActors=-1, Group=0, ReceiverGroup=0
-2023-02-26 17:12:08,789 [20] ERROR Photon.Hive.HiveGame.HiveHostGame.Plugin - MissingCallProcessing for type:Photon.Hive.Plugin.RaiseEventCallInfo in Plugin:'Name:ServerPlugin, Version:1.0 AppId:C339-38F4-AE0A-52D5-A910-706E, AppVersion:'.
-2023-02-26 17:12:08,789 [20] DEBUG Photon.Hive.Plugin.RaiseEventCallInfo - Fail: none of Photon.Hive.Plugin.RaiseEventCallInfo's method were called
-2023-02-26 17:12:08,884 [29] DEBUG Photon.Hive.HivePeer - OnOperationRequest. Code=253
-2023-02-26 17:12:08,885 [29] DEBUG Photon.Hive.HiveHostGame - Broadcasting: Got RaiseEvent from 2/'794abc04-ff8d-4e17-b57c-924e8f761f7e', targetActors=-1, Group=0, ReceiverGroup=0
-2023-02-26 17:12:08,885 [29] ERROR Photon.Hive.HiveGame.HiveHostGame.Plugin - MissingCallProcessing for type:Photon.Hive.Plugin.RaiseEventCallInfo in Plugin:'Name:ServerPlugin, Version:1.0 AppId:C339-38F4-AE0A-52D5-A910-706E, AppVersion:'.
-2023-02-26 17:12:08,885 [29] DEBUG Photon.Hive.Plugin.RaiseEventCallInfo - Fail: none of Photon.Hive.Plugin.RaiseEventCallInfo's method were called
-2023-02-26 17:12:08,980 [16] DEBUG Photon.Hive.HivePeer - OnOperationRequest. Code=253
-2023-02-26 17:12:08,980 [16] DEBUG Photon.Hive.HiveHostGame - Broadcasting: Got RaiseEvent from 2/'794abc04-ff8d-4e17-b57c-924e8f761f7e', targetActors=-1, Group=0, ReceiverGroup=0
-2023-02-26 17:12:08,981 [16] ERROR Photon.Hive.HiveGame.HiveHostGame.Plugin - MissingCallProcessing for type:Photon.Hive.Plugin.RaiseEventCallInfo in Plugin:'Name:ServerPlugin, Version:1.0 AppId:C339-38F4-AE0A-52D5-A910-706E, AppVersion:'.
-2023-02-26 17:12:08,981 [16] DEBUG Photon.Hive.Plugin.RaiseEventCallInfo - Fail: none of Photon.Hive.Plugin.RaiseEventCallInfo's method were called
-2023-02-26 17:12:09,073 [18] DEBUG Photon.Hive.HivePeer - OnOperationRequest. Code=253
-2023-02-26 17:12:09,073 [18] DEBUG Photon.Hive.HiveHostGame - Broadcasting: Got RaiseEvent from 2/'794abc04-ff8d-4e17-b57c-924e8f761f7e', targetActors=-1, Group=0, ReceiverGroup=0
-2023-02-26 17:12:09,073 [18] ERROR Photon.Hive.HiveGame.HiveHostGame.Plugin - MissingCallProcessing for type:Photon.Hive.Plugin.RaiseEventCallInfo in Plugin:'Name:ServerPlugin, Version:1.0 AppId:C339-38F4-AE0A-52D5-A910-706E, AppVersion:'.
-2023-02-26 17:12:09,073 [18] DEBUG Photon.Hive.Plugin.RaiseEventCallInfo - Fail: none of Photon.Hive.Plugin.RaiseEventCallInfo's method were called
-2023-02-26 17:12:09,167 [24] DEBUG Photon.Hive.HivePeer - OnOperationRequest. Code=253
-2023-02-26 17:12:09,167 [24] DEBUG Photon.Hive.HiveHostGame - Broadcasting: Got RaiseEvent from 2/'794abc04-ff8d-4e17-b57c-924e8f761f7e', targetActors=-1, Group=0, ReceiverGroup=0
-2023-02-26 17:12:09,167 [24] ERROR Photon.Hive.HiveGame.HiveHostGame.Plugin - MissingCallProcessing for type:Photon.Hive.Plugin.RaiseEventCallInfo in Plugin:'Name:ServerPlugin, Version:1.0 AppId:C339-38F4-AE0A-52D5-A910-706E, AppVersion:'.
-2023-02-26 17:12:09,168 [24] DEBUG Photon.Hive.Plugin.RaiseEventCallInfo - Fail: none of Photon.Hive.Plugin.RaiseEventCallInfo's method were called
-2023-02-26 17:12:09,262 [29] DEBUG Photon.Hive.HivePeer - OnOperationRequest. Code=253
-2023-02-26 17:12:09,263 [29] DEBUG Photon.Hive.HiveHostGame - Broadcasting: Got RaiseEvent from 2/'794abc04-ff8d-4e17-b57c-924e8f761f7e', targetActors=-1, Group=0, ReceiverGroup=0
-2023-02-26 17:12:09,263 [29] ERROR Photon.Hive.HiveGame.HiveHostGame.Plugin - MissingCallProcessing for type:Photon.Hive.Plugin.RaiseEventCallInfo in Plugin:'Name:ServerPlugin, Version:1.0 AppId:C339-38F4-AE0A-52D5-A910-706E, AppVersion:'.
-2023-02-26 17:12:09,263 [29] DEBUG Photon.Hive.Plugin.RaiseEventCallInfo - Fail: none of Photon.Hive.Plugin.RaiseEventCallInfo's method were called
-2023-02-26 17:12:09,356 [16] DEBUG Photon.Hive.HivePeer - OnOperationRequest. Code=253
-2023-02-26 17:12:09,357 [16] DEBUG Photon.Hive.HiveHostGame - Broadcasting: Got RaiseEvent from 2/'794abc04-ff8d-4e17-b57c-924e8f761f7e', targetActors=-1, Group=0, ReceiverGroup=0
-2023-02-26 17:12:09,357 [16] ERROR Photon.Hive.HiveGame.HiveHostGame.Plugin - MissingCallProcessing for type:Photon.Hive.Plugin.RaiseEventCallInfo in Plugin:'Name:ServerPlugin, Version:1.0 AppId:C339-38F4-AE0A-52D5-A910-706E, AppVersion:'.
-2023-02-26 17:12:09,357 [16] DEBUG Photon.Hive.Plugin.RaiseEventCallInfo - Fail: none of Photon.Hive.Plugin.RaiseEventCallInfo's method were called
-2023-02-26 17:12:09,449 [18] DEBUG Photon.Hive.HivePeer - OnOperationRequest. Code=253
-2023-02-26 17:12:09,449 [18] DEBUG Photon.Hive.HiveHostGame - Broadcasting: Got RaiseEvent from 2/'794abc04-ff8d-4e17-b57c-924e8f761f7e', targetActors=-1, Group=0, ReceiverGroup=0
-2023-02-26 17:12:09,449 [18] ERROR Photon.Hive.HiveGame.HiveHostGame.Plugin - MissingCallProcessing for type:Photon.Hive.Plugin.RaiseEventCallInfo in Plugin:'Name:ServerPlugin, Version:1.0 AppId:C339-38F4-AE0A-52D5-A910-706E, AppVersion:'.
-2023-02-26 17:12:09,449 [18] DEBUG Photon.Hive.Plugin.RaiseEventCallInfo - Fail: none of Photon.Hive.Plugin.RaiseEventCallInfo's method were called
-2023-02-26 17:12:09,545 [24] DEBUG Photon.Hive.HivePeer - OnOperationRequest. Code=253
-2023-02-26 17:12:09,546 [27] DEBUG Photon.Hive.HiveHostGame - Broadcasting: Got RaiseEvent from 2/'794abc04-ff8d-4e17-b57c-924e8f761f7e', targetActors=-1, Group=0, ReceiverGroup=0
-2023-02-26 17:12:09,546 [27] ERROR Photon.Hive.HiveGame.HiveHostGame.Plugin - MissingCallProcessing for type:Photon.Hive.Plugin.RaiseEventCallInfo in Plugin:'Name:ServerPlugin, Version:1.0 AppId:C339-38F4-AE0A-52D5-A910-706E, AppVersion:'.
-2023-02-26 17:12:09,546 [27] DEBUG Photon.Hive.Plugin.RaiseEventCallInfo - Fail: none of Photon.Hive.Plugin.RaiseEventCallInfo's method were called
-2023-02-26 17:12:09,639 [21] DEBUG Photon.Hive.HivePeer - OnOperationRequest. Code=253
-2023-02-26 17:12:09,639 [21] DEBUG Photon.Hive.HiveHostGame - Broadcasting: Got RaiseEvent from 2/'794abc04-ff8d-4e17-b57c-924e8f761f7e', targetActors=-1, Group=0, ReceiverGroup=0
-2023-02-26 17:12:09,639 [21] ERROR Photon.Hive.HiveGame.HiveHostGame.Plugin - MissingCallProcessing for type:Photon.Hive.Plugin.RaiseEventCallInfo in Plugin:'Name:ServerPlugin, Version:1.0 AppId:C339-38F4-AE0A-52D5-A910-706E, AppVersion:'.
-2023-02-26 17:12:09,639 [21] DEBUG Photon.Hive.Plugin.RaiseEventCallInfo - Fail: none of Photon.Hive.Plugin.RaiseEventCallInfo's method were called
-2023-02-26 17:12:09,733 [23] DEBUG Photon.Hive.HivePeer - OnOperationRequest. Code=253
-2023-02-26 17:12:09,734 [23] DEBUG Photon.Hive.HiveHostGame - Broadcasting: Got RaiseEvent from 2/'794abc04-ff8d-4e17-b57c-924e8f761f7e', targetActors=-1, Group=0, ReceiverGroup=0
-2023-02-26 17:12:09,734 [23] ERROR Photon.Hive.HiveGame.HiveHostGame.Plugin - MissingCallProcessing for type:Photon.Hive.Plugin.RaiseEventCallInfo in Plugin:'Name:ServerPlugin, Version:1.0 AppId:C339-38F4-AE0A-52D5-A910-706E, AppVersion:'.
-2023-02-26 17:12:09,734 [23] DEBUG Photon.Hive.Plugin.RaiseEventCallInfo - Fail: none of Photon.Hive.Plugin.RaiseEventCallInfo's method were called
-2023-02-26 17:12:09,825 [15] DEBUG Photon.Hive.HivePeer - OnOperationRequest. Code=253
-2023-02-26 17:12:09,826 [10] DEBUG Photon.Hive.HiveHostGame - Broadcasting: Got RaiseEvent from 2/'794abc04-ff8d-4e17-b57c-924e8f761f7e', targetActors=-1, Group=0, ReceiverGroup=0
-2023-02-26 17:12:09,826 [10] ERROR Photon.Hive.HiveGame.HiveHostGame.Plugin - MissingCallProcessing for type:Photon.Hive.Plugin.RaiseEventCallInfo in Plugin:'Name:ServerPlugin, Version:1.0 AppId:C339-38F4-AE0A-52D5-A910-706E, AppVersion:'.
-2023-02-26 17:12:09,826 [10] DEBUG Photon.Hive.Plugin.RaiseEventCallInfo - Fail: none of Photon.Hive.Plugin.RaiseEventCallInfo's method were called
-2023-02-26 17:12:09,922 [12] DEBUG Photon.Hive.HivePeer - OnOperationRequest. Code=253
-2023-02-26 17:12:09,923 [25] DEBUG Photon.Hive.HiveHostGame - Broadcasting: Got RaiseEvent from 2/'794abc04-ff8d-4e17-b57c-924e8f761f7e', targetActors=-1, Group=0, ReceiverGroup=0
-2023-02-26 17:12:09,923 [25] ERROR Photon.Hive.HiveGame.HiveHostGame.Plugin - MissingCallProcessing for type:Photon.Hive.Plugin.RaiseEventCallInfo in Plugin:'Name:ServerPlugin, Version:1.0 AppId:C339-38F4-AE0A-52D5-A910-706E, AppVersion:'.
-2023-02-26 17:12:09,923 [25] DEBUG Photon.Hive.Plugin.RaiseEventCallInfo - Fail: none of Photon.Hive.Plugin.RaiseEventCallInfo's method were called
-2023-02-26 17:12:10,018 [11] DEBUG Photon.Hive.HivePeer - OnOperationRequest. Code=253
-2023-02-26 17:12:10,018 [24] DEBUG Photon.Hive.HiveHostGame - Broadcasting: Got RaiseEvent from 2/'794abc04-ff8d-4e17-b57c-924e8f761f7e', targetActors=-1, Group=0, ReceiverGroup=0
-2023-02-26 17:12:10,018 [24] ERROR Photon.Hive.HiveGame.HiveHostGame.Plugin - MissingCallProcessing for type:Photon.Hive.Plugin.RaiseEventCallInfo in Plugin:'Name:ServerPlugin, Version:1.0 AppId:C339-38F4-AE0A-52D5-A910-706E, AppVersion:'.
-2023-02-26 17:12:10,019 [24] DEBUG Photon.Hive.Plugin.RaiseEventCallInfo - Fail: none of Photon.Hive.Plugin.RaiseEventCallInfo's method were called
-2023-02-26 17:12:10,111 [13] DEBUG Photon.Hive.HivePeer - OnOperationRequest. Code=253
-2023-02-26 17:12:10,111 [13] DEBUG Photon.Hive.HiveHostGame - Broadcasting: Got RaiseEvent from 2/'794abc04-ff8d-4e17-b57c-924e8f761f7e', targetActors=-1, Group=0, ReceiverGroup=0
-2023-02-26 17:12:10,111 [13] ERROR Photon.Hive.HiveGame.HiveHostGame.Plugin - MissingCallProcessing for type:Photon.Hive.Plugin.RaiseEventCallInfo in Plugin:'Name:ServerPlugin, Version:1.0 AppId:C339-38F4-AE0A-52D5-A910-706E, AppVersion:'.
-2023-02-26 17:12:10,111 [13] DEBUG Photon.Hive.Plugin.RaiseEventCallInfo - Fail: none of Photon.Hive.Plugin.RaiseEventCallInfo's method were called
-2023-02-26 17:12:10,204 [26] DEBUG Photon.Hive.HivePeer - OnOperationRequest. Code=253
-2023-02-26 17:12:10,205 [28] DEBUG Photon.Hive.HiveHostGame - Broadcasting: Got RaiseEvent from 2/'794abc04-ff8d-4e17-b57c-924e8f761f7e', targetActors=-1, Group=0, ReceiverGroup=0
-2023-02-26 17:12:10,205 [28] ERROR Photon.Hive.HiveGame.HiveHostGame.Plugin - MissingCallProcessing for type:Photon.Hive.Plugin.RaiseEventCallInfo in Plugin:'Name:ServerPlugin, Version:1.0 AppId:C339-38F4-AE0A-52D5-A910-706E, AppVersion:'.
-2023-02-26 17:12:10,205 [28] DEBUG Photon.Hive.Plugin.RaiseEventCallInfo - Fail: none of Photon.Hive.Plugin.RaiseEventCallInfo's method were called
-2023-02-26 17:12:10,298 [20] DEBUG Photon.Hive.HivePeer - OnOperationRequest. Code=253
-2023-02-26 17:12:10,299 [27] DEBUG Photon.Hive.HiveHostGame - Broadcasting: Got RaiseEvent from 2/'794abc04-ff8d-4e17-b57c-924e8f761f7e', targetActors=-1, Group=0, ReceiverGroup=0
-2023-02-26 17:12:10,299 [27] ERROR Photon.Hive.HiveGame.HiveHostGame.Plugin - MissingCallProcessing for type:Photon.Hive.Plugin.RaiseEventCallInfo in Plugin:'Name:ServerPlugin, Version:1.0 AppId:C339-38F4-AE0A-52D5-A910-706E, AppVersion:'.
-2023-02-26 17:12:10,299 [27] DEBUG Photon.Hive.Plugin.RaiseEventCallInfo - Fail: none of Photon.Hive.Plugin.RaiseEventCallInfo's method were called
-2023-02-26 17:12:10,391 [14] DEBUG Photon.Hive.HivePeer - OnOperationRequest. Code=253
-2023-02-26 17:12:10,392 [17] DEBUG Photon.Hive.HiveHostGame - Broadcasting: Got RaiseEvent from 2/'794abc04-ff8d-4e17-b57c-924e8f761f7e', targetActors=-1, Group=0, ReceiverGroup=0
-2023-02-26 17:12:10,392 [17] ERROR Photon.Hive.HiveGame.HiveHostGame.Plugin - MissingCallProcessing for type:Photon.Hive.Plugin.RaiseEventCallInfo in Plugin:'Name:ServerPlugin, Version:1.0 AppId:C339-38F4-AE0A-52D5-A910-706E, AppVersion:'.
-2023-02-26 17:12:10,392 [17] DEBUG Photon.Hive.Plugin.RaiseEventCallInfo - Fail: none of Photon.Hive.Plugin.RaiseEventCallInfo's method were called
-2023-02-26 17:12:10,486 [29] DEBUG Photon.Hive.HivePeer - OnOperationRequest. Code=253
-2023-02-26 17:12:10,486 [29] DEBUG Photon.Hive.HiveHostGame - Broadcasting: Got RaiseEvent from 2/'794abc04-ff8d-4e17-b57c-924e8f761f7e', targetActors=-1, Group=0, ReceiverGroup=0
-2023-02-26 17:12:10,486 [29] ERROR Photon.Hive.HiveGame.HiveHostGame.Plugin - MissingCallProcessing for type:Photon.Hive.Plugin.RaiseEventCallInfo in Plugin:'Name:ServerPlugin, Version:1.0 AppId:C339-38F4-AE0A-52D5-A910-706E, AppVersion:'.
-2023-02-26 17:12:10,487 [29] DEBUG Photon.Hive.Plugin.RaiseEventCallInfo - Fail: none of Photon.Hive.Plugin.RaiseEventCallInfo's method were called
-2023-02-26 17:12:10,582 [22] DEBUG Photon.Hive.HivePeer - OnOperationRequest. Code=253
-2023-02-26 17:12:10,582 [22] DEBUG Photon.Hive.HiveHostGame - Broadcasting: Got RaiseEvent from 2/'794abc04-ff8d-4e17-b57c-924e8f761f7e', targetActors=-1, Group=0, ReceiverGroup=0
-2023-02-26 17:12:10,582 [22] ERROR Photon.Hive.HiveGame.HiveHostGame.Plugin - MissingCallProcessing for type:Photon.Hive.Plugin.RaiseEventCallInfo in Plugin:'Name:ServerPlugin, Version:1.0 AppId:C339-38F4-AE0A-52D5-A910-706E, AppVersion:'.
-2023-02-26 17:12:10,582 [22] DEBUG Photon.Hive.Plugin.RaiseEventCallInfo - Fail: none of Photon.Hive.Plugin.RaiseEventCallInfo's method were called
-2023-02-26 17:12:10,675 [25] DEBUG Photon.Hive.HivePeer - OnOperationRequest. Code=253
-2023-02-26 17:12:10,675 [25] DEBUG Photon.Hive.HiveHostGame - Broadcasting: Got RaiseEvent from 2/'794abc04-ff8d-4e17-b57c-924e8f761f7e', targetActors=-1, Group=0, ReceiverGroup=0
-2023-02-26 17:12:10,676 [25] ERROR Photon.Hive.HiveGame.HiveHostGame.Plugin - MissingCallProcessing for type:Photon.Hive.Plugin.RaiseEventCallInfo in Plugin:'Name:ServerPlugin, Version:1.0 AppId:C339-38F4-AE0A-52D5-A910-706E, AppVersion:'.
-2023-02-26 17:12:10,676 [25] DEBUG Photon.Hive.Plugin.RaiseEventCallInfo - Fail: none of Photon.Hive.Plugin.RaiseEventCallInfo's method were called
-2023-02-26 17:12:10,771 [11] DEBUG Photon.Hive.HivePeer - OnOperationRequest. Code=253
-2023-02-26 17:12:10,771 [11] DEBUG Photon.Hive.HiveHostGame - Broadcasting: Got RaiseEvent from 2/'794abc04-ff8d-4e17-b57c-924e8f761f7e', targetActors=-1, Group=0, ReceiverGroup=0
-2023-02-26 17:12:10,771 [11] ERROR Photon.Hive.HiveGame.HiveHostGame.Plugin - MissingCallProcessing for type:Photon.Hive.Plugin.RaiseEventCallInfo in Plugin:'Name:ServerPlugin, Version:1.0 AppId:C339-38F4-AE0A-52D5-A910-706E, AppVersion:'.
-2023-02-26 17:12:10,771 [11] DEBUG Photon.Hive.Plugin.RaiseEventCallInfo - Fail: none of Photon.Hive.Plugin.RaiseEventCallInfo's method were called
-2023-02-26 17:12:10,864 [21] DEBUG Photon.Hive.HivePeer - OnOperationRequest. Code=253
-2023-02-26 17:12:10,864 [21] DEBUG Photon.Hive.HiveHostGame - Broadcasting: Got RaiseEvent from 2/'794abc04-ff8d-4e17-b57c-924e8f761f7e', targetActors=-1, Group=0, ReceiverGroup=0
-2023-02-26 17:12:10,865 [21] ERROR Photon.Hive.HiveGame.HiveHostGame.Plugin - MissingCallProcessing for type:Photon.Hive.Plugin.RaiseEventCallInfo in Plugin:'Name:ServerPlugin, Version:1.0 AppId:C339-38F4-AE0A-52D5-A910-706E, AppVersion:'.
-2023-02-26 17:12:10,865 [21] DEBUG Photon.Hive.Plugin.RaiseEventCallInfo - Fail: none of Photon.Hive.Plugin.RaiseEventCallInfo's method were called
-2023-02-26 17:12:10,960 [19] DEBUG Photon.Hive.HivePeer - OnOperationRequest. Code=253
-2023-02-26 17:12:10,961 [19] DEBUG Photon.Hive.HiveHostGame - Broadcasting: Got RaiseEvent from 2/'794abc04-ff8d-4e17-b57c-924e8f761f7e', targetActors=-1, Group=0, ReceiverGroup=0
-2023-02-26 17:12:10,961 [19] ERROR Photon.Hive.HiveGame.HiveHostGame.Plugin - MissingCallProcessing for type:Photon.Hive.Plugin.RaiseEventCallInfo in Plugin:'Name:ServerPlugin, Version:1.0 AppId:C339-38F4-AE0A-52D5-A910-706E, AppVersion:'.
-2023-02-26 17:12:10,961 [19] DEBUG Photon.Hive.Plugin.RaiseEventCallInfo - Fail: none of Photon.Hive.Plugin.RaiseEventCallInfo's method were called
-2023-02-26 17:12:11,055 [12] DEBUG Photon.Hive.HivePeer - OnOperationRequest. Code=253
-2023-02-26 17:12:11,056 [25] DEBUG Photon.Hive.HiveHostGame - Broadcasting: Got RaiseEvent from 2/'794abc04-ff8d-4e17-b57c-924e8f761f7e', targetActors=-1, Group=0, ReceiverGroup=0
-2023-02-26 17:12:11,056 [25] ERROR Photon.Hive.HiveGame.HiveHostGame.Plugin - MissingCallProcessing for type:Photon.Hive.Plugin.RaiseEventCallInfo in Plugin:'Name:ServerPlugin, Version:1.0 AppId:C339-38F4-AE0A-52D5-A910-706E, AppVersion:'.
-2023-02-26 17:12:11,056 [25] DEBUG Photon.Hive.Plugin.RaiseEventCallInfo - Fail: none of Photon.Hive.Plugin.RaiseEventCallInfo's method were called
-2023-02-26 17:12:11,149 [20] DEBUG Photon.Hive.HivePeer - OnOperationRequest. Code=253
-2023-02-26 17:12:11,149 [20] DEBUG Photon.Hive.HiveHostGame - Broadcasting: Got RaiseEvent from 2/'794abc04-ff8d-4e17-b57c-924e8f761f7e', targetActors=-1, Group=0, ReceiverGroup=0
-2023-02-26 17:12:11,149 [20] ERROR Photon.Hive.HiveGame.HiveHostGame.Plugin - MissingCallProcessing for type:Photon.Hive.Plugin.RaiseEventCallInfo in Plugin:'Name:ServerPlugin, Version:1.0 AppId:C339-38F4-AE0A-52D5-A910-706E, AppVersion:'.
-2023-02-26 17:12:11,150 [20] DEBUG Photon.Hive.Plugin.RaiseEventCallInfo - Fail: none of Photon.Hive.Plugin.RaiseEventCallInfo's method were called
-2023-02-26 17:12:11,241 [13] DEBUG Photon.Hive.HivePeer - OnOperationRequest. Code=253
-2023-02-26 17:12:11,241 [21] DEBUG Photon.Hive.HiveHostGame - Broadcasting: Got RaiseEvent from 2/'794abc04-ff8d-4e17-b57c-924e8f761f7e', targetActors=-1, Group=0, ReceiverGroup=0
-2023-02-26 17:12:11,243 [21] ERROR Photon.Hive.HiveGame.HiveHostGame.Plugin - MissingCallProcessing for type:Photon.Hive.Plugin.RaiseEventCallInfo in Plugin:'Name:ServerPlugin, Version:1.0 AppId:C339-38F4-AE0A-52D5-A910-706E, AppVersion:'.
-2023-02-26 17:12:11,243 [21] DEBUG Photon.Hive.Plugin.RaiseEventCallInfo - Fail: none of Photon.Hive.Plugin.RaiseEventCallInfo's method were called
-2023-02-26 17:12:11,336 [19] DEBUG Photon.Hive.HivePeer - OnOperationRequest. Code=253
-2023-02-26 17:12:11,337 [24] DEBUG Photon.Hive.HiveHostGame - Broadcasting: Got RaiseEvent from 2/'794abc04-ff8d-4e17-b57c-924e8f761f7e', targetActors=-1, Group=0, ReceiverGroup=0
-2023-02-26 17:12:11,337 [24] ERROR Photon.Hive.HiveGame.HiveHostGame.Plugin - MissingCallProcessing for type:Photon.Hive.Plugin.RaiseEventCallInfo in Plugin:'Name:ServerPlugin, Version:1.0 AppId:C339-38F4-AE0A-52D5-A910-706E, AppVersion:'.
-2023-02-26 17:12:11,337 [24] DEBUG Photon.Hive.Plugin.RaiseEventCallInfo - Fail: none of Photon.Hive.Plugin.RaiseEventCallInfo's method were called
-2023-02-26 17:12:11,428 [25] DEBUG Photon.Hive.HivePeer - OnOperationRequest. Code=253
-2023-02-26 17:12:11,429 [25] DEBUG Photon.Hive.HiveHostGame - Broadcasting: Got RaiseEvent from 2/'794abc04-ff8d-4e17-b57c-924e8f761f7e', targetActors=-1, Group=0, ReceiverGroup=0
-2023-02-26 17:12:11,429 [25] ERROR Photon.Hive.HiveGame.HiveHostGame.Plugin - MissingCallProcessing for type:Photon.Hive.Plugin.RaiseEventCallInfo in Plugin:'Name:ServerPlugin, Version:1.0 AppId:C339-38F4-AE0A-52D5-A910-706E, AppVersion:'.
-2023-02-26 17:12:11,429 [25] DEBUG Photon.Hive.Plugin.RaiseEventCallInfo - Fail: none of Photon.Hive.Plugin.RaiseEventCallInfo's method were called
-2023-02-26 17:12:11,524 [20] DEBUG Photon.Hive.HivePeer - OnOperationRequest. Code=253
-2023-02-26 17:12:11,525 [28] DEBUG Photon.Hive.HiveHostGame - Broadcasting: Got RaiseEvent from 2/'794abc04-ff8d-4e17-b57c-924e8f761f7e', targetActors=-1, Group=0, ReceiverGroup=0
-2023-02-26 17:12:11,525 [28] ERROR Photon.Hive.HiveGame.HiveHostGame.Plugin - MissingCallProcessing for type:Photon.Hive.Plugin.RaiseEventCallInfo in Plugin:'Name:ServerPlugin, Version:1.0 AppId:C339-38F4-AE0A-52D5-A910-706E, AppVersion:'.
-2023-02-26 17:12:11,525 [28] DEBUG Photon.Hive.Plugin.RaiseEventCallInfo - Fail: none of Photon.Hive.Plugin.RaiseEventCallInfo's method were called
-2023-02-26 17:12:11,618 [21] DEBUG Photon.Hive.HivePeer - OnOperationRequest. Code=253
-2023-02-26 17:12:11,619 [18] DEBUG Photon.Hive.HiveHostGame - Broadcasting: Got RaiseEvent from 2/'794abc04-ff8d-4e17-b57c-924e8f761f7e', targetActors=-1, Group=0, ReceiverGroup=0
-2023-02-26 17:12:11,619 [18] ERROR Photon.Hive.HiveGame.HiveHostGame.Plugin - MissingCallProcessing for type:Photon.Hive.Plugin.RaiseEventCallInfo in Plugin:'Name:ServerPlugin, Version:1.0 AppId:C339-38F4-AE0A-52D5-A910-706E, AppVersion:'.
-2023-02-26 17:12:11,619 [18] DEBUG Photon.Hive.Plugin.RaiseEventCallInfo - Fail: none of Photon.Hive.Plugin.RaiseEventCallInfo's method were called
-2023-02-26 17:12:11,713 [29] DEBUG Photon.Hive.HivePeer - OnOperationRequest. Code=253
-2023-02-26 17:12:11,715 [29] DEBUG Photon.Hive.HiveHostGame - Broadcasting: Got RaiseEvent from 2/'794abc04-ff8d-4e17-b57c-924e8f761f7e', targetActors=-1, Group=0, ReceiverGroup=0
-2023-02-26 17:12:11,715 [29] ERROR Photon.Hive.HiveGame.HiveHostGame.Plugin - MissingCallProcessing for type:Photon.Hive.Plugin.RaiseEventCallInfo in Plugin:'Name:ServerPlugin, Version:1.0 AppId:C339-38F4-AE0A-52D5-A910-706E, AppVersion:'.
-2023-02-26 17:12:11,715 [29] DEBUG Photon.Hive.Plugin.RaiseEventCallInfo - Fail: none of Photon.Hive.Plugin.RaiseEventCallInfo's method were called
-2023-02-26 17:12:11,808 [19] DEBUG Photon.Hive.HivePeer - OnOperationRequest. Code=253
-2023-02-26 17:12:11,808 [24] DEBUG Photon.Hive.HiveHostGame - Broadcasting: Got RaiseEvent from 2/'794abc04-ff8d-4e17-b57c-924e8f761f7e', targetActors=-1, Group=0, ReceiverGroup=0
-2023-02-26 17:12:11,809 [24] ERROR Photon.Hive.HiveGame.HiveHostGame.Plugin - MissingCallProcessing for type:Photon.Hive.Plugin.RaiseEventCallInfo in Plugin:'Name:ServerPlugin, Version:1.0 AppId:C339-38F4-AE0A-52D5-A910-706E, AppVersion:'.
-2023-02-26 17:12:11,809 [24] DEBUG Photon.Hive.Plugin.RaiseEventCallInfo - Fail: none of Photon.Hive.Plugin.RaiseEventCallInfo's method were called
-2023-02-26 17:12:11,904 [11] DEBUG Photon.Hive.HivePeer - OnOperationRequest. Code=253
-2023-02-26 17:12:11,904 [25] DEBUG Photon.Hive.HiveHostGame - Broadcasting: Got RaiseEvent from 2/'794abc04-ff8d-4e17-b57c-924e8f761f7e', targetActors=-1, Group=0, ReceiverGroup=0
-2023-02-26 17:12:11,904 [25] ERROR Photon.Hive.HiveGame.HiveHostGame.Plugin - MissingCallProcessing for type:Photon.Hive.Plugin.RaiseEventCallInfo in Plugin:'Name:ServerPlugin, Version:1.0 AppId:C339-38F4-AE0A-52D5-A910-706E, AppVersion:'.
-2023-02-26 17:12:11,904 [25] DEBUG Photon.Hive.Plugin.RaiseEventCallInfo - Fail: none of Photon.Hive.Plugin.RaiseEventCallInfo's method were called
-2023-02-26 17:12:11,999 [20] DEBUG Photon.Hive.HivePeer - OnOperationRequest. Code=253
-2023-02-26 17:12:12,000 [20] DEBUG Photon.Hive.HiveHostGame - Broadcasting: Got RaiseEvent from 2/'794abc04-ff8d-4e17-b57c-924e8f761f7e', targetActors=-1, Group=0, ReceiverGroup=0
-2023-02-26 17:12:12,000 [20] ERROR Photon.Hive.HiveGame.HiveHostGame.Plugin - MissingCallProcessing for type:Photon.Hive.Plugin.RaiseEventCallInfo in Plugin:'Name:ServerPlugin, Version:1.0 AppId:C339-38F4-AE0A-52D5-A910-706E, AppVersion:'.
-2023-02-26 17:12:12,000 [20] DEBUG Photon.Hive.Plugin.RaiseEventCallInfo - Fail: none of Photon.Hive.Plugin.RaiseEventCallInfo's method were called
-2023-02-26 17:12:12,093 [10] DEBUG Photon.Hive.HivePeer - OnOperationRequest. Code=253
-2023-02-26 17:12:12,093 [18] DEBUG Photon.Hive.HiveHostGame - Broadcasting: Got RaiseEvent from 2/'794abc04-ff8d-4e17-b57c-924e8f761f7e', targetActors=-1, Group=0, ReceiverGroup=0
-2023-02-26 17:12:12,093 [18] ERROR Photon.Hive.HiveGame.HiveHostGame.Plugin - MissingCallProcessing for type:Photon.Hive.Plugin.RaiseEventCallInfo in Plugin:'Name:ServerPlugin, Version:1.0 AppId:C339-38F4-AE0A-52D5-A910-706E, AppVersion:'.
-2023-02-26 17:12:12,095 [18] DEBUG Photon.Hive.Plugin.RaiseEventCallInfo - Fail: none of Photon.Hive.Plugin.RaiseEventCallInfo's method were called
-2023-02-26 17:12:12,186 [16] DEBUG Photon.Hive.HivePeer - OnOperationRequest. Code=253
-2023-02-26 17:12:12,187 [16] DEBUG Photon.Hive.HiveHostGame - Broadcasting: Got RaiseEvent from 2/'794abc04-ff8d-4e17-b57c-924e8f761f7e', targetActors=-1, Group=0, ReceiverGroup=0
-2023-02-26 17:12:12,187 [16] ERROR Photon.Hive.HiveGame.HiveHostGame.Plugin - MissingCallProcessing for type:Photon.Hive.Plugin.RaiseEventCallInfo in Plugin:'Name:ServerPlugin, Version:1.0 AppId:C339-38F4-AE0A-52D5-A910-706E, AppVersion:'.
-2023-02-26 17:12:12,187 [16] DEBUG Photon.Hive.Plugin.RaiseEventCallInfo - Fail: none of Photon.Hive.Plugin.RaiseEventCallInfo's method were called
-2023-02-26 17:12:12,279 [25] DEBUG Photon.Hive.HivePeer - OnOperationRequest. Code=253
-2023-02-26 17:12:12,280 [25] DEBUG Photon.Hive.HiveHostGame - Broadcasting: Got RaiseEvent from 2/'794abc04-ff8d-4e17-b57c-924e8f761f7e', targetActors=-1, Group=0, ReceiverGroup=0
-2023-02-26 17:12:12,280 [25] ERROR Photon.Hive.HiveGame.HiveHostGame.Plugin - MissingCallProcessing for type:Photon.Hive.Plugin.RaiseEventCallInfo in Plugin:'Name:ServerPlugin, Version:1.0 AppId:C339-38F4-AE0A-52D5-A910-706E, AppVersion:'.
-2023-02-26 17:12:12,280 [25] DEBUG Photon.Hive.Plugin.RaiseEventCallInfo - Fail: none of Photon.Hive.Plugin.RaiseEventCallInfo's method were called
-2023-02-26 17:12:12,373 [20] DEBUG Photon.Hive.HivePeer - OnOperationRequest. Code=253
-2023-02-26 17:12:12,374 [10] DEBUG Photon.Hive.HiveHostGame - Broadcasting: Got RaiseEvent from 2/'794abc04-ff8d-4e17-b57c-924e8f761f7e', targetActors=-1, Group=0, ReceiverGroup=0
-2023-02-26 17:12:12,374 [10] ERROR Photon.Hive.HiveGame.HiveHostGame.Plugin - MissingCallProcessing for type:Photon.Hive.Plugin.RaiseEventCallInfo in Plugin:'Name:ServerPlugin, Version:1.0 AppId:C339-38F4-AE0A-52D5-A910-706E, AppVersion:'.
-2023-02-26 17:12:12,374 [10] DEBUG Photon.Hive.Plugin.RaiseEventCallInfo - Fail: none of Photon.Hive.Plugin.RaiseEventCallInfo's method were called
-2023-02-26 17:12:12,467 [15] DEBUG Photon.Hive.HivePeer - OnOperationRequest. Code=253
-2023-02-26 17:12:12,467 [15] DEBUG Photon.Hive.HiveHostGame - Broadcasting: Got RaiseEvent from 2/'794abc04-ff8d-4e17-b57c-924e8f761f7e', targetActors=-1, Group=0, ReceiverGroup=0
-2023-02-26 17:12:12,467 [15] ERROR Photon.Hive.HiveGame.HiveHostGame.Plugin - MissingCallProcessing for type:Photon.Hive.Plugin.RaiseEventCallInfo in Plugin:'Name:ServerPlugin, Version:1.0 AppId:C339-38F4-AE0A-52D5-A910-706E, AppVersion:'.
-2023-02-26 17:12:12,468 [15] DEBUG Photon.Hive.Plugin.RaiseEventCallInfo - Fail: none of Photon.Hive.Plugin.RaiseEventCallInfo's method were called
-2023-02-26 17:12:12,564 [14] DEBUG Photon.Hive.HivePeer - OnOperationRequest. Code=253
-2023-02-26 17:12:12,565 [12] DEBUG Photon.Hive.HiveHostGame - Broadcasting: Got RaiseEvent from 2/'794abc04-ff8d-4e17-b57c-924e8f761f7e', targetActors=-1, Group=0, ReceiverGroup=0
-2023-02-26 17:12:12,565 [12] ERROR Photon.Hive.HiveGame.HiveHostGame.Plugin - MissingCallProcessing for type:Photon.Hive.Plugin.RaiseEventCallInfo in Plugin:'Name:ServerPlugin, Version:1.0 AppId:C339-38F4-AE0A-52D5-A910-706E, AppVersion:'.
-2023-02-26 17:12:12,565 [12] DEBUG Photon.Hive.Plugin.RaiseEventCallInfo - Fail: none of Photon.Hive.Plugin.RaiseEventCallInfo's method were called
-2023-02-26 17:12:12,657 [24] DEBUG Photon.Hive.HivePeer - OnOperationRequest. Code=253
-2023-02-26 17:12:12,658 [19] DEBUG Photon.Hive.HiveHostGame - Broadcasting: Got RaiseEvent from 2/'794abc04-ff8d-4e17-b57c-924e8f761f7e', targetActors=-1, Group=0, ReceiverGroup=0
-2023-02-26 17:12:12,658 [19] ERROR Photon.Hive.HiveGame.HiveHostGame.Plugin - MissingCallProcessing for type:Photon.Hive.Plugin.RaiseEventCallInfo in Plugin:'Name:ServerPlugin, Version:1.0 AppId:C339-38F4-AE0A-52D5-A910-706E, AppVersion:'.
-2023-02-26 17:12:12,658 [19] DEBUG Photon.Hive.Plugin.RaiseEventCallInfo - Fail: none of Photon.Hive.Plugin.RaiseEventCallInfo's method were called
-2023-02-26 17:12:12,754 [13] DEBUG Photon.Hive.HivePeer - OnOperationRequest. Code=253
-2023-02-26 17:12:12,754 [22] DEBUG Photon.Hive.HiveHostGame - Broadcasting: Got RaiseEvent from 2/'794abc04-ff8d-4e17-b57c-924e8f761f7e', targetActors=-1, Group=0, ReceiverGroup=0
-2023-02-26 17:12:12,754 [22] ERROR Photon.Hive.HiveGame.HiveHostGame.Plugin - MissingCallProcessing for type:Photon.Hive.Plugin.RaiseEventCallInfo in Plugin:'Name:ServerPlugin, Version:1.0 AppId:C339-38F4-AE0A-52D5-A910-706E, AppVersion:'.
-2023-02-26 17:12:12,754 [22] DEBUG Photon.Hive.Plugin.RaiseEventCallInfo - Fail: none of Photon.Hive.Plugin.RaiseEventCallInfo's method were called
-2023-02-26 17:12:12,847 [21] DEBUG Photon.Hive.HivePeer - OnOperationRequest. Code=253
-2023-02-26 17:12:12,847 [26] DEBUG Photon.Hive.HiveHostGame - Broadcasting: Got RaiseEvent from 2/'794abc04-ff8d-4e17-b57c-924e8f761f7e', targetActors=-1, Group=0, ReceiverGroup=0
-2023-02-26 17:12:12,847 [26] ERROR Photon.Hive.HiveGame.HiveHostGame.Plugin - MissingCallProcessing for type:Photon.Hive.Plugin.RaiseEventCallInfo in Plugin:'Name:ServerPlugin, Version:1.0 AppId:C339-38F4-AE0A-52D5-A910-706E, AppVersion:'.
-2023-02-26 17:12:12,847 [26] DEBUG Photon.Hive.Plugin.RaiseEventCallInfo - Fail: none of Photon.Hive.Plugin.RaiseEventCallInfo's method were called
-2023-02-26 17:12:12,942 [10] DEBUG Photon.Hive.HivePeer - OnOperationRequest. Code=253
-2023-02-26 17:12:12,942 [10] DEBUG Photon.Hive.HiveHostGame - Broadcasting: Got RaiseEvent from 2/'794abc04-ff8d-4e17-b57c-924e8f761f7e', targetActors=-1, Group=0, ReceiverGroup=0
-2023-02-26 17:12:12,942 [10] ERROR Photon.Hive.HiveGame.HiveHostGame.Plugin - MissingCallProcessing for type:Photon.Hive.Plugin.RaiseEventCallInfo in Plugin:'Name:ServerPlugin, Version:1.0 AppId:C339-38F4-AE0A-52D5-A910-706E, AppVersion:'.
-2023-02-26 17:12:12,942 [10] DEBUG Photon.Hive.Plugin.RaiseEventCallInfo - Fail: none of Photon.Hive.Plugin.RaiseEventCallInfo's method were called
-2023-02-26 17:12:13,037 [15] DEBUG Photon.Hive.HivePeer - OnOperationRequest. Code=253
-2023-02-26 17:12:13,038 [15] DEBUG Photon.Hive.HiveHostGame - Broadcasting: Got RaiseEvent from 2/'794abc04-ff8d-4e17-b57c-924e8f761f7e', targetActors=-1, Group=0, ReceiverGroup=0
-2023-02-26 17:12:13,038 [15] ERROR Photon.Hive.HiveGame.HiveHostGame.Plugin - MissingCallProcessing for type:Photon.Hive.Plugin.RaiseEventCallInfo in Plugin:'Name:ServerPlugin, Version:1.0 AppId:C339-38F4-AE0A-52D5-A910-706E, AppVersion:'.
-2023-02-26 17:12:13,038 [15] DEBUG Photon.Hive.Plugin.RaiseEventCallInfo - Fail: none of Photon.Hive.Plugin.RaiseEventCallInfo's method were called
-2023-02-26 17:12:13,130 [17] DEBUG Photon.Hive.HivePeer - OnOperationRequest. Code=253
-2023-02-26 17:12:13,131 [27] DEBUG Photon.Hive.HiveHostGame - Broadcasting: Got RaiseEvent from 2/'794abc04-ff8d-4e17-b57c-924e8f761f7e', targetActors=-1, Group=0, ReceiverGroup=0
-2023-02-26 17:12:13,131 [27] ERROR Photon.Hive.HiveGame.HiveHostGame.Plugin - MissingCallProcessing for type:Photon.Hive.Plugin.RaiseEventCallInfo in Plugin:'Name:ServerPlugin, Version:1.0 AppId:C339-38F4-AE0A-52D5-A910-706E, AppVersion:'.
-2023-02-26 17:12:13,131 [27] DEBUG Photon.Hive.Plugin.RaiseEventCallInfo - Fail: none of Photon.Hive.Plugin.RaiseEventCallInfo's method were called
-2023-02-26 17:12:13,225 [28] DEBUG Photon.Hive.HivePeer - OnOperationRequest. Code=253
-2023-02-26 17:12:13,225 [25] DEBUG Photon.Hive.HiveHostGame - Broadcasting: Got RaiseEvent from 2/'794abc04-ff8d-4e17-b57c-924e8f761f7e', targetActors=-1, Group=0, ReceiverGroup=0
-2023-02-26 17:12:13,226 [25] ERROR Photon.Hive.HiveGame.HiveHostGame.Plugin - MissingCallProcessing for type:Photon.Hive.Plugin.RaiseEventCallInfo in Plugin:'Name:ServerPlugin, Version:1.0 AppId:C339-38F4-AE0A-52D5-A910-706E, AppVersion:'.
-2023-02-26 17:12:13,226 [25] DEBUG Photon.Hive.Plugin.RaiseEventCallInfo - Fail: none of Photon.Hive.Plugin.RaiseEventCallInfo's method were called
-2023-02-26 17:12:13,320 [11] DEBUG Photon.Hive.HivePeer - OnOperationRequest. Code=253
-2023-02-26 17:12:13,320 [11] DEBUG Photon.Hive.HiveHostGame - Broadcasting: Got RaiseEvent from 2/'794abc04-ff8d-4e17-b57c-924e8f761f7e', targetActors=-1, Group=0, ReceiverGroup=0
-2023-02-26 17:12:13,320 [11] ERROR Photon.Hive.HiveGame.HiveHostGame.Plugin - MissingCallProcessing for type:Photon.Hive.Plugin.RaiseEventCallInfo in Plugin:'Name:ServerPlugin, Version:1.0 AppId:C339-38F4-AE0A-52D5-A910-706E, AppVersion:'.
-2023-02-26 17:12:13,320 [11] DEBUG Photon.Hive.Plugin.RaiseEventCallInfo - Fail: none of Photon.Hive.Plugin.RaiseEventCallInfo's method were called
-2023-02-26 17:12:13,417 [24] DEBUG Photon.Hive.HivePeer - OnOperationRequest. Code=253
-2023-02-26 17:12:13,417 [17] DEBUG Photon.Hive.HiveHostGame - Broadcasting: Got RaiseEvent from 2/'794abc04-ff8d-4e17-b57c-924e8f761f7e', targetActors=-1, Group=0, ReceiverGroup=0
-2023-02-26 17:12:13,417 [17] ERROR Photon.Hive.HiveGame.HiveHostGame.Plugin - MissingCallProcessing for type:Photon.Hive.Plugin.RaiseEventCallInfo in Plugin:'Name:ServerPlugin, Version:1.0 AppId:C339-38F4-AE0A-52D5-A910-706E, AppVersion:'.
-2023-02-26 17:12:13,417 [17] DEBUG Photon.Hive.Plugin.RaiseEventCallInfo - Fail: none of Photon.Hive.Plugin.RaiseEventCallInfo's method were called
-2023-02-26 17:12:13,512 [13] DEBUG Photon.Hive.HivePeer - OnOperationRequest. Code=253
-2023-02-26 17:12:13,512 [22] DEBUG Photon.Hive.HiveHostGame - Broadcasting: Got RaiseEvent from 2/'794abc04-ff8d-4e17-b57c-924e8f761f7e', targetActors=-1, Group=0, ReceiverGroup=0
-2023-02-26 17:12:13,513 [22] ERROR Photon.Hive.HiveGame.HiveHostGame.Plugin - MissingCallProcessing for type:Photon.Hive.Plugin.RaiseEventCallInfo in Plugin:'Name:ServerPlugin, Version:1.0 AppId:C339-38F4-AE0A-52D5-A910-706E, AppVersion:'.
-2023-02-26 17:12:13,513 [22] DEBUG Photon.Hive.Plugin.RaiseEventCallInfo - Fail: none of Photon.Hive.Plugin.RaiseEventCallInfo's method were called
-2023-02-26 17:12:13,606 [26] DEBUG Photon.Hive.HivePeer - OnOperationRequest. Code=253
-2023-02-26 17:12:13,606 [26] DEBUG Photon.Hive.HiveHostGame - Broadcasting: Got RaiseEvent from 2/'794abc04-ff8d-4e17-b57c-924e8f761f7e', targetActors=-1, Group=0, ReceiverGroup=0
-2023-02-26 17:12:13,607 [26] ERROR Photon.Hive.HiveGame.HiveHostGame.Plugin - MissingCallProcessing for type:Photon.Hive.Plugin.RaiseEventCallInfo in Plugin:'Name:ServerPlugin, Version:1.0 AppId:C339-38F4-AE0A-52D5-A910-706E, AppVersion:'.
-2023-02-26 17:12:13,607 [26] DEBUG Photon.Hive.Plugin.RaiseEventCallInfo - Fail: none of Photon.Hive.Plugin.RaiseEventCallInfo's method were called
-2023-02-26 17:12:13,700 [29] DEBUG Photon.Hive.HivePeer - OnOperationRequest. Code=253
-2023-02-26 17:12:13,700 [29] DEBUG Photon.Hive.HiveHostGame - Broadcasting: Got RaiseEvent from 2/'794abc04-ff8d-4e17-b57c-924e8f761f7e', targetActors=-1, Group=0, ReceiverGroup=0
-2023-02-26 17:12:13,700 [29] ERROR Photon.Hive.HiveGame.HiveHostGame.Plugin - MissingCallProcessing for type:Photon.Hive.Plugin.RaiseEventCallInfo in Plugin:'Name:ServerPlugin, Version:1.0 AppId:C339-38F4-AE0A-52D5-A910-706E, AppVersion:'.
-2023-02-26 17:12:13,700 [29] DEBUG Photon.Hive.Plugin.RaiseEventCallInfo - Fail: none of Photon.Hive.Plugin.RaiseEventCallInfo's method were called
-2023-02-26 17:12:13,796 [15] DEBUG Photon.Hive.HivePeer - OnOperationRequest. Code=253
-2023-02-26 17:12:13,796 [15] DEBUG Photon.Hive.HiveHostGame - Broadcasting: Got RaiseEvent from 2/'794abc04-ff8d-4e17-b57c-924e8f761f7e', targetActors=-1, Group=0, ReceiverGroup=0
-2023-02-26 17:12:13,797 [15] ERROR Photon.Hive.HiveGame.HiveHostGame.Plugin - MissingCallProcessing for type:Photon.Hive.Plugin.RaiseEventCallInfo in Plugin:'Name:ServerPlugin, Version:1.0 AppId:C339-38F4-AE0A-52D5-A910-706E, AppVersion:'.
-2023-02-26 17:12:13,797 [15] DEBUG Photon.Hive.Plugin.RaiseEventCallInfo - Fail: none of Photon.Hive.Plugin.RaiseEventCallInfo's method were called
-2023-02-26 17:12:13,889 [19] DEBUG Photon.Hive.HivePeer - OnOperationRequest. Code=253
-2023-02-26 17:12:13,889 [19] DEBUG Photon.Hive.HiveHostGame - Broadcasting: Got RaiseEvent from 2/'794abc04-ff8d-4e17-b57c-924e8f761f7e', targetActors=-1, Group=0, ReceiverGroup=0
-2023-02-26 17:12:13,889 [19] ERROR Photon.Hive.HiveGame.HiveHostGame.Plugin - MissingCallProcessing for type:Photon.Hive.Plugin.RaiseEventCallInfo in Plugin:'Name:ServerPlugin, Version:1.0 AppId:C339-38F4-AE0A-52D5-A910-706E, AppVersion:'.
-2023-02-26 17:12:13,889 [19] DEBUG Photon.Hive.Plugin.RaiseEventCallInfo - Fail: none of Photon.Hive.Plugin.RaiseEventCallInfo's method were called
-2023-02-26 17:12:13,983 [28] DEBUG Photon.Hive.HivePeer - OnOperationRequest. Code=253
-2023-02-26 17:12:13,983 [28] DEBUG Photon.Hive.HiveHostGame - Broadcasting: Got RaiseEvent from 2/'794abc04-ff8d-4e17-b57c-924e8f761f7e', targetActors=-1, Group=0, ReceiverGroup=0
-2023-02-26 17:12:13,984 [28] ERROR Photon.Hive.HiveGame.HiveHostGame.Plugin - MissingCallProcessing for type:Photon.Hive.Plugin.RaiseEventCallInfo in Plugin:'Name:ServerPlugin, Version:1.0 AppId:C339-38F4-AE0A-52D5-A910-706E, AppVersion:'.
-2023-02-26 17:12:13,984 [28] DEBUG Photon.Hive.Plugin.RaiseEventCallInfo - Fail: none of Photon.Hive.Plugin.RaiseEventCallInfo's method were called
-2023-02-26 17:12:14,265 [23] DEBUG Photon.Hive.HivePeer - OnOperationRequest. Code=253
-2023-02-26 17:12:14,265 [21] DEBUG Photon.Hive.HiveHostGame - Broadcasting: Got RaiseEvent from 2/'794abc04-ff8d-4e17-b57c-924e8f761f7e', targetActors=-1, Group=0, ReceiverGroup=0
-2023-02-26 17:12:14,265 [21] ERROR Photon.Hive.HiveGame.HiveHostGame.Plugin - MissingCallProcessing for type:Photon.Hive.Plugin.RaiseEventCallInfo in Plugin:'Name:ServerPlugin, Version:1.0 AppId:C339-38F4-AE0A-52D5-A910-706E, AppVersion:'.
-2023-02-26 17:12:14,265 [21] DEBUG Photon.Hive.Plugin.RaiseEventCallInfo - Fail: none of Photon.Hive.Plugin.RaiseEventCallInfo's method were called
-2023-02-26 17:12:14,374 [15] DEBUG Photon.Hive.HivePeer - OnOperationRequest. Code=253
-2023-02-26 17:12:14,374 [27] DEBUG Photon.Hive.HiveHostGame - Broadcasting: Got RaiseEvent from 2/'794abc04-ff8d-4e17-b57c-924e8f761f7e', targetActors=-1, Group=0, ReceiverGroup=0
-2023-02-26 17:12:14,375 [27] ERROR Photon.Hive.HiveGame.HiveHostGame.Plugin - MissingCallProcessing for type:Photon.Hive.Plugin.RaiseEventCallInfo in Plugin:'Name:ServerPlugin, Version:1.0 AppId:C339-38F4-AE0A-52D5-A910-706E, AppVersion:'.
-2023-02-26 17:12:14,375 [27] DEBUG Photon.Hive.Plugin.RaiseEventCallInfo - Fail: none of Photon.Hive.Plugin.RaiseEventCallInfo's method were called
-2023-02-26 17:12:21,143 [23] DEBUG Photon.LoadBalancing.GameServer.GameClientPeer - Auth Timeout Checker stopped. authTimeout:20000 p:GameClientPeer: PID: 7, IsConnected: False, IsDisposed: False, Last Activity: Operation 253 at UTC 2023-02-26T11:42:14, in Room '44abdc20-6ca0-40e6-9fca-52275327008f', IP 127.0.0.1:49932, NetworkProtocol Udp, Protocol GpBinaryV18, JoinStage: 12 
-2023-02-26 17:12:21,143 [23] DEBUG Photon.Hive.HivePeer - OnDisconnect: conId=7, reason=0, reasonDetail=
-2023-02-26 17:12:21,143 [23] DEBUG Photon.Hive.HivePeer - RemovePeerFromCurrentRoom: Removing peer from room. p:GameClientPeer: PID: 7, IsConnected: False, IsDisposed: False, Last Activity: Operation 253 at UTC 2023-02-26T11:42:14, in Room '44abdc20-6ca0-40e6-9fca-52275327008f', IP 127.0.0.1:49932, NetworkProtocol Udp, Protocol GpBinaryV18, JoinStage: 12 
-2023-02-26 17:12:21,145 [13] DEBUG Photon.Hive.HiveGame - ProcessMessage 1
-2023-02-26 17:12:21,145 [23] DEBUG Photon.Hive.Caching.RoomCacheBase - Removed room instance reference: roomName=44abdc20-6ca0-40e6-9fca-52275327008f, referenceCount=1
-2023-02-26 17:12:21,146 [13] DEBUG Photon.Hive.Plugin.LeaveGameCallInfo - Continue.
-2023-02-26 17:12:21,147 [13] DEBUG Photon.Hive.HiveGame - Clean up actor Actor: 2; Peer:'GameClientPeer: PID: 7, IsConnected: False, IsDisposed: True, Last Activity: Operation 253 at UTC 2023-02-26T11:42:14, in Room '', IP 127.0.0.1:49932, NetworkProtocol Udp, Protocol GpBinaryV18, JoinStage: 12 ', DeactivationTime:'', UserId:'794abc04-ff8d-4e17-b57c-924e8f761f7e',nick:'Stalyny', RemovedFromInactive:01-01-0001 00:00:00 - DeleteCacheOnLeave:
-2023-02-26 17:12:21,150 [13] DEBUG Photon.LoadBalancing.GameServer.GameUpdatesBatcher - Message was sent directly
-2023-02-26 17:12:21,150 [13] DEBUG Photon.LoadBalancing.GameServer.MasterServerConnectionBase - Sending event to master. EventCode=3, ConnectionId=37ac9efa-7be9-49f9-8e7a-64bb378db8a6
-2023-02-26 17:12:21,150 [13] DEBUG Photon.Hive.Collections.ActorsManager - Actor removed: 2 794abc04-ff8d-4e17-b57c-924e8f761f7e to game: 44abdc20-6ca0-40e6-9fca-52275327008f -- peer:GameClientPeer: PID: 7, IsConnected: False, IsDisposed: True, Last Activity: Operation 253 at UTC 2023-02-26T11:42:14, in Room '', IP 127.0.0.1:49932, NetworkProtocol Udp, Protocol GpBinaryV18, JoinStage: 12 
-2023-02-26 17:12:21,195 [25] DEBUG Photon.LoadBalancing.GameServer.GameClientPeer - OnOperationRequest: conId=4, opCode=252
-2023-02-26 17:12:21,195 [25] DEBUG Photon.Hive.HivePeer - OnOperationRequest. Code=252
-2023-02-26 17:12:21,195 [28] DEBUG Photon.Hive.Plugin.BeforeSetPropertiesCallInfo - Continue.
-2023-02-26 17:12:21,195 [28] DEBUG Photon.Hive.Plugin.SetPropertiesCallInfo - Continue.
-2023-02-26 17:12:22,152 [16] DEBUG Photon.LoadBalancing.GameServer.MasterServerConnectionBase - Sending event to master. EventCode=2, ConnectionId=37ac9efa-7be9-49f9-8e7a-64bb378db8a6
-2023-02-26 17:12:37,040 [11] DEBUG Photon.LoadBalancing.GameServer.GameApplication - CreatePeer for 69ae0d10-03a7-46cf-bde8-8b39e812
-2023-02-26 17:12:37,041 [11] DEBUG Photon.LoadBalancing.GameServer.GameApplication - incoming game peer at 127.0.0.1:5056 from 127.0.0.1:56981
-2023-02-26 17:12:37,041 [11] DEBUG Photon.LoadBalancing.GameServer.GameClientPeer - Auth Timeout Checker scheduled. authTimeout:20000 p:GameClientPeer: PID: 10, IsConnected: False, IsDisposed: False, Last Activity: Operation 0 at UTC 0001-01-01T00:00:00, in Room '', IP 127.0.0.1:56981, NetworkProtocol Udp, Protocol GpBinaryV18, JoinStage: 0 
-2023-02-26 17:12:37,133 [10] DEBUG Photon.LoadBalancing.GameServer.GameClientPeer - OnOperationRequest: conId=10, opCode=230
-2023-02-26 17:12:37,134 [10] DEBUG Photon.LoadBalancing.GameServer.GameClientPeer - Auth Timeout Checker stopped. authTimeout:20000 p:GameClientPeer: PID: 10, IsConnected: True, IsDisposed: False, Last Activity: Operation 230 at UTC 2023-02-26T11:42:37, in Room '', IP 127.0.0.1:56981, NetworkProtocol Udp, Protocol GpBinaryV18, JoinStage: 0 
-2023-02-26 17:12:37,134 [10] DEBUG Photon.LoadBalancing.GameServer.GameClientPeer - Token Validation: checking token with GS: localhost and GameId:44abdc20-6ca0-40e6-9fca-52275327008f
-2023-02-26 17:12:37,168 [15] DEBUG Photon.LoadBalancing.GameServer.GameClientPeer - OnOperationRequest: conId=10, opCode=226
-2023-02-26 17:12:37,168 [15] DEBUG Photon.Hive.HivePeer - OnOperationRequest. Code=226
-2023-02-26 17:12:37,169 [15] DEBUG Photon.Hive.Caching.RoomCacheBase - Created room instance reference: roomName=44abdc20-6ca0-40e6-9fca-52275327008f, referenceCount=2
-2023-02-26 17:12:37,169 [29] DEBUG Photon.Hive.Plugin.BeforeJoinGameCallInfo - Continue.
-2023-02-26 17:12:37,169 [29] DEBUG Photon.Hive.Collections.ActorsManager - Actor added: 3 5f0aa483-bcf9-4aba-a52f-84ddef8238aa to game: 44abdc20-6ca0-40e6-9fca-52275327008f -- peer:GameClientPeer: PID: 10, IsConnected: True, IsDisposed: False, Last Activity: Operation 226 at UTC 2023-02-26T11:42:37, in Room '44abdc20-6ca0-40e6-9fca-52275327008f', IP 127.0.0.1:56981, NetworkProtocol Udp, Protocol GpBinaryV18, JoinStage: 4 
-2023-02-26 17:12:37,169 [29] DEBUG Photon.Hive.HiveGame - JoinApplyGameStateChanges: Actor 3 is added. MasterClientId is 1
-2023-02-26 17:12:37,169 [29] DEBUG Photon.Hive.Plugin.JoinGameCallInfo - Continue.
-2023-02-26 17:12:37,169 [29] DEBUG Photon.LoadBalancing.GameServer.GameUpdatesBatcher - Message was sent directly
-2023-02-26 17:12:37,170 [29] DEBUG Photon.LoadBalancing.GameServer.MasterServerConnectionBase - Sending event to master. EventCode=3, ConnectionId=37ac9efa-7be9-49f9-8e7a-64bb378db8a6
-2023-02-26 17:12:37,211 [16] DEBUG Photon.LoadBalancing.GameServer.GameClientPeer - OnOperationRequest: conId=4, opCode=252
-2023-02-26 17:12:37,211 [16] DEBUG Photon.Hive.HivePeer - OnOperationRequest. Code=252
-2023-02-26 17:12:37,211 [20] DEBUG Photon.Hive.Plugin.BeforeSetPropertiesCallInfo - Continue.
-2023-02-26 17:12:37,212 [20] DEBUG Photon.Hive.Plugin.SetPropertiesCallInfo - Continue.
-2023-02-26 17:12:37,231 [19] DEBUG Photon.Hive.HivePeer - OnOperationRequest. Code=253
-2023-02-26 17:12:37,231 [22] DEBUG Photon.Hive.HiveHostGame - Broadcasting: Got RaiseEvent from 1/'f8799bcb-2da4-49d4-8e47-acf4c0a5eee0', targetActors=-1, Group=0, ReceiverGroup=0
-2023-02-26 17:12:37,232 [22] ERROR Photon.Hive.HiveGame.HiveHostGame.Plugin - MissingCallProcessing for type:Photon.Hive.Plugin.RaiseEventCallInfo in Plugin:'Name:ServerPlugin, Version:1.0 AppId:C339-38F4-AE0A-52D5-A910-706E, AppVersion:'.
-2023-02-26 17:12:37,232 [22] DEBUG Photon.Hive.Plugin.RaiseEventCallInfo - Fail: none of Photon.Hive.Plugin.RaiseEventCallInfo's method were called
-2023-02-26 17:12:37,326 [12] DEBUG Photon.Hive.HivePeer - OnOperationRequest. Code=253
-2023-02-26 17:12:37,326 [12] DEBUG Photon.Hive.HiveHostGame - Broadcasting: Got RaiseEvent from 1/'f8799bcb-2da4-49d4-8e47-acf4c0a5eee0', targetActors=-1, Group=0, ReceiverGroup=0
-2023-02-26 17:12:37,326 [12] ERROR Photon.Hive.HiveGame.HiveHostGame.Plugin - MissingCallProcessing for type:Photon.Hive.Plugin.RaiseEventCallInfo in Plugin:'Name:ServerPlugin, Version:1.0 AppId:C339-38F4-AE0A-52D5-A910-706E, AppVersion:'.
-2023-02-26 17:12:37,326 [12] DEBUG Photon.Hive.Plugin.RaiseEventCallInfo - Fail: none of Photon.Hive.Plugin.RaiseEventCallInfo's method were called
-2023-02-26 17:12:38,056 [18] DEBUG Photon.LoadBalancing.GameServer.MasterServerConnectionBase - Sending event to master. EventCode=2, ConnectionId=37ac9efa-7be9-49f9-8e7a-64bb378db8a6
-2023-02-26 17:12:59,865 [17] DEBUG Photon.LoadBalancing.GameServer.GameClientPeer - Auth Timeout Checker stopped. authTimeout:20000 p:GameClientPeer: PID: 10, IsConnected: False, IsDisposed: False, Last Activity: Operation 226 at UTC 2023-02-26T11:42:37, in Room '44abdc20-6ca0-40e6-9fca-52275327008f', IP 127.0.0.1:56981, NetworkProtocol Udp, Protocol GpBinaryV18, JoinStage: 12 
-2023-02-26 17:12:59,865 [17] DEBUG Photon.Hive.HivePeer - OnDisconnect: conId=10, reason=0, reasonDetail=
-2023-02-26 17:12:59,865 [17] DEBUG Photon.Hive.HivePeer - RemovePeerFromCurrentRoom: Removing peer from room. p:GameClientPeer: PID: 10, IsConnected: False, IsDisposed: False, Last Activity: Operation 226 at UTC 2023-02-26T11:42:37, in Room '44abdc20-6ca0-40e6-9fca-52275327008f', IP 127.0.0.1:56981, NetworkProtocol Udp, Protocol GpBinaryV18, JoinStage: 12 
-2023-02-26 17:12:59,865 [17] DEBUG Photon.Hive.Caching.RoomCacheBase - Removed room instance reference: roomName=44abdc20-6ca0-40e6-9fca-52275327008f, referenceCount=1
-2023-02-26 17:12:59,865 [24] DEBUG Photon.Hive.HiveGame - ProcessMessage 1
-2023-02-26 17:12:59,865 [24] DEBUG Photon.Hive.Plugin.LeaveGameCallInfo - Continue.
-2023-02-26 17:12:59,865 [24] DEBUG Photon.Hive.HiveGame - Clean up actor Actor: 3; Peer:'GameClientPeer: PID: 10, IsConnected: False, IsDisposed: True, Last Activity: Operation 226 at UTC 2023-02-26T11:42:37, in Room '', IP 127.0.0.1:56981, NetworkProtocol Udp, Protocol GpBinaryV18, JoinStage: 12 ', DeactivationTime:'', UserId:'5f0aa483-bcf9-4aba-a52f-84ddef8238aa',nick:'', RemovedFromInactive:01-01-0001 00:00:00 - DeleteCacheOnLeave:
-2023-02-26 17:12:59,865 [24] DEBUG Photon.LoadBalancing.GameServer.GameUpdatesBatcher - Message was sent directly
-2023-02-26 17:12:59,865 [24] DEBUG Photon.LoadBalancing.GameServer.MasterServerConnectionBase - Sending event to master. EventCode=3, ConnectionId=37ac9efa-7be9-49f9-8e7a-64bb378db8a6
-2023-02-26 17:12:59,867 [24] DEBUG Photon.Hive.Collections.ActorsManager - Actor removed: 3 5f0aa483-bcf9-4aba-a52f-84ddef8238aa to game: 44abdc20-6ca0-40e6-9fca-52275327008f -- peer:GameClientPeer: PID: 10, IsConnected: False, IsDisposed: True, Last Activity: Operation 226 at UTC 2023-02-26T11:42:37, in Room '', IP 127.0.0.1:56981, NetworkProtocol Udp, Protocol GpBinaryV18, JoinStage: 12 
-2023-02-26 17:12:59,889 [28] DEBUG Photon.LoadBalancing.GameServer.GameClientPeer - OnOperationRequest: conId=4, opCode=252
-2023-02-26 17:12:59,889 [28] DEBUG Photon.Hive.HivePeer - OnOperationRequest. Code=252
-2023-02-26 17:12:59,890 [20] DEBUG Photon.Hive.Plugin.BeforeSetPropertiesCallInfo - Continue.
-2023-02-26 17:12:59,890 [20] DEBUG Photon.Hive.Plugin.SetPropertiesCallInfo - Continue.
-2023-02-26 17:13:00,868 [19] DEBUG Photon.LoadBalancing.GameServer.MasterServerConnectionBase - Sending event to master. EventCode=2, ConnectionId=37ac9efa-7be9-49f9-8e7a-64bb378db8a6
-2023-02-26 17:13:08,646 [1] INFO  Photon.LoadBalancing.GameServer.GameApplication - OnStopRequested: serverid=cc57c0c5-1c6e-4084-80c0-154da416d2f3
-2023-02-26 17:13:08,656 [20] WARN  Photon.LoadBalancing.GameServer.OutgoingMasterServerPeer - s2s MS connection: connection closed (id=1, reason=0, detail=), serverId=cc57c0c5-1c6e-4084-80c0-154da416d2f3
-2023-02-26 17:13:09,661 [1] INFO  Photon.SocketServer.ApplicationBase - Application is stopping: AppId=Game
-2023-02-26 17:13:09,665 [12] DEBUG Photon.LoadBalancing.GameServer.GameClientPeer - Auth Timeout Checker stopped. authTimeout:20000 p:GameClientPeer: PID: 4, IsConnected: False, IsDisposed: False, Last Activity: Operation 252 at UTC 2023-02-26T11:42:59, in Room '44abdc20-6ca0-40e6-9fca-52275327008f', IP 127.0.0.1:58292, NetworkProtocol Udp, Protocol GpBinaryV18, JoinStage: 12 
-2023-02-26 17:13:09,665 [12] DEBUG Photon.Hive.HivePeer - OnDisconnect: conId=4, reason=2, reasonDetail=
-2023-02-26 17:13:09,666 [12] DEBUG Photon.Hive.HivePeer - RemovePeerFromCurrentRoom: Removing peer from room. p:GameClientPeer: PID: 4, IsConnected: False, IsDisposed: False, Last Activity: Operation 252 at UTC 2023-02-26T11:42:59, in Room '44abdc20-6ca0-40e6-9fca-52275327008f', IP 127.0.0.1:58292, NetworkProtocol Udp, Protocol GpBinaryV18, JoinStage: 12 
-2023-02-26 17:13:09,666 [12] DEBUG Photon.Hive.Caching.RoomCacheBase - Removed room instance reference: roomName=44abdc20-6ca0-40e6-9fca-52275327008f, referenceCount=0
-2023-02-26 17:13:09,666 [12] DEBUG Photon.Hive.Caching.RoomCacheBase - Room has no references. Trying to remove it. room:44abdc20-6ca0-40e6-9fca-52275327008f
-2023-02-26 17:13:09,666 [29] DEBUG Photon.Hive.HiveGame - ProcessMessage 1
-2023-02-26 17:13:09,666 [29] DEBUG Photon.Hive.Plugin.LeaveGameCallInfo - Continue.
-2023-02-26 17:13:09,666 [29] DEBUG Photon.Hive.HiveGame - Clean up actor Actor: 1; Peer:'GameClientPeer: PID: 4, IsConnected: False, IsDisposed: False, Last Activity: Operation 252 at UTC 2023-02-26T11:42:59, in Room '44abdc20-6ca0-40e6-9fca-52275327008f', IP 127.0.0.1:58292, NetworkProtocol Udp, Protocol GpBinaryV18, JoinStage: 12 ', DeactivationTime:'', UserId:'f8799bcb-2da4-49d4-8e47-acf4c0a5eee0',nick:'Stalyny', RemovedFromInactive:01-01-0001 00:00:00 - DeleteCacheOnLeave:
-2023-02-26 17:13:09,667 [12] DEBUG Photon.Hive.Caching.RoomCacheBase - Room BeforeRemoveFromCache returned 'false'. Removing stopped. room:44abdc20-6ca0-40e6-9fca-52275327008f
-2023-02-26 17:13:09,667 [29] DEBUG Photon.Hive.HiveGame - Actor 1 left. MasterClientId is 0
-2023-02-26 17:13:09,667 [29] DEBUG Photon.LoadBalancing.GameServer.GameUpdatesBatcher - Message was sent directly
-2023-02-26 17:13:09,667 [29] DEBUG Photon.LoadBalancing.GameServer.MasterServerConnectionBase - Sending event to master. EventCode=3, ConnectionId=37ac9efa-7be9-49f9-8e7a-64bb378db8a6
-2023-02-26 17:13:09,667 [29] DEBUG Photon.LoadBalancing.GameServer.MasterServerConnectionBase - Event data was not sent. peer is null. Event Code=3, ConnectionId:37ac9efa-7be9-49f9-8e7a-64bb378db8a6
-2023-02-26 17:13:09,668 [1] INFO  Photon.LoadBalancing.GameServer.GameApplication - TearDown: serverId=cc57c0c5-1c6e-4084-80c0-154da416d2f3
-2023-02-26 17:13:09,668 [29] DEBUG Photon.Hive.Collections.ActorsManager - Actor removed: 1 f8799bcb-2da4-49d4-8e47-acf4c0a5eee0 to game: 44abdc20-6ca0-40e6-9fca-52275327008f -- peer:GameClientPeer: PID: 4, IsConnected: False, IsDisposed: True, Last Activity: Operation 252 at UTC 2023-02-26T11:42:59, in Room '', IP 127.0.0.1:58292, NetworkProtocol Udp, Protocol GpBinaryV18, JoinStage: 12 
-2023-02-26 17:13:09,669 [1] INFO  Photon.SocketServer.ApplicationBase - Application stop: AppId=Game
-2023-02-26 17:13:09,669 [17] DEBUG Photon.Hive.Plugin.BeforeCloseGameCallInfo - Continue.
-2023-02-26 17:13:09,670 [17] DEBUG Photon.Hive.Plugin.CloseGameCallInfo - Continue.
-2023-02-26 17:13:09,671 [17] DEBUG Photon.Hive.Caching.RoomCacheBase - Removed room instance: roomId=44abdc20-6ca0-40e6-9fca-52275327008f
-2023-02-26 17:13:20,581 [1] INFO  Photon.LoadBalancing.GameServer.GameApplication - Using Server GC:True
-2023-02-26 17:13:20,592 [1] INFO  Photon.LoadBalancing.GameServer.GameApplication - Using GC LatencyMode:Interactive
-2023-02-26 17:13:20,593 [1] INFO  Photon.LoadBalancing.GameServer.GameApplication - Setup: serverId=91d12cfc-4441-4cb2-9662-7f840a5b2c70
-2023-02-26 17:13:20,606 [1] INFO  Photon.Hive.Plugin.PluginManager - Plugin configured: name=ServerPlugin
-2023-02-26 17:13:20,608 [1] DEBUG Photon.Hive.Plugin.PluginManager - Plugin path is set to 'D:\Projects\Unity\MultiPlayerProjects\photon-server-plugin-sdk\deploy\Plugins/ServerPlugin//bin/ServerPlugin.dll'
-2023-02-26 17:13:20,612 [1] INFO  Photon.Hive.Plugin.PluginManager - Loaded Assembly Name=ServerPlugin, Version=1.0.0.0, Culture=, PublicKey token=, Path=D:\Projects\Unity\MultiPlayerProjects\photon-server-plugin-sdk\deploy\Plugins/ServerPlugin//bin/ServerPlugin.dll
-2023-02-26 17:13:20,612 [1] INFO  Photon.Hive.Plugin.PluginManager - Referenced Assembly Name=mscorlib, Version=4.0.0.0, Culture=, PublicKey token=B7-7A-5C-56-19-34-E0-89, Path=
-2023-02-26 17:13:20,612 [1] INFO  Photon.Hive.Plugin.PluginManager - Referenced Assembly Name=PhotonHivePlugin, Version=1.1.0.24499, Culture=, PublicKey token=, Path=
-2023-02-26 17:13:20,613 [1] INFO  Photon.Hive.Plugin.PluginManager - Plugin Type ServerPlugin.ServerPluginFactory from assembly ServerPlugin, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null was successfuly created
-2023-02-26 17:13:20,613 [1] INFO  Photon.Hive.Plugin.PluginManager - Plugin manager (version=1.1.0.24499) is setup. type=ServerPlugin.ServerPluginFactory;path=D:\Projects\Unity\MultiPlayerProjects\photon-server-plugin-sdk\deploy\Plugins/ServerPlugin//bin/ServerPlugin.dll;version=1.1.0.24499
-2023-02-26 17:13:21,488 [1] INFO  Photon.LoadBalancing.GameServer.GameApplication - TokenCreator initialized with an expiration of 01:00:00
-2023-02-26 17:13:21,498 [1] WARN  Photon.Common.LoadBalancer.LoadShedding.WorkloadController - Bandwidth counters are not valid
-2023-02-26 17:13:21,499 [1] WARN  Photon.Common.LoadBalancer.LoadShedding.WorkloadController - Did not find counter Business Logic Queue
-2023-02-26 17:13:21,499 [1] WARN  Photon.Common.LoadBalancer.LoadShedding.WorkloadController - Did not find counter ENet Queue
-2023-02-26 17:13:21,499 [1] WARN  Photon.Common.LoadBalancer.LoadShedding.WorkloadController - Did not find counter ENet Threads Processing
-2023-02-26 17:13:21,499 [1] WARN  Photon.Common.LoadBalancer.LoadShedding.WorkloadController - Did not find counter ENet Threads Active
-2023-02-26 17:13:21,499 [1] WARN  Photon.Common.LoadBalancer.LoadShedding.WorkloadController - Did not find counter TCP: Disconnected Peers +/sec
-2023-02-26 17:13:21,500 [1] WARN  Photon.Common.LoadBalancer.LoadShedding.WorkloadController - Did not find counter TCP: Disconnected Peers (C) +/sec
-2023-02-26 17:13:21,500 [1] WARN  Photon.Common.LoadBalancer.LoadShedding.WorkloadController - Did not find counter TCP: Peers
-2023-02-26 17:13:21,500 [1] WARN  Photon.Common.LoadBalancer.LoadShedding.WorkloadController - Did not find counter UDP: Disconnected Peers +/sec
-2023-02-26 17:13:21,500 [1] WARN  Photon.Common.LoadBalancer.LoadShedding.WorkloadController - Did not find counter UDP: Disconnected Peers (C) +/sec
-2023-02-26 17:13:21,500 [1] WARN  Photon.Common.LoadBalancer.LoadShedding.WorkloadController - Did not find counter UDP: Peers
-2023-02-26 17:13:21,510 [1] INFO  Photon.Common.LoadBalancer.LoadShedding.FeedbackControlSystem - Initialized FeedbackControlSystem with 1 controllers from config file.
-2023-02-26 17:13:21,517 [1] INFO  Photon.Common.LoadBalancer.ServerStateManager - Watching for application state file in D:\Projects\Unity\MultiPlayerProjects\photon-server-plugin-sdk\deploy\ServerState.txt
-2023-02-26 17:13:21,518 [1] INFO  Photon.Common.LoadBalancer.ServerStateManager - Server state is set to online
-2023-02-26 17:13:21,519 [1] INFO  Photon.LoadBalancing.GameServer.GameApplication - Initializing master server connection ...
-2023-02-26 17:13:21,520 [1] DEBUG Photon.LoadBalancing.GameServer.MasterServerConnectionBase - ConnectionId=223ac1e6-8dee-4b09-9127-3abb72ec12e0
-2023-02-26 17:13:21,522 [1] DEBUG Photon.LoadBalancing.GameServer.MasterServerConnectionBase - s2s MS connection: MasterServer endpoint for address 127.0.0.1 updated to 127.0.0.1:4520
-2023-02-26 17:13:21,532 [1] INFO  Photon.LoadBalancing.GameServer.MasterServerConnectionBase - s2s MS connection: Parameters to register on master: address 127.0.0.1, TCP 4531, UDP 5056, WebSocket 9091, Secure WebSocket 19091, ServerID 91d12cfc-4441-4cb2-9662-7f840a5b2c70, Hostname localhost, IPv6Address , WebRTC 7072
-2023-02-26 17:13:21,544 [1] INFO  Photon.LoadBalancing.GameServer.MasterServerConnectionBase - s2s MS connection: Connecting to master at 127.0.0.1:4520, serverId=91d12cfc-4441-4cb2-9662-7f840a5b2c70
-2023-02-26 17:13:21,545 [1] INFO  Photon.SocketServer.ApplicationBase - Application start: AppId=Game; AppPath=D:\Projects\Unity\MultiPlayerProjects\photon-server-plugin-sdk\deploy\LoadBalancing\GameServer, Type=Photon.LoadBalancing.GameServer.GameApplication 
-2023-02-26 17:13:21,545 [1] INFO  Photon.SocketServer.ApplicationBase - Using Server GC:True
-2023-02-26 17:13:21,545 [1] INFO  Photon.SocketServer.ApplicationBase - Using GC LatencyMode:Interactive
-2023-02-26 17:13:24,610 [11] INFO  Photon.LoadBalancing.GameServer.MasterServerConnectionBase - s2s MS connection: connection established: address:127.0.0.1, ConnectionId:223ac1e6-8dee-4b09-9127-3abb72ec12e0
-2023-02-26 17:13:24,610 [11] INFO  Photon.Common.LoadBalancer.ServerStateManager - Server state is set to online
-2023-02-26 17:13:24,614 [11] INFO  Photon.LoadBalancing.GameServer.OutgoingMasterServerPeer - Successfully registered at master server: serverId=91d12cfc-4441-4cb2-9662-7f840a5b2c70
-2023-02-26 17:13:24,615 [11] INFO  Photon.LoadBalancing.GameServer.MasterServerConnectionBase - s2s MS connection: connection registered on master: address:127.0.0.1
-2023-02-26 17:13:24,616 [11] DEBUG Photon.LoadBalancing.GameServer.MasterServerConnection - Update Expected Games Count event sent. endpoint:127.0.0.1:4520, connectionId:223ac1e6-8dee-4b09-9127-3abb72ec12e0
-2023-02-26 17:13:36,489 [16] DEBUG Photon.LoadBalancing.GameServer.GameApplication - CreatePeer for 69ae0d10-03a7-46cf-bde8-8b39e812
-2023-02-26 17:13:36,490 [16] DEBUG Photon.LoadBalancing.GameServer.GameApplication - incoming game peer at 127.0.0.1:5056 from 127.0.0.1:50580
-2023-02-26 17:13:36,495 [16] DEBUG Photon.LoadBalancing.GameServer.GameClientPeer - Auth Timeout Checker scheduled. authTimeout:20000 p:GameClientPeer: PID: 2, IsConnected: False, IsDisposed: False, Last Activity: Operation 0 at UTC 0001-01-01T00:00:00, in Room '', IP 127.0.0.1:50580, NetworkProtocol Udp, Protocol GpBinaryV18, JoinStage: 0 
-2023-02-26 17:13:36,496 [16] INFO  Photon.SocketServer.Diagnostics.HttpQueuePerformanceCounters - Performance counters successfully initialized: instanceName=_Total
-2023-02-26 17:13:36,606 [16] INFO  Photon.SocketServer.Diagnostics.HttpQueuePerformanceCounters - Performance counters successfully initialized: instanceName=LoadBalancing_rpc
-2023-02-26 17:13:36,788 [18] DEBUG Photon.LoadBalancing.GameServer.GameClientPeer - OnOperationRequest: conId=2, opCode=230
-2023-02-26 17:13:36,790 [18] DEBUG Photon.LoadBalancing.GameServer.GameClientPeer - Auth Timeout Checker stopped. authTimeout:20000 p:GameClientPeer: PID: 2, IsConnected: True, IsDisposed: False, Last Activity: Operation 230 at UTC 2023-02-26T11:43:36, in Room '', IP 127.0.0.1:50580, NetworkProtocol Udp, Protocol GpBinaryV18, JoinStage: 0 
-2023-02-26 17:13:36,795 [18] DEBUG Photon.LoadBalancing.GameServer.GameClientPeer - Token Validation: checking token with GS: localhost and GameId:85345cc4-abcd-4261-b4ab-7c9a6a3f1fcc
-2023-02-26 17:13:36,824 [28] DEBUG Photon.LoadBalancing.GameServer.GameClientPeer - OnOperationRequest: conId=2, opCode=226
-2023-02-26 17:13:36,825 [28] DEBUG Photon.Hive.HivePeer - OnOperationRequest. Code=226
-2023-02-26 17:13:36,832 [28] DEBUG Photon.Hive.Caching.RoomCacheBase - Creating room instance: roomName=85345cc4-abcd-4261-b4ab-7c9a6a3f1fcc
-2023-02-26 17:13:36,835 [28] INFO  Photon.SocketServer.Diagnostics.HttpQueuePerformanceCounters - Performance counters successfully initialized: instanceName=LoadBalancing_game
-2023-02-26 17:13:36,960 [28] DEBUG Photon.Hive.Caching.RoomCacheBase - Created room instance reference: roomName=85345cc4-abcd-4261-b4ab-7c9a6a3f1fcc, referenceCount=1
-2023-02-26 17:13:36,966 [12] INFO  Photon.Hive.Plugin.PluginManager - Plugin successfully created:Type:ServerPlugin.ServerPluginFactory, path:D:\Projects\Unity\MultiPlayerProjects\photon-server-plugin-sdk\deploy\Plugins/ServerPlugin//bin/ServerPlugin.dll
-2023-02-26 17:13:36,976 [12] INFO  Plugin.ServerPlugin - 
+2023-04-07 17:33:36,547 [10] DEBUG Photon.LoadBalancing.GameServer.GameUpdatesBatcher - SendScheduledBatch for appId:, version:
+2023-04-07 17:33:36,547 [10] DEBUG Photon.LoadBalancing.GameServer.GameUpdatesBatcher - Sending Batch for appId:, version:
+2023-04-07 17:33:36,547 [10] DEBUG Photon.LoadBalancing.GameServer.MasterServerConnectionBase - Sending event to master. EventCode=12, ConnectionId=6a55cf45-837f-47ca-ae5c-69bb60905d14
+2023-04-07 17:33:37,271 [11] DEBUG Photon.LoadBalancing.GameServer.MasterServerConnectionBase - Sending event to master. EventCode=2, ConnectionId=6a55cf45-837f-47ca-ae5c-69bb60905d14
+2023-04-07 17:33:47,421 [39] DEBUG Photon.LoadBalancing.GameServer.GameApplication - CreatePeer for LoadBalancing
+2023-04-07 17:33:47,421 [39] DEBUG Photon.LoadBalancing.GameServer.GameApplication - incoming game peer at 192.168.0.174:5056 from 192.168.0.174:61290
+2023-04-07 17:33:47,421 [39] DEBUG Photon.LoadBalancing.GameServer.GameClientPeer - Auth Timeout Checker scheduled. authTimeout:20000 p:GameClientPeer: PID: 34, IsConnected: False, IsDisposed: False, Last Activity: Operation 0 at UTC 0001-01-01T00:00:00, in Room '', IP 192.168.0.174:61290, NetworkProtocol Udp, Protocol GpBinaryV18, JoinStage: 0 
+2023-04-07 17:33:47,479 [10] DEBUG Photon.LoadBalancing.GameServer.GameClientPeer - OnOperationRequest: conId=34, opCode=230
+2023-04-07 17:33:47,480 [10] DEBUG Photon.LoadBalancing.GameServer.GameClientPeer - Auth Timeout Checker stopped. authTimeout:20000 p:GameClientPeer: PID: 34, IsConnected: True, IsDisposed: False, Last Activity: Operation 230 at UTC 2023-04-07T12:03:47, in Room '', IP 192.168.0.174:61290, NetworkProtocol Udp, Protocol GpBinaryV18, JoinStage: 0 
+2023-04-07 17:33:47,480 [10] DEBUG Photon.LoadBalancing.GameServer.GameClientPeer - Token Validation: checking token with GS: localhost and GameId:46babee9-0962-4b57-a3ad-2474e97d4f16
+2023-04-07 17:33:47,514 [22] DEBUG Photon.LoadBalancing.GameServer.GameClientPeer - OnOperationRequest: conId=34, opCode=226
+2023-04-07 17:33:47,514 [22] DEBUG Photon.Hive.HivePeer - OnOperationRequest. Code=226
+2023-04-07 17:33:47,515 [22] DEBUG Photon.Hive.Caching.RoomCacheBase - Created room instance reference: roomName=46babee9-0962-4b57-a3ad-2474e97d4f16, referenceCount=2
+2023-04-07 17:33:47,515 [22] DEBUG Photon.Hive.Plugin.BeforeJoinGameCallInfo - Continue.
+2023-04-07 17:33:47,515 [22] DEBUG Photon.Hive.Collections.ActorsManager - Actor added: 2 8c68dd74-b38c-495c-aaeb-f4c468a5c062 to game: 46babee9-0962-4b57-a3ad-2474e97d4f16 -- peer:GameClientPeer: PID: 34, IsConnected: True, IsDisposed: False, Last Activity: Operation 226 at UTC 2023-04-07T12:03:47, in Room '46babee9-0962-4b57-a3ad-2474e97d4f16', IP 192.168.0.174:61290, NetworkProtocol Udp, Protocol GpBinaryV18, JoinStage: 4 
+2023-04-07 17:33:47,515 [22] DEBUG Photon.Hive.HiveGame - JoinApplyGameStateChanges: Actor 2 is added. MasterClientId is 1
+2023-04-07 17:33:47,515 [22] DEBUG Photon.Hive.Plugin.JoinGameCallInfo - Continue.
+2023-04-07 17:33:47,516 [22] DEBUG Photon.LoadBalancing.GameServer.GameUpdatesBatcher - Message was sent directly
+2023-04-07 17:33:47,516 [22] DEBUG Photon.LoadBalancing.GameServer.MasterServerConnectionBase - Sending event to master. EventCode=3, ConnectionId=6a55cf45-837f-47ca-ae5c-69bb60905d14
+2023-04-07 17:33:47,516 [22] INFO  Plugin.ServerPlugin - 
 
- OnCreateGame 85345cc4-abcd-4261-b4ab-7c9a6a3f1fcc by user 659369fd-5f11-44c0-9af9-3e523b4f75e7 
+ Player Joined in 46babee9-0962-4b57-a3ad-2474e97d4f16 - user 8c68dd74-b38c-495c-aaeb-f4c468a5c062 
 ...................
 
-2023-02-26 17:13:36,976 [12] DEBUG Photon.Hive.Plugin.CreateGameCallInfo - Continue.
-2023-02-26 17:13:36,977 [12] DEBUG Photon.Hive.HiveGame - Processing Join from IP: 127.0.0.1 to port: 5056
-2023-02-26 17:13:36,985 [12] DEBUG Photon.Hive.Collections.ActorsManager - Actor added: 1 659369fd-5f11-44c0-9af9-3e523b4f75e7 to game: 85345cc4-abcd-4261-b4ab-7c9a6a3f1fcc -- peer:GameClientPeer: PID: 2, IsConnected: True, IsDisposed: False, Last Activity: Operation 226 at UTC 2023-02-26T11:43:36, in Room '85345cc4-abcd-4261-b4ab-7c9a6a3f1fcc', IP 127.0.0.1:50580, NetworkProtocol Udp, Protocol GpBinaryV18, JoinStage: 4 
-2023-02-26 17:13:36,985 [12] DEBUG Photon.Hive.HiveGame - JoinApplyGameStateChanges: Actor 1 is added. MasterClientId is 1
-2023-02-26 17:13:36,988 [12] DEBUG Photon.Hive.HiveGame - Created Game - name=85345cc4-abcd-4261-b4ab-7c9a6a3f1fcc, lobbyName=, lobbyType=Default, maxPlayers=0, IsOpen=True, IsVisible=True, EmptyRoomLiveTime=0, PlayerTTL=0, CheckUserOnJoin=True, PublishUserId=False, ExpectedUsers=
-2023-02-26 17:13:37,007 [12] DEBUG Photon.LoadBalancing.GameServer.Game - UpdateGameStateOnMasterOnCreate: game - '85345cc4-abcd-4261-b4ab-7c9a6a3f1fcc'
-2023-02-26 17:13:37,008 [12] DEBUG Photon.LoadBalancing.GameServer.GameUpdatesBatcher - Message was sent directly
-2023-02-26 17:13:37,010 [12] DEBUG Photon.LoadBalancing.GameServer.MasterServerConnectionBase - Sending event to master. EventCode=3, ConnectionId=223ac1e6-8dee-4b09-9127-3abb72ec12e0
-2023-02-26 17:13:37,498 [10] DEBUG Photon.LoadBalancing.GameServer.MasterServerConnectionBase - Sending event to master. EventCode=2, ConnectionId=223ac1e6-8dee-4b09-9127-3abb72ec12e0
-2023-02-26 17:13:42,614 [23] DEBUG Photon.LoadBalancing.GameServer.GameApplication - CreatePeer for 69ae0d10-03a7-46cf-bde8-8b39e812
-2023-02-26 17:13:42,614 [23] DEBUG Photon.LoadBalancing.GameServer.GameApplication - incoming game peer at 127.0.0.1:5056 from 127.0.0.1:50584
-2023-02-26 17:13:42,614 [23] DEBUG Photon.LoadBalancing.GameServer.GameClientPeer - Auth Timeout Checker scheduled. authTimeout:20000 p:GameClientPeer: PID: 5, IsConnected: False, IsDisposed: False, Last Activity: Operation 0 at UTC 0001-01-01T00:00:00, in Room '', IP 127.0.0.1:50584, NetworkProtocol Udp, Protocol GpBinaryV18, JoinStage: 0 
-2023-02-26 17:13:42,674 [15] DEBUG Photon.LoadBalancing.GameServer.GameClientPeer - OnOperationRequest: conId=5, opCode=230
-2023-02-26 17:13:42,675 [15] DEBUG Photon.LoadBalancing.GameServer.GameClientPeer - Auth Timeout Checker stopped. authTimeout:20000 p:GameClientPeer: PID: 5, IsConnected: True, IsDisposed: False, Last Activity: Operation 230 at UTC 2023-02-26T11:43:42, in Room '', IP 127.0.0.1:50584, NetworkProtocol Udp, Protocol GpBinaryV18, JoinStage: 0 
-2023-02-26 17:13:42,675 [15] DEBUG Photon.LoadBalancing.GameServer.GameClientPeer - Token Validation: checking token with GS: localhost and GameId:85345cc4-abcd-4261-b4ab-7c9a6a3f1fcc
-2023-02-26 17:13:42,710 [11] DEBUG Photon.LoadBalancing.GameServer.GameClientPeer - OnOperationRequest: conId=5, opCode=226
-2023-02-26 17:13:42,711 [11] DEBUG Photon.Hive.HivePeer - OnOperationRequest. Code=226
-2023-02-26 17:13:42,711 [11] DEBUG Photon.Hive.Caching.RoomCacheBase - Created room instance reference: roomName=85345cc4-abcd-4261-b4ab-7c9a6a3f1fcc, referenceCount=2
-2023-02-26 17:13:42,712 [10] DEBUG Photon.Hive.Plugin.BeforeJoinGameCallInfo - Continue.
-2023-02-26 17:13:42,713 [10] DEBUG Photon.Hive.Collections.ActorsManager - Actor added: 2 7d5c68ef-4772-4c2c-9f17-a6dc5f658e2d to game: 85345cc4-abcd-4261-b4ab-7c9a6a3f1fcc -- peer:GameClientPeer: PID: 5, IsConnected: True, IsDisposed: False, Last Activity: Operation 226 at UTC 2023-02-26T11:43:42, in Room '85345cc4-abcd-4261-b4ab-7c9a6a3f1fcc', IP 127.0.0.1:50584, NetworkProtocol Udp, Protocol GpBinaryV18, JoinStage: 4 
-2023-02-26 17:13:42,713 [10] DEBUG Photon.Hive.HiveGame - JoinApplyGameStateChanges: Actor 2 is added. MasterClientId is 1
-2023-02-26 17:13:42,715 [10] DEBUG Photon.Hive.Plugin.JoinGameCallInfo - Continue.
-2023-02-26 17:13:42,716 [10] DEBUG Photon.LoadBalancing.GameServer.GameUpdatesBatcher - Message was sent directly
-2023-02-26 17:13:42,716 [10] DEBUG Photon.LoadBalancing.GameServer.MasterServerConnectionBase - Sending event to master. EventCode=3, ConnectionId=223ac1e6-8dee-4b09-9127-3abb72ec12e0
-2023-02-26 17:13:43,620 [22] DEBUG Photon.LoadBalancing.GameServer.MasterServerConnectionBase - Sending event to master. EventCode=2, ConnectionId=223ac1e6-8dee-4b09-9127-3abb72ec12e0
-2023-02-26 18:02:55,331 [18] DEBUG Photon.LoadBalancing.GameServer.GameClientPeer - Auth Timeout Checker stopped. authTimeout:20000 p:GameClientPeer: PID: 5, IsConnected: False, IsDisposed: False, Last Activity: Operation 226 at UTC 2023-02-26T11:43:42, in Room '85345cc4-abcd-4261-b4ab-7c9a6a3f1fcc', IP 127.0.0.1:50584, NetworkProtocol Udp, Protocol GpBinaryV18, JoinStage: 12 
-2023-02-26 18:02:55,332 [18] DEBUG Photon.Hive.HivePeer - OnDisconnect: conId=5, reason=0, reasonDetail=
-2023-02-26 18:02:55,332 [18] DEBUG Photon.Hive.HivePeer - RemovePeerFromCurrentRoom: Removing peer from room. p:GameClientPeer: PID: 5, IsConnected: False, IsDisposed: False, Last Activity: Operation 226 at UTC 2023-02-26T11:43:42, in Room '85345cc4-abcd-4261-b4ab-7c9a6a3f1fcc', IP 127.0.0.1:50584, NetworkProtocol Udp, Protocol GpBinaryV18, JoinStage: 12 
-2023-02-26 18:02:55,333 [20] DEBUG Photon.Hive.HiveGame - ProcessMessage 1
-2023-02-26 18:02:55,333 [18] DEBUG Photon.Hive.Caching.RoomCacheBase - Removed room instance reference: roomName=85345cc4-abcd-4261-b4ab-7c9a6a3f1fcc, referenceCount=1
-2023-02-26 18:02:55,334 [20] DEBUG Photon.Hive.Plugin.LeaveGameCallInfo - Continue.
-2023-02-26 18:02:55,335 [20] DEBUG Photon.Hive.HiveGame - Clean up actor Actor: 2; Peer:'GameClientPeer: PID: 5, IsConnected: False, IsDisposed: True, Last Activity: Operation 226 at UTC 2023-02-26T11:43:42, in Room '', IP 127.0.0.1:50584, NetworkProtocol Udp, Protocol GpBinaryV18, JoinStage: 12 ', DeactivationTime:'', UserId:'7d5c68ef-4772-4c2c-9f17-a6dc5f658e2d',nick:'', RemovedFromInactive:01-01-0001 00:00:00 - DeleteCacheOnLeave:
-2023-02-26 18:02:55,339 [20] DEBUG Photon.LoadBalancing.GameServer.GameUpdatesBatcher - Message was sent directly
-2023-02-26 18:02:55,339 [20] DEBUG Photon.LoadBalancing.GameServer.MasterServerConnectionBase - Sending event to master. EventCode=3, ConnectionId=223ac1e6-8dee-4b09-9127-3abb72ec12e0
-2023-02-26 18:02:55,340 [20] DEBUG Photon.Hive.Collections.ActorsManager - Actor removed: 2 7d5c68ef-4772-4c2c-9f17-a6dc5f658e2d to game: 85345cc4-abcd-4261-b4ab-7c9a6a3f1fcc -- peer:GameClientPeer: PID: 5, IsConnected: False, IsDisposed: True, Last Activity: Operation 226 at UTC 2023-02-26T11:43:42, in Room '', IP 127.0.0.1:50584, NetworkProtocol Udp, Protocol GpBinaryV18, JoinStage: 12 
-2023-02-26 18:02:56,353 [10] DEBUG Photon.LoadBalancing.GameServer.MasterServerConnectionBase - Sending event to master. EventCode=2, ConnectionId=223ac1e6-8dee-4b09-9127-3abb72ec12e0
-2023-02-26 18:03:05,679 [26] DEBUG Photon.LoadBalancing.GameServer.GameClientPeer - Auth Timeout Checker stopped. authTimeout:20000 p:GameClientPeer: PID: 2, IsConnected: False, IsDisposed: False, Last Activity: Operation 226 at UTC 2023-02-26T11:43:36, in Room '85345cc4-abcd-4261-b4ab-7c9a6a3f1fcc', IP 127.0.0.1:50580, NetworkProtocol Udp, Protocol GpBinaryV18, JoinStage: 12 
-2023-02-26 18:03:05,679 [26] DEBUG Photon.Hive.HivePeer - OnDisconnect: conId=2, reason=0, reasonDetail=
-2023-02-26 18:03:05,680 [26] DEBUG Photon.Hive.HivePeer - RemovePeerFromCurrentRoom: Removing peer from room. p:GameClientPeer: PID: 2, IsConnected: False, IsDisposed: False, Last Activity: Operation 226 at UTC 2023-02-26T11:43:36, in Room '85345cc4-abcd-4261-b4ab-7c9a6a3f1fcc', IP 127.0.0.1:50580, NetworkProtocol Udp, Protocol GpBinaryV18, JoinStage: 12 
-2023-02-26 18:03:05,680 [26] DEBUG Photon.Hive.Caching.RoomCacheBase - Removed room instance reference: roomName=85345cc4-abcd-4261-b4ab-7c9a6a3f1fcc, referenceCount=0
-2023-02-26 18:03:05,680 [17] DEBUG Photon.Hive.HiveGame - ProcessMessage 1
-2023-02-26 18:03:05,680 [17] DEBUG Photon.Hive.Plugin.LeaveGameCallInfo - Continue.
-2023-02-26 18:03:05,680 [17] DEBUG Photon.Hive.HiveGame - Clean up actor Actor: 1; Peer:'GameClientPeer: PID: 2, IsConnected: False, IsDisposed: False, Last Activity: Operation 226 at UTC 2023-02-26T11:43:36, in Room '85345cc4-abcd-4261-b4ab-7c9a6a3f1fcc', IP 127.0.0.1:50580, NetworkProtocol Udp, Protocol GpBinaryV18, JoinStage: 12 ', DeactivationTime:'', UserId:'659369fd-5f11-44c0-9af9-3e523b4f75e7',nick:'', RemovedFromInactive:01-01-0001 00:00:00 - DeleteCacheOnLeave:
-2023-02-26 18:03:05,680 [17] DEBUG Photon.Hive.HiveGame - Actor 1 left. MasterClientId is 0
-2023-02-26 18:03:05,680 [17] DEBUG Photon.LoadBalancing.GameServer.GameUpdatesBatcher - Message was sent directly
-2023-02-26 18:03:05,680 [17] DEBUG Photon.LoadBalancing.GameServer.MasterServerConnectionBase - Sending event to master. EventCode=3, ConnectionId=223ac1e6-8dee-4b09-9127-3abb72ec12e0
-2023-02-26 18:03:05,681 [17] DEBUG Photon.Hive.Collections.ActorsManager - Actor removed: 1 659369fd-5f11-44c0-9af9-3e523b4f75e7 to game: 85345cc4-abcd-4261-b4ab-7c9a6a3f1fcc -- peer:GameClientPeer: PID: 2, IsConnected: False, IsDisposed: False, Last Activity: Operation 226 at UTC 2023-02-26T11:43:36, in Room '85345cc4-abcd-4261-b4ab-7c9a6a3f1fcc', IP 127.0.0.1:50580, NetworkProtocol Udp, Protocol GpBinaryV18, JoinStage: 12 
-2023-02-26 18:03:05,680 [26] DEBUG Photon.Hive.Caching.RoomCacheBase - Room has no references. Trying to remove it. room:85345cc4-abcd-4261-b4ab-7c9a6a3f1fcc
-2023-02-26 18:03:05,682 [26] DEBUG Photon.Hive.Caching.RoomCacheBase - Room BeforeRemoveFromCache returned 'false'. Removing stopped. room:85345cc4-abcd-4261-b4ab-7c9a6a3f1fcc
-2023-02-26 18:03:05,683 [18] DEBUG Photon.Hive.Plugin.BeforeCloseGameCallInfo - Continue.
-2023-02-26 18:03:05,684 [18] DEBUG Photon.Hive.Plugin.CloseGameCallInfo - Continue.
-2023-02-26 18:03:05,685 [18] DEBUG Photon.Hive.Caching.RoomCacheBase - Removed room instance: roomId=85345cc4-abcd-4261-b4ab-7c9a6a3f1fcc
-2023-02-26 18:03:05,685 [18] DEBUG Photon.Hive.Room - Release for room:85345cc4-abcd-4261-b4ab-7c9a6a3f1fcc, RemovePath:;BeforeRemoveFromCacheCalled(12:33:05);BeforeRemoveFromCacheActionCalled(12:33:05);ProcessBeforeCloseGameCalled(12:33:05);ProcessBeforeCloseGameCalledEmptyRoomLiveTimeLECalled(12:33:05);TriggerPluginOnCloseCalled(12:33:05);ProcessCloseGameCalled(12:33:05);TryRemoveRoomFromCacheCalled(12:33:05)
-2023-02-26 18:03:05,685 [18] DEBUG Photon.Hive.Room - Tried to remove room: roomName=85345cc4-abcd-4261-b4ab-7c9a6a3f1fcc, removed=True
-2023-02-26 18:03:05,686 [18] DEBUG Photon.Hive.Room - Disposing room '85345cc4-abcd-4261-b4ab-7c9a6a3f1fcc', dispose:True
-2023-02-26 18:03:05,690 [18] DEBUG Photon.LoadBalancing.GameServer.GameUpdatesBatcher - Flush for appId:, version:
-2023-02-26 18:03:06,697 [11] DEBUG Photon.LoadBalancing.GameServer.MasterServerConnectionBase - Sending event to master. EventCode=2, ConnectionId=223ac1e6-8dee-4b09-9127-3abb72ec12e0
-2023-02-26 18:13:47,625 [29] DEBUG Photon.LoadBalancing.GameServer.GameApplication - CreatePeer for 69ae0d10-03a7-46cf-bde8-8b39e812
-2023-02-26 18:13:47,625 [29] DEBUG Photon.LoadBalancing.GameServer.GameApplication - incoming game peer at 127.0.0.1:5056 from 127.0.0.1:61131
-2023-02-26 18:13:47,625 [29] DEBUG Photon.LoadBalancing.GameServer.GameClientPeer - Auth Timeout Checker scheduled. authTimeout:20000 p:GameClientPeer: PID: 8, IsConnected: False, IsDisposed: False, Last Activity: Operation 0 at UTC 0001-01-01T00:00:00, in Room '', IP 127.0.0.1:61131, NetworkProtocol Udp, Protocol GpBinaryV18, JoinStage: 0 
-2023-02-26 18:13:47,684 [24] DEBUG Photon.LoadBalancing.GameServer.GameClientPeer - OnOperationRequest: conId=8, opCode=230
-2023-02-26 18:13:47,685 [24] DEBUG Photon.LoadBalancing.GameServer.GameClientPeer - Auth Timeout Checker stopped. authTimeout:20000 p:GameClientPeer: PID: 8, IsConnected: True, IsDisposed: False, Last Activity: Operation 230 at UTC 2023-02-26T12:43:47, in Room '', IP 127.0.0.1:61131, NetworkProtocol Udp, Protocol GpBinaryV18, JoinStage: 0 
-2023-02-26 18:13:47,685 [24] DEBUG Photon.LoadBalancing.GameServer.GameClientPeer - Token Validation: checking token with GS: localhost and GameId:b360699c-3e3d-470a-a3de-a6965493d785
-2023-02-26 18:13:47,718 [14] DEBUG Photon.LoadBalancing.GameServer.GameClientPeer - OnOperationRequest: conId=8, opCode=226
-2023-02-26 18:13:47,718 [14] DEBUG Photon.Hive.HivePeer - OnOperationRequest. Code=226
-2023-02-26 18:13:47,718 [14] DEBUG Photon.Hive.Caching.RoomCacheBase - Creating room instance: roomName=b360699c-3e3d-470a-a3de-a6965493d785
-2023-02-26 18:13:47,719 [14] DEBUG Photon.Hive.Caching.RoomCacheBase - Created room instance reference: roomName=b360699c-3e3d-470a-a3de-a6965493d785, referenceCount=1
-2023-02-26 18:13:47,719 [14] INFO  Photon.Hive.Plugin.PluginManager - Plugin successfully created:Type:ServerPlugin.ServerPluginFactory, path:D:\Projects\Unity\MultiPlayerProjects\photon-server-plugin-sdk\deploy\Plugins/ServerPlugin//bin/ServerPlugin.dll
-2023-02-26 18:13:47,719 [14] INFO  Plugin.ServerPlugin - 
+2023-04-07 17:33:47,516 [22] INFO  Plugin.ServerPlugin - 
 
- OnCreateGame b360699c-3e3d-470a-a3de-a6965493d785 by user b8c712c2-ec68-445f-8967-65d8cf875749 
+ Player BeforeJoin CALLED in 46babee9-0962-4b57-a3ad-2474e97d4f16 - user 8c68dd74-b38c-495c-aaeb-f4c468a5c062 
 ...................
 
-2023-02-26 18:13:47,719 [14] DEBUG Photon.Hive.Plugin.CreateGameCallInfo - Continue.
-2023-02-26 18:13:47,719 [14] DEBUG Photon.Hive.HiveGame - Processing Join from IP: 127.0.0.1 to port: 5056
-2023-02-26 18:13:47,719 [14] DEBUG Photon.Hive.Collections.ActorsManager - Actor added: 1 b8c712c2-ec68-445f-8967-65d8cf875749 to game: b360699c-3e3d-470a-a3de-a6965493d785 -- peer:GameClientPeer: PID: 8, IsConnected: True, IsDisposed: False, Last Activity: Operation 226 at UTC 2023-02-26T12:43:47, in Room 'b360699c-3e3d-470a-a3de-a6965493d785', IP 127.0.0.1:61131, NetworkProtocol Udp, Protocol GpBinaryV18, JoinStage: 4 
-2023-02-26 18:13:47,719 [14] DEBUG Photon.Hive.HiveGame - JoinApplyGameStateChanges: Actor 1 is added. MasterClientId is 1
-2023-02-26 18:13:47,720 [14] DEBUG Photon.Hive.HiveGame - Created Game - name=b360699c-3e3d-470a-a3de-a6965493d785, lobbyName=, lobbyType=Default, maxPlayers=0, IsOpen=True, IsVisible=True, EmptyRoomLiveTime=0, PlayerTTL=0, CheckUserOnJoin=True, PublishUserId=False, ExpectedUsers=
-2023-02-26 18:13:47,720 [14] DEBUG Photon.LoadBalancing.GameServer.Game - UpdateGameStateOnMasterOnCreate: game - 'b360699c-3e3d-470a-a3de-a6965493d785'
-2023-02-26 18:13:47,721 [14] DEBUG Photon.LoadBalancing.GameServer.GameUpdatesBatcher - Message was sent directly
-2023-02-26 18:13:47,721 [14] DEBUG Photon.LoadBalancing.GameServer.MasterServerConnectionBase - Sending event to master. EventCode=3, ConnectionId=223ac1e6-8dee-4b09-9127-3abb72ec12e0
-2023-02-26 18:13:48,650 [28] DEBUG Photon.LoadBalancing.GameServer.MasterServerConnectionBase - Sending event to master. EventCode=2, ConnectionId=223ac1e6-8dee-4b09-9127-3abb72ec12e0
-2023-02-26 18:13:48,993 [19] DEBUG Photon.Hive.HivePeer - OnOperationRequest. Code=253
-2023-02-26 18:13:48,996 [20] DEBUG Photon.Hive.HiveHostGame - Broadcasting: Got RaiseEvent from 1/'b8c712c2-ec68-445f-8967-65d8cf875749', targetActors=-1, Group=0, ReceiverGroup=0
-2023-02-26 18:13:48,997 [20] INFO  Plugin.ServerPlugin - 889 -Raisevent data
-2023-02-26 18:13:48,999 [20] ERROR Photon.Hive.HiveGame.HiveHostGame.Plugin - MissingCallProcessing for type:Photon.Hive.Plugin.RaiseEventCallInfo in Plugin:'Name:ServerPlugin, Version:1.0 AppId:C339-38F4-AE0A-52D5-A910-706E, AppVersion:'.
-2023-02-26 18:13:48,999 [20] DEBUG Photon.Hive.Plugin.RaiseEventCallInfo - Fail: none of Photon.Hive.Plugin.RaiseEventCallInfo's method were called
-2023-02-26 18:13:53,608 [20] DEBUG Photon.Hive.HivePeer - OnOperationRequest. Code=253
-2023-02-26 18:13:53,608 [16] DEBUG Photon.Hive.HiveHostGame - Broadcasting: Got RaiseEvent from 1/'b8c712c2-ec68-445f-8967-65d8cf875749', targetActors=-1, Group=0, ReceiverGroup=0
-2023-02-26 18:13:53,608 [16] INFO  Plugin.ServerPlugin - 889 -Raisevent data
-2023-02-26 18:13:53,608 [16] ERROR Photon.Hive.HiveGame.HiveHostGame.Plugin - MissingCallProcessing for type:Photon.Hive.Plugin.RaiseEventCallInfo in Plugin:'Name:ServerPlugin, Version:1.0 AppId:C339-38F4-AE0A-52D5-A910-706E, AppVersion:'.
-2023-02-26 18:13:53,608 [16] DEBUG Photon.Hive.Plugin.RaiseEventCallInfo - Fail: none of Photon.Hive.Plugin.RaiseEventCallInfo's method were called
-2023-02-26 18:14:14,397 [27] DEBUG Photon.Hive.HivePeer - OnOperationRequest. Code=253
-2023-02-26 18:14:14,398 [28] DEBUG Photon.Hive.HiveHostGame - Broadcasting: Got RaiseEvent from 1/'b8c712c2-ec68-445f-8967-65d8cf875749', targetActors=-1, Group=0, ReceiverGroup=0
-2023-02-26 18:14:14,398 [28] INFO  Plugin.ServerPlugin - 889 -Raisevent data
-2023-02-26 18:14:14,398 [28] ERROR Photon.Hive.HiveGame.HiveHostGame.Plugin - MissingCallProcessing for type:Photon.Hive.Plugin.RaiseEventCallInfo in Plugin:'Name:ServerPlugin, Version:1.0 AppId:C339-38F4-AE0A-52D5-A910-706E, AppVersion:'.
-2023-02-26 18:14:14,398 [28] DEBUG Photon.Hive.Plugin.RaiseEventCallInfo - Fail: none of Photon.Hive.Plugin.RaiseEventCallInfo's method were called
-2023-02-26 18:14:15,995 [19] DEBUG Photon.Hive.HivePeer - OnOperationRequest. Code=253
-2023-02-26 18:14:15,995 [12] DEBUG Photon.Hive.HiveHostGame - Broadcasting: Got RaiseEvent from 1/'b8c712c2-ec68-445f-8967-65d8cf875749', targetActors=-1, Group=0, ReceiverGroup=0
-2023-02-26 18:14:15,995 [12] INFO  Plugin.ServerPlugin - 889 -Raisevent data
-2023-02-26 18:14:15,995 [12] ERROR Photon.Hive.HiveGame.HiveHostGame.Plugin - MissingCallProcessing for type:Photon.Hive.Plugin.RaiseEventCallInfo in Plugin:'Name:ServerPlugin, Version:1.0 AppId:C339-38F4-AE0A-52D5-A910-706E, AppVersion:'.
-2023-02-26 18:14:15,996 [12] DEBUG Photon.Hive.Plugin.RaiseEventCallInfo - Fail: none of Photon.Hive.Plugin.RaiseEventCallInfo's method were called
-2023-02-26 18:14:17,742 [11] DEBUG Photon.Hive.HivePeer - OnOperationRequest. Code=253
-2023-02-26 18:14:17,743 [18] DEBUG Photon.Hive.HiveHostGame - Broadcasting: Got RaiseEvent from 1/'b8c712c2-ec68-445f-8967-65d8cf875749', targetActors=-1, Group=0, ReceiverGroup=0
-2023-02-26 18:14:17,743 [18] INFO  Plugin.ServerPlugin - 889 -Raisevent data
-2023-02-26 18:14:17,743 [18] ERROR Photon.Hive.HiveGame.HiveHostGame.Plugin - MissingCallProcessing for type:Photon.Hive.Plugin.RaiseEventCallInfo in Plugin:'Name:ServerPlugin, Version:1.0 AppId:C339-38F4-AE0A-52D5-A910-706E, AppVersion:'.
-2023-02-26 18:14:17,743 [18] DEBUG Photon.Hive.Plugin.RaiseEventCallInfo - Fail: none of Photon.Hive.Plugin.RaiseEventCallInfo's method were called
-2023-02-26 18:14:19,660 [14] DEBUG Photon.Hive.HivePeer - OnOperationRequest. Code=253
-2023-02-26 18:14:19,661 [24] DEBUG Photon.Hive.HiveHostGame - Broadcasting: Got RaiseEvent from 1/'b8c712c2-ec68-445f-8967-65d8cf875749', targetActors=-1, Group=0, ReceiverGroup=0
-2023-02-26 18:14:19,661 [24] INFO  Plugin.ServerPlugin - 889 -Raisevent data
-2023-02-26 18:14:19,661 [24] ERROR Photon.Hive.HiveGame.HiveHostGame.Plugin - MissingCallProcessing for type:Photon.Hive.Plugin.RaiseEventCallInfo in Plugin:'Name:ServerPlugin, Version:1.0 AppId:C339-38F4-AE0A-52D5-A910-706E, AppVersion:'.
-2023-02-26 18:14:19,661 [24] DEBUG Photon.Hive.Plugin.RaiseEventCallInfo - Fail: none of Photon.Hive.Plugin.RaiseEventCallInfo's method were called
-2023-02-26 18:14:20,440 [26] DEBUG Photon.Hive.HivePeer - OnOperationRequest. Code=253
-2023-02-26 18:14:20,441 [28] DEBUG Photon.Hive.HiveHostGame - Broadcasting: Got RaiseEvent from 1/'b8c712c2-ec68-445f-8967-65d8cf875749', targetActors=-1, Group=0, ReceiverGroup=0
-2023-02-26 18:14:20,441 [28] INFO  Plugin.ServerPlugin - 889 -Raisevent data
-2023-02-26 18:14:20,441 [28] ERROR Photon.Hive.HiveGame.HiveHostGame.Plugin - MissingCallProcessing for type:Photon.Hive.Plugin.RaiseEventCallInfo in Plugin:'Name:ServerPlugin, Version:1.0 AppId:C339-38F4-AE0A-52D5-A910-706E, AppVersion:'.
-2023-02-26 18:14:20,441 [28] DEBUG Photon.Hive.Plugin.RaiseEventCallInfo - Fail: none of Photon.Hive.Plugin.RaiseEventCallInfo's method were called
-2023-02-26 18:14:21,161 [13] DEBUG Photon.Hive.HivePeer - OnOperationRequest. Code=253
-2023-02-26 18:14:21,162 [13] DEBUG Photon.Hive.HiveHostGame - Broadcasting: Got RaiseEvent from 1/'b8c712c2-ec68-445f-8967-65d8cf875749', targetActors=-1, Group=0, ReceiverGroup=0
-2023-02-26 18:14:21,162 [13] INFO  Plugin.ServerPlugin - 889 -Raisevent data
-2023-02-26 18:14:21,162 [13] ERROR Photon.Hive.HiveGame.HiveHostGame.Plugin - MissingCallProcessing for type:Photon.Hive.Plugin.RaiseEventCallInfo in Plugin:'Name:ServerPlugin, Version:1.0 AppId:C339-38F4-AE0A-52D5-A910-706E, AppVersion:'.
-2023-02-26 18:14:21,162 [13] DEBUG Photon.Hive.Plugin.RaiseEventCallInfo - Fail: none of Photon.Hive.Plugin.RaiseEventCallInfo's method were called
-2023-02-26 18:14:21,943 [15] DEBUG Photon.Hive.HivePeer - OnOperationRequest. Code=253
-2023-02-26 18:14:21,943 [27] DEBUG Photon.Hive.HiveHostGame - Broadcasting: Got RaiseEvent from 1/'b8c712c2-ec68-445f-8967-65d8cf875749', targetActors=-1, Group=0, ReceiverGroup=0
-2023-02-26 18:14:21,943 [27] INFO  Plugin.ServerPlugin - 889 -Raisevent data
-2023-02-26 18:14:21,944 [27] ERROR Photon.Hive.HiveGame.HiveHostGame.Plugin - MissingCallProcessing for type:Photon.Hive.Plugin.RaiseEventCallInfo in Plugin:'Name:ServerPlugin, Version:1.0 AppId:C339-38F4-AE0A-52D5-A910-706E, AppVersion:'.
-2023-02-26 18:14:21,944 [27] DEBUG Photon.Hive.Plugin.RaiseEventCallInfo - Fail: none of Photon.Hive.Plugin.RaiseEventCallInfo's method were called
-2023-02-26 18:14:22,605 [13] DEBUG Photon.Hive.HivePeer - OnOperationRequest. Code=253
-2023-02-26 18:14:22,606 [11] DEBUG Photon.Hive.HiveHostGame - Broadcasting: Got RaiseEvent from 1/'b8c712c2-ec68-445f-8967-65d8cf875749', targetActors=-1, Group=0, ReceiverGroup=0
-2023-02-26 18:14:22,606 [11] INFO  Plugin.ServerPlugin - 889 -Raisevent data
-2023-02-26 18:14:22,606 [11] ERROR Photon.Hive.HiveGame.HiveHostGame.Plugin - MissingCallProcessing for type:Photon.Hive.Plugin.RaiseEventCallInfo in Plugin:'Name:ServerPlugin, Version:1.0 AppId:C339-38F4-AE0A-52D5-A910-706E, AppVersion:'.
-2023-02-26 18:14:22,606 [11] DEBUG Photon.Hive.Plugin.RaiseEventCallInfo - Fail: none of Photon.Hive.Plugin.RaiseEventCallInfo's method were called
-2023-02-26 18:14:23,135 [19] DEBUG Photon.Hive.HivePeer - OnOperationRequest. Code=253
-2023-02-26 18:14:23,135 [10] DEBUG Photon.Hive.HiveHostGame - Broadcasting: Got RaiseEvent from 1/'b8c712c2-ec68-445f-8967-65d8cf875749', targetActors=-1, Group=0, ReceiverGroup=0
-2023-02-26 18:14:23,136 [10] INFO  Plugin.ServerPlugin - 889 -Raisevent data
-2023-02-26 18:14:23,136 [10] ERROR Photon.Hive.HiveGame.HiveHostGame.Plugin - MissingCallProcessing for type:Photon.Hive.Plugin.RaiseEventCallInfo in Plugin:'Name:ServerPlugin, Version:1.0 AppId:C339-38F4-AE0A-52D5-A910-706E, AppVersion:'.
-2023-02-26 18:14:23,136 [10] DEBUG Photon.Hive.Plugin.RaiseEventCallInfo - Fail: none of Photon.Hive.Plugin.RaiseEventCallInfo's method were called
-2023-02-26 18:14:23,694 [22] DEBUG Photon.Hive.HivePeer - OnOperationRequest. Code=253
-2023-02-26 18:14:23,694 [12] DEBUG Photon.Hive.HiveHostGame - Broadcasting: Got RaiseEvent from 1/'b8c712c2-ec68-445f-8967-65d8cf875749', targetActors=-1, Group=0, ReceiverGroup=0
-2023-02-26 18:14:23,694 [12] INFO  Plugin.ServerPlugin - 889 -Raisevent data
-2023-02-26 18:14:23,694 [12] ERROR Photon.Hive.HiveGame.HiveHostGame.Plugin - MissingCallProcessing for type:Photon.Hive.Plugin.RaiseEventCallInfo in Plugin:'Name:ServerPlugin, Version:1.0 AppId:C339-38F4-AE0A-52D5-A910-706E, AppVersion:'.
-2023-02-26 18:14:23,694 [12] DEBUG Photon.Hive.Plugin.RaiseEventCallInfo - Fail: none of Photon.Hive.Plugin.RaiseEventCallInfo's method were called
-2023-02-26 18:14:25,162 [10] DEBUG Photon.Hive.HivePeer - OnOperationRequest. Code=253
-2023-02-26 18:14:25,162 [29] DEBUG Photon.Hive.HiveHostGame - Broadcasting: Got RaiseEvent from 1/'b8c712c2-ec68-445f-8967-65d8cf875749', targetActors=-1, Group=0, ReceiverGroup=0
-2023-02-26 18:14:25,162 [29] INFO  Plugin.ServerPlugin - 889 -Raisevent data
-2023-02-26 18:14:25,162 [29] ERROR Photon.Hive.HiveGame.HiveHostGame.Plugin - MissingCallProcessing for type:Photon.Hive.Plugin.RaiseEventCallInfo in Plugin:'Name:ServerPlugin, Version:1.0 AppId:C339-38F4-AE0A-52D5-A910-706E, AppVersion:'.
-2023-02-26 18:14:25,163 [29] DEBUG Photon.Hive.Plugin.RaiseEventCallInfo - Fail: none of Photon.Hive.Plugin.RaiseEventCallInfo's method were called
-2023-02-26 18:14:30,228 [22] DEBUG Photon.Hive.HivePeer - OnOperationRequest. Code=253
-2023-02-26 18:14:30,228 [22] DEBUG Photon.Hive.HiveHostGame - Broadcasting: Got RaiseEvent from 1/'b8c712c2-ec68-445f-8967-65d8cf875749', targetActors=-1, Group=0, ReceiverGroup=0
-2023-02-26 18:14:30,228 [22] INFO  Plugin.ServerPlugin - 889 -Raisevent data
-2023-02-26 18:14:30,228 [22] ERROR Photon.Hive.HiveGame.HiveHostGame.Plugin - MissingCallProcessing for type:Photon.Hive.Plugin.RaiseEventCallInfo in Plugin:'Name:ServerPlugin, Version:1.0 AppId:C339-38F4-AE0A-52D5-A910-706E, AppVersion:'.
-2023-02-26 18:14:30,228 [22] DEBUG Photon.Hive.Plugin.RaiseEventCallInfo - Fail: none of Photon.Hive.Plugin.RaiseEventCallInfo's method were called
-2023-02-26 18:14:30,919 [16] DEBUG Photon.Hive.HivePeer - OnOperationRequest. Code=253
-2023-02-26 18:14:30,920 [14] DEBUG Photon.Hive.HiveHostGame - Broadcasting: Got RaiseEvent from 1/'b8c712c2-ec68-445f-8967-65d8cf875749', targetActors=-1, Group=0, ReceiverGroup=0
-2023-02-26 18:14:30,920 [14] INFO  Plugin.ServerPlugin - 889 -Raisevent data
-2023-02-26 18:14:30,921 [14] ERROR Photon.Hive.HiveGame.HiveHostGame.Plugin - MissingCallProcessing for type:Photon.Hive.Plugin.RaiseEventCallInfo in Plugin:'Name:ServerPlugin, Version:1.0 AppId:C339-38F4-AE0A-52D5-A910-706E, AppVersion:'.
-2023-02-26 18:14:30,921 [14] DEBUG Photon.Hive.Plugin.RaiseEventCallInfo - Fail: none of Photon.Hive.Plugin.RaiseEventCallInfo's method were called
-2023-02-26 18:14:34,243 [29] DEBUG Photon.Hive.HivePeer - OnOperationRequest. Code=253
-2023-02-26 18:14:34,244 [17] DEBUG Photon.Hive.HiveHostGame - Broadcasting: Got RaiseEvent from 1/'b8c712c2-ec68-445f-8967-65d8cf875749', targetActors=-1, Group=0, ReceiverGroup=0
-2023-02-26 18:14:34,244 [17] INFO  Plugin.ServerPlugin - 889 -Raisevent data
-2023-02-26 18:14:34,244 [17] ERROR Photon.Hive.HiveGame.HiveHostGame.Plugin - MissingCallProcessing for type:Photon.Hive.Plugin.RaiseEventCallInfo in Plugin:'Name:ServerPlugin, Version:1.0 AppId:C339-38F4-AE0A-52D5-A910-706E, AppVersion:'.
-2023-02-26 18:14:34,244 [17] DEBUG Photon.Hive.Plugin.RaiseEventCallInfo - Fail: none of Photon.Hive.Plugin.RaiseEventCallInfo's method were called
-2023-02-26 18:14:35,372 [27] DEBUG Photon.LoadBalancing.GameServer.GameClientPeer - Auth Timeout Checker stopped. authTimeout:20000 p:GameClientPeer: PID: 8, IsConnected: False, IsDisposed: False, Last Activity: Operation 253 at UTC 2023-02-26T12:44:34, in Room 'b360699c-3e3d-470a-a3de-a6965493d785', IP 127.0.0.1:61131, NetworkProtocol Udp, Protocol GpBinaryV18, JoinStage: 12 
-2023-02-26 18:14:35,372 [27] DEBUG Photon.Hive.HivePeer - OnDisconnect: conId=8, reason=0, reasonDetail=
-2023-02-26 18:14:35,372 [27] DEBUG Photon.Hive.HivePeer - RemovePeerFromCurrentRoom: Removing peer from room. p:GameClientPeer: PID: 8, IsConnected: False, IsDisposed: False, Last Activity: Operation 253 at UTC 2023-02-26T12:44:34, in Room 'b360699c-3e3d-470a-a3de-a6965493d785', IP 127.0.0.1:61131, NetworkProtocol Udp, Protocol GpBinaryV18, JoinStage: 12 
-2023-02-26 18:14:35,372 [27] DEBUG Photon.Hive.Caching.RoomCacheBase - Removed room instance reference: roomName=b360699c-3e3d-470a-a3de-a6965493d785, referenceCount=0
-2023-02-26 18:14:35,372 [22] DEBUG Photon.Hive.HiveGame - ProcessMessage 1
-2023-02-26 18:14:35,372 [22] DEBUG Photon.Hive.Plugin.LeaveGameCallInfo - Continue.
-2023-02-26 18:14:35,373 [22] DEBUG Photon.Hive.HiveGame - Clean up actor Actor: 1; Peer:'GameClientPeer: PID: 8, IsConnected: False, IsDisposed: False, Last Activity: Operation 253 at UTC 2023-02-26T12:44:34, in Room 'b360699c-3e3d-470a-a3de-a6965493d785', IP 127.0.0.1:61131, NetworkProtocol Udp, Protocol GpBinaryV18, JoinStage: 12 ', DeactivationTime:'', UserId:'b8c712c2-ec68-445f-8967-65d8cf875749',nick:'', RemovedFromInactive:01-01-0001 00:00:00 - DeleteCacheOnLeave:
-2023-02-26 18:14:35,373 [22] DEBUG Photon.Hive.HiveGame - Actor 1 left. MasterClientId is 0
-2023-02-26 18:14:35,373 [22] DEBUG Photon.LoadBalancing.GameServer.GameUpdatesBatcher - Message was sent directly
-2023-02-26 18:14:35,373 [22] DEBUG Photon.LoadBalancing.GameServer.MasterServerConnectionBase - Sending event to master. EventCode=3, ConnectionId=223ac1e6-8dee-4b09-9127-3abb72ec12e0
-2023-02-26 18:14:35,373 [22] DEBUG Photon.Hive.Collections.ActorsManager - Actor removed: 1 b8c712c2-ec68-445f-8967-65d8cf875749 to game: b360699c-3e3d-470a-a3de-a6965493d785 -- peer:GameClientPeer: PID: 8, IsConnected: False, IsDisposed: False, Last Activity: Operation 253 at UTC 2023-02-26T12:44:34, in Room 'b360699c-3e3d-470a-a3de-a6965493d785', IP 127.0.0.1:61131, NetworkProtocol Udp, Protocol GpBinaryV18, JoinStage: 12 
-2023-02-26 18:14:35,372 [27] DEBUG Photon.Hive.Caching.RoomCacheBase - Room has no references. Trying to remove it. room:b360699c-3e3d-470a-a3de-a6965493d785
-2023-02-26 18:14:35,373 [27] DEBUG Photon.Hive.Caching.RoomCacheBase - Room BeforeRemoveFromCache returned 'false'. Removing stopped. room:b360699c-3e3d-470a-a3de-a6965493d785
-2023-02-26 18:14:35,373 [23] DEBUG Photon.Hive.Plugin.BeforeCloseGameCallInfo - Continue.
-2023-02-26 18:14:35,374 [23] DEBUG Photon.Hive.Plugin.CloseGameCallInfo - Continue.
-2023-02-26 18:14:35,374 [23] DEBUG Photon.Hive.Caching.RoomCacheBase - Removed room instance: roomId=b360699c-3e3d-470a-a3de-a6965493d785
-2023-02-26 18:14:35,374 [23] DEBUG Photon.Hive.Room - Release for room:b360699c-3e3d-470a-a3de-a6965493d785, RemovePath:;BeforeRemoveFromCacheCalled(12:44:35);BeforeRemoveFromCacheActionCalled(12:44:35);ProcessBeforeCloseGameCalled(12:44:35);ProcessBeforeCloseGameCalledEmptyRoomLiveTimeLECalled(12:44:35);TriggerPluginOnCloseCalled(12:44:35);ProcessCloseGameCalled(12:44:35);TryRemoveRoomFromCacheCalled(12:44:35)
-2023-02-26 18:14:35,374 [23] DEBUG Photon.Hive.Room - Tried to remove room: roomName=b360699c-3e3d-470a-a3de-a6965493d785, removed=True
-2023-02-26 18:14:35,374 [23] DEBUG Photon.Hive.Room - Disposing room 'b360699c-3e3d-470a-a3de-a6965493d785', dispose:True
-2023-02-26 18:14:35,374 [23] DEBUG Photon.LoadBalancing.GameServer.GameUpdatesBatcher - Flush for appId:, version:
-2023-02-26 18:14:36,386 [17] DEBUG Photon.LoadBalancing.GameServer.MasterServerConnectionBase - Sending event to master. EventCode=2, ConnectionId=223ac1e6-8dee-4b09-9127-3abb72ec12e0
+2023-04-07 17:33:48,437 [11] DEBUG Photon.LoadBalancing.GameServer.MasterServerConnectionBase - Sending event to master. EventCode=2, ConnectionId=6a55cf45-837f-47ca-ae5c-69bb60905d14
+2023-04-07 17:33:49,841 [21] DEBUG Photon.LoadBalancing.GameServer.GameApplication - CreatePeer for LoadBalancing
+2023-04-07 17:33:49,841 [21] DEBUG Photon.LoadBalancing.GameServer.GameApplication - incoming game peer at 192.168.0.174:5056 from 192.168.0.174:61291
+2023-04-07 17:33:49,842 [21] DEBUG Photon.LoadBalancing.GameServer.GameClientPeer - Auth Timeout Checker scheduled. authTimeout:20000 p:GameClientPeer: PID: 35, IsConnected: False, IsDisposed: False, Last Activity: Operation 0 at UTC 0001-01-01T00:00:00, in Room '', IP 192.168.0.174:61291, NetworkProtocol Udp, Protocol GpBinaryV18, JoinStage: 0 
+2023-04-07 17:33:49,935 [10] DEBUG Photon.LoadBalancing.GameServer.GameClientPeer - OnOperationRequest: conId=35, opCode=230
+2023-04-07 17:33:49,936 [10] DEBUG Photon.LoadBalancing.GameServer.GameClientPeer - Auth Timeout Checker stopped. authTimeout:20000 p:GameClientPeer: PID: 35, IsConnected: True, IsDisposed: False, Last Activity: Operation 230 at UTC 2023-04-07T12:03:49, in Room '', IP 192.168.0.174:61291, NetworkProtocol Udp, Protocol GpBinaryV18, JoinStage: 0 
+2023-04-07 17:33:49,936 [10] DEBUG Photon.LoadBalancing.GameServer.GameClientPeer - Token Validation: checking token with GS: localhost and GameId:46babee9-0962-4b57-a3ad-2474e97d4f16
+2023-04-07 17:33:49,959 [21] DEBUG Photon.LoadBalancing.GameServer.GameClientPeer - OnOperationRequest: conId=35, opCode=226
+2023-04-07 17:33:49,960 [21] DEBUG Photon.Hive.HivePeer - OnOperationRequest. Code=226
+2023-04-07 17:33:49,960 [21] DEBUG Photon.Hive.Caching.RoomCacheBase - Created room instance reference: roomName=46babee9-0962-4b57-a3ad-2474e97d4f16, referenceCount=3
+2023-04-07 17:33:49,960 [21] DEBUG Photon.Hive.Plugin.BeforeJoinGameCallInfo - Continue.
+2023-04-07 17:33:49,961 [21] DEBUG Photon.Hive.Collections.ActorsManager - Actor added: 3 a8f194a4-8e54-4a82-9537-d54997346759 to game: 46babee9-0962-4b57-a3ad-2474e97d4f16 -- peer:GameClientPeer: PID: 35, IsConnected: True, IsDisposed: False, Last Activity: Operation 226 at UTC 2023-04-07T12:03:49, in Room '46babee9-0962-4b57-a3ad-2474e97d4f16', IP 192.168.0.174:61291, NetworkProtocol Udp, Protocol GpBinaryV18, JoinStage: 4 
+2023-04-07 17:33:49,961 [21] DEBUG Photon.Hive.HiveGame - JoinApplyGameStateChanges: Actor 3 is added. MasterClientId is 1
+2023-04-07 17:33:49,961 [21] DEBUG Photon.Hive.Plugin.JoinGameCallInfo - Continue.
+2023-04-07 17:33:49,962 [21] DEBUG Photon.LoadBalancing.GameServer.GameUpdatesBatcher - Message was sent directly
+2023-04-07 17:33:49,962 [21] DEBUG Photon.LoadBalancing.GameServer.MasterServerConnectionBase - Sending event to master. EventCode=3, ConnectionId=6a55cf45-837f-47ca-ae5c-69bb60905d14
+2023-04-07 17:33:49,962 [21] INFO  Plugin.ServerPlugin - 
+
+ Player Joined in 46babee9-0962-4b57-a3ad-2474e97d4f16 - user a8f194a4-8e54-4a82-9537-d54997346759 
+...................
+
+2023-04-07 17:33:49,963 [21] INFO  Plugin.ServerPlugin - 
+
+ Player BeforeJoin CALLED in 46babee9-0962-4b57-a3ad-2474e97d4f16 - user a8f194a4-8e54-4a82-9537-d54997346759 
+...................
+
+2023-04-07 17:33:50,852 [21] DEBUG Photon.LoadBalancing.GameServer.MasterServerConnectionBase - Sending event to master. EventCode=2, ConnectionId=6a55cf45-837f-47ca-ae5c-69bb60905d14
+2023-04-07 17:33:57,533 [22] INFO  Plugin.ServerPlugin - 
+ PokerRound Started 0  
+
+2023-04-07 17:33:57,533 [22] INFO  Plugin.ServerPlugin - 
+ Table Cards [CLUBS, 8], [SPADES, 6], [SPADES, 12], [DIAMONDS, 5], [SPADES, 4], ,   
+
+2023-04-07 17:33:57,533 [22] INFO  Plugin.ServerPlugin - 
+ ActorPlayer 1 Cards: [DIAMONDS, 9], [DIAMONDS, 1]   
+
+2023-04-07 17:33:57,534 [22] INFO  Plugin.ServerPlugin - 
+ ActorPlayer 2 Cards: [SPADES, 7], [HEARTS, 12]   
+
+2023-04-07 17:33:57,534 [22] INFO  Plugin.ServerPlugin - 
+ ActorPlayer 3 Cards: [DIAMONDS, 11], [HEARTS, 5]   
+
+2023-04-07 17:33:58,988 [22] DEBUG Photon.LoadBalancing.GameServer.GameClientPeer - OnOperationRequest: conId=32, opCode=252
+2023-04-07 17:33:58,988 [22] DEBUG Photon.Hive.HivePeer - OnOperationRequest. Code=252
+2023-04-07 17:33:58,989 [22] DEBUG Photon.Hive.Plugin.BeforeSetPropertiesCallInfo - Continue.
+2023-04-07 17:33:58,989 [22] DEBUG Photon.Hive.Plugin.SetPropertiesCallInfo - Continue.
+2023-04-07 17:33:58,989 [22] DEBUG Photon.LoadBalancing.GameServer.Game - MaxPlayer=3, IsOpen=, IsVisible=, #LobbyProperties=0, #GameProperties=0
+2023-04-07 17:33:58,989 [22] DEBUG Photon.LoadBalancing.GameServer.Game - UpdateGameStateOnMaster: game - '46babee9-0962-4b57-a3ad-2474e97d4f16', reinitialize:False, replication:0
+2023-04-07 17:33:58,990 [22] DEBUG Photon.LoadBalancing.GameServer.GameUpdatesBatcher - Message was sent directly
+2023-04-07 17:33:58,990 [22] DEBUG Photon.LoadBalancing.GameServer.MasterServerConnectionBase - Sending event to master. EventCode=3, ConnectionId=6a55cf45-837f-47ca-ae5c-69bb60905d14
+2023-04-07 17:33:59,965 [11] INFO  Plugin.ServerPlugin - 
+ PokerRound Started 1  
+
+2023-04-07 17:33:59,965 [11] INFO  Plugin.ServerPlugin - 
+ Table Cards [DIAMONDS, 10], [CLUBS, 10], [DIAMONDS, 7], [HEARTS, 12], [SPADES, 1], ,   
+
+2023-04-07 17:33:59,965 [11] INFO  Plugin.ServerPlugin - 
+ ActorPlayer 1 Cards: [HEARTS, 11], [HEARTS, 5]   
+
+2023-04-07 17:33:59,966 [11] INFO  Plugin.ServerPlugin - 
+ ActorPlayer 2 Cards: [DIAMONDS, 8], [SPADES, 7]   
+
+2023-04-07 17:33:59,966 [11] INFO  Plugin.ServerPlugin - 
+ ActorPlayer 3 Cards: [DIAMONDS, 2], [SPADES, 13]   
+
+2023-04-07 17:34:15,239 [25] DEBUG Photon.Hive.HivePeer - OnOperationRequest. Code=253
+2023-04-07 17:34:15,240 [25] DEBUG Photon.Hive.HiveHostGame - Broadcasting: Got RaiseEvent from 1/'33d3c200-309a-40d6-a33b-e908e562ab47', targetActors=-1, Group=0, ReceiverGroup=0
+2023-04-07 17:34:15,240 [25] INFO  Plugin.ServerPlugin - 
+ Check called by Actor 1 - aslam  -CHECK, CurrentPLayerActor 2 
+....
+ RoundPlayercount:- ..
+
+2023-04-07 17:34:15,240 [25] ERROR Photon.Hive.HiveGame.HiveHostGame.Plugin - MissingCallProcessing for type:Photon.Hive.Plugin.RaiseEventCallInfo in Plugin:'Name:ServerPlugin, Version:1.0 AppId:6DF1-C931-6CF2-EBDB-F77B-5CE8, AppVersion:'.
+2023-04-07 17:34:15,240 [25] DEBUG Photon.Hive.Plugin.RaiseEventCallInfo - Fail: none of Photon.Hive.Plugin.RaiseEventCallInfo's method were called
+2023-04-07 17:34:46,837 [10] INFO  Photon.Common.LoadBalancer.LoadShedding.FeedbackController - Transit CpuUsage from Level3 to Level4 with input 41
+2023-04-07 17:34:46,837 [10] INFO  Photon.Common.LoadBalancer.LoadShedding.WorkloadController - FeedbackLevel changed: old=Level3, new=Level4
+2023-04-07 17:35:29,920 [24] DEBUG Photon.Hive.HivePeer - OnOperationRequest. Code=253
+2023-04-07 17:35:29,921 [24] DEBUG Photon.Hive.HiveHostGame - Broadcasting: Got RaiseEvent from 1/'33d3c200-309a-40d6-a33b-e908e562ab47', targetActors=-1, Group=0, ReceiverGroup=0
+2023-04-07 17:35:29,921 [24] INFO  Plugin.ServerPlugin - 
+ Check called by Actor 1 - aslam  -CHECK, CurrentPLayerActor 2 
+....
+ RoundPlayercount:- ..
+
+2023-04-07 17:35:29,921 [24] ERROR Photon.Hive.HiveGame.HiveHostGame.Plugin - MissingCallProcessing for type:Photon.Hive.Plugin.RaiseEventCallInfo in Plugin:'Name:ServerPlugin, Version:1.0 AppId:6DF1-C931-6CF2-EBDB-F77B-5CE8, AppVersion:'.
+2023-04-07 17:35:29,921 [24] DEBUG Photon.Hive.Plugin.RaiseEventCallInfo - Fail: none of Photon.Hive.Plugin.RaiseEventCallInfo's method were called
+2023-04-07 17:36:50,188 [11] INFO  Photon.Common.LoadBalancer.LoadShedding.FeedbackController - Transit CpuUsage from Level4 to Level5 with input 51
+2023-04-07 17:36:50,189 [11] INFO  Photon.Common.LoadBalancer.LoadShedding.WorkloadController - FeedbackLevel changed: old=Level4, new=Level5
+2023-04-07 17:39:29,728 [23] DEBUG Photon.LoadBalancing.GameServer.GameClientPeer - Auth Timeout Checker stopped. authTimeout:20000 p:GameClientPeer: PID: 32, IsConnected: False, IsDisposed: False, Last Activity: Operation 253 at UTC 2023-04-07T12:05:29, in Room '46babee9-0962-4b57-a3ad-2474e97d4f16', IP 192.168.0.19:57348, NetworkProtocol Udp, Protocol GpBinaryV18, JoinStage: 12 
+2023-04-07 17:39:29,728 [23] DEBUG Photon.Hive.HivePeer - OnDisconnect: conId=32, reason=4, reasonDetail=
+Sent: 1746828 now: 1776156 (diff: 29328 + new rtt timeout: 3200 >= max: 30000) since last touch: 30360
+Disc: Seq: 236 CH: 255 RTT: 63 VAR: 24 Now: 1776156 Sent: 1746828 Diff: 29328 Resends: 11
+Resend: Seq: 236 CH: 255 RTT: 63 VAR: 24 Now: 1772906 Timeout: 3200 Resend: 10
+Resend: Seq: 236 CH: 255 RTT: 63 VAR: 24 Now: 1769656 Timeout: 3200 Resend: 9
+Resend: Seq: 236 CH: 255 RTT: 63 VAR: 24 Now: 1766390 Timeout: 3200 Resend: 8
+Resend: Seq: 236 CH: 255 RTT: 63 VAR: 24 Now: 1763125 Timeout: 3200 Resend: 7
+Resend: Seq: 236 CH: 255 RTT: 63 VAR: 24 Now: 1759875 Timeout: 3200 Resend: 6
+Resend: Seq: 236 CH: 255 RTT: 63 VAR: 24 Now: 1756625 Timeout: 3200 Resend: 5
+Resend: Seq: 236 CH: 255 RTT: 63 VAR: 24 Now: 1753375 Timeout: 3200 Resend: 4
+Resend: Seq: 236 CH: 255 RTT: 63 VAR: 24 Now: 1750093 Timeout: 3200 Resend: 3
+Resend: Seq: 236 CH: 255 RTT: 63 VAR: 24 Now: 1748343 Timeout: 1600 Resend: 2
+Resend: Seq: 236 CH: 255 RTT: 63 VAR: 24 Now: 1747468 Timeout: 800 Resend: 1
+Resend: Seq: 236 CH: 255 RTT: 63 VAR: 24 Now: 1747046 Timeout: 400 Resend: 0
+   ACK: Seq: 235 CH: 255 RTT: 63 VAR: 24 Now: 1745796 Sent: 1745718 Diff: 78
+   ACK: Seq: 234 CH: 255 RTT: 61 VAR: 28 Now: 1744703 Sent: 1744687 Diff: 16
+   ACK: Seq: 233 CH: 255 RTT: 67 VAR: 22 Now: 1743671 Sent: 1743625 Diff: 46
+   ACK: Seq: 232 CH: 255 RTT: 69 VAR: 22 Now: 1742609 Sent: 1742531 Diff: 78
+   ACK: Seq: 231 CH: 255 RTT: 68 VAR: 26 Now: 1741515 Sent: 1741453 Diff: 62
+   ACK: Seq: 230 CH: 255 RTT: 68 VAR: 33 Now: 1739437 Sent: 1739390 Diff: 47
+   ACK: Seq: 229 CH: 255 RTT: 70 VAR: 37 Now: 1738375 Sent: 1738375 Diff: 0
+   ACK: Seq: 228 CH: 255 RTT: 80 VAR: 26 Now: 1737359 Sent: 1737281 Diff: 78
+   ACK: Seq: 227 CH: 255 RTT: 80 VAR: 34 Now: 1736265 Sent: 1736156 Diff: 109
+   ACK: Seq: 226 CH: 255 RTT: 76 VAR: 35 Now: 1735140 Sent: 1735109 Diff: 31
+   ACK: Seq: 225 CH: 255 RTT: 82 VAR: 31 Now: 1734093 Sent: 1734015 Diff: 78
+   ACK: Seq: 224 CH: 255 RTT: 82 VAR: 39 Now: 1733000 Sent: 1732890 Diff: 110
+   ACK: Seq: 223 CH: 255 RTT: 78 VAR: 42 Now: 1731875 Sent: 1731859 Diff: 16
+   ACK: Seq: 222 CH: 255 RTT: 86 VAR: 35 Now: 1730828 Sent: 1730750 Diff: 78
+   ACK: Seq: 221 CH: 255 RTT: 87 VAR: 43 Now: 1729734 Sent: 1729671 Diff: 63
+   ACK: Seq: 220 CH: 255 RTT: 90 VAR: 49 Now: 1727656 Sent: 1727578 Diff: 78
+   ACK: Seq: 219 CH: 255 RTT: 91 VAR: 61 Now: 1726562 Sent: 1726515 Diff: 47
+   ACK: Seq: 218 CH: 255 RTT: 97 VAR: 66 Now: 1725500 Sent: 1725468 Diff: 32
+   ACK: Seq: 217 CH: 255 RTT: 106 VAR: 66 Now: 1724453 Sent: 1724390 Diff: 63
+   ACK: Seq: 216 CH: 255 RTT: 112 VAR: 74 Now: 1723390 Sent: 1723218 Diff: 172
+   ACK: Seq: 216 CH: 255 RTT: 104 VAR: 78 Now: 1723375 Sent: 1723015 Diff: 360
+Resend: Seq: 216 CH: 255 RTT: 68 VAR: 18 Now: 1723218 Timeout: 400 Resend: 0
+   ACK: Seq: 215 CH: 255 RTT: 68 VAR: 18 Now: 1722000 Sent: 1721906 Diff: 94
+   ACK: Seq: 214 CH: 255 RTT: 65 VAR: 15 Now: 1720875 Sent: 1720828 Diff: 47
+   ACK: Seq: 213 CH: 255 RTT: 67 VAR: 14 Now: 1719796 Sent: 1719718 Diff: 78
+   ACK: Seq: 212 CH: 255 RTT: 66 VAR: 16 Now: 1718703 Sent: 1718656 Diff: 47
+   ACK: Seq: 211 CH: 255 RTT: 68 VAR: 15 Now: 1717640 Sent: 1717578 Diff: 62
+   ACK: Seq: 210 CH: 255 RTT: 68 VAR: 18 Now: 1716562 Sent: 1716500 Diff: 62
+   ACK: Seq: 209 CH: 255 RTT: 68 VAR: 22 Now: 1714484 Sent: 1714375 Diff: 109
+   ACK: Seq: 208 CH: 255 RTT: 63 VAR: 15 Now: 1713359 Sent: 1713312 Diff: 47
+   ACK: Seq: 207 CH: 255 RTT: 65 VAR: 14 Now: 1712296 Sent: 1712218 Diff: 78
+   ACK: Seq: 206 CH: 255 RTT: 64 VAR: 14 Now: 1711203 Sent: 1711140 Diff: 63
+   ACK: Seq: 205 CH: 255 RTT: 64 VAR: 18 Now: 1710125 Sent: 1710046 Diff: 79
+   ACK: Seq: 204 CH: 255 RTT: 62 VAR: 19 Now: 1708015 Sent: 1707968 Diff: 47
+   ACK: Seq: 203 CH: 255 RTT: 64 VAR: 21 Now: 1706953 Sent: 1706875 Diff: 78
+   ACK: Seq: 202 CH: 255 RTT: 63 VAR: 24 Now: 1705859 Sent: 1705765 Diff: 94
+   ACK: Seq: 201 CH: 255 RTT: 59 VAR: 22 Now: 1704750 Sent: 1704703 Diff: 47
+   ACK: Seq: 200 CH: 255 RTT: 60 VAR: 25 Now: 1703687 Sent: 1703609 Diff: 78
+2023-04-07 17:39:29,729 [23] DEBUG Photon.Hive.HivePeer - RemovePeerFromCurrentRoom: Removing peer from room. p:GameClientPeer: PID: 32, IsConnected: False, IsDisposed: False, Last Activity: Operation 253 at UTC 2023-04-07T12:05:29, in Room '46babee9-0962-4b57-a3ad-2474e97d4f16', IP 192.168.0.19:57348, NetworkProtocol Udp, Protocol GpBinaryV18, JoinStage: 12 
+2023-04-07 17:39:29,729 [23] DEBUG Photon.Hive.Caching.RoomCacheBase - Removed room instance reference: roomName=46babee9-0962-4b57-a3ad-2474e97d4f16, referenceCount=2
+2023-04-07 17:39:29,729 [25] DEBUG Photon.Hive.HiveGame - ProcessMessage 1
+2023-04-07 17:39:29,730 [25] DEBUG Photon.Hive.Plugin.LeaveGameCallInfo - Continue.
+2023-04-07 17:39:29,730 [25] DEBUG Photon.Hive.HiveGame - Clean up actor Actor: 1; Peer:'GameClientPeer: PID: 32, IsConnected: False, IsDisposed: True, Last Activity: Operation 253 at UTC 2023-04-07T12:05:29, in Room '', IP 192.168.0.19:57348, NetworkProtocol Udp, Protocol GpBinaryV18, JoinStage: 12 ', DeactivationTime:'', UserId:'33d3c200-309a-40d6-a33b-e908e562ab47',nick:'aslam ', RemovedFromInactive:01-01-0001 00:00:00 - DeleteCacheOnLeave:
+2023-04-07 17:39:29,730 [25] DEBUG Photon.Hive.HiveGame - Actor 1 left. MasterClientId is 2
+2023-04-07 17:39:29,730 [25] DEBUG Photon.LoadBalancing.GameServer.GameUpdatesBatcher - Message was sent directly
+2023-04-07 17:39:29,730 [25] DEBUG Photon.LoadBalancing.GameServer.MasterServerConnectionBase - Sending event to master. EventCode=3, ConnectionId=6a55cf45-837f-47ca-ae5c-69bb60905d14
+2023-04-07 17:39:29,731 [25] DEBUG Photon.Hive.Collections.ActorsManager - Actor removed: 1 33d3c200-309a-40d6-a33b-e908e562ab47 to game: 46babee9-0962-4b57-a3ad-2474e97d4f16 -- peer:GameClientPeer: PID: 32, IsConnected: False, IsDisposed: True, Last Activity: Operation 253 at UTC 2023-04-07T12:05:29, in Room '', IP 192.168.0.19:57348, NetworkProtocol Udp, Protocol GpBinaryV18, JoinStage: 12 
+2023-04-07 17:39:30,740 [11] DEBUG Photon.LoadBalancing.GameServer.MasterServerConnectionBase - Sending event to master. EventCode=2, ConnectionId=6a55cf45-837f-47ca-ae5c-69bb60905d14
+2023-04-07 17:39:34,113 [25] INFO  Photon.Common.LoadBalancer.LoadShedding.FeedbackController - Transit CpuUsage from Level5 to Level6 with input 61
+2023-04-07 17:39:34,114 [25] INFO  Photon.Common.LoadBalancer.LoadShedding.WorkloadController - FeedbackLevel changed: old=Level5, new=Level6
+2023-04-07 17:39:55,303 [20] INFO  Photon.Common.LoadBalancer.LoadShedding.FeedbackController - Transit CpuUsage from Level6 to Level5 with input 57
+2023-04-07 17:39:55,303 [20] INFO  Photon.Common.LoadBalancer.LoadShedding.WorkloadController - FeedbackLevel changed: old=Level6, new=Level5
+2023-04-07 17:41:04,077 [25] INFO  Photon.Common.LoadBalancer.LoadShedding.FeedbackController - Transit CpuUsage from Level5 to Level4 with input 48
+2023-04-07 17:41:04,078 [25] INFO  Photon.Common.LoadBalancer.LoadShedding.WorkloadController - FeedbackLevel changed: old=Level5, new=Level4
+2023-04-07 18:00:39,279 [11] INFO  Photon.Common.LoadBalancer.LoadShedding.FeedbackController - Transit CpuUsage from Level4 to Level5 with input 51
+2023-04-07 18:00:39,280 [11] INFO  Photon.Common.LoadBalancer.LoadShedding.WorkloadController - FeedbackLevel changed: old=Level4, new=Level5
+2023-04-07 18:09:11,143 [39] INFO  Photon.Common.LoadBalancer.LoadShedding.FeedbackController - Transit CpuUsage from Level5 to Level4 with input 48
+2023-04-07 18:09:11,143 [39] INFO  Photon.Common.LoadBalancer.LoadShedding.WorkloadController - FeedbackLevel changed: old=Level5, new=Level4
+2023-04-07 18:14:24,732 [20] INFO  Photon.Common.LoadBalancer.LoadShedding.FeedbackController - Transit CpuUsage from Level4 to Level5 with input 51
+2023-04-07 18:14:24,733 [20] INFO  Photon.Common.LoadBalancer.LoadShedding.WorkloadController - FeedbackLevel changed: old=Level4, new=Level5
+2023-04-07 18:51:22,771 [10] INFO  Photon.Common.LoadBalancer.LoadShedding.FeedbackController - Transit CpuUsage from Level5 to Level4 with input 48
+2023-04-07 18:51:22,772 [10] INFO  Photon.Common.LoadBalancer.LoadShedding.WorkloadController - FeedbackLevel changed: old=Level5, new=Level4
+2023-04-07 18:52:13,355 [10] INFO  Photon.Common.LoadBalancer.LoadShedding.FeedbackController - Transit CpuUsage from Level4 to Level5 with input 51
+2023-04-07 18:52:13,356 [10] INFO  Photon.Common.LoadBalancer.LoadShedding.WorkloadController - FeedbackLevel changed: old=Level4, new=Level5
+2023-04-07 18:59:03,871 [22] INFO  Photon.Common.LoadBalancer.LoadShedding.FeedbackController - Transit CpuUsage from Level5 to Level4 with input 48
+2023-04-07 18:59:03,872 [22] INFO  Photon.Common.LoadBalancer.LoadShedding.WorkloadController - FeedbackLevel changed: old=Level5, new=Level4
+2023-04-07 19:03:17,733 [39] INFO  Photon.Common.LoadBalancer.LoadShedding.FeedbackController - Transit CpuUsage from Level4 to Level5 with input 51
+2023-04-07 19:03:17,734 [39] INFO  Photon.Common.LoadBalancer.LoadShedding.WorkloadController - FeedbackLevel changed: old=Level4, new=Level5
+2023-04-07 19:12:40,238 [20] INFO  Photon.Common.LoadBalancer.LoadShedding.FeedbackController - Transit CpuUsage from Level5 to Level4 with input 48
+2023-04-07 19:12:40,239 [20] INFO  Photon.Common.LoadBalancer.LoadShedding.WorkloadController - FeedbackLevel changed: old=Level5, new=Level4
+2023-04-07 19:14:44,622 [39] INFO  Photon.Common.LoadBalancer.LoadShedding.FeedbackController - Transit CpuUsage from Level4 to Level5 with input 51
+2023-04-07 19:14:44,622 [39] INFO  Photon.Common.LoadBalancer.LoadShedding.WorkloadController - FeedbackLevel changed: old=Level4, new=Level5
+2023-04-07 19:19:45,926 [11] INFO  Photon.Common.LoadBalancer.LoadShedding.FeedbackController - Transit CpuUsage from Level5 to Level4 with input 48
+2023-04-07 19:19:45,927 [11] INFO  Photon.Common.LoadBalancer.LoadShedding.WorkloadController - FeedbackLevel changed: old=Level5, new=Level4
+2023-04-07 19:20:05,202 [44] DEBUG Photon.LoadBalancing.GameServer.GameClientPeer - Auth Timeout Checker stopped. authTimeout:20000 p:GameClientPeer: PID: 34, IsConnected: False, IsDisposed: False, Last Activity: Operation 226 at UTC 2023-04-07T12:03:47, in Room '46babee9-0962-4b57-a3ad-2474e97d4f16', IP 192.168.0.174:61290, NetworkProtocol Udp, Protocol GpBinaryV18, JoinStage: 12 
+2023-04-07 19:20:05,202 [44] DEBUG Photon.Hive.HivePeer - OnDisconnect: conId=34, reason=4, reasonDetail=
+Sent: 7782062 now: 7811531 (diff: 29469 + new rtt timeout: 3200 >= max: 30000) since last touch: 30485
+Disc: Seq: 5729 CH: 255 RTT: 23 VAR: 20 Now: 7811531 Sent: 7782062 Diff: 29469 Resends: 11
+Resend: Seq: 5729 CH: 255 RTT: 23 VAR: 20 Now: 7808265 Timeout: 3200 Resend: 10
+Resend: Seq: 5729 CH: 255 RTT: 23 VAR: 20 Now: 7804984 Timeout: 3200 Resend: 9
+Resend: Seq: 5729 CH: 255 RTT: 23 VAR: 20 Now: 7801734 Timeout: 3200 Resend: 8
+Resend: Seq: 5729 CH: 255 RTT: 23 VAR: 20 Now: 7798468 Timeout: 3200 Resend: 7
+Resend: Seq: 5729 CH: 255 RTT: 23 VAR: 20 Now: 7795187 Timeout: 3200 Resend: 6
+Resend: Seq: 5729 CH: 255 RTT: 23 VAR: 20 Now: 7791906 Timeout: 3200 Resend: 5
+Resend: Seq: 5729 CH: 255 RTT: 23 VAR: 20 Now: 7788671 Timeout: 3200 Resend: 4
+Resend: Seq: 5729 CH: 255 RTT: 23 VAR: 20 Now: 7785375 Timeout: 3200 Resend: 3
+Resend: Seq: 5729 CH: 255 RTT: 23 VAR: 20 Now: 7783593 Timeout: 1600 Resend: 2
+Resend: Seq: 5729 CH: 255 RTT: 23 VAR: 20 Now: 7782687 Timeout: 800 Resend: 1
+Resend: Seq: 5729 CH: 255 RTT: 23 VAR: 20 Now: 7782281 Timeout: 400 Resend: 0
+   ACK: Seq: 5728 CH: 255 RTT: 23 VAR: 20 Now: 7781015 Sent: 7781015 Diff: 0
+   ACK: Seq: 5727 CH: 255 RTT: 26 VAR: 19 Now: 7779968 Sent: 7779890 Diff: 78
+   ACK: Seq: 5726 CH: 255 RTT: 19 VAR: 8 Now: 7778859 Sent: 7778828 Diff: 31
+   ACK: Seq: 5725 CH: 255 RTT: 18 VAR: 6 Now: 7777812 Sent: 7777796 Diff: 16
+   ACK: Seq: 5724 CH: 255 RTT: 18 VAR: 7 Now: 7776781 Sent: 7776750 Diff: 31
+   ACK: Seq: 5723 CH: 255 RTT: 17 VAR: 5 Now: 7775734 Sent: 7775718 Diff: 16
+   ACK: Seq: 5722 CH: 255 RTT: 17 VAR: 6 Now: 7774687 Sent: 7774671 Diff: 16
+   ACK: Seq: 5721 CH: 255 RTT: 17 VAR: 8 Now: 7773625 Sent: 7773609 Diff: 16
+   ACK: Seq: 5720 CH: 255 RTT: 17 VAR: 10 Now: 7772546 Sent: 7772546 Diff: 0
+   ACK: Seq: 5719 CH: 255 RTT: 19 VAR: 8 Now: 7770500 Sent: 7770484 Diff: 16
+   ACK: Seq: 5718 CH: 255 RTT: 19 VAR: 10 Now: 7769468 Sent: 7769437 Diff: 31
+   ACK: Seq: 5717 CH: 255 RTT: 18 VAR: 9 Now: 7768390 Sent: 7768375 Diff: 15
+   ACK: Seq: 5716 CH: 255 RTT: 18 VAR: 12 Now: 7767359 Sent: 7767328 Diff: 31
+   ACK: Seq: 5715 CH: 255 RTT: 17 VAR: 11 Now: 7765281 Sent: 7765250 Diff: 31
+   ACK: Seq: 5714 CH: 255 RTT: 15 VAR: 10 Now: 7764234 Sent: 7764203 Diff: 31
+   ACK: Seq: 5713 CH: 255 RTT: 13 VAR: 8 Now: 7762171 Sent: 7762156 Diff: 15
+   ACK: Seq: 5712 CH: 255 RTT: 13 VAR: 10 Now: 7761140 Sent: 7761109 Diff: 31
+   ACK: Seq: 5711 CH: 255 RTT: 11 VAR: 7 Now: 7760062 Sent: 7760062 Diff: 0
+   ACK: Seq: 5710 CH: 255 RTT: 12 VAR: 6 Now: 7759046 Sent: 7759031 Diff: 15
+   ACK: Seq: 5709 CH: 255 RTT: 12 VAR: 8 Now: 7757968 Sent: 7757968 Diff: 0
+   ACK: Seq: 5708 CH: 255 RTT: 13 VAR: 6 Now: 7756953 Sent: 7756953 Diff: 0
+   ACK: Seq: 5707 CH: 255 RTT: 14 VAR: 4 Now: 7755937 Sent: 7755921 Diff: 16
+   ACK: Seq: 5706 CH: 255 RTT: 14 VAR: 5 Now: 7754890 Sent: 7754875 Diff: 15
+   ACK: Seq: 5705 CH: 255 RTT: 14 VAR: 6 Now: 7753843 Sent: 7753828 Diff: 15
+   ACK: Seq: 5704 CH: 255 RTT: 14 VAR: 8 Now: 7752812 Sent: 7752812 Diff: 0
+   ACK: Seq: 5703 CH: 255 RTT: 15 VAR: 6 Now: 7751796 Sent: 7751781 Diff: 15
+   ACK: Seq: 5702 CH: 255 RTT: 15 VAR: 7 Now: 7750765 Sent: 7750750 Diff: 15
+   ACK: Seq: 5701 CH: 255 RTT: 15 VAR: 9 Now: 7749718 Sent: 7749703 Diff: 15
+   ACK: Seq: 5700 CH: 255 RTT: 15 VAR: 11 Now: 7748687 Sent: 7748687 Diff: 0
+   ACK: Seq: 5699 CH: 255 RTT: 17 VAR: 10 Now: 7747671 Sent: 7747656 Diff: 15
+   ACK: Seq: 5698 CH: 255 RTT: 17 VAR: 13 Now: 7746609 Sent: 7746609 Diff: 0
+   ACK: Seq: 5697 CH: 255 RTT: 19 VAR: 12 Now: 7745546 Sent: 7745546 Diff: 0
+   ACK: Seq: 5696 CH: 255 RTT: 21 VAR: 10 Now: 7744531 Sent: 7744500 Diff: 31
+   ACK: Seq: 5695 CH: 255 RTT: 20 VAR: 10 Now: 7743484 Sent: 7743468 Diff: 16
+   ACK: Seq: 5694 CH: 255 RTT: 20 VAR: 11 Now: 7742453 Sent: 7742421 Diff: 32
+   ACK: Seq: 5693 CH: 255 RTT: 19 VAR: 10 Now: 7739375 Sent: 7739359 Diff: 16
+   ACK: Seq: 5692 CH: 255 RTT: 19 VAR: 13 Now: 7738312 Sent: 7738312 Diff: 0
+   ACK: Seq: 5691 CH: 255 RTT: 21 VAR: 11 Now: 7737296 Sent: 7737265 Diff: 31
+2023-04-07 19:20:05,203 [44] DEBUG Photon.Hive.HivePeer - RemovePeerFromCurrentRoom: Removing peer from room. p:GameClientPeer: PID: 34, IsConnected: False, IsDisposed: False, Last Activity: Operation 226 at UTC 2023-04-07T12:03:47, in Room '46babee9-0962-4b57-a3ad-2474e97d4f16', IP 192.168.0.174:61290, NetworkProtocol Udp, Protocol GpBinaryV18, JoinStage: 12 
+2023-04-07 19:20:05,203 [20] DEBUG Photon.Hive.HiveGame - ProcessMessage 1
+2023-04-07 19:20:05,203 [44] DEBUG Photon.Hive.Caching.RoomCacheBase - Removed room instance reference: roomName=46babee9-0962-4b57-a3ad-2474e97d4f16, referenceCount=1
+2023-04-07 19:20:05,204 [20] DEBUG Photon.Hive.Plugin.LeaveGameCallInfo - Continue.
+2023-04-07 19:20:05,204 [20] DEBUG Photon.Hive.HiveGame - Clean up actor Actor: 2; Peer:'GameClientPeer: PID: 34, IsConnected: False, IsDisposed: True, Last Activity: Operation 226 at UTC 2023-04-07T12:03:47, in Room '', IP 192.168.0.174:61290, NetworkProtocol Udp, Protocol GpBinaryV18, JoinStage: 12 ', DeactivationTime:'', UserId:'8c68dd74-b38c-495c-aaeb-f4c468a5c062',nick:'Player2863', RemovedFromInactive:01-01-0001 00:00:00 - DeleteCacheOnLeave:
+2023-04-07 19:20:05,204 [20] DEBUG Photon.Hive.HiveGame - Actor 2 left. MasterClientId is 3
+2023-04-07 19:20:05,205 [20] DEBUG Photon.LoadBalancing.GameServer.GameUpdatesBatcher - Message was sent directly
+2023-04-07 19:20:05,205 [20] DEBUG Photon.LoadBalancing.GameServer.MasterServerConnectionBase - Sending event to master. EventCode=3, ConnectionId=6a55cf45-837f-47ca-ae5c-69bb60905d14
+2023-04-07 19:20:05,205 [20] DEBUG Photon.Hive.Collections.ActorsManager - Actor removed: 2 8c68dd74-b38c-495c-aaeb-f4c468a5c062 to game: 46babee9-0962-4b57-a3ad-2474e97d4f16 -- peer:GameClientPeer: PID: 34, IsConnected: False, IsDisposed: True, Last Activity: Operation 226 at UTC 2023-04-07T12:03:47, in Room '', IP 192.168.0.174:61290, NetworkProtocol Udp, Protocol GpBinaryV18, JoinStage: 12 
+2023-04-07 19:20:06,217 [21] DEBUG Photon.LoadBalancing.GameServer.MasterServerConnectionBase - Sending event to master. EventCode=2, ConnectionId=6a55cf45-837f-47ca-ae5c-69bb60905d14
+2023-04-07 19:20:50,594 [20] INFO  Photon.Common.LoadBalancer.LoadShedding.FeedbackController - Transit CpuUsage from Level4 to Level3 with input 38
+2023-04-07 19:20:50,595 [20] INFO  Photon.Common.LoadBalancer.LoadShedding.WorkloadController - FeedbackLevel changed: old=Level4, new=Level3
+2023-04-07 19:38:20,370 [39] INFO  Photon.Common.LoadBalancer.LoadShedding.FeedbackController - Transit CpuUsage from Level3 to Level4 with input 41
+2023-04-07 19:38:20,371 [39] INFO  Photon.Common.LoadBalancer.LoadShedding.WorkloadController - FeedbackLevel changed: old=Level3, new=Level4
+2023-04-07 19:40:24,720 [10] INFO  Photon.Common.LoadBalancer.LoadShedding.FeedbackController - Transit CpuUsage from Level4 to Level3 with input 38
+2023-04-07 19:40:24,721 [10] INFO  Photon.Common.LoadBalancer.LoadShedding.WorkloadController - FeedbackLevel changed: old=Level4, new=Level3
+2023-04-07 19:41:07,171 [10] INFO  Photon.Common.LoadBalancer.LoadShedding.FeedbackController - Transit CpuUsage from Level3 to Level4 with input 41
+2023-04-07 19:41:07,172 [10] INFO  Photon.Common.LoadBalancer.LoadShedding.WorkloadController - FeedbackLevel changed: old=Level3, new=Level4
+2023-04-07 19:42:52,329 [39] INFO  Photon.Common.LoadBalancer.LoadShedding.FeedbackController - Transit CpuUsage from Level4 to Level3 with input 38
+2023-04-07 19:42:52,330 [39] INFO  Photon.Common.LoadBalancer.LoadShedding.WorkloadController - FeedbackLevel changed: old=Level4, new=Level3
+2023-04-07 19:45:26,088 [39] INFO  Photon.Common.LoadBalancer.LoadShedding.FeedbackController - Transit CpuUsage from Level3 to Level4 with input 41
+2023-04-07 19:45:26,089 [39] INFO  Photon.Common.LoadBalancer.LoadShedding.WorkloadController - FeedbackLevel changed: old=Level3, new=Level4
+2023-04-07 19:50:53,811 [21] INFO  Photon.Common.LoadBalancer.LoadShedding.FeedbackController - Transit CpuUsage from Level4 to Level3 with input 38
+2023-04-07 19:50:53,812 [21] INFO  Photon.Common.LoadBalancer.LoadShedding.WorkloadController - FeedbackLevel changed: old=Level4, new=Level3
+2023-04-07 19:53:15,437 [21] INFO  Photon.Common.LoadBalancer.LoadShedding.FeedbackController - Transit CpuUsage from Level3 to Level4 with input 41
+2023-04-07 19:53:15,438 [21] INFO  Photon.Common.LoadBalancer.LoadShedding.WorkloadController - FeedbackLevel changed: old=Level3, new=Level4
+2023-04-07 20:06:54,506 [44] INFO  Photon.Common.LoadBalancer.LoadShedding.FeedbackController - Transit CpuUsage from Level4 to Level3 with input 38
+2023-04-07 20:06:54,507 [44] INFO  Photon.Common.LoadBalancer.LoadShedding.WorkloadController - FeedbackLevel changed: old=Level4, new=Level3

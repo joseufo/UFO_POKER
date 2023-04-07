@@ -24,33 +24,56 @@ namespace TestPoker
 
             session = UnityEngine.Random.Range(1, 100000);
 
+            //GameObject.Find("Dropdown_player_0_1_seme").GetComponent<Dropdown>().value = 3; onDropDownValueChange(GameObject.Find("Dropdown_player_0_1_seme").GetComponent<Dropdown>());
+            //GameObject.Find("Dropdown_player_0_1_carta").GetComponent<Dropdown>().value = 2;
+            //GameObject.Find("Dropdown_player_0_2_seme").GetComponent<Dropdown>().value = 1; onDropDownValueChange(GameObject.Find("Dropdown_player_0_2_seme").GetComponent<Dropdown>());
+            //GameObject.Find("Dropdown_player_0_2_carta").GetComponent<Dropdown>().value = 10;
+
+            //GameObject.Find("Dropdown_player_1_1_seme").GetComponent<Dropdown>().value = 1; onDropDownValueChange(GameObject.Find("Dropdown_player_1_1_seme").GetComponent<Dropdown>());
+            //GameObject.Find("Dropdown_player_1_1_carta").GetComponent<Dropdown>().value = 12;
+            //GameObject.Find("Dropdown_player_1_2_seme").GetComponent<Dropdown>().value = 3; onDropDownValueChange(GameObject.Find("Dropdown_player_1_2_seme").GetComponent<Dropdown>());
+            //GameObject.Find("Dropdown_player_1_2_carta").GetComponent<Dropdown>().value = 10;
+
+            //GameObject.Find("Dropdown_player_2_1_seme").GetComponent<Dropdown>().value = 2; onDropDownValueChange(GameObject.Find("Dropdown_player_2_1_seme").GetComponent<Dropdown>());
+            //GameObject.Find("Dropdown_player_2_1_carta").GetComponent<Dropdown>().value = 8;
+            //GameObject.Find("Dropdown_player_2_2_seme").GetComponent<Dropdown>().value = 0; onDropDownValueChange(GameObject.Find("Dropdown_player_2_2_seme").GetComponent<Dropdown>());
+            //GameObject.Find("Dropdown_player_2_2_carta").GetComponent<Dropdown>().value = 10;
+
+            //GameObject.Find("Dropdown_fold_1_seme").GetComponent<Dropdown>().value = 3; onDropDownValueChange(GameObject.Find("Dropdown_fold_1_seme").GetComponent<Dropdown>());
+            //GameObject.Find("Dropdown_fold_1_carta").GetComponent<Dropdown>().value = 11;
+
+            //GameObject.Find("Dropdown_fold_2_seme").GetComponent<Dropdown>().value = 3; onDropDownValueChange(GameObject.Find("Dropdown_fold_2_seme").GetComponent<Dropdown>());
+            //GameObject.Find("Dropdown_fold_2_carta").GetComponent<Dropdown>().value = 4;
+
+            //GameObject.Find("Dropdown_fold_3_seme").GetComponent<Dropdown>().value = 0; onDropDownValueChange(GameObject.Find("Dropdown_fold_3_seme").GetComponent<Dropdown>());
+            //GameObject.Find("Dropdown_fold_3_carta").GetComponent<Dropdown>().value = 5;
+
+            //GameObject.Find("Dropdown_turn_seme").GetComponent<Dropdown>().value = 3; onDropDownValueChange(GameObject.Find("Dropdown_turn_seme").GetComponent<Dropdown>());
+            //GameObject.Find("Dropdown_turn_carta").GetComponent<Dropdown>().value = 9;
+
+            //GameObject.Find("Dropdown_river_seme").GetComponent<Dropdown>().value = 3; onDropDownValueChange(GameObject.Find("Dropdown_river_seme").GetComponent<Dropdown>());
+            //GameObject.Find("Dropdown_river_carta").GetComponent<Dropdown>().value = 12;
+
             GameObject.Find("Dropdown_player_0_1_seme").GetComponent<Dropdown>().value = 2; onDropDownValueChange(GameObject.Find("Dropdown_player_0_1_seme").GetComponent<Dropdown>());
             GameObject.Find("Dropdown_player_0_1_carta").GetComponent<Dropdown>().value = 2;
             GameObject.Find("Dropdown_player_0_2_seme").GetComponent<Dropdown>().value = 3; onDropDownValueChange(GameObject.Find("Dropdown_player_0_2_seme").GetComponent<Dropdown>());
             GameObject.Find("Dropdown_player_0_2_carta").GetComponent<Dropdown>().value = 3;
-
             GameObject.Find("Dropdown_player_1_1_seme").GetComponent<Dropdown>().value = 3; onDropDownValueChange(GameObject.Find("Dropdown_player_1_1_seme").GetComponent<Dropdown>());
             GameObject.Find("Dropdown_player_1_1_carta").GetComponent<Dropdown>().value = 3;
             GameObject.Find("Dropdown_player_1_2_seme").GetComponent<Dropdown>().value = 0; onDropDownValueChange(GameObject.Find("Dropdown_player_1_2_seme").GetComponent<Dropdown>());
             GameObject.Find("Dropdown_player_1_2_carta").GetComponent<Dropdown>().value = 4;
-
             GameObject.Find("Dropdown_player_2_1_seme").GetComponent<Dropdown>().value = 2; onDropDownValueChange(GameObject.Find("Dropdown_player_2_1_seme").GetComponent<Dropdown>());
             GameObject.Find("Dropdown_player_2_1_carta").GetComponent<Dropdown>().value = 1;
             GameObject.Find("Dropdown_player_2_2_seme").GetComponent<Dropdown>().value = 1; onDropDownValueChange(GameObject.Find("Dropdown_player_2_2_seme").GetComponent<Dropdown>());
             GameObject.Find("Dropdown_player_2_2_carta").GetComponent<Dropdown>().value = 8;
-
             GameObject.Find("Dropdown_fold_1_seme").GetComponent<Dropdown>().value = 0; onDropDownValueChange(GameObject.Find("Dropdown_fold_1_seme").GetComponent<Dropdown>());
             GameObject.Find("Dropdown_fold_1_carta").GetComponent<Dropdown>().value = 6;
-
             GameObject.Find("Dropdown_fold_2_seme").GetComponent<Dropdown>().value = 2; onDropDownValueChange(GameObject.Find("Dropdown_fold_2_seme").GetComponent<Dropdown>());
             GameObject.Find("Dropdown_fold_2_carta").GetComponent<Dropdown>().value = 4;
-
             GameObject.Find("Dropdown_fold_3_seme").GetComponent<Dropdown>().value = 0; onDropDownValueChange(GameObject.Find("Dropdown_fold_3_seme").GetComponent<Dropdown>());
             GameObject.Find("Dropdown_fold_3_carta").GetComponent<Dropdown>().value = 5;
-
             GameObject.Find("Dropdown_turn_seme").GetComponent<Dropdown>().value = 3; onDropDownValueChange(GameObject.Find("Dropdown_turn_seme").GetComponent<Dropdown>());
             GameObject.Find("Dropdown_turn_carta").GetComponent<Dropdown>().value = 7;
-
             GameObject.Find("Dropdown_river_seme").GetComponent<Dropdown>().value = 3; onDropDownValueChange(GameObject.Find("Dropdown_river_seme").GetComponent<Dropdown>());
             GameObject.Find("Dropdown_river_carta").GetComponent<Dropdown>().value = 0;
 

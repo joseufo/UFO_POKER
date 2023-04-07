@@ -6,6 +6,6 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Poker/Scenes/PokerC.unity
-    guid: aa9ba41ad6647c644bea1b9ac6a2e9da
+    path: Assets/Poker/Scenes/PokerOnline.unity
+    guid: 86402aba771a1344d8c70baaf5dbfe54
   m_configObjects: {}

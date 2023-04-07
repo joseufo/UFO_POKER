@@ -41,12 +41,18 @@ public class PokerServManager : MonoBehaviour
 
     public void PlayerJoinAdd()
     {
-        PokerClientManager.instance.AddOpponent();
+        PlayerData playerData = new PlayerData();
+        PokerClientManager.instance.AddOpponent(playerData);
     }
     public void PlayerJoinAddMax()
     {
-        for(int i=0; i<5; i++)
-            PokerClientManager.instance.AddOpponent();
+       
+        for (int i=0; i<5; i++)
+        {
+            PlayerData playerData = new PlayerData();
+            PokerClientManager.instance.AddOpponent(playerData);
+        }
+            
     }
     public void RestartGame()
     {
@@ -67,7 +73,7 @@ public class PokerServManager : MonoBehaviour
         for(int i=0; i<playerlist.Count; i++)
         {
 
-            playerlist[i].SetAndShowPlayerCards(CardDeck[i], CardDeck[i+1], i);
+            playerlist[i].SetAndShowPlayerCards(CardDeck[i], CardDeck[i+1]);
             Debug.Log(playerlist[i].playerText.text + " Cards : " + CardDeck[i].ToString() + " , " + CardDeck[i + 1].ToString());
             
             CardDeck.RemoveAt(i); CardDeck.RemoveAt(i);

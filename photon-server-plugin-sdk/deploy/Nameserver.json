@@ -1,9 +1,9 @@
 {
   "Nodes": [
-    // -----------------Realtime Public EU---------------------------------------
+    
     {
-      "Region": "EU",
-      "IpAddress": "127.0.0.1",
+      "Region": "IN",
+      "IpAddress": "192.168.0.174",
       "IpAddressIPv6": "::1",
       "Hostname": "localhost"
     }

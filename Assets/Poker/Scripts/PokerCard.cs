@@ -18,6 +18,10 @@ public class PokerCard : MonoBehaviour
        
 
     }
+    public void ShowBack()
+    {
+        this.gameObject.SetActive(true);
+    }
     public void SetAndShowCard(Card cardData)
     {
         this.name = cardData.ToString();

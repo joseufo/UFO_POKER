@@ -27,9 +27,9 @@ namespace TestPoker
         public enum SUIT { HEARTS = 1, DIAMONDS = 2, CLUBS = 3, SPADES = 4 }
         public enum VALUE
         {
-            TWO = 2, THREE, FOUR,
+            ACE = 1, TWO = 2, THREE, FOUR,
             FIVE, SIX, SEVEN, EIGHT,
-            NINE, TEN, JACK, QUEEN, KING, ACE
+            NINE, TEN, JACK, QUEEN, KING,
         }
         //SUIT _suit;
         public SUIT Suit;
@@ -39,7 +39,7 @@ namespace TestPoker
         //public int rank { get => (int)Value; }
         public override string ToString()
         {
-            return string.Format("[{0}, {1}]", suit, rank);
+            return string.Format("[{0}, {1}]", (SUIT)suit, rank);
         }
 
         public static bool operator ==(Card a, Card b)
@@ -327,7 +327,7 @@ namespace TestPoker
 
             //Debug.Log("============================================1===================getSequenceForNumer===================================--> toCheck : " + toCheck);
 
-            if (toCheck > 9) return new Card(0, 0);
+            if (toCheck > 10) return new Card(0, 0);
 
             int checkForStarting = toCheck;
             int result = 0;
@@ -545,22 +545,47 @@ namespace TestPoker
         bool check_straight(CompleteResultStruct data)
         {
             bool tmpRet = false;
+            int aceLoc = -1;
+            Dictionary<int, int> tempDict = new Dictionary<int, int>() { { 10, 10 }, { 11, 11 }, { 12, 12 }, { 13, 13 } };
             List<Card> allCards = getAllCardsData(data);
+            for (int i = 0; i < allCards.Count; i++)
+            {
+                if (allCards[i].rank == 1)
+                {
+                    //allCards[i] = new Card(allCards[i].suit, 14);
+                    aceLoc = i;
+                }
+                if (tempDict.ContainsKey(allCards[i].rank))
+                {
+                    tempDict.Remove(allCards[i].rank);
+                }
+            }
+            if(aceLoc!=-1)
+            {
+                if(tempDict.Count==0)
+                    allCards[aceLoc] = new Card(allCards[aceLoc].suit, 14);
+            }
+
+
             List<int> allCardsInt = new List<int>();
             foreach (Card v in allCards) { allCardsInt.Add((int)v.rank); }
             Card _res = Card.nullCard;
             List<int> tmpListOfFiveSequence = new List<int>();
+
             foreach (int i in allCardsInt)
             {
                 //_res = BBStaticData.newGetSequenceForNumer(i, allCardsInt);
                 _res = newGetSequenceForNumer(i, allCardsInt);
                 //Debug.Log("check_flush -> : " + _res);
+                //Debug.LogError(_res + ", ");
                 if (_res.suit >= 5)
                 {
                     tmpListOfFiveSequence.Add((int)_res.rank);
                 }
             }
-
+            //Debug.LogError(tmpListOfFiveSequence.Count + ", ");
+            //foreach (var card in tmpListOfFiveSequence)
+            //Debug.LogError(card + ", ");
             //foreach(int v in tmpListOfFiveSequence) Debug.Log("check_flush tmpListOfFiveSequence -> : " + v);
 
             if (tmpListOfFiveSequence.Count > 0)
@@ -570,6 +595,7 @@ namespace TestPoker
                 data.maxCardValue = tmpListOfFiveSequence[0];
                 data.bestFive.Add(tmpListOfFiveSequence[0]); data.bestFive.Add(tmpListOfFiveSequence[0] - 1); data.bestFive.Add(tmpListOfFiveSequence[0] - 2); data.bestFive.Add(tmpListOfFiveSequence[0] - 3); data.bestFive.Add(tmpListOfFiveSequence[0] - 4);
                 tmpRet = true;
+                return tmpRet;
             }
 
             return tmpRet;
@@ -1168,26 +1194,30 @@ namespace TestPoker
 
             for (int x = 0; x < pdList.Count; x++)
             {
+                //foreach (var card in pdList[x].completeResultStruct.FlushOrderedCardsValue)
+                //Debug.LogError(card.ToString());
                 if (pdList[x].completeResultStruct.FlushOrderedCardsValue[x] == 1)
                 {
                     pdList[x].completeResultStruct.FlushOrderedCardsValue[x] = 14;
+
                 }
             }
 
             float highCard = 0;
+
             for (int x = 0; x < pdList.Count; x++) { if (pdList[x].completeResultStruct.FlushOrderedCardsValue[0] > highCard) { highCard = pdList[x].completeResultStruct.FlushOrderedCardsValue[0]; } }
             //Debug.Log("****************getWinnerCheck_Flush start -> highCard : " + highCard);
 
             if (pdList.Count > 1)
             {
-                for (int y = 0; y < pdList.Count - 1; y++)
+                for (int y = 0; y < 5; y++)//[0].completeResultStruct.bestFive.Count //
                 {
                     highCard = 0;
                     for (int x = 0; x < pdList.Count; x++) { if (pdList[x].completeResultStruct.bestFive[y] > highCard) { highCard = pdList[x].completeResultStruct.bestFive[y]; } }
 
                     for (int x = 0; x < pdList.Count; x++) { if (pdList[x].completeResultStruct.bestFive[y] < highCard) { tmpRetToRemove.Add(pdList[x].playerPosition); } }
                     for (int x = 0; x < tmpRetToRemove.Count; x++) { PlayerData pd = pdList.Find(item => item.playerPosition == tmpRetToRemove[x]); pdList.Remove(pd); }
-                    //Debug.Log("****************getWinnerCheck_Flush ******  -> pdList.Count : [" + y + "] : " + pdList.Count);
+                    //Debug.LogError("****************getWinnerCheck_Flush ******+  -> pdList.Count : [" + y + "] : " + pdList.Count);
                 }
             }
 
