@@ -11,6 +11,8 @@ public class TestScript : MonoBehaviour
 	// Use this for initialization
 	void Start()
 	{
+
+		return;
 		GameObject card = new GameObject("Card"); // parent object
 		GameObject cardFront = new GameObject("CardFront");
 		GameObject cardBack = new GameObject("CardBack");
@@ -43,8 +45,9 @@ public class TestScript : MonoBehaviour
 		Debug.Log("Start done");
 	}
 
-
+	public Transform card;
 	// Update is called once per frame
+	bool uncover = false;
 	void Update()
 	{
 		if ((Input.GetMouseButtonDown(0) || Input.touchCount > 0))
@@ -52,10 +55,12 @@ public class TestScript : MonoBehaviour
 			Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 			RaycastHit2D hit = Physics2D.Raycast(ray.origin, ray.direction);
 			// we hit a card
+			if (uncover == false) uncover = true; else uncover = false;
+			StartCoroutine(RotShowCard(card, uncover));
 			if (hit.collider != null)
 			{
 				Debug.Log(hit.collider.gameObject.name);
-				StartCoroutine(uncoverCard(hit.collider.gameObject.transform, true));
+				//StartCoroutine(uncoverCard(hit.collider.gameObject.transform, true));
 			}
 		}
 	}
@@ -86,6 +91,50 @@ public class TestScript : MonoBehaviour
 					// by order not distance (by default)
 					Transform c = card.GetChild(i);
 					c.GetComponent<SpriteRenderer>().sortingOrder *= -1;
+
+					yield return null;
+				}
+			}
+
+			yield return null;
+		}
+
+		yield return 0;
+	}
+
+	IEnumerator RotShowCard(Transform card, bool uncover)
+	{
+
+		float minAngle = uncover ? 0 : 180;
+		float maxAngle = uncover ? 180 : 0;
+		card.gameObject.GetComponent<SpriteRenderer>().flipX = true;
+		float t = 0;
+		bool uncovered = false;
+
+		while (t < 1f)
+		{
+			t += Time.deltaTime * uncoverTime; ;
+
+			float angle = Mathf.LerpAngle(minAngle, maxAngle, t);
+			card.eulerAngles = new Vector3(0, angle, 0);
+
+			if (((angle >= 90 && angle < 180) || (angle >= 270 && angle < 360)) && !uncovered)
+			{
+				uncovered = true;
+                if (uncover) { 
+				card.gameObject.GetComponent<SpriteRenderer>().sprite = frontSprite;
+				card.gameObject.GetComponent<SpriteRenderer>().flipX = true;}
+                else {
+					card.gameObject.GetComponent<SpriteRenderer>().sprite = backSprite;
+					card.gameObject.GetComponent<SpriteRenderer>().flipX = false;
+				}
+                for (int i = 0; i < card.childCount; i++)
+				{
+					// reverse sorting order to show the otherside of the card
+					// otherwise you would still see the same sprite because they are sorted 
+					// by order not distance (by default)
+					//Transform c = card.GetChild(i);
+					//c.GetComponent<SpriteRenderer>().sortingOrder *= -1;
 
 					yield return null;
 				}

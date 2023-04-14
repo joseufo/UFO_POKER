@@ -173,6 +173,8 @@ public class PokerCardEval : MonoBehaviour
         if (check_Pair(completeResultStructIN)) { completeResultStructIN.cardsResultValues = CardsResultValues.Pair; completeResultStructIN.playerIdx = playerId; completeResultStructOUT = completeResultStructIN; return; }
         if (check_HighCard(completeResultStructIN)) { completeResultStructIN.cardsResultValues = CardsResultValues.HighCard; completeResultStructIN.playerIdx = playerId; completeResultStructOUT = completeResultStructIN; return; }
 
+
+        var card = new Card(1, 5);
     }
 
 
@@ -214,8 +216,12 @@ public class PokerCardEval : MonoBehaviour
 
     bool check_StraightFlush(EvalData data)
     {
-        bool tmpRet = false;
         int seme = 0;
+        if (justCheck_Flush(data, out seme) && check_straight(data))
+            return true;
+        else return false;
+        bool tmpRet = false;
+       
         if (justCheck_Flush(data, out seme) == false)
         {
             //Debug.Log("check_StraightFlush justCheck_Flush == FALSE ");
@@ -341,7 +347,7 @@ public class PokerCardEval : MonoBehaviour
 
         //Debug.Log("============================================1===================getSequenceForNumer===================================--> toCheck : " + toCheck);
 
-        if (toCheck > 9) return new Card(0, 0);
+        if (toCheck > 10) return new Card(0, 0);
 
         int checkForStarting = toCheck;
         int result = 0;
@@ -1027,6 +1033,11 @@ public class PokerCardEval : MonoBehaviour
 
     public List<PlayerData> getWinnerCheck_Pair(List<PlayerData> pdList)
     {
+        
+        string pairWinDebug = "Winnerss: ";
+        foreach (var winner in pdList)
+            pairWinDebug += "[" + winner.playerName + ", " + winner.playerPosition + "], ";
+        Debug.LogError(pairWinDebug);
         List<int> tmpRetToRemove = new List<int>();
 
         int maxPairValue = 0;
@@ -1081,6 +1092,12 @@ public class PokerCardEval : MonoBehaviour
 
     public List<PlayerData> getWinnerCheck_TwoPair(List<PlayerData> pdList)
     {
+       
+    
+        string pairWinDebug = "Winnerss: ";
+        foreach (var winner in pdList)
+            pairWinDebug += "["+winner.playerName +", "+ winner.playerPosition+ "], ";
+        Debug.LogError(pairWinDebug);
         List<int> tmpRetToRemove = new List<int>();
 
         float highCardPair_x = 0;
@@ -1314,23 +1331,6 @@ public class PokerCardEval : MonoBehaviour
         return pdList;
     }
 
-    public IEnumerator rotateCoveredCards(List<PlayerData> data)
-    {
-        //Quaternion rotForShow = GameObject.Find("RotatedForShowCardOnTable").transform.rotation;
-        //for(int x = 0; x < data.Count; x++) {
-        //		if(data[x].isOutOfGame == false) {
-        //			if(data[x].playerGameObject != null) {
-        //				data[x].transform_card_1.rotation = rotForShow;
-        //		    GetComponent<BBSoundController>().playClip(GetComponent<BBSoundController>().rotateCard);
-        //               yield return new WaitForSeconds(0.5f);
-        //				data[x].transform_card_2.rotation = rotForShow;
-        //		    GetComponent<BBSoundController>().playClip(GetComponent<BBSoundController>().rotateCard);
-        //               yield return new WaitForSeconds(0.5f);
-        //            }
-        //	  }
-        //}
-        yield break;
-    }
 
 
 

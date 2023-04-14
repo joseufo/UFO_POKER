@@ -248,7 +248,7 @@ namespace TestPoker
 
 
                 pokerCards.getPlayerCardsResult(pdList[x].playerPosition, data, out dataOut);
-                pdList[x].completeResultStruct = dataOut;
+                pdList[x].completeEvalData = dataOut;
             }
 
             int bestResult = 10;
@@ -256,17 +256,17 @@ namespace TestPoker
             {
                 Debug.Log("-----------------------------------------------");
                 Debug.Log("++++++++++ Result idx : " + pdList[x].playerPosition);
-                Debug.Log("++++++++++ Result result : " + pdList[x].completeResultStruct.cardsResultValues);
-                TextResult.text = TextResult.text + "[" + pdList[x].playerPosition + "] cardsResultValues : " + pdList[x].completeResultStruct.cardsResultValues + "\n";
+                Debug.Log("++++++++++ Result result : " + pdList[x].completeEvalData.cardsResultValues);
+                TextResult.text = TextResult.text + "[" + pdList[x].playerPosition + "] cardsResultValues : " + pdList[x].completeEvalData.cardsResultValues + "\n";
                 string bestFive = "";
-                foreach (int i in pdList[x].completeResultStruct.bestFive)
+                foreach (int i in pdList[x].completeEvalData.bestFive)
                 {
                     bestFive = bestFive + i + " : ";
                 }
                 Debug.Log(bestFive);
-                TextResult.text = TextResult.text + "[" + pdList[x].playerPosition + "] bestFive : " + bestFive + " kiker :" + pdList[x].completeResultStruct.kikers.ToString() + "\n";
+                TextResult.text = TextResult.text + "[" + pdList[x].playerPosition + "] bestFive : " + bestFive + " kiker :" + pdList[x].completeEvalData.kikers.ToString() + "\n";
                 Debug.Log("-----------------------------------------------");
-                if ((int)pdList[x].completeResultStruct.cardsResultValues < bestResult) bestResult = (int)pdList[x].completeResultStruct.cardsResultValues;
+                if ((int)pdList[x].completeEvalData.cardsResultValues < bestResult) bestResult = (int)pdList[x].completeEvalData.cardsResultValues;
             }
 
             Debug.Log("bestResult : " + (TestGameCardPoker.CardsResultValues)bestResult);
@@ -275,7 +275,7 @@ namespace TestPoker
 
             for (int x = 0; x < pdList.Count; x++)
             {
-                if (pdList[x].completeResultStruct.cardsResultValues == (TestGameCardPoker.CardsResultValues)bestResult)
+                if (pdList[x].completeEvalData.cardsResultValues == (TestGameCardPoker.CardsResultValues)bestResult)
                 {
                     pdWinnerList.Add(pdList[x]);
                 }
@@ -284,7 +284,7 @@ namespace TestPoker
             Debug.Log("pdWinnerList Count : " + pdWinnerList.Count);
             for (int x = 0; x < pdWinnerList.Count; x++)
             {
-                TextResult.text = TextResult.text + "Winner : " + pdWinnerList[x].playerPosition + " result : " + pdWinnerList[x].completeResultStruct.cardsResultValues + "\n";
+                TextResult.text = TextResult.text + "Winner : " + pdWinnerList[x].playerPosition + " result : " + pdWinnerList[x].completeEvalData.cardsResultValues + "\n";
             }
 
 

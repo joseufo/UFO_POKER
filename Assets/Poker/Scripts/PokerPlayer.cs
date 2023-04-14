@@ -82,6 +82,11 @@ public class PokerPlayer : MonoBehaviour
         Card2.ShowBack();
     }
 
+    public void UnshowCard()
+    {
+        Card1.gameObject.SetActive(false);
+        Card2.gameObject.SetActive(false);
+    }
 
     public void SetCardRankingText(string cardRanking)
     {

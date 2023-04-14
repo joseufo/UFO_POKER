@@ -54,7 +54,7 @@ public class PokerClientManager : MonoBehaviour
     List<Card> flopCardsList = new List<Card>();
     Card TurnCard = Card.nullCard, RiverCard = Card.nullCard;
 
-    int cardShown = 0;
+    int nextCardIndex = 0;
     bool useFlopCars, useTurnCard, useRiverCard;
     //EvalHand CardEval = new EvalHand();
 
@@ -80,6 +80,7 @@ public class PokerClientManager : MonoBehaviour
         //player.GetComponent<PokerPlayer>().PlayerName = "Player0";
         //player.GetComponent<PokerPlayer>().playerData.playerName = "Player0";
         pokerPlayer.playerData = newPlayerData;
+        pokerPlayer.PlayerName = pokerPlayer.playerData.playerName;
         pokerPlayer.DisplayData();
         PlayerList.Add(player.GetComponent<PokerPlayer>());
         DPokerPlayer.Add(pokerPlayer.playerData.playerActorNo, PlayerList[PlayerList.IndexOf(pokerPlayer)]);
@@ -134,28 +135,33 @@ public class PokerClientManager : MonoBehaviour
         switch (cardPhase)
         {
             case 1:
+
                 foreach (var card in cardList)
                 {
                     flopCardsList.Add(card);
-                    TableCards[cardShown].SetAndShowCard(card);
-                    TableCards[cardShown].gameObject.SetActive(true);
-                    cardShown++;
+                    TableCards[nextCardIndex].SetAndShowCard(card);
+                    TableCards[nextCardIndex].gameObject.SetActive(true);
+                    nextCardIndex ++;
                 }
+                nextCardIndex = 3;
                 break;
             case 2:
-                TableCards[cardShown].SetAndShowCard(cardList[0]);
-                TableCards[cardShown].gameObject.SetActive(true);
+                TableCards[nextCardIndex].SetAndShowCard(cardList[0]);
+                TableCards[nextCardIndex].gameObject.SetActive(true);
                 TurnCard = cardList[0];
-                cardShown++;
+                nextCardIndex = 4;
                 break;
             case 3:
-                TableCards[cardShown].SetAndShowCard(cardList[0]);
-                TableCards[cardShown].gameObject.SetActive(true);
+                TableCards[nextCardIndex].SetAndShowCard(cardList[0]);
+                TableCards[nextCardIndex].gameObject.SetActive(true);
                 RiverCard = cardList[0];
                 break;
         }
-
-
+        string tableCards = "TableCards: ";
+        for (int i=0; i<TableCards.Count; i++ )
+            tableCards += TableCards[i].CardData + ", ";
+        if(cardPhase == 3)
+        Debug.Log(tableCards);
         ShowLocalPlayerRanking();
         //ShowPlayerHandRankings();
 
@@ -195,10 +201,10 @@ public class PokerClientManager : MonoBehaviour
             cardListString += cards.ToString() + ", ";
         cardListString += data.turnCard.ToString();
         cardListString += data.riverCard.ToString();
-        Debug.Log(cardListString);
+        //Debug.Log(cardListString);
 
 
-        if (cardShown >= 3)
+        if (nextCardIndex >= 3)
         {
             GameCardControl.getPlayerCardsResult(PlayerList[0].playerData.playerPosition, data, out dataOut);
             PlayerList[0].playerData.completeEvalData = dataOut;
@@ -209,7 +215,7 @@ public class PokerClientManager : MonoBehaviour
             {
                 bestFive = bestFive + ix + " : ";
             }
-            Debug.Log("player" + PlayerList[0].PlayerName + " bestfive:" + bestFive);
+            Debug.Log("" + PlayerList[0].PlayerName + " bestfive:" + bestFive);
         }
         else
         {
@@ -259,10 +265,10 @@ public class PokerClientManager : MonoBehaviour
                 cardListString += cards.ToString() + ", ";
             cardListString += data.turnCard.ToString();
             cardListString += data.riverCard.ToString();
-            Debug.Log(cardListString);
+            //Debug.Log(cardListString);
 
 
-            if (cardShown>=3)
+            if (nextCardIndex>=3)
             {
                 GameCardControl.getPlayerCardsResult(PlayerList[i].playerData.playerPosition, data, out dataOut);
                 PlayerList[i].playerData.completeEvalData = dataOut;
@@ -273,7 +279,7 @@ public class PokerClientManager : MonoBehaviour
                 {
                     bestFive = bestFive + ix + " : ";
                 }
-                Debug.Log("player" + PlayerList[i].PlayerName + " bestfive:" + bestFive);
+                Debug.Log("" + PlayerList[i].PlayerName + " bestfive:" + bestFive);
             }
             else
             {
@@ -293,6 +299,12 @@ public class PokerClientManager : MonoBehaviour
         }
         
     }
+    public void PlayerSitBack(int actorNo)
+    {
+        DPokerPlayer[actorNo].UnshowCard();
+        PlayerList.Remove(DPokerPlayer[actorNo]);
+        DPokerPlayer.Remove(actorNo);
+    }
     public GameObject rest;
     public void GameEnd()
     {
@@ -301,21 +313,27 @@ public class PokerClientManager : MonoBehaviour
         FindPokerWinner();
         rest.SetActive(true);
     }
+    public void Fold()
+    {
+        //IEnumerable<PokerPlayer> query = PlayerList.OrderBy(player => player.PlayerHand[0]);
+        
+        rest.SetActive(true);
+    }
     public void FindPokerWinner()
     {
         int bestResult = 10;
         for (int x = 0; x < PlayerList.Count; x++)
         {
             Debug.Log("-----------------------------------------------");
-            Debug.Log("++++++++++ Result idx : " + PlayerList[x].playerData.playerPosition);
-            Debug.Log("++++++++++ Result result : " + PlayerList[x].playerData.completeEvalData.cardsResultValues);
+            //Debug.Log("++++++++++ Result idx : " + PlayerList[x].playerData.playerPosition);
+            Debug.Log("++++ Result idx : " + PlayerList[x].playerData.playerPosition + "++++++ Result result : " + PlayerList[x].playerData.completeEvalData.cardsResultValues);
             //TextResult.text = TextResult.text + "[" + pdList[x].playerPosition + "] cardsResultValues : " + pdList[x].completeResultStruct.cardsResultValues + "\n";
             string bestFive = "";
             foreach (int i in PlayerList[x].playerData.completeEvalData.bestFive)
             {
                 bestFive = bestFive + i + " : ";
             }
-            Debug.Log("player" + x + " bestfive:" + bestFive);
+            Debug.Log(PlayerList[x].PlayerName + "- bestfive:" + bestFive);
             // TextResult.text = TextResult.text + "[" + pdList[x].playerPosition + "] bestFive : " + bestFive + " kiker :" + pdList[x].completeResultStruct.kikers.ToString() + "\n";
             Debug.Log("-----------------------------------------------");
             if ((int)PlayerList[x].playerData.completeEvalData.cardsResultValues < bestResult) bestResult = (int)PlayerList[x].playerData.completeEvalData.cardsResultValues;
@@ -337,7 +355,7 @@ public class PokerClientManager : MonoBehaviour
         for (int x = 0; x < pdWinnerList.Count; x++)
         {
             //TextResult.text = TextResult.text + "Winner : " + pdWinnerList[x].playerPosition + " result : " + pdWinnerList[x].completeResultStruct.cardsResultValues + "\n";
-            Debug.Log("Winner : " + pdWinnerList[x].playerPosition + " result : " + pdWinnerList[x].completeEvalData.cardsResultValues + "\n");
+            Debug.Log("Winner : " + pdWinnerList[x].playerName + " result : " + pdWinnerList[x].completeEvalData.cardsResultValues + "\n");
             finalWinners.Add(pdWinnerList[x]);
         }
 
@@ -353,74 +371,75 @@ public class PokerClientManager : MonoBehaviour
                     finalWinners = GameCardControl.getWinnerCheck_HighCard(pdWinnerList);
                     foreach (PlayerData pd in finalWinners)
                     {
-                        winnersResult = winnersResult + "FINAL WIN NUMBER : " + finalWinners.Count + " WINNER : " + pd.playerPosition + "\n";
+                        winnersResult = winnersResult + "FINAL WIN NUMBER : " + finalWinners.Count + " WINNER : " + pd.playerName + "\n";
                     }
                     break;
                 case CardsResultValues.Pair:
                     finalWinners = GameCardControl.getWinnerCheck_Pair(pdWinnerList);
                     foreach (PlayerData pd in finalWinners)
                     {
-                        winnersResult = winnersResult + "FINAL WIN NUMBER : " + finalWinners.Count + " WINNER : " + pd.playerPosition + "\n";
+                        winnersResult = winnersResult + "FINAL WIN NUMBER : " + finalWinners.Count + " WINNER : " + pd.playerName + "\n";
                     }
                     break;
                 case CardsResultValues.TwoPair:
                     finalWinners = GameCardControl.getWinnerCheck_TwoPair(pdWinnerList);
                     foreach (PlayerData pd in finalWinners)
                     {
-                        winnersResult = winnersResult + "FINAL WIN NUMBER : " + finalWinners.Count + " WINNER : " + pd.playerPosition + "\n";
+                        winnersResult = winnersResult + "FINAL WIN NUMBER : " + finalWinners.Count + " WINNER : " + pd.playerName + "\n";
                     }
                     break;
                 case CardsResultValues.ThreeOfAkind:
                     finalWinners = GameCardControl.getWinnerCheck_Tris(pdWinnerList);
                     foreach (PlayerData pd in finalWinners)
                     {
-                        winnersResult = winnersResult + "FINAL WIN NUMBER : " + finalWinners.Count + " WINNER : " + pd.playerPosition + "\n";
+                        winnersResult = winnersResult + "FINAL WIN NUMBER : " + finalWinners.Count + " WINNER : " + pd.playerName + "\n";
                     }
                     break;
                 case CardsResultValues.Straight:
                     finalWinners = GameCardControl.getWinnerCheck_Straight(pdWinnerList);
                     foreach (PlayerData pd in finalWinners)
                     {
-                        winnersResult = winnersResult + "FINAL WIN NUMBER : " + finalWinners.Count + " WINNER : " + pd.playerPosition + "\n";
+                        winnersResult = winnersResult + "FINAL WIN NUMBER : " + finalWinners.Count + " WINNER : " + pd.playerName + "\n";
                     }
                     break;
                 case CardsResultValues.Flush:
                     finalWinners = GameCardControl.getWinnerCheck_Flush(pdWinnerList);
                     foreach (PlayerData pd in finalWinners)
                     {
-                        winnersResult = winnersResult + "FINAL WIN NUMBER : " + finalWinners.Count + " WINNER : " + pd.playerPosition + "\n";
+                        winnersResult = winnersResult + "FINAL WIN NUMBER : " + finalWinners.Count + " WINNER : " + pd.playerName + "\n";
                     }
                     break;
                 case CardsResultValues.FullHouse:
                     finalWinners = GameCardControl.getWinnerCheck_FullHouse(pdWinnerList);
                     foreach (PlayerData pd in finalWinners)
                     {
-                        winnersResult = winnersResult + "FINAL WIN NUMBER : " + finalWinners.Count + " WINNER : " + pd.playerPosition + "\n";
+                        winnersResult = winnersResult + "FINAL WIN NUMBER : " + finalWinners.Count + " WINNER : " + pd.playerName + "\n";
                     }
                     break;
                 case CardsResultValues.FourOfAkind:
                     finalWinners = GameCardControl.getWinnerCheck_FourOfKind(pdWinnerList);
                     foreach (PlayerData pd in finalWinners)
                     {
-                        winnersResult = winnersResult + "FINAL WIN NUMBER : " + finalWinners.Count + " WINNER : " + pd.playerPosition + "\n";
+                        winnersResult = winnersResult + "FINAL WIN NUMBER : " + finalWinners.Count + " WINNER : " + pd.playerName + "\n";
                     }
                     break;
                 case CardsResultValues.StraightFlush:
                     finalWinners = GameCardControl.getWinner_StraightFlush(pdWinnerList);
                     foreach (PlayerData pd in finalWinners)
                     {
-                        winnersResult = winnersResult + "FINAL WIN NUMBER : " + finalWinners.Count + " WINNER : " + pd.playerPosition + "\n";
+                        winnersResult = winnersResult + "FINAL WIN NUMBER : " + finalWinners.Count + " WINNER : " + pd.playerName + "\n";
                     }
                     break;
             }
         }
+        string playersWinners = "";
+        foreach (var player in finalWinners)
+            playersWinners += player.playerName +".. ";
         if (finalWinners.Count == 1)
-            ResultText.text = "Winner Player : " + finalWinners[0].playerName;
+            ResultText.text = "Winner Player : " + playersWinners;
         else
         {
-            string playersWinners = "";
-            foreach (var player in finalWinners)
-                playersWinners += player.playerName + ", ";
+            
             //Debug.Log(player.PlayerName);
             Debug.Log("Draw!, Split pot with");
             ResultText.text = "Draw!, Split pot with " + playersWinners;

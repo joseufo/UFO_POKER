@@ -18,7 +18,7 @@ namespace TestPoker
         public int playerPosition;
         public bool isLocalPlayer = false;
 
-        public TestGameCardPoker.CompleteResultStruct completeResultStruct;
+        public TestGameCardPoker.CompleteResultStruct completeEvalData;
 
         public bool isOutOfGame = false;
         public bool runOutOfMoney = false;

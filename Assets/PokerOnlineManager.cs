@@ -11,7 +11,7 @@ using TMPro;
 using System.Net;
 public class PokerOnlineManager : MonoBehaviourPunCallbacks, IOnEventCallback
 {
-    public bool connectOnline;
+    bool AutoCheck;
     public TMP_InputField NameInput;
     public Button JoinCreateButton;
     public TMP_Text InfoText;
@@ -27,7 +27,7 @@ public class PokerOnlineManager : MonoBehaviourPunCallbacks, IOnEventCallback
     bool isMyturn;
     void Start()
     {
-        maxPlayers = 7;
+        //maxPlayers = 7;
         TESTFUNC(ref maxPlayers);
         JoinCreateButton.onClick.AddListener(() => JoinOrHostGame());
         JoinCreateButton.gameObject.transform.parent.gameObject.SetActive(true);
@@ -45,11 +45,24 @@ public class PokerOnlineManager : MonoBehaviourPunCallbacks, IOnEventCallback
     }
     public void JoinOrHostGame()
     {
-
+#if UNITY_EDITOR
+        PlayerPrefs.DeleteAll();
+#endif
         if (String.IsNullOrEmpty(NameInput.text) || NameInput.text[0] == ' ')
-            playerNametest = "Player" + UnityEngine.Random.Range(1, 10000);
+        {
+            if (PlayerPrefs.HasKey("name"))
+            {
+                playerNametest = PlayerPrefs.GetString("name");
+            }
+            else playerNametest = "Player" + UnityEngine.Random.Range(1, 10000);
+        }            
         else
-            playerNametest = NameInput.text;
+        {
+            playerNametest = NameInput.text; PlayerPrefs.SetString("name", NameInput.text);
+        }
+        
+      
+        
         CreateOrJoinRoom();
         JoinCreateButton.gameObject.transform.parent.gameObject.SetActive(false);
         InfoText.text = "Joining/Hosting...";
@@ -77,7 +90,8 @@ public class PokerOnlineManager : MonoBehaviourPunCallbacks, IOnEventCallback
         PlayerData dataPlayer = new PlayerData();
         dataPlayer.playerName = playerNametest;
         dataPlayer.playerActorNo = PhotonNetwork.LocalPlayer.ActorNumber;
-        dataPlayer.playerPosition = mySeat;
+        dataPlayer.playerPosition = PhotonNetwork.LocalPlayer.ActorNumber;
+        //dataPlayer.playerPosition = mySeat;
         PokerClientManager.instance.AddLocalPlayer(dataPlayer);
         List<PlayerData> roomPlayerList = new List<PlayerData>();
         foreach (var photonPlayer in PhotonNetwork.PlayerListOthers)
@@ -85,6 +99,7 @@ public class PokerOnlineManager : MonoBehaviourPunCallbacks, IOnEventCallback
             var playerdata = new PlayerData();
             playerdata.playerName = photonPlayer.NickName;
             playerdata.playerActorNo = photonPlayer.ActorNumber;
+            playerdata.playerPosition = photonPlayer.ActorNumber;
             Debug.Log(photonPlayer.NickName + " : " + photonPlayer.ActorNumber);
             if (photonPlayer.CustomProperties.ContainsKey("position"))
             {
@@ -114,6 +129,7 @@ public class PokerOnlineManager : MonoBehaviourPunCallbacks, IOnEventCallback
         InfoText.text = "Joined..." + (PhotonNetwork.CurrentRoom.PlayerCount >= minPlayers ? "Waiting to Start" : "Waiting For Players");
         PlayerData player = new PlayerData();
         player.playerName = newPlayer.NickName;
+        player.playerPosition = newPlayer.ActorNumber;
         player.playerActorNo = newPlayer.ActorNumber;
         PokerClientManager.instance.AddOpponent(player);
     }
@@ -154,13 +170,23 @@ public class PokerOnlineManager : MonoBehaviourPunCallbacks, IOnEventCallback
         roomOptions.MaxPlayers = (byte)maxPlayers;
         PhotonNetwork.JoinRandomOrCreateRoom();
     }
+    public void AutoCheckChange(bool value) { AutoCheck = value; if(isMyturn) CallORCheckButton(); }
 
     public void CallORCheckButton()
     {
         Debug.Log(isMyturn);
         if (!isMyturn) return;
-
+        
         CallEvent(CHECK, null, null);
+    }
+    public void FoldButton()
+    {
+        Debug.Log(isMyturn);
+        if (!isMyturn) return;
+
+        CallEvent(FOLD, null, null);
+        InfoText.text = " You Folded  ";
+        PokerClientManager.instance.Fold();
     }
 
     void Update()
@@ -177,9 +203,11 @@ public class PokerOnlineManager : MonoBehaviourPunCallbacks, IOnEventCallback
                 break;
             case CHECK:
                 PhotonNetwork.RaiseEvent(CHECK, null, null, SendOptions.SendReliable);
-                Debug.Log("Check Called");
+                //Debug.Log("Check Called");
                 break;
-            case FOLD: break;
+            case FOLD:
+                PhotonNetwork.RaiseEvent(FOLD, null, null, SendOptions.SendReliable);
+                break;
             case RAISE: break;
         }
 
@@ -213,8 +241,10 @@ public class PokerOnlineManager : MonoBehaviourPunCallbacks, IOnEventCallback
         }
         if (photonEvent.Code == TIMERGAMESTART)
         {
-            timeToBegin = (float)(photonEvent.Parameters[3]);
-            Debug.Log(timeToBegin);
+            //if((int)PhotonNetwork.CurrentRoom.CustomProperties["BeginTime"] != -1)
+            timeToBegin = (float)PhotonNetwork.CurrentRoom.CustomProperties["BeginTime"];
+            //timeToBegin = (float)(photonEvent.Parameters[3]);
+            //Debug.Log(timeToBegin);
             countDownTimer = true;
             StartCoroutine(startTimer());
 
@@ -225,6 +255,7 @@ public class PokerOnlineManager : MonoBehaviourPunCallbacks, IOnEventCallback
 
             var startPlayerTurn = (int)photonEvent.Parameters[1];
             var playerCards = (int[])photonEvent.Parameters[2];
+           
             Card card1 = new Card(playerCards[0], playerCards[1]);
             Card card2 = new Card(playerCards[2], playerCards[3]);
 
@@ -233,6 +264,7 @@ public class PokerOnlineManager : MonoBehaviourPunCallbacks, IOnEventCallback
             {
                 InfoText.text = "RoundStarted, Your Turn";
                 isMyturn = true;
+                if(AutoCheck)CallORCheckButton();
             }
             else
             {
@@ -246,11 +278,18 @@ public class PokerOnlineManager : MonoBehaviourPunCallbacks, IOnEventCallback
 
         if (photonEvent.Code == SWITCHTURN)
         {
-            var playerTurn = (int)photonEvent.Parameters[1];
+            //
+            string msg = "";
+            if(photonEvent.Parameters[0] != null)
+            {
+                PokerClientManager.instance.PlayerSitBack((int)photonEvent.Parameters[0]);
+            }
+            var playerTurn = (int)photonEvent.Parameters[2];
             if (playerTurn == PhotonNetwork.LocalPlayer.ActorNumber)
             {
                 InfoText.text = "Your Turn";
                 isMyturn = true;
+                if (AutoCheck) CallORCheckButton();
             }
             else
             {
