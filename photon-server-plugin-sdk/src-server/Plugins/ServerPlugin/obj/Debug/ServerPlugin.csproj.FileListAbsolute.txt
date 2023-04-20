@@ -18,8 +18,8 @@ D:\Unity\UFO_POKER\photon-server-plugin-sdk\src-server\Plugins\ServerPlugin\bin\
 D:\Unity\UFO_POKER\photon-server-plugin-sdk\src-server\Plugins\ServerPlugin\bin\Debug\ServerPlugin.pdb
 D:\Unity\UFO_POKER\photon-server-plugin-sdk\src-server\Plugins\ServerPlugin\bin\Debug\PhotonHivePlugin.dll
 D:\Unity\UFO_POKER\photon-server-plugin-sdk\src-server\Plugins\ServerPlugin\bin\Debug\PhotonHivePlugin.pdb
-D:\Unity\UFO_POKER\photon-server-plugin-sdk\src-server\Plugins\ServerPlugin\obj\Debug\ServerPlugin.csproj.AssemblyReference.cache
 D:\Unity\UFO_POKER\photon-server-plugin-sdk\src-server\Plugins\ServerPlugin\obj\Debug\ServerPlugin.csproj.CoreCompileInputs.cache
 D:\Unity\UFO_POKER\photon-server-plugin-sdk\src-server\Plugins\ServerPlugin\obj\Debug\ServerPlugin.csproj.CopyComplete
 D:\Unity\UFO_POKER\photon-server-plugin-sdk\src-server\Plugins\ServerPlugin\obj\Debug\ServerPlugin.dll
 D:\Unity\UFO_POKER\photon-server-plugin-sdk\src-server\Plugins\ServerPlugin\obj\Debug\ServerPlugin.pdb
+D:\Unity\UFO_POKER\photon-server-plugin-sdk\src-server\Plugins\ServerPlugin\obj\Debug\ServerPlugin.csproj.AssemblyReference.cache

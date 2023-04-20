@@ -95,9 +95,12 @@ public class PokerClientManager : MonoBehaviour
         {
             PlayerList[0].SetCardRankingText("High Card");
         }
-        for (int i = 1; i < PlayerList.Count; i++) 
+        for (int i = 1; i < PlayerList.Count; i++)
+        {
+            Debug.Log("NAME" + PlayerList[i].PlayerName);
             PlayerList[i].ShowBackCards();
-            
+            PlayerList[i].SetCardRankingText("");
+        } 
     }
     public void AddRoomOpponents(List<PlayerData> playerDataList)
     {
@@ -306,12 +309,29 @@ public class PokerClientManager : MonoBehaviour
         DPokerPlayer.Remove(actorNo);
     }
     public GameObject rest;
-    public void GameEnd()
+    public void RoundStart()
+    {
+        ResultText.text = "";
+        foreach (var pokerPlayer in PlayerList)
+        {
+            pokerPlayer.ShowBackCards();
+            pokerPlayer.UnshowCard();
+        }
+        foreach(var pokerCard in TableCards)
+        {
+            pokerCard.ShowBack();
+            pokerCard.gameObject.SetActive(false);
+        }
+            
+    }
+    public void RoundEnd()
     {
         //IEnumerable<PokerPlayer> query = PlayerList.OrderBy(player => player.PlayerHand[0]);
         ShowPlayerHandRankings();
         FindPokerWinner();
-        rest.SetActive(true);
+        flopCardsList.Clear();
+        nextCardIndex = 0;
+        //rest.SetActive(true);
     }
     public void Fold()
     {

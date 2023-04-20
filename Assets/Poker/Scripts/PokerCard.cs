@@ -14,13 +14,14 @@ public class PokerCard : MonoBehaviour
     void Start()
     {
 
-        backSprite = GetComponent<SpriteRenderer>().sprite;
+        backSprite = PokerCardManager.instance.BackSprite;
        
 
     }
     public void ShowBack()
     {
         this.gameObject.SetActive(true);
+        this.GetComponent<SpriteRenderer>().sprite = PokerCardManager.instance.BackSprite;
     }
     public void SetAndShowCard(Card cardData)
     {

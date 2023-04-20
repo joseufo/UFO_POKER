@@ -15,7 +15,7 @@ public class PokerPlayer : MonoBehaviour
     //public int[] PlayerStatus { get; set; }  // [id, callraisefolded, chips, chips wagered] 
     public int DeckState { get; set; } = 0;
 
-    public int Chips { get; set; } = 1000;
+    public int Coins { get; set; } = 0;
     
     public int PlayerID { get; set; } = -1;
     public bool Folded { get; set; } = false;
@@ -34,21 +34,7 @@ public class PokerPlayer : MonoBehaviour
     public int[] rankScores = new int[3] { 0, 0, 0, };
     void Start()
     {
-        return;
-        PlayerHand = new Card[2];
-        playerData = new PlayerData();
-        if (!isLocalPlayer)
-        {
-            PlayerName = "Player" + Random.Range(1, 100);
-            playerText.text = PlayerName;
-            playerData.playerName = PlayerName;
-        }
-        else
-        {
-            PlayerName = "Player0";
-            playerText.text = PlayerName;
-            playerData.playerName = PlayerName;
-        }
+        
             
         //handCards = new Hand();
         //SetInitialCards(Card.Suit.Diamonds, Random.Range(2, 13), Card.Suit.Spades, Random.Range(2, 13));

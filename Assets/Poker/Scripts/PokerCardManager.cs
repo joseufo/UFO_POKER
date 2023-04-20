@@ -9,6 +9,7 @@ public class PokerCardManager : MonoBehaviour
     
     public static PokerCardManager instance;
     public List<Sprite> ClubSprites, DiamondSprites, HeartSprites, SpadeSprites = new List<Sprite>();
+    public Sprite BackSprite;
     private void Awake()
     {
         if (instance == null)

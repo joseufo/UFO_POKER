@@ -2321,3 +2321,108 @@
 2023-04-14 16:46:09,591 [1] INFO  Photon.SocketServer.ApplicationBase - Application start: AppId=NameServer; AppPath=D:\Unity\UFO_POKER\photon-server-plugin-sdk\deploy\NameServer, Type=Photon.NameServer.PhotonApp 
 2023-04-14 16:46:09,591 [1] INFO  Photon.SocketServer.ApplicationBase - Using Server GC:True
 2023-04-14 16:46:09,592 [1] INFO  Photon.SocketServer.ApplicationBase - Using GC LatencyMode:Interactive
+2023-04-18 13:38:07,156 [1] INFO  Photon.NameServer.PhotonApp - Initializing ...
+2023-04-18 13:38:07,318 [1] INFO  Photon.NameServer.PhotonApp - ServicePointManager.DefaultConnectionLimit=2147483647
+2023-04-18 13:38:07,412 [1] INFO  Photon.NameServer.PhotonApp - TokenCreator initialized with an expiration of 00:30:00
+2023-04-18 13:38:07,515 [1] WARN  Photon.SocketServer.Diagnostics.HttpQueuePerformanceCounters - User are in Performance Logging group, but not and admin, counters will be available for read only
+2023-04-18 13:38:08,061 [1] WARN  Photon.SocketServer.Diagnostics.EncryptionQueuePerfCounters - User are in Performance Logging group, but not and admin, counters will be available for read only
+2023-04-18 13:38:08,064 [1] WARN  Photon.SocketServer.Diagnostics.ManagedCorePerformanceCounters - User are in Performance Logging group, but not and admin, counters will be available for read only
+2023-04-18 13:38:08,067 [1] WARN  Photon.Common.Authentication.Diagnostic.CustomAuthResultCounters - User are in Performance Logging group, but not and admin, counters will be available for read only
+2023-04-18 13:38:08,635 [1] INFO  Photon.Common.Authentication.Diagnostic.CustomAuthResultCounters - Performance counters successfully initialized: instanceName=LoadBalancing_Custom
+2023-04-18 13:38:08,760 [1] INFO  Photon.SocketServer.Diagnostics.HttpQueuePerformanceCounters - Performance counters successfully initialized: instanceName=_Total
+2023-04-18 13:38:08,864 [1] INFO  Photon.SocketServer.Diagnostics.HttpQueuePerformanceCounters - Performance counters successfully initialized: instanceName=LoadBalancing_Custom
+2023-04-18 13:38:08,976 [1] INFO  Photon.Common.Authentication.Diagnostic.CustomAuthResultCounters - Performance counters successfully initialized: instanceName=LoadBalancing_Facebook
+2023-04-18 13:38:09,084 [1] INFO  Photon.SocketServer.Diagnostics.HttpQueuePerformanceCounters - Performance counters successfully initialized: instanceName=LoadBalancing_Facebook
+2023-04-18 13:38:09,194 [1] INFO  Photon.Common.Authentication.Diagnostic.CustomAuthResultCounters - Performance counters successfully initialized: instanceName=LoadBalancing_Oculus
+2023-04-18 13:38:09,304 [1] INFO  Photon.SocketServer.Diagnostics.HttpQueuePerformanceCounters - Performance counters successfully initialized: instanceName=LoadBalancing_Oculus
+2023-04-18 13:38:09,412 [1] INFO  Photon.Common.Authentication.Diagnostic.CustomAuthResultCounters - Performance counters successfully initialized: instanceName=LoadBalancing_Steam
+2023-04-18 13:38:09,522 [1] INFO  Photon.SocketServer.Diagnostics.HttpQueuePerformanceCounters - Performance counters successfully initialized: instanceName=LoadBalancing_Steam
+2023-04-18 13:38:09,632 [1] INFO  Photon.Common.Authentication.Diagnostic.CustomAuthResultCounters - Performance counters successfully initialized: instanceName=LoadBalancing_Viveport
+2023-04-18 13:38:09,741 [1] INFO  Photon.SocketServer.Diagnostics.HttpQueuePerformanceCounters - Performance counters successfully initialized: instanceName=LoadBalancing_Viveport
+2023-04-18 13:38:09,850 [1] INFO  Photon.SocketServer.ApplicationBase - Application start: AppId=NameServer; AppPath=D:\Unity\UFO_POKER\photon-server-plugin-sdk\deploy\NameServer, Type=Photon.NameServer.PhotonApp 
+2023-04-18 13:38:09,850 [1] INFO  Photon.SocketServer.ApplicationBase - Using Server GC:True
+2023-04-18 13:38:09,851 [1] INFO  Photon.SocketServer.ApplicationBase - Using GC LatencyMode:Interactive
+2023-04-18 13:44:12,207 [1] INFO  Photon.NameServer.PhotonApp - Initializing ...
+2023-04-18 13:44:12,218 [1] INFO  Photon.NameServer.PhotonApp - ServicePointManager.DefaultConnectionLimit=2147483647
+2023-04-18 13:44:12,243 [1] INFO  Photon.NameServer.PhotonApp - TokenCreator initialized with an expiration of 00:30:00
+2023-04-18 13:44:12,289 [1] WARN  Photon.SocketServer.Diagnostics.HttpQueuePerformanceCounters - User are in Performance Logging group, but not and admin, counters will be available for read only
+2023-04-18 13:44:12,905 [1] WARN  Photon.SocketServer.Diagnostics.EncryptionQueuePerfCounters - User are in Performance Logging group, but not and admin, counters will be available for read only
+2023-04-18 13:44:12,909 [1] WARN  Photon.SocketServer.Diagnostics.ManagedCorePerformanceCounters - User are in Performance Logging group, but not and admin, counters will be available for read only
+2023-04-18 13:44:12,913 [1] WARN  Photon.Common.Authentication.Diagnostic.CustomAuthResultCounters - User are in Performance Logging group, but not and admin, counters will be available for read only
+2023-04-18 13:44:13,239 [1] INFO  Photon.Common.Authentication.Diagnostic.CustomAuthResultCounters - Performance counters successfully initialized: instanceName=LoadBalancing_Custom
+2023-04-18 13:44:13,345 [1] INFO  Photon.SocketServer.Diagnostics.HttpQueuePerformanceCounters - Performance counters successfully initialized: instanceName=_Total
+2023-04-18 13:44:13,452 [1] INFO  Photon.SocketServer.Diagnostics.HttpQueuePerformanceCounters - Performance counters successfully initialized: instanceName=LoadBalancing_Custom
+2023-04-18 13:44:13,569 [1] INFO  Photon.Common.Authentication.Diagnostic.CustomAuthResultCounters - Performance counters successfully initialized: instanceName=LoadBalancing_Facebook
+2023-04-18 13:44:13,672 [1] INFO  Photon.SocketServer.Diagnostics.HttpQueuePerformanceCounters - Performance counters successfully initialized: instanceName=LoadBalancing_Facebook
+2023-04-18 13:44:13,784 [1] INFO  Photon.Common.Authentication.Diagnostic.CustomAuthResultCounters - Performance counters successfully initialized: instanceName=LoadBalancing_Oculus
+2023-04-18 13:44:13,891 [1] INFO  Photon.SocketServer.Diagnostics.HttpQueuePerformanceCounters - Performance counters successfully initialized: instanceName=LoadBalancing_Oculus
+2023-04-18 13:44:14,002 [1] INFO  Photon.Common.Authentication.Diagnostic.CustomAuthResultCounters - Performance counters successfully initialized: instanceName=LoadBalancing_Steam
+2023-04-18 13:44:14,113 [1] INFO  Photon.SocketServer.Diagnostics.HttpQueuePerformanceCounters - Performance counters successfully initialized: instanceName=LoadBalancing_Steam
+2023-04-18 13:44:14,223 [1] INFO  Photon.Common.Authentication.Diagnostic.CustomAuthResultCounters - Performance counters successfully initialized: instanceName=LoadBalancing_Viveport
+2023-04-18 13:44:14,332 [1] INFO  Photon.SocketServer.Diagnostics.HttpQueuePerformanceCounters - Performance counters successfully initialized: instanceName=LoadBalancing_Viveport
+2023-04-18 13:44:14,439 [1] INFO  Photon.SocketServer.ApplicationBase - Application start: AppId=NameServer; AppPath=D:\Unity\UFO_POKER\photon-server-plugin-sdk\deploy\NameServer, Type=Photon.NameServer.PhotonApp 
+2023-04-18 13:44:14,440 [1] INFO  Photon.SocketServer.ApplicationBase - Using Server GC:True
+2023-04-18 13:44:14,440 [1] INFO  Photon.SocketServer.ApplicationBase - Using GC LatencyMode:Interactive
+2023-04-18 16:49:36,203 [1] INFO  Photon.NameServer.PhotonApp - Initializing ...
+2023-04-18 16:49:36,216 [1] INFO  Photon.NameServer.PhotonApp - ServicePointManager.DefaultConnectionLimit=2147483647
+2023-04-18 16:49:36,240 [1] INFO  Photon.NameServer.PhotonApp - TokenCreator initialized with an expiration of 00:30:00
+2023-04-18 16:49:36,281 [1] WARN  Photon.SocketServer.Diagnostics.HttpQueuePerformanceCounters - User are in Performance Logging group, but not and admin, counters will be available for read only
+2023-04-18 16:49:36,846 [1] WARN  Photon.SocketServer.Diagnostics.EncryptionQueuePerfCounters - User are in Performance Logging group, but not and admin, counters will be available for read only
+2023-04-18 16:49:36,850 [1] WARN  Photon.SocketServer.Diagnostics.ManagedCorePerformanceCounters - User are in Performance Logging group, but not and admin, counters will be available for read only
+2023-04-18 16:49:36,853 [1] WARN  Photon.Common.Authentication.Diagnostic.CustomAuthResultCounters - User are in Performance Logging group, but not and admin, counters will be available for read only
+2023-04-18 16:49:37,173 [1] INFO  Photon.Common.Authentication.Diagnostic.CustomAuthResultCounters - Performance counters successfully initialized: instanceName=LoadBalancing_Custom
+2023-04-18 16:49:37,284 [1] INFO  Photon.SocketServer.Diagnostics.HttpQueuePerformanceCounters - Performance counters successfully initialized: instanceName=_Total
+2023-04-18 16:49:37,392 [1] INFO  Photon.SocketServer.Diagnostics.HttpQueuePerformanceCounters - Performance counters successfully initialized: instanceName=LoadBalancing_Custom
+2023-04-18 16:49:37,505 [1] INFO  Photon.Common.Authentication.Diagnostic.CustomAuthResultCounters - Performance counters successfully initialized: instanceName=LoadBalancing_Facebook
+2023-04-18 16:49:37,610 [1] INFO  Photon.SocketServer.Diagnostics.HttpQueuePerformanceCounters - Performance counters successfully initialized: instanceName=LoadBalancing_Facebook
+2023-04-18 16:49:37,721 [1] INFO  Photon.Common.Authentication.Diagnostic.CustomAuthResultCounters - Performance counters successfully initialized: instanceName=LoadBalancing_Oculus
+2023-04-18 16:49:37,833 [1] INFO  Photon.SocketServer.Diagnostics.HttpQueuePerformanceCounters - Performance counters successfully initialized: instanceName=LoadBalancing_Oculus
+2023-04-18 16:49:37,943 [1] INFO  Photon.Common.Authentication.Diagnostic.CustomAuthResultCounters - Performance counters successfully initialized: instanceName=LoadBalancing_Steam
+2023-04-18 16:49:38,053 [1] INFO  Photon.SocketServer.Diagnostics.HttpQueuePerformanceCounters - Performance counters successfully initialized: instanceName=LoadBalancing_Steam
+2023-04-18 16:49:38,166 [1] INFO  Photon.Common.Authentication.Diagnostic.CustomAuthResultCounters - Performance counters successfully initialized: instanceName=LoadBalancing_Viveport
+2023-04-18 16:49:38,275 [1] INFO  Photon.SocketServer.Diagnostics.HttpQueuePerformanceCounters - Performance counters successfully initialized: instanceName=LoadBalancing_Viveport
+2023-04-18 16:49:38,387 [1] INFO  Photon.SocketServer.ApplicationBase - Application start: AppId=NameServer; AppPath=D:\Unity\UFO_POKER\photon-server-plugin-sdk\deploy\NameServer, Type=Photon.NameServer.PhotonApp 
+2023-04-18 16:49:38,387 [1] INFO  Photon.SocketServer.ApplicationBase - Using Server GC:True
+2023-04-18 16:49:38,388 [1] INFO  Photon.SocketServer.ApplicationBase - Using GC LatencyMode:Interactive
+2023-04-18 16:52:28,891 [1] INFO  Photon.NameServer.PhotonApp - Initializing ...
+2023-04-18 16:52:28,904 [1] INFO  Photon.NameServer.PhotonApp - ServicePointManager.DefaultConnectionLimit=2147483647
+2023-04-18 16:52:28,914 [1] INFO  Photon.NameServer.PhotonApp - TokenCreator initialized with an expiration of 00:30:00
+2023-04-18 16:52:28,961 [1] WARN  Photon.SocketServer.Diagnostics.HttpQueuePerformanceCounters - User are in Performance Logging group, but not and admin, counters will be available for read only
+2023-04-18 16:52:29,542 [1] WARN  Photon.SocketServer.Diagnostics.EncryptionQueuePerfCounters - User are in Performance Logging group, but not and admin, counters will be available for read only
+2023-04-18 16:52:29,545 [1] WARN  Photon.SocketServer.Diagnostics.ManagedCorePerformanceCounters - User are in Performance Logging group, but not and admin, counters will be available for read only
+2023-04-18 16:52:29,549 [1] WARN  Photon.Common.Authentication.Diagnostic.CustomAuthResultCounters - User are in Performance Logging group, but not and admin, counters will be available for read only
+2023-04-18 16:52:29,868 [1] INFO  Photon.Common.Authentication.Diagnostic.CustomAuthResultCounters - Performance counters successfully initialized: instanceName=LoadBalancing_Custom
+2023-04-18 16:52:29,970 [1] INFO  Photon.SocketServer.Diagnostics.HttpQueuePerformanceCounters - Performance counters successfully initialized: instanceName=_Total
+2023-04-18 16:52:30,079 [1] INFO  Photon.SocketServer.Diagnostics.HttpQueuePerformanceCounters - Performance counters successfully initialized: instanceName=LoadBalancing_Custom
+2023-04-18 16:52:30,189 [1] INFO  Photon.Common.Authentication.Diagnostic.CustomAuthResultCounters - Performance counters successfully initialized: instanceName=LoadBalancing_Facebook
+2023-04-18 16:52:30,295 [1] INFO  Photon.SocketServer.Diagnostics.HttpQueuePerformanceCounters - Performance counters successfully initialized: instanceName=LoadBalancing_Facebook
+2023-04-18 16:52:30,404 [1] INFO  Photon.Common.Authentication.Diagnostic.CustomAuthResultCounters - Performance counters successfully initialized: instanceName=LoadBalancing_Oculus
+2023-04-18 16:52:30,515 [1] INFO  Photon.SocketServer.Diagnostics.HttpQueuePerformanceCounters - Performance counters successfully initialized: instanceName=LoadBalancing_Oculus
+2023-04-18 16:52:30,626 [1] INFO  Photon.Common.Authentication.Diagnostic.CustomAuthResultCounters - Performance counters successfully initialized: instanceName=LoadBalancing_Steam
+2023-04-18 16:52:30,735 [1] INFO  Photon.SocketServer.Diagnostics.HttpQueuePerformanceCounters - Performance counters successfully initialized: instanceName=LoadBalancing_Steam
+2023-04-18 16:52:30,844 [1] INFO  Photon.Common.Authentication.Diagnostic.CustomAuthResultCounters - Performance counters successfully initialized: instanceName=LoadBalancing_Viveport
+2023-04-18 16:52:30,953 [1] INFO  Photon.SocketServer.Diagnostics.HttpQueuePerformanceCounters - Performance counters successfully initialized: instanceName=LoadBalancing_Viveport
+2023-04-18 16:52:31,061 [1] INFO  Photon.SocketServer.ApplicationBase - Application start: AppId=NameServer; AppPath=D:\Unity\UFO_POKER\photon-server-plugin-sdk\deploy\NameServer, Type=Photon.NameServer.PhotonApp 
+2023-04-18 16:52:31,062 [1] INFO  Photon.SocketServer.ApplicationBase - Using Server GC:True
+2023-04-18 16:52:31,062 [1] INFO  Photon.SocketServer.ApplicationBase - Using GC LatencyMode:Interactive
+2023-04-19 10:42:25,439 [1] INFO  Photon.NameServer.PhotonApp - Initializing ...
+2023-04-19 10:42:25,464 [1] INFO  Photon.NameServer.PhotonApp - ServicePointManager.DefaultConnectionLimit=2147483647
+2023-04-19 10:42:25,481 [1] INFO  Photon.NameServer.PhotonApp - TokenCreator initialized with an expiration of 00:30:00
+2023-04-19 10:42:25,525 [1] WARN  Photon.SocketServer.Diagnostics.HttpQueuePerformanceCounters - User are in Performance Logging group, but not and admin, counters will be available for read only
+2023-04-19 10:42:26,085 [1] WARN  Photon.SocketServer.Diagnostics.EncryptionQueuePerfCounters - User are in Performance Logging group, but not and admin, counters will be available for read only
+2023-04-19 10:42:26,089 [1] WARN  Photon.SocketServer.Diagnostics.ManagedCorePerformanceCounters - User are in Performance Logging group, but not and admin, counters will be available for read only
+2023-04-19 10:42:26,092 [1] WARN  Photon.Common.Authentication.Diagnostic.CustomAuthResultCounters - User are in Performance Logging group, but not and admin, counters will be available for read only
+2023-04-19 10:42:26,536 [1] INFO  Photon.Common.Authentication.Diagnostic.CustomAuthResultCounters - Performance counters successfully initialized: instanceName=LoadBalancing_Custom
+2023-04-19 10:42:26,643 [1] INFO  Photon.SocketServer.Diagnostics.HttpQueuePerformanceCounters - Performance counters successfully initialized: instanceName=_Total
+2023-04-19 10:42:26,751 [1] INFO  Photon.SocketServer.Diagnostics.HttpQueuePerformanceCounters - Performance counters successfully initialized: instanceName=LoadBalancing_Custom
+2023-04-19 10:42:26,862 [1] INFO  Photon.Common.Authentication.Diagnostic.CustomAuthResultCounters - Performance counters successfully initialized: instanceName=LoadBalancing_Facebook
+2023-04-19 10:42:26,969 [1] INFO  Photon.SocketServer.Diagnostics.HttpQueuePerformanceCounters - Performance counters successfully initialized: instanceName=LoadBalancing_Facebook
+2023-04-19 10:42:27,078 [1] INFO  Photon.Common.Authentication.Diagnostic.CustomAuthResultCounters - Performance counters successfully initialized: instanceName=LoadBalancing_Oculus
+2023-04-19 10:42:27,186 [1] INFO  Photon.SocketServer.Diagnostics.HttpQueuePerformanceCounters - Performance counters successfully initialized: instanceName=LoadBalancing_Oculus
+2023-04-19 10:42:27,294 [1] INFO  Photon.Common.Authentication.Diagnostic.CustomAuthResultCounters - Performance counters successfully initialized: instanceName=LoadBalancing_Steam
+2023-04-19 10:42:27,403 [1] INFO  Photon.SocketServer.Diagnostics.HttpQueuePerformanceCounters - Performance counters successfully initialized: instanceName=LoadBalancing_Steam
+2023-04-19 10:42:27,511 [1] INFO  Photon.Common.Authentication.Diagnostic.CustomAuthResultCounters - Performance counters successfully initialized: instanceName=LoadBalancing_Viveport
+2023-04-19 10:42:27,618 [1] INFO  Photon.SocketServer.Diagnostics.HttpQueuePerformanceCounters - Performance counters successfully initialized: instanceName=LoadBalancing_Viveport
+2023-04-19 10:42:27,727 [1] INFO  Photon.SocketServer.ApplicationBase - Application start: AppId=NameServer; AppPath=D:\Unity\UFO_POKER\photon-server-plugin-sdk\deploy\NameServer, Type=Photon.NameServer.PhotonApp 
+2023-04-19 10:42:27,728 [1] INFO  Photon.SocketServer.ApplicationBase - Using Server GC:True
+2023-04-19 10:42:27,728 [1] INFO  Photon.SocketServer.ApplicationBase - Using GC LatencyMode:Interactive

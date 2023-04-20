@@ -102,7 +102,7 @@ public class PokerServManager : MonoBehaviour
                 SetRiverCard();
                 break;
             case 5:
-                PokerClientManager.instance.GameEnd();
+                PokerClientManager.instance.RoundEnd();
                 break;
         }
 

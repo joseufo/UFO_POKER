@@ -25,7 +25,7 @@ namespace ServerPlugin
 
         private object startGameTimer;
         private int roomTotalPlayers = 0, roundPlayerCount = 0;
-        private int initStartTime = 10000; //60000
+        private int initStartTime = 7000; //60000
         //private IPluginHost pluginHost;
         const int maxPlayers = 5, minPlayers = 2;
 
@@ -38,7 +38,7 @@ namespace ServerPlugin
         private bool gameStarted = false, roundInProgress = false;
 
         private IList<int> currentRoundActors = (IList<int>)new List<int>();
-        private Queue<int> roundCycle = new Queue<int>();
+       
         List<PlayerData> currentRoundPlayers = new List<PlayerData>();
         public override bool SetupInstance(IPluginHost host, Dictionary<string, string> config, out string errorMsg)
         {
@@ -59,6 +59,8 @@ namespace ServerPlugin
             IList<IActor> currentActors = this.PluginHost.GameActors;
             this.pluginLogger.InfoFormat("\n\n OnCreateGame {0} by user {1} - \n Actor-{2}, Name: {3}  \n...................\n", info.Request.GameId, info.UserId, currentActors[0].ActorNr, currentActors[0].Nickname);
 
+            SerializableGameState gameState = PluginHost.GetSerializableGameState();
+            //gameState.MaxPlayers = 3;
             //playerScores.Add(info.UserId, 0);           
             RegPlayer(currentActors[0]);
         }
@@ -156,8 +158,7 @@ namespace ServerPlugin
             foreach (var actor in DRoomPlayersData.Keys)
             {
                 IList<int> temPlayer = new List<int>() { actor };
-                currentRoundActors.Add(actor);
-                roundCycle.Enqueue(actor);
+                currentRoundActors.Add(actor);                
 
                 currentRoundPlayers.Add(DRoomPlayersData[actor]);
                 var playerData = DRoomPlayersData[actor];
@@ -169,7 +170,7 @@ namespace ServerPlugin
                 //suitvalue[playerData.card1data.suit] = playerData.card1data.rank; suitvalue[playerData.card2data.suit] = playerData.card2data.rank;
                 int[] playerCardData = new int[4]; playerCardData[0] = playerData.card1data.suit; playerCardData[1] = playerData.card1data.rank; playerCardData[2] = playerData.card2data.suit; playerCardData[3] = playerData.card2data.rank;
                 this.generalData[(byte)1] = currentRoundPlayers[0].playerActorNo;
-                //this.generalData[(byte)1] = roundCycle.Dequeue();
+                
                 this.generalData[(byte)2] = playerCardData;
                 this.PluginHost.BroadcastEvent(temPlayer, 0, ROUNDSTART, this.generalData, (byte)0);
             }
@@ -180,6 +181,43 @@ namespace ServerPlugin
             //this.PluginHost.BroadcastEvent(currentRoundPlayers, 0, ROUNDSTART, this.generalData, (byte)0);
             //autoTimer = this.PluginHost.CreateTimer(new Action(this.AutoPlay), 500, 500);
         }
+
+        private void EndPokerRound()
+        {
+            Dictionary<int, int[]> allPlayerCards = new Dictionary<int, int[]>();
+            foreach (var player in currentRoundPlayers)
+            {
+                int[] playerCards = new int[4];
+                playerCards[0] = player.card1data.suit; playerCards[1] = player.card1data.rank; playerCards[2] = player.card2data.suit; playerCards[3] = player.card2data.rank;
+                allPlayerCards.Add(player.playerActorNo, playerCards);
+            }
+            this.generalData[(byte)0] = allPlayerCards;
+            this.PluginHost.BroadcastEvent(currentRoundActors, 0, ROUNDEND, this.generalData, (byte)0);
+            roundInProgress = false;
+            pokerPhase = 0;
+
+            this.pluginLogger.InfoFormat("\n PokerRound END  \n");
+            this.currentRoundCard.Clear();
+            TableCards.Clear();
+            currentRoundPlayers.Clear();
+            currentRoundActors.Clear();
+            this.generalData.Clear();
+
+            m_timeStamp = (float)Environment.TickCount; //[PhotonNetwork.ServerTimestamp]
+            this.generalData[(byte)2] = (object)(m_timeStamp);
+            this.generalData[(byte)3] = (m_timeStamp + initStartTime);
+            
+            this.PluginHost.SetProperties(0, new Hashtable() { { (object)"BeginTime", (m_timeStamp + initStartTime) } }, (Hashtable)null, true);
+
+            this.PluginHost.BroadcastEvent((byte)0, 0, (byte)0, TIMERGAMESTART, this.generalData, (byte)0);
+            //this.startGameTimer = this.PluginHost.CreateTimer(new Action(this.StartGame), 20000, 500);
+            
+                this.startGameTimer = this.PluginHost.CreateOneTimeTimer(null, new Action(this.PokerStartTimer), initStartTime);
+
+
+        }
+
+        
         object autoTimer;
         void AutoPlay()
         {
@@ -188,7 +226,7 @@ namespace ServerPlugin
             currentPlayerTurn++;
             if (pokerPhase > 3)
             {
-                EndPokerround();
+                EndPokerRound();
                 this.PluginHost.StopTimer(autoTimer);
             }
         }
@@ -218,7 +256,7 @@ namespace ServerPlugin
                     pokerPhase++;
                     if (pokerPhase > 3)
                     {
-                        EndPokerround();
+                        EndPokerRound();
                     }
                     else
                         SendTableCardsToPlayers(pokerPhase);
@@ -262,7 +300,7 @@ namespace ServerPlugin
                     pokerPhase++;
                     if (pokerPhase > 3)
                     {
-                        EndPokerround();
+                        EndPokerRound();
                     }
                     else
                         SendTableCardsToPlayers(pokerPhase);
@@ -339,19 +377,7 @@ namespace ServerPlugin
 
             }
         }
-        void EndPokerround()
-        {
-            Dictionary<int, int[]> allPlayerCards = new Dictionary<int, int[]>();
-            foreach (var player in currentRoundPlayers)
-            {
-                int[] playerCards = new int[4];
-                playerCards[0] = player.card1data.suit; playerCards[1] = player.card1data.rank; playerCards[2] = player.card2data.suit; playerCards[3] = player.card2data.rank;
-                allPlayerCards.Add(player.playerActorNo, playerCards);
-            }
-            this.generalData[(byte)0] = allPlayerCards;
-            this.PluginHost.BroadcastEvent(currentRoundActors, 0, ROUNDEND, this.generalData, (byte)0);
-            roundInProgress = false;
-        }
+       
 
 
 

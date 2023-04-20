@@ -24,7 +24,7 @@ public class PokerOnlineManager : MonoBehaviourPunCallbacks, IOnEventCallback
     int minPlayers = 2, maxPlayers = 5;
     string playerNametest;
 
-    bool isMyturn;
+    bool isMyturn, roundStarted;
     void Start()
     {
         //maxPlayers = 7;
@@ -126,6 +126,7 @@ public class PokerOnlineManager : MonoBehaviourPunCallbacks, IOnEventCallback
     public override void OnPlayerEnteredRoom(Player newPlayer)
     {
         Debug.Log("Player Joined -" + " \n UserId : " + newPlayer.UserId + "\n ActNo : " + newPlayer.ActorNumber);
+        if(!roundStarted)
         InfoText.text = "Joined..." + (PhotonNetwork.CurrentRoom.PlayerCount >= minPlayers ? "Waiting to Start" : "Waiting For Players");
         PlayerData player = new PlayerData();
         player.playerName = newPlayer.NickName;
@@ -253,6 +254,8 @@ public class PokerOnlineManager : MonoBehaviourPunCallbacks, IOnEventCallback
         if (photonEvent.Code == ROUNDSTART)
         {
 
+            PokerClientManager.instance.RoundStart();
+            roundStarted = true;
             var startPlayerTurn = (int)photonEvent.Parameters[1];
             var playerCards = (int[])photonEvent.Parameters[2];
            
@@ -338,8 +341,9 @@ public class PokerOnlineManager : MonoBehaviourPunCallbacks, IOnEventCallback
                 Card card2 = new Card(allPlayerCards[pactor][2], allPlayerCards[pactor][3]);
                 PokerClientManager.instance.DPokerPlayer[pactor].SetAndShowPlayerCards(card1, card2);
             }
-            PokerClientManager.instance.GameEnd();
-            PhotonNetwork.Disconnect();
+            PokerClientManager.instance.RoundEnd();
+            roundStarted = false;
+            //PhotonNetwork.Disconnect();
         }
             //Debug.Log(photonEvent.Code);
             if (photonEvent.Code == 12)
@@ -364,7 +368,7 @@ public class PokerOnlineManager : MonoBehaviourPunCallbacks, IOnEventCallback
             if (t.TotalMilliseconds < 1000 && PhotonNetwork.IsMasterClient)
             {
                 //last 10 seconds gives time for the last players to join
-                PhotonNetwork.CurrentRoom.MaxPlayers = PhotonNetwork.CurrentRoom.PlayerCount;
+                //PhotonNetwork.CurrentRoom.MaxPlayers = PhotonNetwork.CurrentRoom.PlayerCount;
             }
             //Debug.Log(t.TotalMilliseconds);
             if (t.TotalMilliseconds > 0)
