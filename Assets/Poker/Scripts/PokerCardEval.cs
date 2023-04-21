@@ -174,7 +174,7 @@ public class PokerCardEval : MonoBehaviour
         if (check_HighCard(completeResultStructIN)) { completeResultStructIN.cardsResultValues = CardsResultValues.HighCard; completeResultStructIN.playerIdx = playerId; completeResultStructOUT = completeResultStructIN; return; }
 
 
-        var card = new Card(1, 5);
+       
     }
 
 

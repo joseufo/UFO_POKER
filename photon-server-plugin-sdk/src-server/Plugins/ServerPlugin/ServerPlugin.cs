@@ -72,6 +72,24 @@ namespace ServerPlugin
 
         }
 
+        void callbreak()
+        {
+            //foreach (var playerID in PlayersList.Keys)
+            //{
+            //    if (PlayersList[playerID] == PlayersList[initialPlayer]) continue;
+
+            //    this.pluginLogger.InfoFormat("\n\n CurrentSuit: {0} , CarName, {1} , RanK: {2}, Player ID: {3}  \n...................\n", currentSuit, PlayersList[playerID].SelectedCard.suit, PlayersList[playerID].SelectedCard.rank, PlayersList[playerID].playerID);
+
+            //    if (((PlayersList[playerID].SelectedCard.suit == currentSuit || PlayersList[playerID].SelectedCard.suit == trumpCard) && PlayersList[playerID].SelectedCard.rank > highest) || (currentSuit != trumpCard && (PlayersList[playerID].SelectedCard.suit == trumpCard)))
+            //    {
+            //        winnerNum = PlayersList[playerID].turnnumber;
+            //        highest = PlayersList[playerID].SelectedCard.rank;
+            //        winnerPlayer = PlayersList[playerID];
+            //    }
+
+
+            //}
+        }
         public override void OnJoin(IJoinGameCallInfo info)
         {
 

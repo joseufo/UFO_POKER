@@ -145,4 +145,60 @@ public class TestScript : MonoBehaviour
 
 		yield return 0;
 	}
+
+	class Player
+	{
+		public int Chips { get; set; }
+		public int TotalBet { get; set; }
+		public Hand Hand { get; set; }
+	}
+
+	class Hand
+	{
+		// define hand ranking methods here
+	}
+
+	class PokerGame
+	{
+		private List<Player> players;
+		private List<int> pots;
+
+		public void AllocatePot(List<Player> winners)
+		{
+			// Allocate main pot to winners
+			int mainPotSize = pots[0];
+			int mainPotShare = mainPotSize / winners.Count;
+			foreach (Player winner in winners)
+			{
+				winner.Chips += mainPotShare;
+			}
+			int remainingChips = mainPotSize % winners.Count;
+
+			// Allocate side pots to winners
+			for (int i = 1; i < pots.Count; i++)
+			{
+				int sidePotSize = pots[i];
+				List<Player> eligiblePlayers = new List<Player>();
+				foreach (Player player in players)
+				{
+					if (player.TotalBet >= sidePotSize)
+					{
+						eligiblePlayers.Add(player);
+					}
+				}
+				int sidePotShare = sidePotSize / eligiblePlayers.Count;
+				foreach (Player winner in winners)
+				{
+					if (eligiblePlayers.Contains(winner))
+					{
+						winner.Chips += sidePotShare;
+					}
+				}
+				remainingChips += sidePotSize % eligiblePlayers.Count;
+			}
+
+			// Return any remaining chips (if the pot couldn't be split evenly)
+			//return remainingChips;
+		}
+	}
 }
