@@ -6,11 +6,13 @@ using UnityEngine.UI;
 using Photon.Pun;
 using Photon.Realtime;
 using ExitGames.Client.Photon;
+using Hashtable = ExitGames.Client.Photon.Hashtable;
 using TMPro;
 
 using System.Net;
 public class PokerOnlineManager : MonoBehaviourPunCallbacks, IOnEventCallback
 {
+    public float SmallBlindAmount, BigBlindAmount, TotalCoinAmount;
     bool AutoCheck;
     public TMP_InputField NameInput;
     public Button JoinCreateButton;
@@ -166,9 +168,12 @@ public class PokerOnlineManager : MonoBehaviourPunCallbacks, IOnEventCallback
     #endregion
     void CreateOrJoinRoom()
     {
-
+        Hashtable roomProps = new Hashtable();
+        roomProps["smallBlind"] = SmallBlindAmount;
+        roomProps["bigBlind"] = BigBlindAmount;
         RoomOptions roomOptions = new RoomOptions();
-        roomOptions.MaxPlayers = (byte)maxPlayers;
+        //roomOptions.CustomRoomProperties.Add
+        //roomOptions.MaxPlayers = (byte)maxPlayers;
         PhotonNetwork.JoinRandomOrCreateRoom();
     }
     public void AutoCheckChange(bool value) { AutoCheck = value; if(isMyturn) CallORCheckButton(); }

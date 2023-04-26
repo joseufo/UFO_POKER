@@ -21,6 +21,8 @@ namespace ServerPlugin
         private Dictionary<string, int> playerScores = new Dictionary<string, int>();
         Dictionary<byte, object> generalData = new Dictionary<byte, object>();
 
+        float smallBlindAmount, bigBlindAmount, maxRaiseAmount;
+
         private IPluginLogger pluginLogger;
 
         private object startGameTimer;
@@ -62,6 +64,8 @@ namespace ServerPlugin
             SerializableGameState gameState = PluginHost.GetSerializableGameState();
             //gameState.MaxPlayers = 3;
             //playerScores.Add(info.UserId, 0);           
+
+            //this.roomSize = int.Parse(info.Request.GameProperties[(object)"roomSize"].ToString());
             RegPlayer(currentActors[0]);
         }
         public override void BeforeJoin(IBeforeJoinGameCallInfo info)
@@ -72,24 +76,7 @@ namespace ServerPlugin
 
         }
 
-        void callbreak()
-        {
-            //foreach (var playerID in PlayersList.Keys)
-            //{
-            //    if (PlayersList[playerID] == PlayersList[initialPlayer]) continue;
-
-            //    this.pluginLogger.InfoFormat("\n\n CurrentSuit: {0} , CarName, {1} , RanK: {2}, Player ID: {3}  \n...................\n", currentSuit, PlayersList[playerID].SelectedCard.suit, PlayersList[playerID].SelectedCard.rank, PlayersList[playerID].playerID);
-
-            //    if (((PlayersList[playerID].SelectedCard.suit == currentSuit || PlayersList[playerID].SelectedCard.suit == trumpCard) && PlayersList[playerID].SelectedCard.rank > highest) || (currentSuit != trumpCard && (PlayersList[playerID].SelectedCard.suit == trumpCard)))
-            //    {
-            //        winnerNum = PlayersList[playerID].turnnumber;
-            //        highest = PlayersList[playerID].SelectedCard.rank;
-            //        winnerPlayer = PlayersList[playerID];
-            //    }
-
-
-            //}
-        }
+       
         public override void OnJoin(IJoinGameCallInfo info)
         {
 
@@ -560,10 +547,12 @@ namespace ServerPlugin
         public string playerName;
         public int playerPosition;
         public int playerActorNo;
-        public bool isLocalPlayer = false;
+
+        public float TotalPlayerAmount;
 
         public EvalData completeEvalData;
 
+        public float turnAmount;
         public bool isOutOfGame = false;
         public bool runOutOfMoney = false;
         public bool underAllin = false;

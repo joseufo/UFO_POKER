@@ -31,7 +31,7 @@ public class PokerPlayer : MonoBehaviour
     [SerializeField] PokerCard Card1, Card2;
 
     public Card[] PlayerHand = new Card[2];
-    public int[] rankScores = new int[3] { 0, 0, 0, };
+    [System.NonSerialized] public int[] rankScores = new int[3] { 0, 0, 0, };
     void Start()
     {
         
