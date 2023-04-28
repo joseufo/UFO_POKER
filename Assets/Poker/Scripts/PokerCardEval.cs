@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public class CardData { public int suit; public int rank; }
+
 public enum SUIT { NULL = 0, HEARTS = 1, DIAMONDS = 2, CLUBS = 3, SPADES = 4 }
 public enum VALUE { NULL = 0, ACE = 1, TWO, THREE, FOUR, FIVE, SIX, SEVEN, EIGHT, NINE, TEN, JACK, QUEEN, KING }
 public struct Card
@@ -15,6 +17,10 @@ public struct Card
         this.rank = r;
         this.Suit = (SUIT)s;
         this.Value = (VALUE)r;
+
+        cardData = new CardData();
+        cardData.suit = this.suit;
+        cardData.rank = this.rank;
     }
     public Card(SUIT s, VALUE v)
     {
@@ -22,6 +28,10 @@ public struct Card
         this.rank = (int)v;
         this.Suit = s;
         this.Value = v;
+
+        cardData = new CardData();
+        cardData.suit = this.suit;
+        cardData.rank = this.rank;
     }
     public void SetCardData(int s, int r)
     {
@@ -29,6 +39,10 @@ public struct Card
         this.rank = r;
         this.Suit = (SUIT)s;
         this.Value = (VALUE)r;
+
+        cardData = new CardData();
+        cardData.suit = this.suit;
+        cardData.rank = this.rank;
     }
     public void SetCardData(SUIT s, VALUE v)
     {
@@ -36,18 +50,25 @@ public struct Card
         this.rank = (int)v;
         this.Suit = s;
         this.Value = v;
-    }
-    public static Card nullCard
-    {
-        get { return new Card(0, 0); }
+
+        cardData = new CardData();
+        cardData.suit = this.suit;
+        cardData.rank = this.rank;
+
     }
 
-   
+
+
     //SUIT _suit;
     public SUIT Suit { get; private set; }
     //VALUE _value;
     public VALUE Value { get; private set; }
 
+    public static Card nullCard
+    {
+        get { return new Card(0, 0); }
+    }
+    CardData cardData;
     //public int rank { get => (int)Value; }
     public override string ToString()
     {
@@ -56,14 +77,7 @@ public struct Card
 
     public static bool operator ==(Card a, Card b)
     {
-        //if (ReferenceEquals(a, b))
-        //{
-        //    return true;
-        //}
-        //if (a is null || b is null)
-        //{
-        //    return false;
-        //}
+
         return a.suit == b.suit && a.rank == b.rank;
     }
 
@@ -88,6 +102,7 @@ public struct Card
 
 
 }
+
 /* suit int
  * 1-Hearts
  * 2-Diamonds
@@ -140,7 +155,7 @@ public class PokerCardEval : MonoBehaviour
             public int best_5;
         }
     */
-   
+
 
     //public GameObject[] playerFinalResultUIList;
     //public GameObject finalResultPanel;
@@ -174,7 +189,7 @@ public class PokerCardEval : MonoBehaviour
         if (check_HighCard(completeResultStructIN)) { completeResultStructIN.cardsResultValues = CardsResultValues.HighCard; completeResultStructIN.playerIdx = playerId; completeResultStructOUT = completeResultStructIN; return; }
 
 
-       
+
     }
 
 
@@ -221,7 +236,7 @@ public class PokerCardEval : MonoBehaviour
             return true;
         else return false;
         bool tmpRet = false;
-       
+
         if (justCheck_Flush(data, out seme) == false)
         {
             //Debug.Log("check_StraightFlush justCheck_Flush == FALSE ");
@@ -1033,7 +1048,7 @@ public class PokerCardEval : MonoBehaviour
 
     public List<PlayerData> getWinnerCheck_Pair(List<PlayerData> pdList)
     {
-        
+
         string pairWinDebug = "Winnerss: ";
         foreach (var winner in pdList)
             pairWinDebug += "[" + winner.playerName + ", " + winner.playerPosition + "], ";
@@ -1092,11 +1107,11 @@ public class PokerCardEval : MonoBehaviour
 
     public List<PlayerData> getWinnerCheck_TwoPair(List<PlayerData> pdList)
     {
-       
-    
+
+
         string pairWinDebug = "Winnerss: ";
         foreach (var winner in pdList)
-            pairWinDebug += "["+winner.playerName +", "+ winner.playerPosition+ "], ";
+            pairWinDebug += "[" + winner.playerName + ", " + winner.playerPosition + "], ";
         Debug.LogError(pairWinDebug);
         List<int> tmpRetToRemove = new List<int>();
 

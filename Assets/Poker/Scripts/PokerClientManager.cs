@@ -15,6 +15,11 @@ public class PlayerData
     public int playerActorNo;
     public bool isLocalPlayer = false;
 
+    public float TotalCoinAmount;
+
+    public float currentCallRaiseAmount;
+    public float RemainingAmount;
+
     public EvalData completeEvalData;
 
     public bool isOutOfGame = false;
