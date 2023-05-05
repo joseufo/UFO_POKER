@@ -9,13 +9,46 @@ using Photon.Hive.Plugin;
 
 namespace PokerPlugin
 {
+    public class PlayerData
+    {
+
+        public string playerName;
+        public int playerPosition;
+        public int playerActorNo;
+
+        public float TotalCoinAmount;
+
+        public float currentCallRaiseAmount;
+        public float RemainingAmount;
+
+        public EvalData completeEvalData;
+
+        public float turnAmount;
+        public bool isOutOfGame = false;
+        public bool runOutOfMoney = false;
+        public bool underAllin = false;
+        public bool isObserver = false;
+
+        public Card card1data, card2data;
+
+        public bool turnComplete;
+
+        PlayerRole playerRole;
+        //public int coeffCardsValOnFlopPhase = 0;
+        //public int maxCardValOnFlopPhase = 0;
+        //public int maxCardValueOnShowDown = 0;
+
+
+
+    }
+
     // Poker Server
     public class PokerPlugin : PluginBase
     {
 
         public override string Name => "PokerPlugin";
 
-
+        PokerCardEval CardEval = new PokerCardEval();
 
         private Dictionary<int, PlayerData> DRoomPlayersData = new Dictionary<int, PlayerData>();
 
@@ -42,6 +75,7 @@ namespace PokerPlugin
 
         private IList<int> currentRoundActors = (IList<int>)new List<int>();
 
+       
         List<PlayerData> currentRoundPlayers = new List<PlayerData>();
         public override bool SetupInstance(IPluginHost host, Dictionary<string, string> config, out string errorMsg)
         {
@@ -53,43 +87,48 @@ namespace PokerPlugin
         }
 
         float m_timeStamp;
-         
-        //AvlSeat - Available Seat 1 to 5
+
+        SerializableGameState photonGameState = new SerializableGameState();
+        string roomID;
+        //AvlSeat - Available Seat 0 to 4
         public override void OnCreateGame(ICreateGameCallInfo info)
         {
-
-            this.PluginHost.SetProperties(0, new Hashtable() { { (object)"SvlSeat", (object)1 } }, (Hashtable)null, true);
+            
+            this.PluginHost.SetProperties(0, new Hashtable() { { (object)"AvlSeat", (object)0 } }, (Hashtable)null, true);
+            roomID = info.Request.GameId;
             //this.PluginHost.SetProperties(0, new Hashtable() { { (object)"BeginTime", (object)-1 } }, (Hashtable)null, true);
             info.Continue(); // same as base.OnCreateGame(info);
             IList<IActor> currentActors = this.PluginHost.GameActors;
             this.pluginLogger.InfoFormat("\n\n OnCreateGame {0} by user {1} - \n Actor-{2}, Name: {3}  \n...................\n", info.Request.GameId, info.UserId, currentActors[0].ActorNr, currentActors[0].Nickname);
 
-            //SerializableGameState gameState = PluginHost.GetSerializableGameState();
-            //gameState.EmptyRoomTTL = 600000;
-            //gameState.PlayerTTL = 0;
-            //gameState.MaxPlayers = 3;
+           
+            photonGameState = PluginHost.GetSerializableGameState();
+            //photonGameState.EmptyRoomTTL = 600000;
+            photonGameState.PlayerTTL = 30000;
+            //photonGameState.MaxPlayers = 3;
             //playerScores.Add(info.UserId, 0);           
 
             //this.roomSize = int.Parse(info.Request.GameProperties[(object)"roomSize"].ToString());
             RegPlayer(currentActors[0]);
         }
-        public override void BeforeJoin(IBeforeJoinGameCallInfo info)
-        {
-            info.Continue();
-
-            this.pluginLogger.InfoFormat("\n\n Player BeforeJoin CALLED in {0} - user {1} \n...................\n", info.Request.GameId, info.UserId);
-
-        }
-
-
+ 
         public override void OnJoin(IJoinGameCallInfo info)
         {
 
             info.Continue();
 
-            this.pluginLogger.InfoFormat("\n\n Player Joined in {0} - user {1} \n...................\n", info.Request.GameId, info.UserId);
+            this.pluginLogger.InfoFormat("\n\n PLAYER_JOINED, in {0} - user {1} \n...................\n", info.Request.GameId, info.UserId);
             IActor actor = GetActor(info.ActorNr);
+            if(!DRoomPlayersData.ContainsKey(info.ActorNr))
             RegPlayer(actor);
+        }
+
+        public override void OnLeave(ILeaveGameCallInfo info)
+        {
+            //base.OnLeave(info);
+            info.Continue();
+            this.pluginLogger.InfoFormat("\n PLAYER_LEFT, froom {0},  Actor: {1} - Name : {2} \n..........30 sec Removal\n",roomID, info.ActorNr, info.Nickname);
+
         }
 
         public int currentPlayerTurn = 0;
@@ -97,10 +136,11 @@ namespace PokerPlugin
         {
             currentSeatPos++;
             PlayerData tPlayerData = new PlayerData();
+            tPlayerData.playerName = actorPlayer.Nickname;
             tPlayerData.playerPosition = currentSeatPos;
             tPlayerData.playerActorNo = actorPlayer.ActorNr;
             //IActor actorPlayer = GetActor(info.ActorNr);
-            actorPlayer.Properties.SetProperty((object)"positon", (object)currentSeatPos);
+            actorPlayer.Properties.SetProperty((object)"position", (object)currentSeatPos);
             DActorPositon[actorPlayer.ActorNr] = currentSeatPos;
 
             //currentRoundPlayers.Add(tPlayerData);
@@ -208,11 +248,20 @@ namespace PokerPlugin
 
             this.pluginLogger.InfoFormat("\n PokerRound END  \n");
             this.currentRoundCard.Clear();
+            foreach (var player in currentRoundPlayers)
+            {
+                //this.pluginLogger.InfoFormat("{0} Cards: {1} , {2}  \n", player.playerName, player.card1data, player.card2data);
+                player.completeEvalData = CardEval.EvaluatePlayerRanks(player, TableCards);
+            }
+            List<PlayerData> RoundWinners = CardEval.FindPokerPotWinners(currentRoundPlayers);
+            this.pluginLogger.InfoFormat("RoundWinner(s): {0}  \n", CardEval.ResultText);
             TableCards.Clear();
             currentRoundPlayers.Clear();
             currentRoundActors.Clear();
             this.generalData.Clear();
 
+           
+            //next round timer
             m_timeStamp = (float)Environment.TickCount; //[PhotonNetwork.ServerTimestamp]
             this.generalData[(byte)2] = (object)(m_timeStamp);
             this.generalData[(byte)3] = (m_timeStamp + initStartTime);
@@ -226,7 +275,7 @@ namespace PokerPlugin
 
 
         }
-
+       
 
         object autoTimer;
         void AutoPlay()
@@ -399,10 +448,10 @@ namespace PokerPlugin
             return card;
         }
         //
+       
         public List<Card> InitCardsAndShuffle()
         {
-            PokerCardEval cardEval = new PokerCardEval();
-            PokerCardEval.newGetSequenceForNumer(1, new List<int> { 1, 2 });
+           
             //string cardDeckString = "";
             List<Card> CardDeck = new List<Card>();
             for (int s = 1; s <= 4; s++)
@@ -466,7 +515,7 @@ namespace PokerPlugin
                 }
             }
         }
-        private object DeserializeCustomPluginType(byte[] bytes)
+        private object DeserializeCardData(byte[] bytes)
         {
             CardData cardObject = new CardData();
             using (var s = new MemoryStream(bytes))
@@ -494,40 +543,7 @@ namespace PokerPlugin
 
 
 
-    public class PlayerData
-    {
 
-
-        public string playerName;
-        public int playerPosition;
-        public int playerActorNo;
-
-        public float TotalCoinAmount;
-
-        public float currentCallRaiseAmount;
-        public float RemainingAmount;
-
-        public EvalData completeEvalData;
-
-        public float turnAmount;
-        public bool isOutOfGame = false;
-        public bool runOutOfMoney = false;
-        public bool underAllin = false;
-        public bool isObserver = false;
-
-        public Card card1data;
-        public Card card2data;
-
-        public bool turnComplete;
-
-        PlayerRole playerRole;
-        //public int coeffCardsValOnFlopPhase = 0;
-        //public int maxCardValOnFlopPhase = 0;
-        //public int maxCardValueOnShowDown = 0;
-
-
-
-    }
     public enum PlayerRole
     {
         Dealer, SmallBlinder, Bigblinder

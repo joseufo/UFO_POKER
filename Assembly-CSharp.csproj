@@ -61,6 +61,7 @@
     <Compile Include="Assets\Poker\Scripts\Development\TestScript.cs" />
     <Compile Include="Assets\Timer.cs" />
     <Compile Include="Assets\Poker\Scripts\PokerServManager.cs" />
+    <Compile Include="Assets\photonTest.cs" />
     <Compile Include="Assets\TestPoker\PlayerData.cs" />
     <Compile Include="Assets\Photon\PhotonLibs\WebSocket\WebSocket.cs" />
     <Compile Include="Assets\Poker\Scripts\Development\HandWinTest.cs" />
@@ -68,6 +69,7 @@
     <Compile Include="Assets\Poker\Scripts\PokerCard.cs" />
     <Compile Include="Assets\TestPoker\TestGameCardPoker.cs" />
     <Compile Include="Assets\Poker\Scripts\PokerClientManager.cs" />
+    <Compile Include="Assets\PokerTemp.cs" />
     <Compile Include="Assets\Poker\Scripts\PokerCardEval.cs" />
     <Compile Include="Assets\Poker\Scripts\Development\DevGamePlayTest.cs" />
     <Compile Include="Assets\Poker\Scripts\PokerPlayer.cs" />
@@ -75,10 +77,8 @@
     <Compile Include="Assets\TestPoker\BBTestResult.cs" />
     <Compile Include="Assets\Poker\Scripts\PokerCardManager.cs" />
     <Compile Include="Assets\Poker\Scripts\Development\CombScript.cs" />
-    <Compile Include="Assets\PokerRoomManager.cs" />
+    <Compile Include="Assets\PokerOnlineManager.cs" />
     <Compile Include="Assets\Poker\Scripts\Card.cs" />
-    <Compile Include="Assets\photonTest.cs" />
-    <Compile Include="Assets\PokerGameManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />

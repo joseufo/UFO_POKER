@@ -10,6 +10,7 @@ public class PokerPlayer : MonoBehaviour
     public string PlayerName;
     public TMP_Text playerText;
     public TMP_Text rankingText;
+    public TMP_Text position;
     public int TotalPlayers { get; set; } = 2;
     public int TurnPosition { get; set; } = 0;
     //public int[] PlayerStatus { get; set; }  // [id, callraisefolded, chips, chips wagered] 
@@ -45,6 +46,7 @@ public class PokerPlayer : MonoBehaviour
     public void DisplayData()
     {
         playerText.text = playerData.playerName;
+        position.text = playerData.playerPosition.ToString();
     }
     
     public void SetAndShowPlayerCards(Card cardData1, Card cardData2)

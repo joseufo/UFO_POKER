@@ -136,18 +136,157 @@ namespace PokerPlugin
     }
     public class PokerCardEval
     {
-        
+        public string ResultText;
+
+        public EvalData EvaluatePlayerRanks(PlayerData playerData, List<Card> tableCards)
+        {
+            EvalData data = new EvalData();
+            EvalData dataOut = new EvalData();
+            data.playerCard_1 = playerData.card1data;
+            data.playerCard_2 = playerData.card2data;
+            data.flopCards[0] = tableCards[0];
+            data.flopCards[1] = tableCards[1];
+            data.flopCards[2] = tableCards[2];
+            data.turnCard = tableCards[3];
+            data.riverCard = tableCards[4];
+            getPlayerCardsResult(playerData.playerPosition, data, out dataOut);
+            return dataOut;
+        }
+        public List<PlayerData> FindPokerPotWinners(List<PlayerData> PlayerList)
+        {
+            int bestResult = 10;
+            for (int x = 0; x < PlayerList.Count; x++)
+            {
+                //Debug.Log("-----------------------------------------------");
+                //Debug.Log("++++++++++ Result idx : " + PlayerList[x].playerData.playerPosition);
+                //Debug.Log("++++ Result idx : " + PlayerList[x].playerData.playerPosition + "++++++ Result result : " + PlayerList[x].playerData.completeEvalData.cardsResultValues);
+                //TextResult.text = TextResult.text + "[" + pdList[x].playerPosition + "] cardsResultValues : " + pdList[x].completeResultStruct.cardsResultValues + "\n";
+                string bestFive = "";
+                foreach (int i in PlayerList[x].completeEvalData.bestFive)
+                {
+                    bestFive = bestFive + i + " : ";
+                }
+                //Debug.Log(PlayerList[x].PlayerName + "- bestfive:" + bestFive);
+                // TextResult.text = TextResult.text + "[" + pdList[x].playerPosition + "] bestFive : " + bestFive + " kiker :" + pdList[x].completeResultStruct.kikers.ToString() + "\n";
+                //Debug.Log("-----------------------------------------------");
+                if ((int)PlayerList[x].completeEvalData.cardsResultValues < bestResult) bestResult = (int)PlayerList[x].completeEvalData.cardsResultValues;
+            }
+
+            //Debug.Log("bestResult : " + (CardsResultValues)bestResult);
+
+            List<PlayerData> pdWinnerList = new List<PlayerData>();
+
+            for (int x = 0; x < PlayerList.Count; x++)
+            {
+                if (PlayerList[x].completeEvalData.cardsResultValues == (CardsResultValues)bestResult)
+                {
+                    pdWinnerList.Add(PlayerList[x]);
+                }
+            }
+            List<PlayerData> finalWinners = new List<PlayerData>();
+            //Debug.Log("pdWinnerList Count : " + pdWinnerList.Count);
+            for (int x = 0; x < pdWinnerList.Count; x++)
+            {
+                //TextResult.text = TextResult.text + "Winner : " + pdWinnerList[x].playerPosition + " result : " + pdWinnerList[x].completeResultStruct.cardsResultValues + "\n";
+                //Debug.Log("Winner : " + pdWinnerList[x].playerName + " result : " + pdWinnerList[x].completeEvalData.cardsResultValues + "\n");
+                finalWinners.Add(pdWinnerList[x]);
+            }
+
+
+            string winnersResult = "";
+            if (pdWinnerList.Count > 1)
+            {
+                finalWinners.Clear();
+                winnersResult = "";
+                switch ((CardsResultValues)bestResult)
+                {
+                    case CardsResultValues.HighCard:
+                        finalWinners = getWinnerCheck_HighCard(pdWinnerList);
+                        foreach (PlayerData pd in finalWinners)
+                        {
+                            winnersResult = winnersResult + "FINAL WIN NUMBER : " + finalWinners.Count + " WINNER : " + pd.playerName + "\n";
+                        }
+                        break;
+                    case CardsResultValues.Pair:
+                        finalWinners = getWinnerCheck_Pair(pdWinnerList);
+                        foreach (PlayerData pd in finalWinners)
+                        {
+                            winnersResult = winnersResult + "FINAL WIN NUMBER : " + finalWinners.Count + " WINNER : " + pd.playerName + "\n";
+                        }
+                        break;
+                    case CardsResultValues.TwoPair:
+                        finalWinners = getWinnerCheck_TwoPair(pdWinnerList);
+                        foreach (PlayerData pd in finalWinners)
+                        {
+                            winnersResult = winnersResult + "FINAL WIN NUMBER : " + finalWinners.Count + " WINNER : " + pd.playerName + "\n";
+                        }
+                        break;
+                    case CardsResultValues.ThreeOfAkind:
+                        finalWinners = getWinnerCheck_Tris(pdWinnerList);
+                        foreach (PlayerData pd in finalWinners)
+                        {
+                            winnersResult = winnersResult + "FINAL WIN NUMBER : " + finalWinners.Count + " WINNER : " + pd.playerName + "\n";
+                        }
+                        break;
+                    case CardsResultValues.Straight:
+                        finalWinners = getWinnerCheck_Straight(pdWinnerList);
+                        foreach (PlayerData pd in finalWinners)
+                        {
+                            winnersResult = winnersResult + "FINAL WIN NUMBER : " + finalWinners.Count + " WINNER : " + pd.playerName + "\n";
+                        }
+                        break;
+                    case CardsResultValues.Flush:
+                        finalWinners = getWinnerCheck_Flush(pdWinnerList);
+                        foreach (PlayerData pd in finalWinners)
+                        {
+                            winnersResult = winnersResult + "FINAL WIN NUMBER : " + finalWinners.Count + " WINNER : " + pd.playerName + "\n";
+                        }
+                        break;
+                    case CardsResultValues.FullHouse:
+                        finalWinners = getWinnerCheck_FullHouse(pdWinnerList);
+                        foreach (PlayerData pd in finalWinners)
+                        {
+                            winnersResult = winnersResult + "FINAL WIN NUMBER : " + finalWinners.Count + " WINNER : " + pd.playerName + "\n";
+                        }
+                        break;
+                    case CardsResultValues.FourOfAkind:
+                        finalWinners = getWinnerCheck_FourOfKind(pdWinnerList);
+                        foreach (PlayerData pd in finalWinners)
+                        {
+                            winnersResult = winnersResult + "FINAL WIN NUMBER : " + finalWinners.Count + " WINNER : " + pd.playerName + "\n";
+                        }
+                        break;
+                    case CardsResultValues.StraightFlush:
+                        finalWinners = getWinner_StraightFlush(pdWinnerList);
+                        foreach (PlayerData pd in finalWinners)
+                        {
+                            winnersResult = winnersResult + "FINAL WIN NUMBER : " + finalWinners.Count + " WINNER : " + pd.playerName + "\n";
+                        }
+                        break;
+                }
+            }
+            string playersWinners = "";
+            foreach (var player in finalWinners)
+                playersWinners += player.playerName + ".. ";
+            if (finalWinners.Count == 1)
+                ResultText = "Winner Player : " + playersWinners;
+            else
+            {
+
+                //Debug.Log(player.PlayerName);
+                //Debug.Log("Draw!, Split pot with");
+                ResultText = "Draw!, Split pot with " + playersWinners;
+                //isDraw = true;
+            }
+            //Debug.Log(winnersResult);
+            return finalWinners;
+        }
 
 
         public void getPlayerCardsResult(int playerId, EvalData completeResultStructIN, out EvalData completeResultStructOUT)
-        {
-
-           
-
-
+        {         
 
             completeResultStructOUT = null;
-
 
             if (check_RoyalFlush(completeResultStructIN)) { completeResultStructIN.cardsResultValues = CardsResultValues.RoyalFlush; completeResultStructIN.playerIdx = playerId; completeResultStructOUT = completeResultStructIN; return; }
             if (check_StraightFlush(completeResultStructIN)) { completeResultStructIN.cardsResultValues = CardsResultValues.StraightFlush; completeResultStructIN.playerIdx = playerId; completeResultStructOUT = completeResultStructIN; return; }

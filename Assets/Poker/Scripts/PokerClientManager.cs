@@ -135,7 +135,7 @@ public class PokerClientManager : MonoBehaviour
         PlayerList.Add(pokerPlayer);
         DPokerPlayer.Add(pokerPlayer.playerData.playerActorNo, PlayerList[PlayerList.IndexOf(pokerPlayer)]);
     }
-    Ranks RankName = new Ranks();
+  
     int CardPhase=0;
     public void SetBoardTableCard(List<Card> cardList , int cardPhase)
     {
@@ -344,6 +344,17 @@ public class PokerClientManager : MonoBehaviour
         
         rest.SetActive(true);
     }
+
+
+
+
+
+
+
+
+
+
+
     public void FindPokerWinner()
     {
         int bestResult = 10;
@@ -557,32 +568,5 @@ public class PokerClientManager : MonoBehaviour
             Instantiate(PokerPlayerPrefab, PlayersTransform[i], false);
         }
     }
-    class Ranks
-    {
-        public string getString(int num)
-        {
-            if (num == 0)
-                return "High Card";
-            if (num == 1)
-                return "Pair";
-            if (num == 2)
-                return "Two Pair";
-            if (num == 3)
-                return "Three of a Kind";
-            if (num == 4)
-                return "Straight";
-            if (num == 5)
-                return "Flush";
-            if (num == 6)
-                return "Full House";
-            if (num == 7)
-                return "Four of a Kind";
-            if (num == 8)
-                return "Straight Flush";
-            if (num == 9)
-                return "Royal Flush";
 
-            return "";
-        }
-    }
 }
