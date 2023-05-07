@@ -29,11 +29,11 @@ public class PokerOnlineManager : MonoBehaviourPunCallbacks, IOnEventCallback
     string playerNametest;
 
 
-    PokerRoomManager RoomManager;
+    //PokerRoomManager RoomManager;
     bool isMyturn, roundStarted;
     void Awake()
     {
-        RoomManager = GetComponent<PokerRoomManager>();
+        //RoomManager = GetComponent<PokerRoomManager>();
     }
     void Start()
     {

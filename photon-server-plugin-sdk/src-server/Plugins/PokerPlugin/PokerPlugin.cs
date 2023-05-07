@@ -9,7 +9,7 @@ using Photon.Hive.Plugin;
 
 namespace PokerPlugin
 {
-        // Poker Server
+        // Poker Server be
     public class PokerPlugin : PluginBase
     {
 
