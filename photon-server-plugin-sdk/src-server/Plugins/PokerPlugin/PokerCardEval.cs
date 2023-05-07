@@ -6,7 +6,40 @@ using System.Threading.Tasks;
 
 namespace PokerPlugin
 {
+    public class PlayerData
+    {
 
+        public string playerName;
+        public int playerPosition;
+        public int playerActorNo;
+
+        public float Coins;
+
+        public float CurrentBet;
+        public float RemainingAmount;
+
+        public EvalData completeEvalData;
+
+        public float turnAmount;
+        public bool isOutOfGame = false;
+        public bool runOutOfMoney = false;
+        public bool underAllin = false;
+        public bool isObserver = false;
+
+        public Card card1data, card2data;
+
+        public Card card3data, card4data;
+
+        public bool turnComplete;
+
+        PlayerRole playerRole;
+        //public int coeffCardsValOnFlopPhase = 0;
+        //public int maxCardValOnFlopPhase = 0;
+        //public int maxCardValueOnShowDown = 0;
+
+
+
+    }
     public class CardData { public int suit; public int rank; }
 
     public enum SUIT { NULL = 0, HEARTS = 1, DIAMONDS = 2, CLUBS = 3, SPADES = 4 }
@@ -121,9 +154,9 @@ namespace PokerPlugin
         public int maxCardValue = 0;
         public int playerIdx;
         public CardsResultValues cardsResultValues;
-        
+
         public Card FullHighCards = Card.nullCard;
-        
+
         public List<int> FlushOrderedCardsValue = new List<int>();
         public List<int> TrisOthersCards = new List<int>();
         public Card TwoPairHighCards = Card.nullCard;
@@ -284,7 +317,7 @@ namespace PokerPlugin
 
 
         public void getPlayerCardsResult(int playerId, EvalData completeResultStructIN, out EvalData completeResultStructOUT)
-        {         
+        {
 
             completeResultStructOUT = null;
 
@@ -418,7 +451,7 @@ namespace PokerPlugin
                 }
             }
 
-          
+
 
             return tmpRet;
 
@@ -1175,7 +1208,7 @@ namespace PokerPlugin
             string pairWinDebug = "Winnerss: ";
             foreach (var winner in pdList)
                 pairWinDebug += "[" + winner.playerName + ", " + winner.playerPosition + "], ";
-            
+
             List<int> tmpRetToRemove = new List<int>();
 
             float highCardPair_x = 0;

@@ -12,6 +12,7 @@ using TMPro;
 using System.Net;
 public class PokerOnlineManager : MonoBehaviourPunCallbacks, IOnEventCallback
 {
+    public string ServerIP;
     public float SmallBlindAmount, BigBlindAmount, TotalCoinAmount;
     public Slider RaiseSlider;
     bool AutoCheck;
@@ -19,7 +20,7 @@ public class PokerOnlineManager : MonoBehaviourPunCallbacks, IOnEventCallback
     public Button JoinCreateButton;
     public TMP_Text InfoText;
     // Photon Event Codes from Server
-    const byte TIMERGAMESTART = 101, ROUNDSTART = 105, INITSEAT = 111, SWITCHTURN = 115,
+    const byte INITSEAT = 51, SEATPLAYER = 55, TIMERGAMESTART = 101, ROUNDSTART = 105,  SWITCHTURN = 115,
             FLOPCARDS = 121, TURNCARD = 122, RIVERCARD = 123, ROUNDEND = 125;
     // Photon Event Codes from User
     const byte CALL = 22, CHECK = 23, FOLD = 25, RAISE = 20;
@@ -27,7 +28,13 @@ public class PokerOnlineManager : MonoBehaviourPunCallbacks, IOnEventCallback
     int minPlayers = 2, maxPlayers = 5;
     string playerNametest;
 
+
+    PokerRoomManager RoomManager;
     bool isMyturn, roundStarted;
+    void Awake()
+    {
+        RoomManager = GetComponent<PokerRoomManager>();
+    }
     void Start()
     {
         
@@ -133,6 +140,7 @@ public class PokerOnlineManager : MonoBehaviourPunCallbacks, IOnEventCallback
     }
     public override void OnPlayerEnteredRoom(Player newPlayer)
     {
+        return;
         Debug.Log("Player Joined -" + " \n UserId : " + newPlayer.UserId + "\n ActNo : " + newPlayer.ActorNumber);
         if(!roundStarted)
         InfoText.text = "Joined..." + (PhotonNetwork.CurrentRoom.PlayerCount >= minPlayers ? "Waiting to Start" : "Waiting For Players");
@@ -226,7 +234,7 @@ public class PokerOnlineManager : MonoBehaviourPunCallbacks, IOnEventCallback
                 break;
             case RAISE: break;
         }
-
+        
     }
 
     public void OnEvent(EventData photonEvent)
@@ -255,7 +263,12 @@ public class PokerOnlineManager : MonoBehaviourPunCallbacks, IOnEventCallback
             }
 
         }
-        if (photonEvent.Code == TIMERGAMESTART)
+       
+        if (photonEvent.Code == SEATPLAYER)
+        {
+
+        }
+            if (photonEvent.Code == TIMERGAMESTART)
         {
             //if((int)PhotonNetwork.CurrentRoom.CustomProperties["BeginTime"] != -1)
             timeToBegin = (float)PhotonNetwork.CurrentRoom.CustomProperties["BeginTime"];
