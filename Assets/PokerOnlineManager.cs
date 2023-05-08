@@ -10,9 +10,8 @@ using Hashtable = ExitGames.Client.Photon.Hashtable;
 using TMPro;
 
 using System.Net;
-public class PokerOnlineManager : MonoBehaviourPunCallbacks, IOnEventCallback
+public class PokerOnlineManager : MonoBehaviour
 {
-    public string ServerIP;
     public float SmallBlindAmount, BigBlindAmount, TotalCoinAmount;
     public Slider RaiseSlider;
     bool AutoCheck;
@@ -81,7 +80,7 @@ public class PokerOnlineManager : MonoBehaviourPunCallbacks, IOnEventCallback
     }
     #region Photon Callbacks
     //Overriden callbacks
-    public override void OnConnectedToMaster()
+    public void ConnectedToMaster()
     {
         Debug.Log("Connected To Master");
         JoinCreateButton.gameObject.SetActive(true);
@@ -91,7 +90,7 @@ public class PokerOnlineManager : MonoBehaviourPunCallbacks, IOnEventCallback
 
 
     }
-    public override void OnJoinedRoom()
+    public void ClientJoinedRoom()
     {
         Debug.Log("Joined Room, Room ID: " + PhotonNetwork.CurrentRoom.Name + " \n UserId : " + PhotonNetwork.LocalPlayer.UserId + "\n ActNo : " + PhotonNetwork.LocalPlayer.ActorNumber);
         InfoText.text = "Joined..." + (PhotonNetwork.CurrentRoom.PlayerCount >= minPlayers ? "Waiting to Start" : "Waiting For Players");
@@ -138,9 +137,9 @@ public class PokerOnlineManager : MonoBehaviourPunCallbacks, IOnEventCallback
         //    stopTimer();
         //}
     }
-    public override void OnPlayerEnteredRoom(Player newPlayer)
+    public void PlayerEnteredRoom(Player newPlayer)
     {
-        return;
+       
         Debug.Log("Player Joined -" + " \n UserId : " + newPlayer.UserId + "\n ActNo : " + newPlayer.ActorNumber);
         if(!roundStarted)
         InfoText.text = "Joined..." + (PhotonNetwork.CurrentRoom.PlayerCount >= minPlayers ? "Waiting to Start" : "Waiting For Players");
@@ -150,36 +149,9 @@ public class PokerOnlineManager : MonoBehaviourPunCallbacks, IOnEventCallback
         player.playerActorNo = newPlayer.ActorNumber;
         PokerClientManager.instance.AddOpponent(player);
     }
-    public override void OnEnable()
-    {
-        base.OnEnable();
-        PhotonNetwork.AddCallbackTarget(this);
-    }
-    public override void OnDisable()
-    {
-        base.OnEnable();
-        PhotonNetwork.RemoveCallbackTarget(this);
-    }
+   
 
-    #region PhotonFail_override_callbacks
-
-    public override void OnCreateRoomFailed(short returnCode, string message)
-    {
-        Debug.LogError(returnCode + " Create Room Failed" + message);
-    }
-    public override void OnJoinRandomFailed(short returnCode, string message)
-    {
-        Debug.LogError(returnCode + " JoinRandom Room Failed" + message);
-    }
-    public override void OnJoinRoomFailed(short returnCode, string message)
-    {
-        Debug.LogError(returnCode + " Join Room Failed" + message);
-    }
-    public override void OnDisconnected(DisconnectCause cause)
-    {
-        Debug.LogError(" Disconnected: " + cause);
-    }
-    #endregion
+ 
 
     #endregion
     void CreateOrJoinRoom()
@@ -237,7 +209,7 @@ public class PokerOnlineManager : MonoBehaviourPunCallbacks, IOnEventCallback
         
     }
 
-    public void OnEvent(EventData photonEvent)
+    public void PokerEvent(EventData photonEvent)
     {
 
 

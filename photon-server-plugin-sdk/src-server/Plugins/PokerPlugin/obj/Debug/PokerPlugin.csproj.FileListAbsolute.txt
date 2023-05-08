@@ -7,3 +7,11 @@ D:\Unity\UFO_POKER\photon-server-plugin-sdk\src-server\Plugins\PokerPlugin\obj\D
 D:\Unity\UFO_POKER\photon-server-plugin-sdk\src-server\Plugins\PokerPlugin\obj\Debug\PokerPlugin.csproj.CopyComplete
 D:\Unity\UFO_POKER\photon-server-plugin-sdk\src-server\Plugins\PokerPlugin\obj\Debug\PokerPlugin.dll
 D:\Unity\UFO_POKER\photon-server-plugin-sdk\src-server\Plugins\PokerPlugin\obj\Debug\PokerPlugin.pdb
+D:\Work\UFO Games\UFO_POKER\photon-server-plugin-sdk\src-server\Plugins\PokerPlugin\bin\Debug\PokerPlugin.dll
+D:\Work\UFO Games\UFO_POKER\photon-server-plugin-sdk\src-server\Plugins\PokerPlugin\bin\Debug\PokerPlugin.pdb
+D:\Work\UFO Games\UFO_POKER\photon-server-plugin-sdk\src-server\Plugins\PokerPlugin\bin\Debug\PhotonHivePlugin.dll
+D:\Work\UFO Games\UFO_POKER\photon-server-plugin-sdk\src-server\Plugins\PokerPlugin\obj\Debug\PokerPlugin.csproj.AssemblyReference.cache
+D:\Work\UFO Games\UFO_POKER\photon-server-plugin-sdk\src-server\Plugins\PokerPlugin\obj\Debug\PokerPlugin.csproj.CoreCompileInputs.cache
+D:\Work\UFO Games\UFO_POKER\photon-server-plugin-sdk\src-server\Plugins\PokerPlugin\obj\Debug\PokerPlugin.csproj.CopyComplete
+D:\Work\UFO Games\UFO_POKER\photon-server-plugin-sdk\src-server\Plugins\PokerPlugin\obj\Debug\PokerPlugin.dll
+D:\Work\UFO Games\UFO_POKER\photon-server-plugin-sdk\src-server\Plugins\PokerPlugin\obj\Debug\PokerPlugin.pdb

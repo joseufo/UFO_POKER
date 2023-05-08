@@ -7,11 +7,13 @@ using ExitGames.Client.Photon;
 using Hashtable = ExitGames.Client.Photon.Hashtable;
 public class PokerRoomManager : MonoBehaviourPunCallbacks , IOnEventCallback
 {
-    
+    public PokerOnlineManager PokerManager;
+    public Dictionary<int, Player> DRoomPlayers = new Dictionary<int, Player>();
     public override void OnEnable()
     {
         base.OnEnable();
         PhotonNetwork.AddCallbackTarget(this);
+        PokerManager = GetComponent<PokerOnlineManager>();
     }
     public override void OnDisable()
     {
@@ -20,7 +22,7 @@ public class PokerRoomManager : MonoBehaviourPunCallbacks , IOnEventCallback
     }
     public void OnEvent(EventData photonEvent)
     {
-        throw new System.NotImplementedException();
+        PokerManager.PokerEvent(photonEvent);
     }
 
     public void ConnectToServer()
@@ -40,38 +42,45 @@ public class PokerRoomManager : MonoBehaviourPunCallbacks , IOnEventCallback
         //JoinCreateButton.gameObject.SetActive(true);
         ////CreateOrJoinRoom();
         //PhotonNetwork.LocalPlayer.NickName = playerNametest;
-
+        PokerManager.ConnectedToMaster();
 
 
     }
     public override void OnJoinedRoom()
     {
        
-
-
-
-        //countDownTimer = true;
-        //timeToBegin = PhotonNetwork.CurrentRoom.CustomProperties["timerTillStart"] != null ? int.Parse(PhotonNetwork.CurrentRoom.CustomProperties["timerTillStart"].ToString()) : -1;
-        //if (timeToBegin != -1)
-        //{
-        //    StartCoroutine(startTimer());
-        //}
-        //else
-        //{
-        //    stopTimer();
-        //}
+        foreach(var roomPlayer in PhotonNetwork.PlayerListOthers)
+        {
+            DRoomPlayers.Add(roomPlayer.ActorNumber, roomPlayer);
+        }
+        PokerManager.ClientJoinedRoom();
+        
     }
     public override void OnPlayerEnteredRoom(Player newPlayer)
     {
-        return;
-        //Debug.Log("Player Joined -" + " \n UserId : " + newPlayer.UserId + "\n ActNo : " + newPlayer.ActorNumber);
-        //if (!roundStarted)
-        //    InfoText.text = "Joined..." + (PhotonNetwork.CurrentRoom.PlayerCount >= minPlayers ? "Waiting to Start" : "Waiting For Players");
-        //PlayerData player = new PlayerData();
-        //player.playerName = newPlayer.NickName;
-        //player.playerPosition = newPlayer.ActorNumber;
-        //player.playerActorNo = newPlayer.ActorNumber;
-        //PokerClientManager.instance.AddOpponent(player);
+        DRoomPlayers.Add(newPlayer.ActorNumber, newPlayer);
+
+        PokerManager.PlayerEnteredRoom(newPlayer);
+    }
+    #endregion
+
+    #region PhotonFail_override_callbacks
+
+    public override void OnCreateRoomFailed(short returnCode, string message)
+    {
+        Debug.LogError(returnCode + " Create Room Failed" + message);
+    }
+    public override void OnJoinRandomFailed(short returnCode, string message)
+    {
+        Debug.LogError(returnCode + " JoinRandom Room Failed" + message);
+    }
+    public override void OnJoinRoomFailed(short returnCode, string message)
+    {
+        Debug.LogError(returnCode + " Join Room Failed" + message);
+    }
+    public override void OnDisconnected(DisconnectCause cause)
+    {
+        Debug.LogError(" Disconnected: " + cause);
     }
     #endregion
 }
