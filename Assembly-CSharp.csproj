@@ -70,7 +70,7 @@
     <Compile Include="Assets\TestPoker\TestGameCardPoker.cs" />
     <Compile Include="Assets\Poker\Scripts\PokerClientManager.cs" />
     <Compile Include="Assets\PokerTemp.cs" />
-    <Compile Include="Assets\Poker\Scripts\PokerCardEval.cs" />
+    <Compile Include="Assets\Poker\Scripts\PokerEval.cs" />
     <Compile Include="Assets\Poker\Scripts\Development\DevGamePlayTest.cs" />
     <Compile Include="Assets\Poker\Scripts\PokerPlayer.cs" />
     <Compile Include="Assets\PhotonManager.cs" />

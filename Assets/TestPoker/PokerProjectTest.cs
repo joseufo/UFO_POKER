@@ -5,7 +5,7 @@ using UnityEngine;
 
     public class PokerProjectTest : MonoBehaviour
     {
-        public PokerCardEval pokerCards;
+        public PokerEval pokerCards;
         // Start is called before the first frame update
         bool useTurnCard = true;
         bool useRiverCard = true;

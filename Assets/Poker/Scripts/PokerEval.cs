@@ -141,7 +141,7 @@ public class EvalData
     public List<int> HighCardOthersBestCards = new List<int>();
     public List<int> bestFive = new List<int>();
 }
-public class PokerCardEval : MonoBehaviour
+public class PokerEval : MonoBehaviour
 {
 
     /*
@@ -229,12 +229,30 @@ public class PokerCardEval : MonoBehaviour
         return tmpRet;
     }
 
+    // change straightflush error
+    //Playercards:  [CLUBS, 12], [SPADES, 8] ,,, Tablecards : [CLUBS, 9], [SPADES, 5], [CLUBS, 6], [CLUBS, 7], [CLUBS, 11]
+    // bestfive:9 : 8 : 7 : 6 : 5 : 
     bool check_StraightFlush(EvalData data)
     {
         int seme = 0;
         if (justCheck_Flush(data, out seme) && check_straight(data))
             return true;
         else return false;
+
+        List<Card> allCards = getAllCardsData(data);
+        for (int s = 1; s < 5; s++)
+        {
+            for (int x = 0; x < allCards.Count; x++)
+            {
+                //Debug.Log("chech_RoyalFlush : " + allCards[x] + " : " + s);
+                if (allCards[x].suit == s)
+                {
+                    
+                    
+                }
+            }
+            
+        }
         bool tmpRet = false;
 
         if (justCheck_Flush(data, out seme) == false)
@@ -244,7 +262,7 @@ public class PokerCardEval : MonoBehaviour
         }
         //Debug.Log("check_StraightFlush justCheck_Flush == TRUE ");
 
-        List<Card> allCards = getAllCardsData(data);
+        //List<Card> allCards = getAllCardsData(data);
         List<Card> flushCards = new List<Card>();
         foreach (Card v in allCards) if (v.suit == seme) flushCards.Add(v);
 

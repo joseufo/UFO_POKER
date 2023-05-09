@@ -16,7 +16,7 @@ namespace PokerPlugin
         public float Coins;
 
         public float CurrentBet;
-        public float RemainingAmount;
+        public float RemainingCoins;
 
         public EvalData completeEvalData;
 
@@ -26,7 +26,7 @@ namespace PokerPlugin
         public bool underAllin = false;
         public bool isObserver = false;
 
-        public Card card1data, card2data;
+        public Card card1, card2;
 
         public Card card3data, card4data;
 
@@ -106,7 +106,7 @@ namespace PokerPlugin
         {
             get { return new Card(0, 0); }
         }
-        CardData cardData;
+        public CardData cardData;
         //public int rank { get => (int)Value; }
         public override string ToString()
         {
@@ -167,7 +167,7 @@ namespace PokerPlugin
         public List<int> HighCardOthersBestCards = new List<int>();
         public List<int> bestFive = new List<int>();
     }
-    public class PokerCardEval
+    public class PokerEval
     {
         public string ResultText;
 
@@ -175,8 +175,8 @@ namespace PokerPlugin
         {
             EvalData data = new EvalData();
             EvalData dataOut = new EvalData();
-            data.playerCard_1 = playerData.card1data;
-            data.playerCard_2 = playerData.card2data;
+            data.playerCard_1 = playerData.card1;
+            data.playerCard_2 = playerData.card2;
             data.flopCards[0] = tableCards[0];
             data.flopCards[1] = tableCards[1];
             data.flopCards[2] = tableCards[2];
