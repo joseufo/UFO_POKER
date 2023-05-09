@@ -42,7 +42,7 @@ public class PlayerData
 public class PokerClientManager : MonoBehaviour
 {
     public bool isOnline;
-    public PokerCardEval GameCardControl;
+    public PokerEval GameCardControl;
     public TMP_Text ResultText; 
     public static PokerClientManager instance;
     [NonSerialized]public bool isGameStarted;    
@@ -107,12 +107,14 @@ public class PokerClientManager : MonoBehaviour
             PlayerList[i].SetCardRankingText("");
         } 
     }
+    List<int> mapIndex = new List<int> { 1, 2, 3, 4 };
     public void AddRoomOpponents(List<PlayerData> playerDataList)
     {
+        playerDataList = playerDataList.OrderByDescending(player => player.playerPosition).ToList();
         int count = playerDataList.Count;
         for (int i = 0; i < playerDataList.Count; i++)
         {
-            opponentCount++;
+            opponentCount++;            
             var newPlayer = Instantiate(PokerPlayerPrefab, PlayersTransform[opponentCount], false);
             var pokerPlayer = newPlayer.GetComponent<PokerPlayer>();            
             pokerPlayer.playerData = playerDataList[i];
@@ -120,22 +122,27 @@ public class PokerClientManager : MonoBehaviour
             pokerPlayer.DisplayData();
             PlayerList.Add(pokerPlayer);
             DPokerPlayer.Add(pokerPlayer.playerData.playerActorNo, PlayerList[PlayerList.IndexOf(pokerPlayer)]);
+            mapIndex.Remove(i);
         }
+        printMapIndex();
     }
 
     public void AddOpponent(PlayerData newPlayerData)
     {
         if (opponentCount == maxPlayers - 1) return;
         opponentCount++;
-        var newPlayer = Instantiate(PokerPlayerPrefab, PlayersTransform[opponentCount], false);
+        int spawnIndex = mapIndex.Count - 1;
+        var newPlayer = Instantiate(PokerPlayerPrefab, PlayersTransform[mapIndex[spawnIndex]], false);
         var pokerPlayer = newPlayer.GetComponent<PokerPlayer>();
         pokerPlayer.playerData = newPlayerData;
         pokerPlayer.PlayerName = pokerPlayer.playerData.playerName;
         pokerPlayer.DisplayData();
         PlayerList.Add(pokerPlayer);
         DPokerPlayer.Add(pokerPlayer.playerData.playerActorNo, PlayerList[PlayerList.IndexOf(pokerPlayer)]);
+        mapIndex.Remove(mapIndex[spawnIndex]);
+        printMapIndex();
     }
-  
+    void printMapIndex() { string indd = ""; foreach (var id in mapIndex) { indd += ", " + id; } Debug.Log("MAPINDEX: " + indd); }
     int CardPhase=0;
     public void SetBoardTableCard(List<Card> cardList , int cardPhase)
     {

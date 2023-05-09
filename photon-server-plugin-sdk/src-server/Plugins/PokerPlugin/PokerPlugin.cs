@@ -9,20 +9,20 @@ using Photon.Hive.Plugin;
 
 namespace PokerPlugin
 {
-        // Poker Server be
+    // Poker Server be
     public class PokerPlugin : PluginBase
     {
 
         public override string Name => "PokerPlugin";
 
-        PokerCardEval CardEval = new PokerCardEval();
+        PokerEval PokEval = new PokerEval();
 
         private Dictionary<int, PlayerData> DRoomPlayersData = new Dictionary<int, PlayerData>();
 
         private Dictionary<string, int> playerScores = new Dictionary<string, int>();
         Dictionary<byte, object> generalData = new Dictionary<byte, object>();
 
-        float smallBlindAmount, bigBlindAmount, maxRaiseAmount, currentPotAmount;
+        float smallBlindAmount, bigBlindAmount, maxRaiseAmount, currentBetAmount;
 
         private IPluginLogger pluginLogger;
 
@@ -33,10 +33,10 @@ namespace PokerPlugin
         const int maxPlayers = 5, minPlayers = 2;
 
         // to clients-
-        const byte INITSEAT = 51, SEATPLAYER = 55, TIMERGAMESTART = 101, ROUNDSTART = 105,  SWITCHTURN = 115,
+        const byte INITSEAT = 51, SEATPLAYER = 55, TIMERGAMESTART = 101, ROUNDSTART = 105, SWITCHTURN = 115,
             FLOPCARDS = 121, TURNCARD = 122, RIVERCARD = 123, ROUNDEND = 125;
         //to server
-        const byte CALL = 22, CHECK = 23, FOLD = 25, RAISE = 20;
+        const byte PLACEBET = 20, ACCEPTBET = 22, CHECK = 23, FOLD = 25;
 
         private bool gameStarted = false, roundInProgress = false;
 
@@ -58,10 +58,13 @@ namespace PokerPlugin
         SerializableGameState photonGameState = new SerializableGameState();
         string roomID;
         //AvlSeat - Available Seat 0 to 4
+        List<int> AvlSeats = new List<int> { 0, 1, 2, 3, 4 };
         public override void OnCreateGame(ICreateGameCallInfo info)
         {
-
+            this.PluginHost.TryRegisterType(typeof(CardData), (byte)1, SerializeCardData, DeserializeCardData);
             this.PluginHost.SetProperties(0, new Hashtable() { { (object)"AvlSeat", (object)0 } }, (Hashtable)null, true);
+            //this.smallBlindAmount = float.Parse(info.Request.GameProperties[(object)"smallBlind"].ToString());
+            smallBlindAmount = 1; bigBlindAmount = 2;
             roomID = info.Request.GameId;
             //this.PluginHost.SetProperties(0, new Hashtable() { { (object)"BeginTime", (object)-1 } }, (Hashtable)null, true);
             info.Continue(); // same as base.OnCreateGame(info);
@@ -102,35 +105,38 @@ namespace PokerPlugin
         private void RegPlayer(IActor actorPlayer)
         {
             if (DRoomPlayersData.ContainsKey(actorPlayer.ActorNr)) return;
-            currentSeatPos++;
+            currentSeatPos = AvlSeats[0]; AvlSeats.Remove(currentSeatPos);
             PlayerData tPlayerData = new PlayerData();
             tPlayerData.playerName = actorPlayer.Nickname;
             tPlayerData.playerPosition = currentSeatPos;
             tPlayerData.playerActorNo = actorPlayer.ActorNr;
             //IActor actorPlayer = GetActor(info.ActorNr);
-            actorPlayer.Properties.SetProperty((object)"seatPos", (object)currentSeatPos);
+            actorPlayer.Properties.SetProperty((object)"SeatPos", (object)currentSeatPos);
             DActorPositon[actorPlayer.ActorNr] = currentSeatPos;
 
             IList<int> tempPlayerList = new List<int>();
-            foreach( var actorKey in DRoomPlayersData.Keys)
+            foreach (var actorKey in DRoomPlayersData.Keys)
             {
                 tempPlayerList.Add(actorKey);
             }
+            this.generalData[(byte)0] = currentSeatPos;
+            this.generalData[(byte)1] = actorPlayer.ActorNr;
+            this.generalData[(byte)2] = DActorPositon;
             this.PluginHost.BroadcastEvent(tempPlayerList, 0, SEATPLAYER, this.generalData, (byte)0);
             tempPlayerList.Clear();
 
             DRoomPlayersData.Add(actorPlayer.ActorNr, tPlayerData);
-            
+
             tempPlayerList.Add(actorPlayer.ActorNr);
-            this.generalData[(byte)1] = DActorPositon;
+            //this.generalData[(byte)1] = DActorPositon;
             this.PluginHost.BroadcastEvent(tempPlayerList, 0, INITSEAT, this.generalData, (byte)0);
-            
+
 
             //foreach (IActor gameActor in this.PluginHost.GameActors)
             //{
 
             //}
-            
+
             roomTotalPlayers = PluginHost.GameActors.Count;
             if (roundInProgress)
                 return;
@@ -166,7 +172,14 @@ namespace PokerPlugin
             if (roundInProgress) return;
             StartPokerRound();
         }
-
+        class PotData
+        {
+            public float PotAmount;
+            public List<PlayerData> PotPlayers;
+        }
+        PotData MainPot = new PotData();
+        List<PotData> SidePots = new List<PotData>();
+        int dealerIndex, smallBlindIndex, bigBlindIndex;
         private void StartPokerRound()
         {
             this.pluginLogger.InfoFormat("\n PokerRound Started {0}  \n", roundCount++);
@@ -190,15 +203,16 @@ namespace PokerPlugin
                 currentRoundPlayers.Add(DRoomPlayersData[actor]);
                 var playerData = DRoomPlayersData[actor];
 
-                playerData.card1data = TakeCardFromDeck(ref currentRoundCard);
-                playerData.card2data = TakeCardFromDeck(ref currentRoundCard);
-                this.pluginLogger.InfoFormat("\n ActorPlayer {0} Cards: {1}, {2}   \n", actor, playerData.card1data, playerData.card2data);
+                playerData.card1 = TakeCardFromDeck(ref currentRoundCard);
+                playerData.card2 = TakeCardFromDeck(ref currentRoundCard);
+                this.pluginLogger.InfoFormat("\n ActorPlayer {0} Cards: {1}, {2}   \n", actor, playerData.card1, playerData.card2);
                 //Dictionary<int, int> suitvalue = new Dictionary<int, int>();
                 //suitvalue[playerData.card1data.suit] = playerData.card1data.rank; suitvalue[playerData.card2data.suit] = playerData.card2data.rank;
-                int[] playerCardData = new int[4]; playerCardData[0] = playerData.card1data.suit; playerCardData[1] = playerData.card1data.rank; playerCardData[2] = playerData.card2data.suit; playerCardData[3] = playerData.card2data.rank;
+                int[] playerCardData = new int[4]; playerCardData[0] = playerData.card1.suit; playerCardData[1] = playerData.card1.rank; playerCardData[2] = playerData.card2.suit; playerCardData[3] = playerData.card2.rank;
                 this.generalData[(byte)1] = currentRoundPlayers[0].playerActorNo;
 
                 this.generalData[(byte)2] = playerCardData;
+                this.generalData[(byte)3] = playerData.card1.cardData;
                 this.PluginHost.BroadcastEvent(temPlayer, 0, ROUNDSTART, this.generalData, (byte)0);
             }
             currentPlayerTurn = 1;
@@ -215,7 +229,7 @@ namespace PokerPlugin
             foreach (var player in currentRoundPlayers)
             {
                 int[] playerCards = new int[4];
-                playerCards[0] = player.card1data.suit; playerCards[1] = player.card1data.rank; playerCards[2] = player.card2data.suit; playerCards[3] = player.card2data.rank;
+                playerCards[0] = player.card1.suit; playerCards[1] = player.card1.rank; playerCards[2] = player.card2.suit; playerCards[3] = player.card2.rank;
                 allPlayerCards.Add(player.playerActorNo, playerCards);
             }
             this.generalData[(byte)0] = allPlayerCards;
@@ -228,10 +242,10 @@ namespace PokerPlugin
             foreach (var player in currentRoundPlayers)
             {
                 //this.pluginLogger.InfoFormat("{0} Cards: {1} , {2}  \n", player.playerName, player.card1data, player.card2data);
-                player.completeEvalData = CardEval.EvaluatePlayerRanks(player, TableCards);
+                player.completeEvalData = PokEval.EvaluatePlayerRanks(player, TableCards);
             }
-            List<PlayerData> RoundWinners = CardEval.FindPokerPotWinners(currentRoundPlayers);
-            this.pluginLogger.InfoFormat("RoundWinner(s): {0}  \n", CardEval.ResultText);
+            List<PlayerData> RoundWinners = PokEval.FindPokerPotWinners(currentRoundPlayers);
+            this.pluginLogger.InfoFormat("RoundWinner(s): {0}  \n", PokEval.ResultText);
             TableCards.Clear();
             currentRoundPlayers.Clear();
             currentRoundActors.Clear();

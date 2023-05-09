@@ -30,9 +30,6 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
-  <PropertyGroup>
-    <RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
-  </PropertyGroup>
   <ItemGroup>
     <Reference Include="PhotonHivePlugin">
       <HintPath>..\lib\net461\PhotonHivePlugin.dll</HintPath>
@@ -47,7 +44,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="PokerCardEval.cs" />
+    <Compile Include="PokerEval.cs" />
     <Compile Include="PokerPluginFactory.cs" />
     <Compile Include="PokerPlugin.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
+using Photon;
 using Photon.Pun;
 using Photon.Realtime;
 using ExitGames.Client.Photon;
@@ -38,6 +40,7 @@ public class PokerRoomManager : MonoBehaviourPunCallbacks , IOnEventCallback
     //Overriden callbacks
     public override void OnConnectedToMaster()
     {
+        PhotonPeer.RegisterType(typeof(CardData), (byte)1, SerializeCardData, DeserializeCardData);
         //Debug.Log("Connected To Master");
         //JoinCreateButton.gameObject.SetActive(true);
         ////CreateOrJoinRoom();
@@ -83,4 +86,35 @@ public class PokerRoomManager : MonoBehaviourPunCallbacks , IOnEventCallback
         Debug.LogError(" Disconnected: " + cause);
     }
     #endregion
+
+    private byte[] SerializeCardData(object o)
+    {
+        CardData cardObject = o as CardData;
+        if (cardObject == null) { return null; }
+        using (var s = new MemoryStream())
+        {
+            using (var bw = new BinaryWriter(s))
+            {
+                bw.Write(cardObject.suit);
+                bw.Write(cardObject.rank);
+                return s.ToArray();
+            }
+        }
+    }
+    private object DeserializeCardData(byte[] bytes)
+    {
+        CardData cardObject = new CardData();
+        using (var s = new MemoryStream(bytes))
+        {
+            using (var br = new BinaryReader(s))
+            {
+                cardObject.suit = br.ReadInt32();
+                cardObject.rank = br.ReadInt32();
+
+            }
+        }
+        return cardObject;
+    }
+
+
 }
