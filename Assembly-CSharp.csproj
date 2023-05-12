@@ -80,6 +80,7 @@
     <Compile Include="Assets\Poker\Scripts\Development\CombScript.cs" />
     <Compile Include="Assets\PokerOnlineManager.cs" />
     <Compile Include="Assets\Poker\Scripts\Card.cs" />
+    <Compile Include="Assets\SeatTransform.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />

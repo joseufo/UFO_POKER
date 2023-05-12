@@ -19,7 +19,7 @@ public class PokerOnlineManager : MonoBehaviour
     public Button JoinCreateButton;
     public TMP_Text InfoText;
     // Photon Event Codes from Server
-    const byte INITSEAT = 51, SEATPLAYER = 55, TIMERGAMESTART = 101, ROUNDSTART = 105,  SWITCHTURN = 115,
+    const byte INITSEAT = 51, SEATPLAYER = 55, TIMERGAMESTART = 101, ROUNDSTART=103, TURNSTART = 105,  SWITCHTURN = 115,
             FLOPCARDS = 121, TURNCARD = 122, RIVERCARD = 123, ROUNDEND = 125;
     // Photon Event Codes from User
     const byte PLACEBET = 20, ACCEPTBET = 22, CHECK = 23, FOLD = 25 ;
@@ -288,7 +288,15 @@ public class PokerOnlineManager : MonoBehaviour
             
             //Debug.Log("GameStartCalled");
         }
+
         if (photonEvent.Code == ROUNDSTART)
+        { 
+            int dealerActor = (int)photonEvent.Parameters[0];
+            int sBlindActor = (int)photonEvent.Parameters[1];
+            int bBlindAcor = (int)photonEvent.Parameters[2];
+
+        }
+            if (photonEvent.Code == TURNSTART)
         {
 
             PokerClientManager.instance.RoundStart();

@@ -16,7 +16,7 @@ namespace PokerPlugin
         public float Coins;
 
         public float CurrentBet;
-        public float RemainingCoins;
+        public float TotalBet;
 
         public EvalData completeEvalData;
 
@@ -375,82 +375,74 @@ namespace PokerPlugin
 
         bool check_StraightFlush(EvalData data)
         {
-            int seme = 0;
-            if (justCheck_Flush(data, out seme) && check_straight(data))
-                return true;
-            else return false;
             bool tmpRet = false;
 
-            if (justCheck_Flush(data, out seme) == false)
-            {
-                //Debug.Log("check_StraightFlush justCheck_Flush == FALSE ");
-                return tmpRet;
-            }
-            //Debug.Log("check_StraightFlush justCheck_Flush == TRUE ");
-
+            int aceLoc = -1;
+            Dictionary<int, int> tempDict = new Dictionary<int, int>() { { 10, 10 }, { 11, 11 }, { 12, 12 }, { 13, 13 } };
             List<Card> allCards = getAllCardsData(data);
-            List<Card> flushCards = new List<Card>();
-            foreach (Card v in allCards) if (v.suit == seme) flushCards.Add(v);
+            for (int i = 0; i < allCards.Count; i++)
+            {
+                if (allCards[i].rank == 1)
+                {
+                    //allCards[i] = new Card(allCards[i].suit, 14);
+                    aceLoc = i;
+                }
+                if (tempDict.ContainsKey(allCards[i].rank))
+                {
+                    tempDict.Remove(allCards[i].rank);
+                }
+            }
+            if (aceLoc != -1)
+            {
+                if (tempDict.Count == 0)
+                    allCards[aceLoc] = new Card(allCards[aceLoc].suit, 14);
+            }
 
-            //Debug.Log("check_StraightFlush flushCards count " + flushCards.Count);
-
-
-            List<int> flushCardsVal = new List<int>();
-            foreach (Card v in flushCards) flushCardsVal.Add((int)v.rank);
-
-            flushCardsVal.Sort();
-
+            //List<Card> allCards = getAllCardsData(data);
+            List<int> allCardsInt = new List<int>();
+            foreach (Card v in allCards) { allCardsInt.Add((int)v.rank); }
             Card _res = Card.nullCard;
-
-            if (flushCardsVal.Count > 5)
+            List<int> tmpListOfFiveSequence = new List<int>();
+            List<Card> carscheck = new List<Card>();
+            foreach (int i in allCardsInt)
             {
-
-                for (int x = 0; x < flushCardsVal.Count; x++)
+                //_res = BBStaticData.newGetSequenceForNumer(i, allCardsInt);
+                _res = newGetSequenceForNumer(i, allCardsInt);
+                //Debug.Log("check_flush -> : " + _res);
+                if (_res.suit >= 5)
                 {
-                    if ((x + 1) < flushCardsVal.Count)
-                    {
-                        if (flushCardsVal[x] == flushCardsVal[x + 1])
-                        {
-                            flushCardsVal.Remove(flushCardsVal[x]);
-                        }
-                    }
-                }
-
-                for (int x = 0; x < flushCardsVal.Count; x++)
-                {
-                    //Debug.Log("------------>> : " + x + " : " + flushCardsVal[x] + " : " + flushCardsVal.Count);
-                }
-
-                if (flushCardsVal.Count > 4)
-                {
-                    tmpRet = true;
-                    data.bestFive.Add(flushCardsVal[flushCardsVal.Count - 5]);
-                    data.bestFive.Add(flushCardsVal[flushCardsVal.Count - 4]);
-                    data.bestFive.Add(flushCardsVal[flushCardsVal.Count - 3]);
-                    data.bestFive.Add(flushCardsVal[flushCardsVal.Count - 2]);
-                    data.bestFive.Add(flushCardsVal[flushCardsVal.Count - 1]);
-                    data.maxCardValue = flushCardsVal[flushCardsVal.Count - 1];
-                }
-
-                for (int x = 0; x < data.bestFive.Count; x++)
-                {
-                    //Debug.Log("======== data.bestFive : " + data.bestFive[x]);
-                }
-                //    Debug.Log("======== counter : " + counter + " _max : " + _max + " start : " + _startFind);
-
-            }
-            else
-            {
-                //_res = BBStaticData.newGetSequenceForNumer(flushCardsVal[0], flushCardsVal);
-                _res = newGetSequenceForNumer(flushCardsVal[0], flushCardsVal);
-                if (_res.suit > 4)
-                {
-                    tmpRet = true;
-                    data.maxCardValue = flushCardsVal[4];
-                    data.bestFive.Add(flushCardsVal[0]); data.bestFive.Add(flushCardsVal[1]); data.bestFive.Add(flushCardsVal[2]); data.bestFive.Add(flushCardsVal[3]); data.bestFive.Add(flushCardsVal[4]);
+                    tmpListOfFiveSequence.Add((int)_res.rank);
+                    carscheck.Add(_res);
                 }
             }
 
+            //foreach(int v in tmpListOfFiveSequence) Debug.Log("check_flush tmpListOfFiveSequence -> : " + v);
+
+            if (tmpListOfFiveSequence.Count > 0)
+            {
+                carscheck.OrderByDescending(x => x.rank);
+                tmpListOfFiveSequence.Sort();
+                tmpListOfFiveSequence.Reverse();
+                data.maxCardValue = tmpListOfFiveSequence[0];
+                data.bestFive.Add(tmpListOfFiveSequence[0]); data.bestFive.Add(tmpListOfFiveSequence[0] - 1); data.bestFive.Add(tmpListOfFiveSequence[0] - 2); data.bestFive.Add(tmpListOfFiveSequence[0] - 3); data.bestFive.Add(tmpListOfFiveSequence[0] - 4);
+
+                tmpRet = true;
+            }
+
+            if (!tmpRet) return tmpRet;
+
+
+            //List<Card> allCards = getAllCardsData(data);
+            int suitest = (int)carscheck[0].suit;
+
+            for (int x = 0; x < 5; x++)
+            {
+                //Debug.Log("chech_RoyalFlush : " + allCards[x] + " : " + s);
+                if (carscheck[x].suit != suitest)
+                {
+                    tmpRet = false;
+                }
+            }
 
 
             return tmpRet;

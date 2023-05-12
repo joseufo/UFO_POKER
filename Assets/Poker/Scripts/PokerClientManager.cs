@@ -62,7 +62,7 @@ public class PokerClientManager : MonoBehaviour
     int nextCardIndex = 0;
     bool useFlopCars, useTurnCard, useRiverCard;
     //EvalHand CardEval = new EvalHand();
-
+    //<actNr, player>
     public Dictionary<int, PokerPlayer> DPokerPlayer = new Dictionary<int, PokerPlayer>();
     private void Awake()
     {
@@ -142,6 +142,30 @@ public class PokerClientManager : MonoBehaviour
         mapIndex.Remove(mapIndex[spawnIndex]);
         printMapIndex();
     }
+    public void AddAllRoomOpponents(List<PlayerData> playerDataList)
+    {
+        playerDataList = playerDataList.OrderByDescending(player => player.playerPosition).ToList();
+        int count = playerDataList.Count;
+        for (int i = 0; i < playerDataList.Count; i++)
+        {
+            opponentCount++;
+            var newPlayer = Instantiate(PokerPlayerPrefab, PlayersTransform[opponentCount], false);
+            var pokerPlayer = newPlayer.GetComponent<PokerPlayer>();
+            pokerPlayer.playerData = playerDataList[i];
+            pokerPlayer.PlayerName = pokerPlayer.playerData.playerName;
+            pokerPlayer.DisplayData();
+            PlayerList.Add(pokerPlayer);
+            DPokerPlayer.Add(pokerPlayer.playerData.playerActorNo, PlayerList[PlayerList.IndexOf(pokerPlayer)]);
+            mapIndex.Remove(i);
+        }
+        printMapIndex();
+    }
+
+    public void ShowPlayerBet(float betAmount, bool isRaise)
+    {
+
+    }
+
     void printMapIndex() { string indd = ""; foreach (var id in mapIndex) { indd += ", " + id; } Debug.Log("MAPINDEX: " + indd); }
     int CardPhase=0;
     public void SetBoardTableCard(List<Card> cardList , int cardPhase)

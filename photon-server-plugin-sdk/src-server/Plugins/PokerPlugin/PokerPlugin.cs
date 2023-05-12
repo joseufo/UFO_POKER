@@ -33,7 +33,7 @@ namespace PokerPlugin
         const int maxPlayers = 5, minPlayers = 2;
 
         // to clients-
-        const byte INITSEAT = 51, SEATPLAYER = 55, TIMERGAMESTART = 101, ROUNDSTART = 105, SWITCHTURN = 115,
+        const byte INITSEAT = 51, SEATPLAYER = 55, TIMERGAMESTART = 101, ROUNDSTART = 103, TURNSTART = 105, SWITCHTURN = 115,
             FLOPCARDS = 121, TURNCARD = 122, RIVERCARD = 123, ROUNDEND = 125;
         //to server
         const byte PLACEBET = 20, ACCEPTBET = 22, CHECK = 23, FOLD = 25;
@@ -179,7 +179,7 @@ namespace PokerPlugin
         }
         PotData MainPot = new PotData();
         List<PotData> SidePots = new List<PotData>();
-        int dealerIndex, smallBlindIndex, bigBlindIndex;
+        int dealerIndex=-1, smallBlindIndex, bigBlindIndex;
         private void StartPokerRound()
         {
             this.pluginLogger.InfoFormat("\n PokerRound Started {0}  \n", roundCount++);
@@ -197,10 +197,48 @@ namespace PokerPlugin
             currentRoundPlayers.Clear();
             foreach (var actor in DRoomPlayersData.Keys)
             {
-                IList<int> temPlayer = new List<int>() { actor };
+               
                 currentRoundActors.Add(actor);
 
                 currentRoundPlayers.Add(DRoomPlayersData[actor]);
+                var playerData = DRoomPlayersData[actor];
+
+                playerData.card1 = TakeCardFromDeck(ref currentRoundCard);
+                playerData.card2 = TakeCardFromDeck(ref currentRoundCard);
+                
+                //Dictionary<int, int> suitvalue = new Dictionary<int, int>();
+                //suitvalue[playerData.card1data.suit] = playerData.card1data.rank; suitvalue[playerData.card2data.suit] = playerData.card2data.rank;
+                int[] playerCardData = new int[4]; playerCardData[0] = playerData.card1.suit; playerCardData[1] = playerData.card1.rank; playerCardData[2] = playerData.card2.suit; playerCardData[3] = playerData.card2.rank;
+                this.generalData[(byte)1] = currentRoundPlayers[0].playerActorNo;
+
+                this.generalData[(byte)2] = playerCardData;
+                this.generalData[(byte)3] = playerData.card1.cardData;
+               
+            }
+            int indexCount = currentRoundPlayers.Count;
+            dealerIndex = (dealerIndex + 1) % indexCount;
+            smallBlindIndex = currentRoundPlayers.Count>2 ? (dealerIndex + 1) % indexCount : dealerIndex; 
+            bigBlindIndex = (smallBlindIndex + 1) % indexCount;
+            currentPlayerTurn = (bigBlindIndex + 1)% indexCount;
+            this.pluginLogger.InfoFormat("\n DealerIndex: {0} , SBlindIndex: {1} , BBlindIndex: {2}   \n", dealerIndex, smallBlindIndex, bigBlindIndex);
+            this.generalData[(byte)0] = currentRoundActors[dealerIndex]; this.generalData[(byte)1] = currentRoundActors[smallBlindIndex]; this.generalData[(byte)2] = currentRoundActors[bigBlindIndex];
+            this.PluginHost.BroadcastEvent(currentRoundActors, 0, ROUNDSTART, this.generalData, (byte)0);
+           
+            this.delayTimer = this.PluginHost.CreateOneTimeTimer(null, new Action(this.TurnStartCardCast), 2);
+            //this.PluginHost.BroadcastEvent(temPlayer, 0, SWITCHTURN, this.generalData, (byte)0);
+            //this.PluginHost.BroadcastEvent((byte)0, 0, (byte)0, ROUNDSTART, this.generalData, (byte)0);
+            //this.PluginHost.BroadcastEvent(currentRoundPlayers, 0, ROUNDSTART, this.generalData, (byte)0);
+            //autoTimer = this.PluginHost.CreateTimer(new Action(this.AutoPlay), 500, 500);
+        }
+        object delayTimer;
+        
+        private void TurnStartCardCast()
+        {
+            this.PluginHost.StopTimer(delayTimer);
+            foreach (var actor in DRoomPlayersData.Keys)
+            {
+                IList<int> temPlayer = new List<int>() { actor };
+                
                 var playerData = DRoomPlayersData[actor];
 
                 playerData.card1 = TakeCardFromDeck(ref currentRoundCard);
@@ -209,18 +247,13 @@ namespace PokerPlugin
                 //Dictionary<int, int> suitvalue = new Dictionary<int, int>();
                 //suitvalue[playerData.card1data.suit] = playerData.card1data.rank; suitvalue[playerData.card2data.suit] = playerData.card2data.rank;
                 int[] playerCardData = new int[4]; playerCardData[0] = playerData.card1.suit; playerCardData[1] = playerData.card1.rank; playerCardData[2] = playerData.card2.suit; playerCardData[3] = playerData.card2.rank;
-                this.generalData[(byte)1] = currentRoundPlayers[0].playerActorNo;
+                this.generalData[(byte)1] = currentRoundPlayers[currentPlayerTurn].playerActorNo;
 
                 this.generalData[(byte)2] = playerCardData;
                 this.generalData[(byte)3] = playerData.card1.cardData;
-                this.PluginHost.BroadcastEvent(temPlayer, 0, ROUNDSTART, this.generalData, (byte)0);
+                this.PluginHost.BroadcastEvent(temPlayer, 0, TURNSTART, this.generalData, (byte)0);
             }
-            currentPlayerTurn = 1;
-
-            //this.PluginHost.BroadcastEvent(temPlayer, 0, SWITCHTURN, this.generalData, (byte)0);
-            //this.PluginHost.BroadcastEvent((byte)0, 0, (byte)0, ROUNDSTART, this.generalData, (byte)0);
-            //this.PluginHost.BroadcastEvent(currentRoundPlayers, 0, ROUNDSTART, this.generalData, (byte)0);
-            //autoTimer = this.PluginHost.CreateTimer(new Action(this.AutoPlay), 500, 500);
+            
         }
 
         private void EndPokerRound()
@@ -289,16 +322,16 @@ namespace PokerPlugin
             if (info.Request.EvCode == CHECK)
             {
 
-                int playerIndex = currentPlayerTurn - 1;
-                this.pluginLogger.InfoFormat("\n Check called by Actor {0} - {1} -CHECK, CurrentPlayerIndex {2} \n....\n RoundPlayercount:- {3}..\n", info.ActorNr, info.Nickname, currentPlayerTurn, DRoomPlayersData[currentRoundActors[currentPlayerTurn - 1]].playerName, currentRoundPlayers.Count);
+                int playerIndex = currentPlayerTurn;
+                this.pluginLogger.InfoFormat("\n Check called by Actor {0} - {1} -CHECK, CurrentPlayerIndex {2} \n....\n RoundPlayercount:- {3}..\n", info.ActorNr, info.Nickname, currentPlayerTurn, DRoomPlayersData[currentRoundActors[currentPlayerTurn]].playerName, currentRoundPlayers.Count);
                 if (info.ActorNr != currentRoundActors[playerIndex]) return;
                 bool cycleComplete = true;
                 currentRoundPlayers[playerIndex].turnComplete = true;
                 foreach (var player in currentRoundPlayers) { if (!player.turnComplete) cycleComplete = false; }
                 //bool cycleComplete = currentPlayerTurn % currentRoundActors.Count == 0 ? true : false;
                 //playerTurnIndex++;
-                currentPlayerTurn = (currentPlayerTurn % currentRoundActors.Count) + 1;
-                playerIndex = currentPlayerTurn - 1;
+                currentPlayerTurn = (currentPlayerTurn + 1) % currentRoundActors.Count;
+                playerIndex = currentPlayerTurn;
                 this.pluginLogger.InfoFormat("\n PlayerCount: {0}  \n", currentRoundPlayers.Count);
                 if (cycleComplete) //currentPlayerTurn >= (currentRoundPlayers.Count-1
                 {
