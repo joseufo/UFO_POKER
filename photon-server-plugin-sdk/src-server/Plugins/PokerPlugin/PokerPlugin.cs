@@ -33,7 +33,7 @@ namespace PokerPlugin
         const int maxPlayers = 5, minPlayers = 2;
 
         // to clients-
-        const byte INITSEAT = 51, SEATPLAYER = 55, TIMERGAMESTART = 101, ROUNDSTART = 105, SWITCHTURN = 115,
+        const byte INITSEAT = 51, ADDPLAYER = 55, TIMERGAMESTART = 101, ROUNDSTART = 105, SWITCHTURN = 115,
             FLOPCARDS = 121, TURNCARD = 122, RIVERCARD = 123, ROUNDEND = 125;
         //to server
         const byte PLACEBET = 20, ACCEPTBET = 22, CHECK = 23, FOLD = 25;
@@ -76,6 +76,7 @@ namespace PokerPlugin
             //photonGameState.EmptyRoomTTL = 600000;
             photonGameState.PlayerTTL = 30000;
             photonGameState.MaxPlayers = maxPlayers;
+            photonGameState.IsOpen = false;
             //playerScores.Add(info.UserId, 0);           
 
             //this.roomSize = int.Parse(info.Request.GameProperties[(object)"roomSize"].ToString());
@@ -122,7 +123,7 @@ namespace PokerPlugin
             this.generalData[(byte)0] = currentSeatPos;
             this.generalData[(byte)1] = actorPlayer.ActorNr;
             this.generalData[(byte)2] = DActorPositon;
-            this.PluginHost.BroadcastEvent(tempPlayerList, 0, SEATPLAYER, this.generalData, (byte)0);
+            this.PluginHost.BroadcastEvent(tempPlayerList, 0, ADDPLAYER, this.generalData, (byte)0);
             tempPlayerList.Clear();
 
             DRoomPlayersData.Add(actorPlayer.ActorNr, tPlayerData);
