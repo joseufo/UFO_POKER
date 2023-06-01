@@ -11,14 +11,15 @@ public class PlayerData
        
 
     public string playerName;
-    public int playerPosition;
+    public int seatPos;
     public int playerActorNo;
+    public int playerRole;
     public bool isLocalPlayer = false;
 
-    public float TotalCoinAmount;
+    public float Coins;
 
-    public float currentCallRaiseAmount;
-    public float RemainingAmount;
+    public float betAmount;
+    
 
     public EvalData completeEvalData;
 
@@ -51,10 +52,13 @@ public class PokerClientManager : MonoBehaviour
 
     public int maxPlayers = 5;
     int opponentCount=0;
-    public List<PokerPlayer> PlayerList = new List<PokerPlayer>();
+    [SerializeField] GameObject[] PlayerObjects = new GameObject[5];
+
+    List<PokerPlayer> RoomPlayerList = new List<PokerPlayer>();
+    List<PokerPlayer> CurrentRoundPlayers = new List<PokerPlayer>();
 
     public List<PokerCard> TableCards = new List<PokerCard>();
-    Card[] BoardCard = new Card[5];
+ 
 
     List<Card> flopCardsList = new List<Card>();
     Card TurnCard = Card.nullCard, RiverCard = Card.nullCard;
@@ -63,7 +67,7 @@ public class PokerClientManager : MonoBehaviour
     bool useFlopCars, useTurnCard, useRiverCard;
     //EvalHand CardEval = new EvalHand();
     //<actNr, player>
-    public Dictionary<int, PokerPlayer> DPokerPlayer = new Dictionary<int, PokerPlayer>();
+    public Dictionary<int, PokerPlayer> DPokerRoomPlayers = new Dictionary<int, PokerPlayer>();
     private void Awake()
     {
         if (instance == null)
@@ -79,49 +83,50 @@ public class PokerClientManager : MonoBehaviour
 
     public void AddLocalPlayer(PlayerData newPlayerData)
     {
-        var player = Instantiate(PokerPlayerPrefab, PlayersTransform[0], false);
-        var pokerPlayer = player.GetComponent<PokerPlayer>();
+        var playerObj = PlayerObjects[0];//Instantiate(PokerPlayerPrefab, PlayersTransform[0], false);
+        var pokerPlayer = playerObj.GetComponent<PokerPlayer>();
         pokerPlayer.isLocalPlayer = true;
         //player.GetComponent<PokerPlayer>().PlayerName = "Player0";
         //player.GetComponent<PokerPlayer>().playerData.playerName = "Player0";
         pokerPlayer.playerData = newPlayerData;
         pokerPlayer.PlayerName = pokerPlayer.playerData.playerName;
-        pokerPlayer.DisplayData();
-        PlayerList.Add(player.GetComponent<PokerPlayer>());
-        DPokerPlayer.Add(pokerPlayer.playerData.playerActorNo, PlayerList[PlayerList.IndexOf(pokerPlayer)]);
+        pokerPlayer.SetInitPlayerData();
+        RoomPlayerList.Add(pokerPlayer);
+        //CurrentRoundPlayers.Add(playerObj.GetComponent<PokerPlayer>());
+        DPokerRoomPlayers.Add(pokerPlayer.playerData.playerActorNo, pokerPlayer);
 
     }
     public void GivePlayerCards(Card card1, Card card2)
     {
-        PlayerList[0].SetAndShowPlayerCards(card1, card2);
-        if (PlayerList[0].playerData.card1data.rank == PlayerList[0].playerData.card2data.rank)
-            PlayerList[0].SetCardRankingText("Pair");
+        CurrentRoundPlayers[0].SetAndShowPlayerCards(card1, card2);
+        if (CurrentRoundPlayers[0].playerData.card1data.rank == CurrentRoundPlayers[0].playerData.card2data.rank)
+            CurrentRoundPlayers[0].SetCardRankingText("Pair");
         else
         {
-            PlayerList[0].SetCardRankingText("High Card");
+            CurrentRoundPlayers[0].SetCardRankingText("High Card");
         }
-        for (int i = 1; i < PlayerList.Count; i++)
+        for (int i = 1; i < CurrentRoundPlayers.Count; i++)
         {
-            Debug.Log("NAME" + PlayerList[i].PlayerName);
-            PlayerList[i].ShowBackCards();
-            PlayerList[i].SetCardRankingText("");
+            Debug.Log("NAME" + CurrentRoundPlayers[i].PlayerName);
+            CurrentRoundPlayers[i].ShowBackCards();
+            CurrentRoundPlayers[i].SetCardRankingText("");
         } 
     }
     List<int> mapIndex = new List<int> { 1, 2, 3, 4 };
     public void AddRoomOpponents(List<PlayerData> playerDataList)
     {
-        playerDataList = playerDataList.OrderByDescending(player => player.playerPosition).ToList();
+        playerDataList = playerDataList.OrderByDescending(player => player.seatPos).ToList();
         int count = playerDataList.Count;
         for (int i = 0; i < playerDataList.Count; i++)
         {
-            opponentCount++;            
-            var newPlayer = Instantiate(PokerPlayerPrefab, PlayersTransform[opponentCount], false);
+            opponentCount++;
+            var newPlayer = PlayerObjects[opponentCount];// Instantiate(PokerPlayerPrefab, PlayersTransform[opponentCount], false);
             var pokerPlayer = newPlayer.GetComponent<PokerPlayer>();            
             pokerPlayer.playerData = playerDataList[i];
             pokerPlayer.PlayerName = pokerPlayer.playerData.playerName;
-            pokerPlayer.DisplayData();
-            PlayerList.Add(pokerPlayer);
-            DPokerPlayer.Add(pokerPlayer.playerData.playerActorNo, PlayerList[PlayerList.IndexOf(pokerPlayer)]);
+            pokerPlayer.SetInitPlayerData();
+            RoomPlayerList.Add(pokerPlayer);//CurrentRoundPlayers.Add(pokerPlayer);
+            DPokerRoomPlayers.Add(pokerPlayer.playerData.playerActorNo, pokerPlayer);
             mapIndex.Remove(i);
         }
         printMapIndex();
@@ -131,20 +136,20 @@ public class PokerClientManager : MonoBehaviour
     {
         if (opponentCount == maxPlayers - 1) return;
         opponentCount++;
-        int spawnIndex = mapIndex.Count - 1;
-        var newPlayer = Instantiate(PokerPlayerPrefab, PlayersTransform[mapIndex[spawnIndex]], false);
-        var pokerPlayer = newPlayer.GetComponent<PokerPlayer>();
+        int spawnIndex = mapIndex[mapIndex.Count - 1];
+        var playerObj = PlayerObjects[spawnIndex]; //Instantiate(PokerPlayerPrefab, PlayersTransform[mapIndex[spawnIndex]], false);
+        var pokerPlayer = playerObj.GetComponent<PokerPlayer>();
         pokerPlayer.playerData = newPlayerData;
         pokerPlayer.PlayerName = pokerPlayer.playerData.playerName;
-        pokerPlayer.DisplayData();
-        PlayerList.Add(pokerPlayer);
-        DPokerPlayer.Add(pokerPlayer.playerData.playerActorNo, PlayerList[PlayerList.IndexOf(pokerPlayer)]);
-        mapIndex.Remove(mapIndex[spawnIndex]);
+        pokerPlayer.SetInitPlayerData();
+        RoomPlayerList.Add(pokerPlayer);   // CurrentRoundPlayers.Add(pokerPlayer);
+        DPokerRoomPlayers.Add(pokerPlayer.playerData.playerActorNo, pokerPlayer);
+        mapIndex.Remove(spawnIndex);
         printMapIndex();
     }
     public void AddAllRoomOpponents(List<PlayerData> playerDataList)
     {
-        playerDataList = playerDataList.OrderByDescending(player => player.playerPosition).ToList();
+        playerDataList = playerDataList.OrderByDescending(player => player.seatPos).ToList();
         int count = playerDataList.Count;
         for (int i = 0; i < playerDataList.Count; i++)
         {
@@ -153,17 +158,52 @@ public class PokerClientManager : MonoBehaviour
             var pokerPlayer = newPlayer.GetComponent<PokerPlayer>();
             pokerPlayer.playerData = playerDataList[i];
             pokerPlayer.PlayerName = pokerPlayer.playerData.playerName;
-            pokerPlayer.DisplayData();
-            PlayerList.Add(pokerPlayer);
-            DPokerPlayer.Add(pokerPlayer.playerData.playerActorNo, PlayerList[PlayerList.IndexOf(pokerPlayer)]);
+            pokerPlayer.SetInitPlayerData();
+            CurrentRoundPlayers.Add(pokerPlayer);
+            DPokerRoomPlayers.Add(pokerPlayer.playerData.playerActorNo, CurrentRoundPlayers[CurrentRoundPlayers.IndexOf(pokerPlayer)]);
             mapIndex.Remove(i);
         }
         printMapIndex();
     }
-
-    public void ShowPlayerBet(float betAmount, bool isRaise)
+    public void RoundStart(int[] playerRolesActors, float smallBlindAmount, float bigBlindAmount)
     {
+        ResultText.text = "";
+        foreach (var roomPlayer in RoomPlayerList)
+            CurrentRoundPlayers.Add(roomPlayer);
+        foreach (var pokerPlayer in CurrentRoundPlayers)
+        {
+            pokerPlayer.ShowBackCards();
+            pokerPlayer.UnshowCard();
+            pokerPlayer.SetPlayerRole(3);
+        }
+        foreach (var pokerCard in TableCards)
+        {
+            pokerCard.ShowBack();
+            pokerCard.gameObject.SetActive(false);
+        }
+        StartCoroutine(Playerblinds(playerRolesActors, smallBlindAmount, bigBlindAmount));
 
+    }
+    IEnumerator Playerblinds(int[] playerRolesActors, float smallBlindAmount, float bigBlindAmount)
+    {
+        DPokerRoomPlayers[playerRolesActors[0]].SetPlayerRole(0); DPokerRoomPlayers[playerRolesActors[1]].SetPlayerRole(1); DPokerRoomPlayers[playerRolesActors[2]].SetPlayerRole(2);
+        DPokerRoomPlayers[playerRolesActors[1]].PutOutCoins(smallBlindAmount); DPokerRoomPlayers[playerRolesActors[2]].PutOutCoins(bigBlindAmount);
+        yield return new WaitForSecondsRealtime(0.5f);
+    }
+    public void RoundEnd()
+    {
+        //IEnumerable<PokerPlayer> query = PlayerList.OrderBy(player => player.PlayerHand[0]);
+
+        ShowPlayerHandRankings();
+        FindPokerWinner();
+        flopCardsList.Clear();
+        nextCardIndex = 0;
+        CurrentRoundPlayers.Clear();
+        //rest.SetActive(true);
+    }
+    public void ShowPlayerBet(int actor, float betAmount, bool isRaise)
+    {
+        DPokerRoomPlayers[actor].PutOutCoins(betAmount);
     }
 
     void printMapIndex() { string indd = ""; foreach (var id in mapIndex) { indd += ", " + id; } Debug.Log("MAPINDEX: " + indd); }
@@ -210,8 +250,8 @@ public class PokerClientManager : MonoBehaviour
     {
         EvalData data = new EvalData();
         EvalData dataOut = new EvalData();
-        data.playerCard_1 = PlayerList[0].playerData.card1data;
-        data.playerCard_2 = PlayerList[0].playerData.card2data;
+        data.playerCard_1 = CurrentRoundPlayers[0].playerData.card1data;
+        data.playerCard_2 = CurrentRoundPlayers[0].playerData.card2data;
         switch (CardPhase)
         {
 
@@ -245,24 +285,24 @@ public class PokerClientManager : MonoBehaviour
 
         if (nextCardIndex >= 3)
         {
-            GameCardControl.getPlayerCardsResult(PlayerList[0].playerData.playerPosition, data, out dataOut);
-            PlayerList[0].playerData.completeEvalData = dataOut;
-            PlayerList[0].SetCardRankingText(PlayerList[0].playerData.completeEvalData.cardsResultValues.ToString());
+            GameCardControl.getPlayerCardsResult(CurrentRoundPlayers[0].playerData.seatPos, data, out dataOut);
+            CurrentRoundPlayers[0].playerData.completeEvalData = dataOut;
+            CurrentRoundPlayers[0].SetCardRankingText(CurrentRoundPlayers[0].playerData.completeEvalData.cardsResultValues.ToString());
 
             string bestFive = "";
-            foreach (int ix in PlayerList[0].playerData.completeEvalData.bestFive)
+            foreach (int ix in CurrentRoundPlayers[0].playerData.completeEvalData.bestFive)
             {
                 bestFive = bestFive + ix + " : ";
             }
-            Debug.Log("" + PlayerList[0].PlayerName + " bestfive:" + bestFive);
+            Debug.Log("" + CurrentRoundPlayers[0].PlayerName + " bestfive:" + bestFive);
         }
         else
         {
-            if (PlayerList[0].playerData.card1data.rank == PlayerList[0].playerData.card2data.rank)
-                PlayerList[0].SetCardRankingText("Pair");
+            if (CurrentRoundPlayers[0].playerData.card1data.rank == CurrentRoundPlayers[0].playerData.card2data.rank)
+                CurrentRoundPlayers[0].SetCardRankingText("Pair");
             else
             {
-                PlayerList[0].SetCardRankingText("High Card");
+                CurrentRoundPlayers[0].SetCardRankingText("High Card");
             }
 
         }
@@ -270,12 +310,12 @@ public class PokerClientManager : MonoBehaviour
     }
     public void ShowPlayerHandRankings()
     {
-        for (int i=0; i< PlayerList.Count; i++)
+        for (int i=0; i< CurrentRoundPlayers.Count; i++)
         {
             EvalData data = new EvalData();
             EvalData dataOut = new EvalData();
-            data.playerCard_1 = PlayerList[i].playerData.card1data;
-            data.playerCard_2 = PlayerList[i].playerData.card2data;
+            data.playerCard_1 = CurrentRoundPlayers[i].playerData.card1data;
+            data.playerCard_2 = CurrentRoundPlayers[i].playerData.card2data;
             switch(CardPhase)
             {
                
@@ -309,24 +349,24 @@ public class PokerClientManager : MonoBehaviour
 
             if (nextCardIndex>=3)
             {
-                GameCardControl.getPlayerCardsResult(PlayerList[i].playerData.playerPosition, data, out dataOut);
-                PlayerList[i].playerData.completeEvalData = dataOut;
-                PlayerList[i].SetCardRankingText(PlayerList[i].playerData.completeEvalData.cardsResultValues.ToString());
+                GameCardControl.getPlayerCardsResult(CurrentRoundPlayers[i].playerData.seatPos, data, out dataOut);
+                CurrentRoundPlayers[i].playerData.completeEvalData = dataOut;
+                CurrentRoundPlayers[i].SetCardRankingText(CurrentRoundPlayers[i].playerData.completeEvalData.cardsResultValues.ToString());
 
                 string bestFive = "";
-                foreach (int ix in PlayerList[i].playerData.completeEvalData.bestFive)
+                foreach (int ix in CurrentRoundPlayers[i].playerData.completeEvalData.bestFive)
                 {
                     bestFive = bestFive + ix + " : ";
                 }
-                Debug.Log("" + PlayerList[i].PlayerName + " bestfive:" + bestFive);
+                Debug.Log("" + CurrentRoundPlayers[i].PlayerName + " bestfive:" + bestFive);
             }
             else
             {
-                if(PlayerList[i].playerData.card1data.rank == PlayerList[i].playerData.card2data.rank)
-                    PlayerList[i].SetCardRankingText("Pair");
+                if(CurrentRoundPlayers[i].playerData.card1data.rank == CurrentRoundPlayers[i].playerData.card2data.rank)
+                    CurrentRoundPlayers[i].SetCardRankingText("Pair");
                 else
                 {
-                    PlayerList[i].SetCardRankingText("High Card");
+                    CurrentRoundPlayers[i].SetCardRankingText("High Card");
                 }
                 
             }
@@ -340,35 +380,12 @@ public class PokerClientManager : MonoBehaviour
     }
     public void PlayerSitBack(int actorNo)
     {
-        DPokerPlayer[actorNo].UnshowCard();
-        PlayerList.Remove(DPokerPlayer[actorNo]);
-        DPokerPlayer.Remove(actorNo);
+        DPokerRoomPlayers[actorNo].UnshowCard();
+        CurrentRoundPlayers.Remove(DPokerRoomPlayers[actorNo]);
+        //DPokerRoomPlayers.Remove(actorNo);
     }
     public GameObject rest;
-    public void RoundStart()
-    {
-        ResultText.text = "";
-        foreach (var pokerPlayer in PlayerList)
-        {
-            pokerPlayer.ShowBackCards();
-            pokerPlayer.UnshowCard();
-        }
-        foreach(var pokerCard in TableCards)
-        {
-            pokerCard.ShowBack();
-            pokerCard.gameObject.SetActive(false);
-        }
-            
-    }
-    public void RoundEnd()
-    {
-        //IEnumerable<PokerPlayer> query = PlayerList.OrderBy(player => player.PlayerHand[0]);
-        ShowPlayerHandRankings();
-        FindPokerWinner();
-        flopCardsList.Clear();
-        nextCardIndex = 0;
-        //rest.SetActive(true);
-    }
+   
     public void Fold()
     {
         //IEnumerable<PokerPlayer> query = PlayerList.OrderBy(player => player.PlayerHand[0]);
@@ -389,32 +406,32 @@ public class PokerClientManager : MonoBehaviour
     public void FindPokerWinner()
     {
         int bestResult = 10;
-        for (int x = 0; x < PlayerList.Count; x++)
+        for (int x = 0; x < CurrentRoundPlayers.Count; x++)
         {
             Debug.Log("-----------------------------------------------");
             //Debug.Log("++++++++++ Result idx : " + PlayerList[x].playerData.playerPosition);
-            Debug.Log("++++ Result idx : " + PlayerList[x].playerData.playerPosition + "++++++ Result result : " + PlayerList[x].playerData.completeEvalData.cardsResultValues);
+            Debug.Log("++++ Result idx : " + CurrentRoundPlayers[x].playerData.seatPos + "++++++ Result result : " + CurrentRoundPlayers[x].playerData.completeEvalData.cardsResultValues);
             //TextResult.text = TextResult.text + "[" + pdList[x].playerPosition + "] cardsResultValues : " + pdList[x].completeResultStruct.cardsResultValues + "\n";
             string bestFive = "";
-            foreach (int i in PlayerList[x].playerData.completeEvalData.bestFive)
+            foreach (int i in CurrentRoundPlayers[x].playerData.completeEvalData.bestFive)
             {
                 bestFive = bestFive + i + " : ";
             }
-            Debug.Log(PlayerList[x].PlayerName + "- bestfive:" + bestFive);
+            Debug.Log(CurrentRoundPlayers[x].PlayerName + "- bestfive:" + bestFive);
             // TextResult.text = TextResult.text + "[" + pdList[x].playerPosition + "] bestFive : " + bestFive + " kiker :" + pdList[x].completeResultStruct.kikers.ToString() + "\n";
             Debug.Log("-----------------------------------------------");
-            if ((int)PlayerList[x].playerData.completeEvalData.cardsResultValues < bestResult) bestResult = (int)PlayerList[x].playerData.completeEvalData.cardsResultValues;
+            if ((int)CurrentRoundPlayers[x].playerData.completeEvalData.cardsResultValues < bestResult) bestResult = (int)CurrentRoundPlayers[x].playerData.completeEvalData.cardsResultValues;
         }
 
         Debug.Log("bestResult : " + (CardsResultValues)bestResult);
 
         List<PlayerData> pdWinnerList = new List<PlayerData>();
 
-        for (int x = 0; x < PlayerList.Count; x++)
+        for (int x = 0; x < CurrentRoundPlayers.Count; x++)
         {
-            if (PlayerList[x].playerData.completeEvalData.cardsResultValues == (CardsResultValues)bestResult)
+            if (CurrentRoundPlayers[x].playerData.completeEvalData.cardsResultValues == (CardsResultValues)bestResult)
             {
-                pdWinnerList.Add(PlayerList[x].playerData);
+                pdWinnerList.Add(CurrentRoundPlayers[x].playerData);
             }
         }
         List<PlayerData> finalWinners = new List<PlayerData>();

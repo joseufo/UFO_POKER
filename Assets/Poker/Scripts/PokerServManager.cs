@@ -68,21 +68,21 @@ public class PokerServManager : MonoBehaviour
     
     void DistributeCards()
     {
-        var playerlist = PokerClientManager.instance.PlayerList;
+        //var playerlist = PokerClientManager.instance.CurrentRoundPlayers;
         
-        for(int i=0; i<playerlist.Count; i++)
-        {
+        //for(int i=0; i<playerlist.Count; i++)
+        //{
 
-            playerlist[i].SetAndShowPlayerCards(CardDeck[i], CardDeck[i+1]);
-            Debug.Log(playerlist[i].playerText.text + " Cards : " + CardDeck[i].ToString() + " , " + CardDeck[i + 1].ToString());
+        //    playerlist[i].SetAndShowPlayerCards(CardDeck[i], CardDeck[i+1]);
+        //    Debug.Log(playerlist[i].playerText.text + " Cards : " + CardDeck[i].ToString() + " , " + CardDeck[i + 1].ToString());
             
-            CardDeck.RemoveAt(i); CardDeck.RemoveAt(i);
-            pokerCardList[i].UnshowCard(); pokerCardList[i+1].UnshowCard();
-        }
+        //    CardDeck.RemoveAt(i); CardDeck.RemoveAt(i);
+        //    pokerCardList[i].UnshowCard(); pokerCardList[i+1].UnshowCard();
+        //}
 
-        PokerClientManager.instance.ShowPlayerHandRankings();
-        SetTableCard();
-        gameState = PokerGameState.Flop;
+        //PokerClientManager.instance.ShowPlayerHandRankings();
+        //SetTableCard();
+        //gameState = PokerGameState.Flop;
     }
     enum PokerGameState{ Flop,Turn,River, End}
 

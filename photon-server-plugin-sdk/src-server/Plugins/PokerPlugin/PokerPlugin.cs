@@ -21,8 +21,9 @@ namespace PokerPlugin
 
         private Dictionary<string, int> playerScores = new Dictionary<string, int>();
         Dictionary<byte, object> generalData = new Dictionary<byte, object>();
+        Dictionary<byte, object> playerTurnData = new Dictionary<byte, object>();
 
-        float smallBlindAmount, bigBlindAmount, maxRaiseAmount, currentBetAmount;
+        float smallBlindAmount=1, bigBlindAmount=2,  currentHighBetAmount; //maxRaiseAmount, pot limit
 
         private IPluginLogger pluginLogger;
 
@@ -101,7 +102,8 @@ namespace PokerPlugin
 
         }
 
-        public int currentPlayerTurn = 0;
+        public int currentPlayerTurnIndex = 0;
+        public float tempPlayerCoins = 100;
         private void RegPlayer(IActor actorPlayer)
         {
             if (DRoomPlayersData.ContainsKey(actorPlayer.ActorNr)) return;
@@ -110,6 +112,7 @@ namespace PokerPlugin
             tPlayerData.playerName = actorPlayer.Nickname;
             tPlayerData.playerPosition = currentSeatPos;
             tPlayerData.playerActorNo = actorPlayer.ActorNr;
+            tPlayerData.Coins = tempPlayerCoins;
             //IActor actorPlayer = GetActor(info.ActorNr);
             actorPlayer.Properties.SetProperty((object)"SeatPos", (object)currentSeatPos);
             DActorPositon[actorPlayer.ActorNr] = currentSeatPos;
@@ -219,12 +222,17 @@ namespace PokerPlugin
             dealerIndex = (dealerIndex + 1) % indexCount;
             smallBlindIndex = currentRoundPlayers.Count>2 ? (dealerIndex + 1) % indexCount : dealerIndex; 
             bigBlindIndex = (smallBlindIndex + 1) % indexCount;
-            currentPlayerTurn = (bigBlindIndex + 1)% indexCount;
+            currentPlayerTurnIndex = bigBlindIndex;//currentPlayerTurnIndex = (bigBlindIndex + 1)% indexCount;
             this.pluginLogger.InfoFormat("\n DealerIndex: {0} , SBlindIndex: {1} , BBlindIndex: {2}   \n", dealerIndex, smallBlindIndex, bigBlindIndex);
             this.generalData[(byte)0] = currentRoundActors[dealerIndex]; this.generalData[(byte)1] = currentRoundActors[smallBlindIndex]; this.generalData[(byte)2] = currentRoundActors[bigBlindIndex];
+            //DRoomPlayersData[currentRoundActors[smallBlindIndex]].PlaceBet(smallBlindAmount); DRoomPlayersData[currentRoundActors[bigBlindIndex]].PlaceBet(bigBlindAmount);
+            PlayerPlaceBet(currentRoundActors[smallBlindIndex], smallBlindAmount);
+            PlayerAcceptBet(currentRoundActors[bigBlindIndex], currentRoundPlayers[bigBlindIndex].BetDebt);
+            PlayerPlaceBet(currentRoundActors[bigBlindIndex], bigBlindAmount-smallBlindAmount); currentRoundPlayers[bigBlindIndex].turnComplete = false;
+            //currentHighBetAmount = bigBlindAmount;
             this.PluginHost.BroadcastEvent(currentRoundActors, 0, ROUNDSTART, this.generalData, (byte)0);
            
-            this.delayTimer = this.PluginHost.CreateOneTimeTimer(null, new Action(this.TurnStartCardCast), 2);
+            this.delayTimer = this.PluginHost.CreateOneTimeTimer(null, new Action(this.TurnStartCardDistribute), 2);
             //this.PluginHost.BroadcastEvent(temPlayer, 0, SWITCHTURN, this.generalData, (byte)0);
             //this.PluginHost.BroadcastEvent((byte)0, 0, (byte)0, ROUNDSTART, this.generalData, (byte)0);
             //this.PluginHost.BroadcastEvent(currentRoundPlayers, 0, ROUNDSTART, this.generalData, (byte)0);
@@ -232,7 +240,7 @@ namespace PokerPlugin
         }
         object delayTimer;
         
-        private void TurnStartCardCast()
+        private void TurnStartCardDistribute()
         {
             this.PluginHost.StopTimer(delayTimer);
             foreach (var actor in DRoomPlayersData.Keys)
@@ -247,13 +255,16 @@ namespace PokerPlugin
                 //Dictionary<int, int> suitvalue = new Dictionary<int, int>();
                 //suitvalue[playerData.card1data.suit] = playerData.card1data.rank; suitvalue[playerData.card2data.suit] = playerData.card2data.rank;
                 int[] playerCardData = new int[4]; playerCardData[0] = playerData.card1.suit; playerCardData[1] = playerData.card1.rank; playerCardData[2] = playerData.card2.suit; playerCardData[3] = playerData.card2.rank;
-                this.generalData[(byte)1] = currentRoundPlayers[currentPlayerTurn].playerActorNo;
+                this.generalData[(byte)1] = currentRoundPlayers[currentPlayerTurnIndex].playerActorNo;
 
                 this.generalData[(byte)2] = playerCardData;
                 this.generalData[(byte)3] = playerData.card1.cardData;
                 this.PluginHost.BroadcastEvent(temPlayer, 0, TURNSTART, this.generalData, (byte)0);
+               
             }
-            
+            SwitchPlayerTurn(currentRoundActors[currentPlayerTurnIndex]);
+            currentRoundPlayers[bigBlindIndex].turnComplete = false;
+           
         }
 
         private void EndPokerRound()
@@ -299,20 +310,97 @@ namespace PokerPlugin
 
 
         }
-
-
-        object autoTimer;
-        void AutoPlay()
+        private void SwitchPlayerTurn(int currentActor)
         {
-            int sendActor = currentPlayerTurn;
-            this.PluginHost.BroadcastEvent(0, sendActor, 0, CHECK, this.generalData, (byte)0);
-            currentPlayerTurn++;
-            if (pokerPhase > 3)
+
+            this.pluginLogger.InfoFormat("\n Switch..CurrentPlayerIndex: {0} , CurrentHightAmount: {1} , PlayerDebt: {2}", currentPlayerTurnIndex, currentHighBetAmount, currentRoundPlayers[currentPlayerTurnIndex].BetDebt);
+            if (currentActor != currentRoundActors[currentPlayerTurnIndex]) return;
+            bool cycleComplete = true;
+            currentRoundPlayers[currentPlayerTurnIndex].turnComplete = true;
+            foreach (var player in currentRoundPlayers) { if (!player.turnComplete) cycleComplete = false; }
+            //bool cycleComplete = currentPlayerTurn % currentRoundActors.Count == 0 ? true : false;
+            //playerTurnIndex++;
+            int allInCount=0;
+            for(int i=0; i<currentRoundPlayers.Count; i++)
             {
-                EndPokerRound();
-                this.PluginHost.StopTimer(autoTimer);
+                currentPlayerTurnIndex = (currentPlayerTurnIndex + 1) % currentRoundActors.Count;  //next turn player
+                if (currentRoundPlayers[currentPlayerTurnIndex].underAllin)
+                {
+                    allInCount++;
+                    continue;
+                }
+                else
+                    break;
+
             }
+            if(allInCount>=currentRoundPlayers.Count-1)
+            {
+                while(pokerPhase<=3)
+                {
+                    pokerPhase++;
+                    SendTableCardsToPlayers(pokerPhase);
+                }
+            }
+            
+            
+            this.pluginLogger.InfoFormat("\n CurrentPlayerIndex: {0} , PokerPhase: {1} , PlayerDebt: {2}\n", currentPlayerTurnIndex, pokerPhase, currentRoundPlayers[currentPlayerTurnIndex].BetDebt);
+            if (cycleComplete) //currentPlayerTurn >= (currentRoundPlayers.Count-1
+            {
+                currentHighBetAmount = 0;
+                foreach (var player in currentRoundPlayers) player.turnComplete = false;
+                //currentPlayerTurn = 1;
+                pokerPhase++;
+                if (pokerPhase > 3)
+                {
+                    EndPokerRound();
+                }
+                else
+                    SendTableCardsToPlayers(pokerPhase);
+            }
+
+            if (!roundInProgress) return;
+
+            float callAmount = currentRoundPlayers[currentPlayerTurnIndex].BetDebt;
+            this.playerTurnData[(byte)0] = callAmount;
+            this.playerTurnData[(byte)2] = currentRoundPlayers[currentPlayerTurnIndex].playerActorNo;// this.generalData[(byte)1] = currentRoundActors[currentPlayerTurn];
+            this.PluginHost.BroadcastEvent(currentRoundActors, 0, SWITCHTURN, this.playerTurnData, (byte)0);
+
         }
+
+        void PlayerPlaceBet(int actorNO, float betAmount)
+        {
+            foreach (var player in currentRoundPlayers)
+            {
+                player.BetDebt += betAmount;
+                player.turnComplete = false;
+            }
+            currentHighBetAmount += betAmount;
+            DRoomPlayersData[actorNO].PlaceOrAcceptBet(betAmount);
+            if (DRoomPlayersData[actorNO].BetDebt == 0)
+                DRoomPlayersData[actorNO].turnComplete = true;
+
+            this.pluginLogger.InfoFormat("\n PlaceBet:  {0} , CurrentHightAmount: {1} , PlayerDebt: {2}\n", DRoomPlayersData[actorNO].playerName, currentHighBetAmount, DRoomPlayersData[actorNO].BetDebt);
+           
+            
+        }
+        void PlayerAcceptBet(int actorNO, float betAmount)
+        {
+            var player = DRoomPlayersData[actorNO];
+            player.PlaceOrAcceptBet(betAmount);
+            this.pluginLogger.InfoFormat("\n ACCEPT:  {0} , CurrentHightAmount: {1} , PlayerDebt: {2}\n", DRoomPlayersData[actorNO].playerName, currentHighBetAmount, DRoomPlayersData[actorNO].BetDebt);
+            if (player.BetDebt == 0)
+                player.turnComplete = true;
+            //SwitchPlayerTurn(actorNO);
+        }
+        void PlayerFold(int actorNo) 
+        {
+            int prevActorIndex = currentPlayerTurnIndex-1 ==-1? currentRoundActors.Count - 1 : currentPlayerTurnIndex -1;
+            var prevActor = currentRoundActors[prevActorIndex];
+            currentRoundActors.Remove(DRoomPlayersData[actorNo].playerActorNo);
+            currentRoundPlayers.Remove(DRoomPlayersData[actorNo]);
+            currentPlayerTurnIndex = currentRoundActors.IndexOf(prevActor);
+        }
+      
         int currentSeatPos = -1;
         Dictionary<int, int> DActorPositon = new Dictionary<int, int>();
         int pokerPhase = 0;
@@ -321,41 +409,36 @@ namespace PokerPlugin
 
             if (info.Request.EvCode == CHECK)
             {
-
-                int playerIndex = currentPlayerTurn;
-                this.pluginLogger.InfoFormat("\n Check called by Actor {0} - {1} -CHECK, CurrentPlayerIndex {2} \n....\n RoundPlayercount:- {3}..\n", info.ActorNr, info.Nickname, currentPlayerTurn, DRoomPlayersData[currentRoundActors[currentPlayerTurn]].playerName, currentRoundPlayers.Count);
-                if (info.ActorNr != currentRoundActors[playerIndex]) return;
-                bool cycleComplete = true;
-                currentRoundPlayers[playerIndex].turnComplete = true;
-                foreach (var player in currentRoundPlayers) { if (!player.turnComplete) cycleComplete = false; }
-                //bool cycleComplete = currentPlayerTurn % currentRoundActors.Count == 0 ? true : false;
-                //playerTurnIndex++;
-                currentPlayerTurn = (currentPlayerTurn + 1) % currentRoundActors.Count;
-                playerIndex = currentPlayerTurn;
-                this.pluginLogger.InfoFormat("\n PlayerCount: {0}  \n", currentRoundPlayers.Count);
-                if (cycleComplete) //currentPlayerTurn >= (currentRoundPlayers.Count-1
-                {
-                    foreach (var player in currentRoundPlayers) player.turnComplete = false;
-                    //currentPlayerTurn = 1;
-                    pokerPhase++;
-                    if (pokerPhase > 3)
-                    {
-                        EndPokerRound();
-                    }
-                    else
-                        SendTableCardsToPlayers(pokerPhase);
-                }
-
-                if (!roundInProgress) return;
-                this.generalData[(byte)0] = null;
-                this.generalData[(byte)2] = currentRoundPlayers[playerIndex].playerActorNo;// this.generalData[(byte)1] = currentRoundActors[currentPlayerTurn];
-                this.PluginHost.BroadcastEvent(currentRoundActors, 0, SWITCHTURN, this.generalData, (byte)0);
+                
+                this.pluginLogger.InfoFormat("\n Check called by Actor {0} - {1} -CHECK, CurrentPlayerIndex {2} \n....\n RoundPlayercount:- {3}..\n", info.ActorNr, info.Nickname, currentPlayerTurnIndex, DRoomPlayersData[currentRoundActors[currentPlayerTurnIndex]].playerName, currentRoundPlayers.Count);
+                if (currentRoundActors[currentPlayerTurnIndex] != info.ActorNr) return;
+                SwitchPlayerTurn(info.ActorNr);
                 //SendTableCardsToPlayers(pokerPhase);
+            }
+            if(info.Request.EvCode == PLACEBET)
+            {
+
+                this.pluginLogger.InfoFormat("\n RAISE called by Actor {0} - {1} -CHECK, CurrentPlayerIndex {2} \n....\n RoundPlayercount:- {3}..\n", info.ActorNr, info.Nickname, currentPlayerTurnIndex, DRoomPlayersData[currentRoundActors[currentPlayerTurnIndex]].playerName, currentRoundPlayers.Count);
+                if (currentRoundActors[currentPlayerTurnIndex] != info.ActorNr) return;
+                float betAmount = (float)info.Request.Data;
+                PlayerAcceptBet(info.ActorNr, DRoomPlayersData[info.ActorNr].BetDebt);
+                PlayerPlaceBet(info.ActorNr, betAmount);
+                SwitchPlayerTurn(info.ActorNr);
+            }
+            if(info.Request.EvCode == ACCEPTBET)
+            {
+                this.pluginLogger.InfoFormat("\n CALL called by Actor {0} - {1} -CHECK, CurrentPlayerIndex {2} \n....\n RoundPlayercount:- {3}..\n", info.ActorNr, info.Nickname, currentPlayerTurnIndex, DRoomPlayersData[currentRoundActors[currentPlayerTurnIndex]].playerName, currentRoundPlayers.Count);
+                if (currentRoundActors[currentPlayerTurnIndex] != info.ActorNr) return;
+
+                PlayerAcceptBet(info.ActorNr, DRoomPlayersData[info.ActorNr].BetDebt);
+                SwitchPlayerTurn(info.ActorNr);
             }
             if (info.Request.EvCode == FOLD)
             {
-                int playerIndex = currentPlayerTurn - 1;
-                this.pluginLogger.InfoFormat("\n Fold called by Actor {0} - {1} -FOLD, CurrentPlayerTurn {2} \n....\n RoundPlayercount:- {3}..\n", info.ActorNr, info.Nickname, currentPlayerTurn, DRoomPlayersData[currentRoundActors[currentPlayerTurn - 1]].playerName, currentRoundPlayers.Count);
+                int playerIndex = currentPlayerTurnIndex - 1;
+                this.pluginLogger.InfoFormat("\n Fold called by Actor {0} - {1} -FOLD, CurrentPlayerTurn {2} \n....\n RoundPlayercount:- {3}..\n", info.ActorNr, info.Nickname, currentPlayerTurnIndex, DRoomPlayersData[currentRoundActors[currentPlayerTurnIndex - 1]].playerName, currentRoundPlayers.Count);
+                if (currentRoundActors[currentPlayerTurnIndex] != info.ActorNr) return;
+                PlayerFold(info.ActorNr);return;
                 if (info.ActorNr != currentRoundActors[playerIndex]) return;
 
 
@@ -370,7 +453,7 @@ namespace PokerPlugin
                     if (!player.turnComplete)
                     {
                         cycleComplete = false;
-                        currentPlayerTurn = currentRoundPlayers.IndexOf(player) + 1;
+                        currentPlayerTurnIndex = currentRoundPlayers.IndexOf(player) + 1;
                         break;
                     }
                 }
@@ -380,7 +463,7 @@ namespace PokerPlugin
                 if (cycleComplete) //currentPlayerTurn > (currentRoundPlayers.Count)
                 {
                     foreach (var player in currentRoundPlayers) player.turnComplete = false;
-                    currentPlayerTurn = 1;
+                    currentPlayerTurnIndex = 1;
                     pokerPhase++;
                     if (pokerPhase > 3)
                     {
@@ -393,7 +476,7 @@ namespace PokerPlugin
                 if (!roundInProgress) return;
                 this.generalData.Clear();
                 this.generalData[(byte)0] = info.ActorNr;
-                playerIndex = currentPlayerTurn - 1;
+                playerIndex = currentPlayerTurnIndex - 1;
                 this.generalData[(byte)2] = currentRoundPlayers[playerIndex].playerActorNo; //this.generalData[(byte)3] = currentRoundActors[currentPlayerTurn];
                 this.PluginHost.BroadcastEvent(currentRoundActors, 0, SWITCHTURN, this.generalData, (byte)0);
 
@@ -562,22 +645,6 @@ namespace PokerPlugin
 
 
 
-    #region PokerCardLogic
-
-
-
-
-
-    public enum PlayerRole
-    {
-        Dealer, SmallBlinder, Bigblinder
-    }
-
-
-
-
-
-    #endregion
-
+ 
 
 }

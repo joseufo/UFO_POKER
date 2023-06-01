@@ -7,48 +7,49 @@ using TMPro;
 public class PokerPlayer : MonoBehaviour
 {
 
-    public string PlayerName;
-    public TMP_Text playerText;
-    public TMP_Text rankingText;
-    public TMP_Text position;
-    public int TotalPlayers { get; set; } = 2;
-    public int TurnPosition { get; set; } = 0;
-    //public int[] PlayerStatus { get; set; }  // [id, callraisefolded, chips, chips wagered] 
-    public int DeckState { get; set; } = 0;
+    public string PlayerName { get; set; }
+  
 
-    public int Coins { get; set; } = 0;
-    
-    public int PlayerID { get; set; } = -1;
-    public bool Folded { get; set; } = false;
-    public bool Called { get; set; } = false;
-    public bool Raised { get; set; } = false;
-    public bool Checked { get; set; } = false;
-    public int RaiseAmount { get; set; } = 0;
-    public int PotSize { get; set; } = 0;
-
+    [SerializeField] GameObject UIPrefab;
+    [SerializeField] Transform PlayerUIPos;
+    [SerializeField] GameObject BetObject;
+    TMP_Text betAmountText;
     public bool isLocalPlayer;
+    GameObject PlayerUIObject;
+    PlayerStatsUI playerUI;
     public PlayerData playerData = new PlayerData();
     // Start is called before the first frame update
     [SerializeField] PokerCard Card1, Card2;
 
     public Card[] PlayerHand = new Card[2];
     [System.NonSerialized] public int[] rankScores = new int[3] { 0, 0, 0, };
-    void Start()
+    
+    private void Awake()
     {
-        
-            
-        //handCards = new Hand();
-        //SetInitialCards(Card.Suit.Diamonds, Random.Range(2, 13), Card.Suit.Spades, Random.Range(2, 13));
-       // AddTestCardHand();
-
-    }
-    //public List<PokerCard> PlayerHand = new List<PokerCard>();
-    public void DisplayData()
-    {
-        playerText.text = playerData.playerName;
-        position.text = playerData.playerPosition.ToString();
+        PlayerUIObject = Instantiate(UIPrefab, PlayerUIPos, false);
+        playerUI = PlayerUIObject.GetComponent<PlayerStatsUI>();
+        PlayerUIObject.SetActive(false);
+        betAmountText = BetObject.GetComponentInChildren<TMP_Text>();
+        BetObject.SetActive(false);
     }
     
+    //public List<PokerCard> PlayerHand = new List<PokerCard>();
+    public void SetInitPlayerData()
+    {
+        PlayerUIObject.SetActive(true);
+        playerUI.SetInitPlayerData(playerData);
+        BetObject.SetActive(true);
+    }
+    IEnumerator BetAnim()
+    {
+        yield return null;
+    }
+    public void PutOutCoins(float amount)
+    {
+        playerData.Coins -= amount;
+        betAmountText.text = amount.ToString();
+        playerUI.UpdateCoinText(playerData.Coins);
+    }
     public void SetAndShowPlayerCards(Card cardData1, Card cardData2)
     {
        
@@ -64,6 +65,11 @@ public class PokerPlayer : MonoBehaviour
         //PlayerHand[1] = new Card();
         PlayerHand[1] = cardData2;
     }
+    string[] playerRoles = new string[4] { "D", "SB", "BB", "" };
+    public void SetPlayerRole(int playerRole)
+    {
+        playerUI.SetPlayerRole(playerRoles[playerRole]);
+    }
     public void ShowBackCards()
     {
         Card1.ShowBack();
@@ -78,22 +84,9 @@ public class PokerPlayer : MonoBehaviour
 
     public void SetCardRankingText(string cardRanking)
     {
-        rankingText.text = cardRanking;
+        playerUI.SetHandRanking(cardRanking);
     }
-    //public void SetInitialCards(Card.SUIT card1Suit, int card1Rank, Card.CSuit card2Suit , int card2Rank)
-    //{
-    //    Card1.SetCardData(card1Suit, card1Rank);
-    //    Card2.SetCardData(card2Suit, card2Rank);
-    //    playerHandCards.Add(Card1.CardData);
-    //    playerHandCards.Add(Card2.CardData);
-      
-        
-    //    foreach(var card in playerHandCards)
-    //    {
-    //        Debug.Log(card.suit + ", " + card.rank);
-    //    }
-            
-    //}
+   
 
     
     

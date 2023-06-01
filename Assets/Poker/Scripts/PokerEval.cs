@@ -236,7 +236,7 @@ public class PokerEval : MonoBehaviour
     {
 
         bool tmpRet = false;
-
+        return tmpRet;
         int aceLoc = -1;
         Dictionary<int, int> tempDict = new Dictionary<int, int>() { { 10, 10 }, { 11, 11 }, { 12, 12 }, { 13, 13 } };
         List<Card> allCards = getAllCardsData(data);
@@ -939,13 +939,13 @@ public class PokerEval : MonoBehaviour
             if (pdList[x].completeEvalData.HighCardOthersBestCards[0] < highCard)
             {
                 //Debug.Log("getWinnerCheck_HighCard REMOVE : " + pdList[x].playerPosition + " : " + pdList[x].completeResultStruct.HighCardOthersBestCards[0]); 
-                tmpRetToRemove.Add(pdList[x].playerPosition);
+                tmpRetToRemove.Add(pdList[x].seatPos);
             }
         }
 
         for (int x = 0; x < tmpRetToRemove.Count; x++)
         {
-            PlayerData pd = pdList.Find(item => item.playerPosition == tmpRetToRemove[x]);
+            PlayerData pd = pdList.Find(item => item.seatPos == tmpRetToRemove[x]);
             pdList.Remove(pd);
         }
 
@@ -955,8 +955,8 @@ public class PokerEval : MonoBehaviour
             tmpRetToRemove.Clear();
             for (int x = 0; x < pdList.Count; x++) { if (pdList[x].completeEvalData.HighCardOthersBestCards[1] > highCard) { highCard = pdList[x].completeEvalData.HighCardOthersBestCards[1]; } }
             //Debug.Log("getWinnerCheck_HighCard highCard [1] : " + highCard); 
-            for (int x = 0; x < pdList.Count; x++) { if (pdList[x].completeEvalData.HighCardOthersBestCards[1] < highCard) { tmpRetToRemove.Add(pdList[x].playerPosition); } }
-            for (int x = 0; x < tmpRetToRemove.Count; x++) { PlayerData pd = pdList.Find(item => item.playerPosition == tmpRetToRemove[x]); pdList.Remove(pd); }
+            for (int x = 0; x < pdList.Count; x++) { if (pdList[x].completeEvalData.HighCardOthersBestCards[1] < highCard) { tmpRetToRemove.Add(pdList[x].seatPos); } }
+            for (int x = 0; x < tmpRetToRemove.Count; x++) { PlayerData pd = pdList.Find(item => item.seatPos == tmpRetToRemove[x]); pdList.Remove(pd); }
         }
 
         highCard = 0; // check list 2
@@ -965,8 +965,8 @@ public class PokerEval : MonoBehaviour
             tmpRetToRemove.Clear();
             for (int x = 0; x < pdList.Count; x++) { if (pdList[x].completeEvalData.HighCardOthersBestCards[2] > highCard) { highCard = pdList[x].completeEvalData.HighCardOthersBestCards[2]; } }
             //Debug.Log("getWinnerCheck_HighCard highCard [2] : " + highCard); 
-            for (int x = 0; x < pdList.Count; x++) { if (pdList[x].completeEvalData.HighCardOthersBestCards[2] < highCard) { tmpRetToRemove.Add(pdList[x].playerPosition); } }
-            for (int x = 0; x < tmpRetToRemove.Count; x++) { PlayerData pd = pdList.Find(item => item.playerPosition == tmpRetToRemove[x]); pdList.Remove(pd); }
+            for (int x = 0; x < pdList.Count; x++) { if (pdList[x].completeEvalData.HighCardOthersBestCards[2] < highCard) { tmpRetToRemove.Add(pdList[x].seatPos); } }
+            for (int x = 0; x < tmpRetToRemove.Count; x++) { PlayerData pd = pdList.Find(item => item.seatPos == tmpRetToRemove[x]); pdList.Remove(pd); }
         }
 
         highCard = 0; // check list 3
@@ -975,8 +975,8 @@ public class PokerEval : MonoBehaviour
             tmpRetToRemove.Clear();
             for (int x = 0; x < pdList.Count; x++) { if (pdList[x].completeEvalData.HighCardOthersBestCards[3] > highCard) { highCard = pdList[x].completeEvalData.HighCardOthersBestCards[3]; } }
             //Debug.Log("getWinnerCheck_HighCard highCard [3] : " + highCard); 
-            for (int x = 0; x < pdList.Count; x++) { if (pdList[x].completeEvalData.HighCardOthersBestCards[3] < highCard) { tmpRetToRemove.Add(pdList[x].playerPosition); } }
-            for (int x = 0; x < tmpRetToRemove.Count; x++) { PlayerData pd = pdList.Find(item => item.playerPosition == tmpRetToRemove[x]); pdList.Remove(pd); }
+            for (int x = 0; x < pdList.Count; x++) { if (pdList[x].completeEvalData.HighCardOthersBestCards[3] < highCard) { tmpRetToRemove.Add(pdList[x].seatPos); } }
+            for (int x = 0; x < tmpRetToRemove.Count; x++) { PlayerData pd = pdList.Find(item => item.seatPos == tmpRetToRemove[x]); pdList.Remove(pd); }
         }
 
         highCard = 0; // check list 4
@@ -985,8 +985,8 @@ public class PokerEval : MonoBehaviour
             tmpRetToRemove.Clear();
             for (int x = 0; x < pdList.Count; x++) { if (pdList[x].completeEvalData.HighCardOthersBestCards[4] > highCard) { highCard = pdList[x].completeEvalData.HighCardOthersBestCards[4]; } }
             //Debug.Log("getWinnerCheck_HighCard highCard [3] : " + highCard); 
-            for (int x = 0; x < pdList.Count; x++) { if (pdList[x].completeEvalData.HighCardOthersBestCards[4] < highCard) { tmpRetToRemove.Add(pdList[x].playerPosition); } }
-            for (int x = 0; x < tmpRetToRemove.Count; x++) { PlayerData pd = pdList.Find(item => item.playerPosition == tmpRetToRemove[x]); pdList.Remove(pd); }
+            for (int x = 0; x < pdList.Count; x++) { if (pdList[x].completeEvalData.HighCardOthersBestCards[4] < highCard) { tmpRetToRemove.Add(pdList[x].seatPos); } }
+            for (int x = 0; x < tmpRetToRemove.Count; x++) { PlayerData pd = pdList.Find(item => item.seatPos == tmpRetToRemove[x]); pdList.Remove(pd); }
         }
 
 
@@ -1002,7 +1002,7 @@ public class PokerEval : MonoBehaviour
 
         string pairWinDebug = "Winnerss: ";
         foreach (var winner in pdList)
-            pairWinDebug += "[" + winner.playerName + ", " + winner.playerPosition + "], ";
+            pairWinDebug += "[" + winner.playerName + ", " + winner.seatPos + "], ";
         Debug.LogError(pairWinDebug);
         List<int> tmpRetToRemove = new List<int>();
 
@@ -1012,8 +1012,8 @@ public class PokerEval : MonoBehaviour
             if (pdList[x].completeEvalData.PairValue > maxPairValue) { maxPairValue = pdList[x].completeEvalData.PairValue; }
         }
         //Debug.Log("getWinnerCheck_Pair start -> *** maxPairValue *** : " + maxPairValue);
-        for (int x = 0; x < pdList.Count; x++) { if (pdList[x].completeEvalData.PairValue < maxPairValue) { tmpRetToRemove.Add(pdList[x].playerPosition); } }
-        for (int x = 0; x < tmpRetToRemove.Count; x++) { PlayerData pd = pdList.Find(item => item.playerPosition == tmpRetToRemove[x]); pdList.Remove(pd); }
+        for (int x = 0; x < pdList.Count; x++) { if (pdList[x].completeEvalData.PairValue < maxPairValue) { tmpRetToRemove.Add(pdList[x].seatPos); } }
+        for (int x = 0; x < tmpRetToRemove.Count; x++) { PlayerData pd = pdList.Find(item => item.seatPos == tmpRetToRemove[x]); pdList.Remove(pd); }
 
         if (pdList.Count > 1)
         {
@@ -1028,8 +1028,8 @@ public class PokerEval : MonoBehaviour
                 if (pdList[x].completeEvalData.PairOthersBestCards[0] > maxOthersCardValue) { maxOthersCardValue = pdList[x].completeEvalData.PairOthersBestCards[0]; }
             }
             //Debug.Log("getWinnerCheck_Pair start -> maxPairValue [0]: " + maxOthersCardValue);
-            for (int x = 0; x < pdList.Count; x++) { if (pdList[x].completeEvalData.PairOthersBestCards[0] < maxOthersCardValue) { tmpRetToRemove.Add(pdList[x].playerPosition); } }
-            for (int x = 0; x < tmpRetToRemove.Count; x++) { PlayerData pd = pdList.Find(item => item.playerPosition == tmpRetToRemove[x]); pdList.Remove(pd); }
+            for (int x = 0; x < pdList.Count; x++) { if (pdList[x].completeEvalData.PairOthersBestCards[0] < maxOthersCardValue) { tmpRetToRemove.Add(pdList[x].seatPos); } }
+            for (int x = 0; x < tmpRetToRemove.Count; x++) { PlayerData pd = pdList.Find(item => item.seatPos == tmpRetToRemove[x]); pdList.Remove(pd); }
 
             maxOthersCardValue = 0; // check 1
             if (pdList.Count > 1)
@@ -1037,8 +1037,8 @@ public class PokerEval : MonoBehaviour
                 tmpRetToRemove.Clear();
                 for (int x = 0; x < pdList.Count; x++) { if (pdList[x].completeEvalData.PairOthersBestCards[1] > maxOthersCardValue) { maxOthersCardValue = pdList[x].completeEvalData.PairOthersBestCards[1]; } }
                 //Debug.Log("getWinnerCheck_Pair start -> maxPairValue [1]: " + maxOthersCardValue);
-                for (int x = 0; x < pdList.Count; x++) { if (pdList[x].completeEvalData.PairOthersBestCards[1] < maxOthersCardValue) { tmpRetToRemove.Add(pdList[x].playerPosition); } }
-                for (int x = 0; x < tmpRetToRemove.Count; x++) { PlayerData pd = pdList.Find(item => item.playerPosition == tmpRetToRemove[x]); pdList.Remove(pd); }
+                for (int x = 0; x < pdList.Count; x++) { if (pdList[x].completeEvalData.PairOthersBestCards[1] < maxOthersCardValue) { tmpRetToRemove.Add(pdList[x].seatPos); } }
+                for (int x = 0; x < tmpRetToRemove.Count; x++) { PlayerData pd = pdList.Find(item => item.seatPos == tmpRetToRemove[x]); pdList.Remove(pd); }
             }
 
             maxOthersCardValue = 0; // check 2 last
@@ -1047,8 +1047,8 @@ public class PokerEval : MonoBehaviour
                 tmpRetToRemove.Clear();
                 for (int x = 0; x < pdList.Count; x++) { if (pdList[x].completeEvalData.PairOthersBestCards[2] > maxOthersCardValue) { maxOthersCardValue = pdList[x].completeEvalData.PairOthersBestCards[2]; } }
                 //Debug.Log("getWinnerCheck_Pair start -> maxPairValue [2]: " + maxOthersCardValue);
-                for (int x = 0; x < pdList.Count; x++) { if (pdList[x].completeEvalData.PairOthersBestCards[2] < maxOthersCardValue) { tmpRetToRemove.Add(pdList[x].playerPosition); } }
-                for (int x = 0; x < tmpRetToRemove.Count; x++) { PlayerData pd = pdList.Find(item => item.playerPosition == tmpRetToRemove[x]); pdList.Remove(pd); }
+                for (int x = 0; x < pdList.Count; x++) { if (pdList[x].completeEvalData.PairOthersBestCards[2] < maxOthersCardValue) { tmpRetToRemove.Add(pdList[x].seatPos); } }
+                for (int x = 0; x < tmpRetToRemove.Count; x++) { PlayerData pd = pdList.Find(item => item.seatPos == tmpRetToRemove[x]); pdList.Remove(pd); }
             }
         }
 
@@ -1062,7 +1062,7 @@ public class PokerEval : MonoBehaviour
 
         string pairWinDebug = "Winnerss: ";
         foreach (var winner in pdList)
-            pairWinDebug += "[" + winner.playerName + ", " + winner.playerPosition + "], ";
+            pairWinDebug += "[" + winner.playerName + ", " + winner.seatPos + "], ";
         Debug.LogError(pairWinDebug);
         List<int> tmpRetToRemove = new List<int>();
 
@@ -1075,8 +1075,8 @@ public class PokerEval : MonoBehaviour
         }
         //Debug.Log("getWinnerCheck_TwoPair start -> highCardPair_x : " + highCardPair_x);
 
-        for (int x = 0; x < pdList.Count; x++) { if (pdList[x].completeEvalData.TwoPairHighCards.suit < highCardPair_x) { tmpRetToRemove.Add(pdList[x].playerPosition); } }
-        for (int x = 0; x < tmpRetToRemove.Count; x++) { PlayerData pd = pdList.Find(item => item.playerPosition == tmpRetToRemove[x]); pdList.Remove(pd); }
+        for (int x = 0; x < pdList.Count; x++) { if (pdList[x].completeEvalData.TwoPairHighCards.suit < highCardPair_x) { tmpRetToRemove.Add(pdList[x].seatPos); } }
+        for (int x = 0; x < tmpRetToRemove.Count; x++) { PlayerData pd = pdList.Find(item => item.seatPos == tmpRetToRemove[x]); pdList.Remove(pd); }
 
         if (pdList.Count > 1)
         {
@@ -1086,8 +1086,8 @@ public class PokerEval : MonoBehaviour
             float highCardPair_y = 0;
             for (int x = 0; x < pdList.Count; x++) { if (pdList[x].completeEvalData.TwoPairHighCards.rank > highCardPair_y) { highCardPair_y = pdList[x].completeEvalData.TwoPairHighCards.rank; } }
             //Debug.Log("getWinnerCheck_TwoPair start -> highCardPair_Y : " + highCardPair_y);
-            for (int x = 0; x < pdList.Count; x++) { if (pdList[x].completeEvalData.TwoPairHighCards.rank < highCardPair_y) { tmpRetToRemove.Add(pdList[x].playerPosition); } }
-            for (int x = 0; x < tmpRetToRemove.Count; x++) { PlayerData pd = pdList.Find(item => item.playerPosition == tmpRetToRemove[x]); pdList.Remove(pd); }
+            for (int x = 0; x < pdList.Count; x++) { if (pdList[x].completeEvalData.TwoPairHighCards.rank < highCardPair_y) { tmpRetToRemove.Add(pdList[x].seatPos); } }
+            for (int x = 0; x < tmpRetToRemove.Count; x++) { PlayerData pd = pdList.Find(item => item.seatPos == tmpRetToRemove[x]); pdList.Remove(pd); }
 
             if (pdList.Count > 1)
             {
@@ -1097,8 +1097,8 @@ public class PokerEval : MonoBehaviour
                 float fifithCard = 0;
                 for (int x = 0; x < pdList.Count; x++) { if (pdList[x].completeEvalData.TwoPairFifthCard > fifithCard) { fifithCard = pdList[x].completeEvalData.TwoPairFifthCard; } }
                 //Debug.Log("getWinnerCheck_TwoPair *** fifithCard *** : " + fifithCard);
-                for (int x = 0; x < pdList.Count; x++) { if (pdList[x].completeEvalData.TwoPairFifthCard < fifithCard) { tmpRetToRemove.Add(pdList[x].playerPosition); } }
-                for (int x = 0; x < tmpRetToRemove.Count; x++) { PlayerData pd = pdList.Find(item => item.playerPosition == tmpRetToRemove[x]); pdList.Remove(pd); }
+                for (int x = 0; x < pdList.Count; x++) { if (pdList[x].completeEvalData.TwoPairFifthCard < fifithCard) { tmpRetToRemove.Add(pdList[x].seatPos); } }
+                for (int x = 0; x < tmpRetToRemove.Count; x++) { PlayerData pd = pdList.Find(item => item.seatPos == tmpRetToRemove[x]); pdList.Remove(pd); }
 
                 if (pdList.Count > 1)
                 {
@@ -1132,8 +1132,8 @@ public class PokerEval : MonoBehaviour
         for (int x = 0; x < pdList.Count; x++) { if (pdList[x].completeEvalData.maxCardValue > highCardTris) { highCardTris = pdList[x].completeEvalData.maxCardValue; } }
         //Debug.Log("****************getWinnerCheck_Tris start -> highCardTris : " + highCardTris);
 
-        for (int x = 0; x < pdList.Count; x++) { if (pdList[x].completeEvalData.maxCardValue < highCardTris) { tmpRetToRemove.Add(pdList[x].playerPosition); } }
-        for (int x = 0; x < tmpRetToRemove.Count; x++) { PlayerData pd = pdList.Find(item => item.playerPosition == tmpRetToRemove[x]); pdList.Remove(pd); }
+        for (int x = 0; x < pdList.Count; x++) { if (pdList[x].completeEvalData.maxCardValue < highCardTris) { tmpRetToRemove.Add(pdList[x].seatPos); } }
+        for (int x = 0; x < tmpRetToRemove.Count; x++) { PlayerData pd = pdList.Find(item => item.seatPos == tmpRetToRemove[x]); pdList.Remove(pd); }
         //Debug.Log("****************getWinnerCheck_Tris start -> pdList.Count : " + pdList.Count);
 
         if (pdList.Count > 1)
@@ -1142,8 +1142,8 @@ public class PokerEval : MonoBehaviour
             tmpRetToRemove.Clear();
             for (int x = 0; x < pdList.Count; x++) { if (pdList[x].completeEvalData.TrisOthersCards[0] > bestOthers) { bestOthers = pdList[x].completeEvalData.TrisOthersCards[0]; } }
             //Debug.Log("check fourth card ****************getWinnerCheck_Tris start -> bestOthers : " + bestOthers);
-            for (int x = 0; x < pdList.Count; x++) { if (pdList[x].completeEvalData.TrisOthersCards[0] < bestOthers) { tmpRetToRemove.Add(pdList[x].playerPosition); } }
-            for (int x = 0; x < tmpRetToRemove.Count; x++) { PlayerData pd = pdList.Find(item => item.playerPosition == tmpRetToRemove[x]); pdList.Remove(pd); }
+            for (int x = 0; x < pdList.Count; x++) { if (pdList[x].completeEvalData.TrisOthersCards[0] < bestOthers) { tmpRetToRemove.Add(pdList[x].seatPos); } }
+            for (int x = 0; x < tmpRetToRemove.Count; x++) { PlayerData pd = pdList.Find(item => item.seatPos == tmpRetToRemove[x]); pdList.Remove(pd); }
 
             if (pdList.Count > 1)
             { // check fifth card
@@ -1151,8 +1151,8 @@ public class PokerEval : MonoBehaviour
                 tmpRetToRemove.Clear();
                 for (int x = 0; x < pdList.Count; x++) { if (pdList[x].completeEvalData.TrisOthersCards[1] > bestOthers) { bestOthers = pdList[x].completeEvalData.TrisOthersCards[1]; } }
                 //Debug.Log("check fifth card ****************getWinnerCheck_Tris start -> bestOthers : " + bestOthers);
-                for (int x = 0; x < pdList.Count; x++) { if (pdList[x].completeEvalData.TrisOthersCards[1] < bestOthers) { tmpRetToRemove.Add(pdList[x].playerPosition); } }
-                for (int x = 0; x < tmpRetToRemove.Count; x++) { PlayerData pd = pdList.Find(item => item.playerPosition == tmpRetToRemove[x]); pdList.Remove(pd); }
+                for (int x = 0; x < pdList.Count; x++) { if (pdList[x].completeEvalData.TrisOthersCards[1] < bestOthers) { tmpRetToRemove.Add(pdList[x].seatPos); } }
+                for (int x = 0; x < tmpRetToRemove.Count; x++) { PlayerData pd = pdList.Find(item => item.seatPos == tmpRetToRemove[x]); pdList.Remove(pd); }
             }
 
         }
@@ -1175,8 +1175,8 @@ public class PokerEval : MonoBehaviour
             highCard = 0;
             for (int x = 0; x < pdList.Count; x++) { if (pdList[x].completeEvalData.bestFive[y] > highCard) { highCard = pdList[x].completeEvalData.bestFive[y]; } }
 
-            for (int x = 0; x < pdList.Count; x++) { if (pdList[x].completeEvalData.bestFive[y] < highCard) { tmpRetToRemove.Add(pdList[x].playerPosition); } }
-            for (int x = 0; x < tmpRetToRemove.Count; x++) { PlayerData pd = pdList.Find(item => item.playerPosition == tmpRetToRemove[x]); pdList.Remove(pd); }
+            for (int x = 0; x < pdList.Count; x++) { if (pdList[x].completeEvalData.bestFive[y] < highCard) { tmpRetToRemove.Add(pdList[x].seatPos); } }
+            for (int x = 0; x < tmpRetToRemove.Count; x++) { PlayerData pd = pdList.Find(item => item.seatPos == tmpRetToRemove[x]); pdList.Remove(pd); }
             //Debug.Log("****************getWinnerCheck_Straight ******  -> pdList.Count : [" + y + "] : " + pdList.Count);
         }
         return pdList;
@@ -1205,8 +1205,8 @@ public class PokerEval : MonoBehaviour
                 highCard = 0;
                 for (int x = 0; x < pdList.Count; x++) { if (pdList[x].completeEvalData.bestFive[y] > highCard) { highCard = pdList[x].completeEvalData.bestFive[y]; } }
 
-                for (int x = 0; x < pdList.Count; x++) { if (pdList[x].completeEvalData.bestFive[y] < highCard) { tmpRetToRemove.Add(pdList[x].playerPosition); } }
-                for (int x = 0; x < tmpRetToRemove.Count; x++) { PlayerData pd = pdList.Find(item => item.playerPosition == tmpRetToRemove[x]); pdList.Remove(pd); }
+                for (int x = 0; x < pdList.Count; x++) { if (pdList[x].completeEvalData.bestFive[y] < highCard) { tmpRetToRemove.Add(pdList[x].seatPos); } }
+                for (int x = 0; x < tmpRetToRemove.Count; x++) { PlayerData pd = pdList.Find(item => item.seatPos == tmpRetToRemove[x]); pdList.Remove(pd); }
                 //Debug.Log("****************getWinnerCheck_Flush ******  -> pdList.Count : [" + y + "] : " + pdList.Count);
             }
         }
@@ -1235,8 +1235,8 @@ public class PokerEval : MonoBehaviour
 
             if (pdList[y].completeEvalData.FullHighCards.suit > highCard_x_tris) { highCard_x_tris = pdList[y].completeEvalData.FullHighCards.suit; }
 
-            for (int x = 0; x < pdList.Count; x++) { if (pdList[x].completeEvalData.FullHighCards.suit < highCard_x_tris) { tmpRetToRemove.Add(pdList[x].playerPosition); } }
-            for (int x = 0; x < tmpRetToRemove.Count; x++) { PlayerData pd = pdList.Find(item => item.playerPosition == tmpRetToRemove[x]); pdList.Remove(pd); }
+            for (int x = 0; x < pdList.Count; x++) { if (pdList[x].completeEvalData.FullHighCards.suit < highCard_x_tris) { tmpRetToRemove.Add(pdList[x].seatPos); } }
+            for (int x = 0; x < tmpRetToRemove.Count; x++) { PlayerData pd = pdList.Find(item => item.seatPos == tmpRetToRemove[x]); pdList.Remove(pd); }
 
         }
 
@@ -1249,8 +1249,8 @@ public class PokerEval : MonoBehaviour
                 tmpRetToRemove.Clear();
                 if (pdList[y].completeEvalData.FullHighCards.rank > highCard_y_tris) { highCard_y_tris = pdList[y].completeEvalData.FullHighCards.rank; }
 
-                for (int x = 0; x < pdList.Count; x++) { if (pdList[x].completeEvalData.FullHighCards.rank < highCard_y_tris) { tmpRetToRemove.Add(pdList[x].playerPosition); } }
-                for (int x = 0; x < tmpRetToRemove.Count; x++) { PlayerData pd = pdList.Find(item => item.playerPosition == tmpRetToRemove[x]); pdList.Remove(pd); }
+                for (int x = 0; x < pdList.Count; x++) { if (pdList[x].completeEvalData.FullHighCards.rank < highCard_y_tris) { tmpRetToRemove.Add(pdList[x].seatPos); } }
+                for (int x = 0; x < tmpRetToRemove.Count; x++) { PlayerData pd = pdList.Find(item => item.seatPos == tmpRetToRemove[x]); pdList.Remove(pd); }
 
             }
 
@@ -1269,8 +1269,8 @@ public class PokerEval : MonoBehaviour
         {
             if (pdList[x].completeEvalData.maxCardValue > maxCard) { maxCard = pdList[x].completeEvalData.maxCardValue; }
         }
-        for (int x = 0; x < pdList.Count; x++) { if (pdList[x].completeEvalData.maxCardValue < maxCard) { tmpRetToRemove.Add(pdList[x].playerPosition); } }
-        for (int x = 0; x < tmpRetToRemove.Count; x++) { PlayerData pd = pdList.Find(item => item.playerPosition == tmpRetToRemove[x]); pdList.Remove(pd); }
+        for (int x = 0; x < pdList.Count; x++) { if (pdList[x].completeEvalData.maxCardValue < maxCard) { tmpRetToRemove.Add(pdList[x].seatPos); } }
+        for (int x = 0; x < tmpRetToRemove.Count; x++) { PlayerData pd = pdList.Find(item => item.seatPos == tmpRetToRemove[x]); pdList.Remove(pd); }
 
 
         return pdList;
@@ -1288,8 +1288,8 @@ public class PokerEval : MonoBehaviour
             if (pdList[x].completeEvalData.maxCardValue > maxCard) { maxCard = pdList[x].completeEvalData.maxCardValue; }
         }
 
-        for (int x = 0; x < pdList.Count; x++) { if (pdList[x].completeEvalData.maxCardValue < maxCard) { tmpRetToRemove.Add(pdList[x].playerPosition); } }
-        for (int x = 0; x < tmpRetToRemove.Count; x++) { PlayerData pd = pdList.Find(item => item.playerPosition == tmpRetToRemove[x]); pdList.Remove(pd); }
+        for (int x = 0; x < pdList.Count; x++) { if (pdList[x].completeEvalData.maxCardValue < maxCard) { tmpRetToRemove.Add(pdList[x].seatPos); } }
+        for (int x = 0; x < tmpRetToRemove.Count; x++) { PlayerData pd = pdList.Find(item => item.seatPos == tmpRetToRemove[x]); pdList.Remove(pd); }
 
 
         //Debug.Log("getWinner_StraightFlush --->> maxCard : " + maxCard);

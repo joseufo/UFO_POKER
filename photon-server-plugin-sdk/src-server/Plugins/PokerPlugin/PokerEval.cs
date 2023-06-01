@@ -14,9 +14,31 @@ namespace PokerPlugin
         public int playerActorNo;
 
         public float Coins;
+        public float TotalCoins;
 
-        public float CurrentBet;
-        public float TotalBet;
+        public float CurrentBet = 0;
+        public float BetDebt = 0;
+        public float TotalBet = 0;
+        public void PlaceOrAcceptBet(float amount)
+        {
+            CurrentBet = amount;
+            if (CurrentBet < Coins)
+            {
+                Coins -= CurrentBet;
+                BetDebt -= CurrentBet;
+            }
+            else
+            {
+                CurrentBet = Coins;
+                Coins = 0;
+                BetDebt = 0;
+                underAllin = true;
+            }
+
+            
+            TotalBet += CurrentBet;
+        }
+
 
         public EvalData completeEvalData;
 
@@ -32,7 +54,7 @@ namespace PokerPlugin
 
         public bool turnComplete;
 
-        PlayerRole playerRole;
+
         //public int coeffCardsValOnFlopPhase = 0;
         //public int maxCardValOnFlopPhase = 0;
         //public int maxCardValueOnShowDown = 0;
@@ -376,7 +398,7 @@ namespace PokerPlugin
         bool check_StraightFlush(EvalData data)
         {
             bool tmpRet = false;
-
+            return tmpRet;
             int aceLoc = -1;
             Dictionary<int, int> tempDict = new Dictionary<int, int>() { { 10, 10 }, { 11, 11 }, { 12, 12 }, { 13, 13 } };
             List<Card> allCards = getAllCardsData(data);

@@ -5,9 +5,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LunarConsole", "LunarConsol
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PhotonRealtime", "PhotonRealtime.csproj", "{8859C5E9-9105-71F6-0312-85AF6C645457}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PhotonUnityNetworking", "PhotonUnityNetworking.csproj", "{EE38E4AC-7124-9E04-3AB2-4735251E5AB7}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Assembly-CSharp", "Assembly-CSharp.csproj", "{09C0D2BF-CA41-AAF5-41C9-643151303209}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PhotonUnityNetworking", "PhotonUnityNetworking.csproj", "{EE38E4AC-7124-9E04-3AB2-4735251E5AB7}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PhotonUnityNetworking.Utilities", "PhotonUnityNetworking.Utilities.csproj", "{BB9BCC43-4BB9-1D73-F213-64CB1B528BDD}"
 EndProject
@@ -37,14 +37,14 @@ Global
 		{8859C5E9-9105-71F6-0312-85AF6C645457}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8859C5E9-9105-71F6-0312-85AF6C645457}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8859C5E9-9105-71F6-0312-85AF6C645457}.Release|Any CPU.Build.0 = Release|Any CPU
-		{EE38E4AC-7124-9E04-3AB2-4735251E5AB7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{EE38E4AC-7124-9E04-3AB2-4735251E5AB7}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{EE38E4AC-7124-9E04-3AB2-4735251E5AB7}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{EE38E4AC-7124-9E04-3AB2-4735251E5AB7}.Release|Any CPU.Build.0 = Release|Any CPU
 		{09C0D2BF-CA41-AAF5-41C9-643151303209}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{09C0D2BF-CA41-AAF5-41C9-643151303209}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{09C0D2BF-CA41-AAF5-41C9-643151303209}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{09C0D2BF-CA41-AAF5-41C9-643151303209}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EE38E4AC-7124-9E04-3AB2-4735251E5AB7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EE38E4AC-7124-9E04-3AB2-4735251E5AB7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EE38E4AC-7124-9E04-3AB2-4735251E5AB7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EE38E4AC-7124-9E04-3AB2-4735251E5AB7}.Release|Any CPU.Build.0 = Release|Any CPU
 		{BB9BCC43-4BB9-1D73-F213-64CB1B528BDD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{BB9BCC43-4BB9-1D73-F213-64CB1B528BDD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BB9BCC43-4BB9-1D73-F213-64CB1B528BDD}.Release|Any CPU.ActiveCfg = Release|Any CPU
