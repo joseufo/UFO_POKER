@@ -1,8 +1,9 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using DG.Tweening;
 
 public class PokerPlayer : MonoBehaviour
 {
@@ -12,11 +13,13 @@ public class PokerPlayer : MonoBehaviour
 
     [SerializeField] GameObject UIPrefab;
     [SerializeField] Transform PlayerUIPos;
-    [SerializeField] GameObject BetObject;
-    TMP_Text betAmountText;
+    [SerializeField] GameObject TableBetObj;
+    [SerializeField] GameObject BetObj;
+    Vector3 betObjInitPosition;
+    TMP_Text amountPlacedtxt;
     public bool isLocalPlayer;
     GameObject PlayerUIObject;
-    PlayerStatsUI playerUI;
+    [System.NonSerialized]public PlayerStatsUI playerUI;
     public PlayerData playerData = new PlayerData();
     // Start is called before the first frame update
     [SerializeField] PokerCard Card1, Card2;
@@ -29,8 +32,10 @@ public class PokerPlayer : MonoBehaviour
         PlayerUIObject = Instantiate(UIPrefab, PlayerUIPos, false);
         playerUI = PlayerUIObject.GetComponent<PlayerStatsUI>();
         PlayerUIObject.SetActive(false);
-        betAmountText = BetObject.GetComponentInChildren<TMP_Text>();
-        BetObject.SetActive(false);
+        amountPlacedtxt = TableBetObj.transform.GetChild(0).GetComponent<TMP_Text>();
+        TableBetObj.SetActive(false);
+        betObjInitPosition = BetObj.transform.position;
+        BetObj.SetActive(false);
     }
     
     //public List<PokerCard> PlayerHand = new List<PokerCard>();
@@ -38,17 +43,26 @@ public class PokerPlayer : MonoBehaviour
     {
         PlayerUIObject.SetActive(true);
         playerUI.SetInitPlayerData(playerData);
-        BetObject.SetActive(true);
+        //BetObject.SetActive(true);
     }
-    IEnumerator BetAnim()
-    {
-        yield return null;
-    }
-    public void PutOutCoins(float amount)
+   
+    float currentPlacedAmount=0;
+    public void PlaceBetAmount(float amount)
     {
         playerData.Coins -= amount;
-        betAmountText.text = amount.ToString();
+        currentPlacedAmount += amount;
+        //amountPlacedtxt.text = "₹"+amount.ToString();
         playerUI.UpdateCoinText(playerData.Coins);
+        
+        BetObj.SetActive(true);
+        BetObj.transform.position = betObjInitPosition;
+        BetObj.transform.GetChild(0).GetComponent<TMP_Text>().text = "₹" + amount.ToString();
+        BetObj.transform.DOMove(TableBetObj.transform.position, 0.5f).OnComplete(delegate {amountPlacedtxt.text = "₹"+currentPlacedAmount.ToString(); BetObj.SetActive(false); TableBetObj.SetActive(true); });
+    }
+    public void ClearBets()
+    {
+        currentPlacedAmount = 0;
+        TableBetObj.SetActive(false);
     }
     public void SetAndShowPlayerCards(Card cardData1, Card cardData2)
     {
@@ -87,7 +101,15 @@ public class PokerPlayer : MonoBehaviour
         playerUI.SetHandRanking(cardRanking);
     }
    
-
+    public void GivePlayerCoins(float amount, Transform totalPotTransform)
+    {
+       
+        BetObj.transform.position = totalPotTransform.position;
+        BetObj.transform.GetChild(0).GetComponent<TMP_Text>().text = "₹" + amount.ToString();
+        BetObj.SetActive(true);
+        playerData.Coins += amount;
+        BetObj.transform.DOMove(betObjInitPosition, 0.7f).OnComplete(delegate { playerUI.UpdateCoinText(playerData.Coins); BetObj.SetActive(false); });
+    }
     
     
     

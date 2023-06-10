@@ -60,10 +60,14 @@
     <Compile Include="Assets\Photon\PhotonLibs\WebSocket\SocketWebTcp.cs" />
     <Compile Include="Assets\TestPoker\PokerProjectTest.cs" />
     <Compile Include="Assets\Poker\Scripts\Development\TestScript.cs" />
+    <Compile Include="Assets\DOTween Examples\Sequences.cs" />
     <Compile Include="Assets\Timer.cs" />
     <Compile Include="Assets\Poker\Scripts\PokerServManager.cs" />
     <Compile Include="Assets\photonTest.cs" />
+    <Compile Include="Assets\DOTween Examples\UGUI.cs" />
     <Compile Include="Assets\PokerRoomManager.cs" />
+    <Compile Include="Assets\DOTween Examples\Example Assets\DragTarget.cs" />
+    <Compile Include="Assets\DOTween Examples\Paths.cs" />
     <Compile Include="Assets\TestPoker\PlayerData.cs" />
     <Compile Include="Assets\Photon\PhotonLibs\WebSocket\WebSocket.cs" />
     <Compile Include="Assets\Poker\Scripts\Development\HandWinTest.cs" />
@@ -75,11 +79,14 @@
     <Compile Include="Assets\Poker\Scripts\PokerEval.cs" />
     <Compile Include="Assets\Poker\Scripts\Development\DevGamePlayTest.cs" />
     <Compile Include="Assets\Poker\Scripts\PokerPlayer.cs" />
+    <Compile Include="Assets\DOTween Examples\Follow.cs" />
+    <Compile Include="Assets\DOTween Examples\Basics.cs" />
     <Compile Include="Assets\PhotonManager.cs" />
     <Compile Include="Assets\TestPoker\BBTestResult.cs" />
-    <Compile Include="Assets\Poker\Scripts\PokerCardManager.cs" />
+    <Compile Include="Assets\Poker\Scripts\PokerUIManager.cs" />
     <Compile Include="Assets\Poker\Scripts\Development\CombScript.cs" />
     <Compile Include="Assets\SeatTransform.cs" />
+    <Compile Include="Assets\DOTween Examples\Materials.cs" />
     <Compile Include="Assets\PokerOnlineManager.cs" />
     <Compile Include="Assets\Poker\Scripts\Card.cs" />
   </ItemGroup>
@@ -775,6 +782,9 @@
     </Reference>
     <Reference Include="Unity.VisualScripting.SettingsProvider.Editor">
       <HintPath>Library\ScriptAssemblies\Unity.VisualScripting.SettingsProvider.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.2D.Sprite.Editor">
+      <HintPath>Library\ScriptAssemblies\Unity.2D.Sprite.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.TestTools.CodeCoverage.Editor.OpenCover.Mono.Reflection">
       <HintPath>Library\ScriptAssemblies\Unity.TestTools.CodeCoverage.Editor.OpenCover.Mono.Reflection.dll</HintPath>

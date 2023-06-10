@@ -43,7 +43,7 @@ namespace PokerPlugin
         public EvalData completeEvalData;
 
         public float turnAmount;
-        public bool isOutOfGame = false;
+        public bool isFolded = false;
         public bool runOutOfMoney = false;
         public bool underAllin = false;
         public bool isObserver = false;

@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -16,12 +16,13 @@ public class PokerOnlineManager : MonoBehaviour
     public Slider RaiseSlider;
     [SerializeField] GameObject PlayerChoicePanel;
     [SerializeField] TMP_Text CallCheckText;
+    [SerializeField] TMP_Text BetText;
     bool AutoCheck;
     public TMP_InputField NameInput;
     public Button JoinCreateButton;
     public TMP_Text InfoText;
     // Photon Event Codes from Server
-    const byte INITSEAT = 51, SEATPLAYER = 55, TIMERGAMESTART = 101, ROUNDSTART = 103, TURNSTART = 105, SWITCHTURN = 115,
+    const byte INITSEAT = 51, SEATPLAYER = 55, TIMERGAMESTART = 101, ROUNDSTART = 103, TURNSTART = 105, SWITCHTURN = 115, ROOMSTATE = 118,
             FLOPCARDS = 121, TURNCARD = 122, RIVERCARD = 123, ROUNDEND = 125;
     // Photon Event Codes from User
     const byte PLACEBET = 20, ACCEPTBET = 22, CHECK = 23, FOLD = 25;
@@ -29,6 +30,7 @@ public class PokerOnlineManager : MonoBehaviour
     int minPlayers = 2, maxPlayers = 5;
     string playerNametest;
 
+    float TotalPot;
 
     PokerRoomManager RoomManager;
     bool isMyturn, roundStarted;
@@ -176,19 +178,45 @@ public class PokerOnlineManager : MonoBehaviour
     {
         Debug.Log(isMyturn);
         if (!isMyturn) return;
-
-        CallEvent(ACCEPTBET, null, null);
-        if(currentCallAmount>0)
-        PokerClientManager.instance.ShowPlayerBet(PhotonNetwork.LocalPlayer.ActorNumber, currentCallAmount, false);
+        RaiseEventOptions raiseEventOptions = new RaiseEventOptions { Receivers = ReceiverGroup.All };
+        RoomManager.CallEvent(ACCEPTBET, (object)currentCallAmount, raiseEventOptions, SendOptions.SendReliable);
+        //if(currentCallAmount>0)
+        ///PokerClientManager.instance.PlacePlayerBet(PhotonNetwork.LocalPlayer.ActorNumber, currentCallAmount, false);
     }
-    public void RaiseAmount(float amount)
+
+    //void isPlayer
+    string amountString;
+    public void RaiseAmountConfig()
     {
-        Debug.Log(isMyturn);
+        var playerDatas = PokerClientManager.instance.DPokerRoomPlayers;
+        RaiseSlider.maxValue = isMyturn ? playerDatas[PhotonNetwork.LocalPlayer.ActorNumber].playerData.Coins : 100f;
+        RaiseSlider.minValue = BigBlindAmount;
+        RaiseSlider.value = RaiseSlider.minValue;
+        amountString = RaiseSlider.minValue.ToString();
+        BetText.text = "₹" + amountString;
+        RaiseSlider.onValueChanged.AddListener(delegate { int betValue = (int)RaiseSlider.value; amountString = betValue.ToString(); BetText.text = "₹" + amountString; RaiseSlider.value = betValue; });
         if (!isMyturn) return;
+
+
+
+    }
+    Dictionary<byte, object> playerSendData = new Dictionary<byte, object>();
+    public void RaiseAmount()
+    {
+
+
+        if (!isMyturn) return;
+        float amount = float.Parse(amountString); //RaiseSlider.value;
+        Debug.Log("RAISING ₹" + amount);
+
+        playerSendData[0] = (object)amount;
+        playerSendData[1] = (object)currentCallAmount;
         object dataContent = (object)amount;
-        
-        PokerClientManager.instance.ShowPlayerBet(PhotonNetwork.LocalPlayer.ActorNumber, currentCallAmount+amount, true);
-        CallEvent(PLACEBET, dataContent, null);
+
+        //PokerClientManager.instance.ShowPlayerBet(PhotonNetwork.LocalPlayer.ActorNumber, currentCallAmount+amount, true);
+        RaiseEventOptions raiseEventOptions = new RaiseEventOptions { Receivers = ReceiverGroup.All };
+        RoomManager.CallEvent(PLACEBET, playerSendData, raiseEventOptions, SendOptions.SendReliable);
+        //RoomManager.CallRpc(dataContent);
     }
 
     public void FoldButton()
@@ -196,36 +224,14 @@ public class PokerOnlineManager : MonoBehaviour
         Debug.Log(isMyturn);
         if (!isMyturn) return;
 
-        CallEvent(FOLD, null, null);
+
+        RoomManager.CallEvent(FOLD, null, null, SendOptions.SendReliable);
         InfoText.text = " You Folded  ";
         PokerClientManager.instance.Fold();
     }
 
-    void Update()
-    {
 
-    }
-    public void CallEvent(byte evCode, object DataContent, object type)
-    {
-        switch (evCode)
-        {
 
-            case ACCEPTBET:
-                PhotonNetwork.RaiseEvent(ACCEPTBET, null, null, SendOptions.SendReliable);
-                break;
-            case CHECK:
-                PhotonNetwork.RaiseEvent(CHECK, null, null, SendOptions.SendReliable);
-                //Debug.Log("Check Called");
-                break;
-            case FOLD:
-                PhotonNetwork.RaiseEvent(FOLD, null, null, SendOptions.SendReliable);
-                break;
-            case PLACEBET:
-                PhotonNetwork.RaiseEvent(PLACEBET, DataContent, null, SendOptions.SendReliable); 
-                break;
-        }
-
-    }
 
     public void PokerEvent(EventData photonEvent)
     {
@@ -294,7 +300,7 @@ public class PokerOnlineManager : MonoBehaviour
                 PokerClientManager.instance.AddOpponent(player);
             }
             else { Debug.LogError("NO PLAYER IN DICT WITH ACTORNO " + playerActorKey); }
-
+            PokerUIManager.instance.HideOutPlayerChoicePanel();
         }
         if (photonEvent.Code == TIMERGAMESTART)
         {
@@ -314,13 +320,13 @@ public class PokerOnlineManager : MonoBehaviour
             playerRolesActors[0] = (int)photonEvent.Parameters[0];
             playerRolesActors[1] = (int)photonEvent.Parameters[1];
             playerRolesActors[2] = (int)photonEvent.Parameters[2];
-            PokerClientManager.instance.RoundStart(playerRolesActors, SmallBlindAmount, BigBlindAmount);
+            PokerClientManager.instance.RoundStart(playerRolesActors, SmallBlindAmount, BigBlindAmount);            
             roundStarted = true;
         }
         if (photonEvent.Code == TURNSTART)
         {
-                
-           
+
+
             var startPlayerTurn = (int)photonEvent.Parameters[1];
             var playerCards = (int[])photonEvent.Parameters[2];
             var cardtest = (CardData)photonEvent.Parameters[3];
@@ -329,7 +335,7 @@ public class PokerOnlineManager : MonoBehaviour
             Card card1 = new Card(playerCards[0], playerCards[1]);
             Card card2 = new Card(playerCards[2], playerCards[3]);
 
-            PokerClientManager.instance.GivePlayerCards(card1, card2); 
+            PokerClientManager.instance.GivePlayerCards(card1, card2);
             //if (startPlayerTurn == PhotonNetwork.LocalPlayer.ActorNumber)
             //{
             //    InfoText.text = "Start, Your Turn";
@@ -343,7 +349,7 @@ public class PokerOnlineManager : MonoBehaviour
             //}
 
             Debug.Log("EVENTCARDATA: " + card1 + ", " + card2);
-            
+
         }
 
         if (photonEvent.Code == SWITCHTURN)
@@ -354,31 +360,15 @@ public class PokerOnlineManager : MonoBehaviour
             //{
             //    PokerClientManager.instance.PlayerSitBack((int)photonEvent.Parameters[0]);
             //}
-            var playerTurn = (int)photonEvent.Parameters[2];
-            if (playerTurn == PhotonNetwork.LocalPlayer.ActorNumber)
-            {
-                InfoText.text = "Your Turn";
-                PlayerChoicePanel.SetActive(true);
-                isMyturn = true;
-                if (AutoCheck) CallORCheckButton();
-                currentCallAmount = (float)photonEvent.Parameters[0];
-                if(currentCallAmount > 0f)
-                {
-                    CallCheckText.text = "CALL [" + currentCallAmount + "]";
-                    
-                }
-                else
-                {
-                    CallCheckText.text = "CHECK";
-                }
-            }
-            else
-            {
-                InfoText.text = "" + PokerClientManager.instance.DPokerRoomPlayers[playerTurn].PlayerName + "'s Turn";
-                PlayerChoicePanel.SetActive(false);
-                CallCheckText.text = "CHECK";
-                isMyturn = false;
-            }
+            float playerCallAmount =(float)photonEvent.Parameters[0];
+            bool cycleComplete = (bool)photonEvent.Parameters[1];
+            int turnActorNo = (int)photonEvent.Parameters[2];
+            if (cycleComplete) InfoText.text = "Cards Deal";
+            float delay = cycleComplete ? 0f : 0f;
+            PokerUIManager.instance.HideOutPlayerChoicePanel();
+            var playTurn = SwitchToPlayerTurn(turnActorNo, delay, playerCallAmount);
+            StartCoroutine(playTurn);
+            
         }
         if (photonEvent.Code == FLOPCARDS)
         {
@@ -389,7 +379,10 @@ public class PokerOnlineManager : MonoBehaviour
                 Card card = new Card(cards[i], cards[i + 3]);
                 flopCardList.Add(card);
             }
-            PokerClientManager.instance.SetBoardTableCard(flopCardList, 1);
+            PokerUIManager.instance.HideOutPlayerChoicePanel();
+            var coroutine = PokerClientManager.instance.SetPokerPhaseCards(flopCardList, 1);
+            StartCoroutine(coroutine);
+
         }
         if (photonEvent.Code == TURNCARD)
         {
@@ -397,8 +390,10 @@ public class PokerOnlineManager : MonoBehaviour
             List<Card> turncard = new List<Card>();
             Card card = new Card(cards[0], cards[1]);
             turncard.Add(card);
+            PokerUIManager.instance.HideOutPlayerChoicePanel();
+            var coroutine = PokerClientManager.instance.SetPokerPhaseCards(turncard, 2);
+            StartCoroutine(coroutine);
 
-            PokerClientManager.instance.SetBoardTableCard(turncard, 2);
         }
         if (photonEvent.Code == RIVERCARD)
         {
@@ -406,8 +401,11 @@ public class PokerOnlineManager : MonoBehaviour
             List<Card> rivercard = new List<Card>();
             Card card = new Card(cards[0], cards[1]);
             rivercard.Add(card);
+            PokerUIManager.instance.HideOutPlayerChoicePanel();
+            var coroutine = PokerClientManager.instance.SetPokerPhaseCards(rivercard, 3);
+            StartCoroutine(coroutine);
 
-            PokerClientManager.instance.SetBoardTableCard(rivercard, 3);
+
         }
         if (photonEvent.Code == ROUNDEND)
         {
@@ -415,26 +413,35 @@ public class PokerOnlineManager : MonoBehaviour
             InfoText.text = "End Round";
             isMyturn = false;
             var allPlayerCards = (Dictionary<int, int[]>)photonEvent.Parameters[0];
+            var WinnersPlayers = (Dictionary<int, float>)photonEvent.Parameters[1];
             foreach (var pactor in allPlayerCards.Keys)
             {
                 Card card1 = new Card(allPlayerCards[pactor][0], allPlayerCards[pactor][1]);
                 Card card2 = new Card(allPlayerCards[pactor][2], allPlayerCards[pactor][3]);
                 PokerClientManager.instance.DPokerRoomPlayers[pactor].SetAndShowPlayerCards(card1, card2);
             }
-            PokerClientManager.instance.RoundEnd();
+            PokerUIManager.instance.HideOutPlayerChoicePanel();
+            var courotine = PokerClientManager.instance.RoundEnd(WinnersPlayers);
+            StartCoroutine(courotine);
             roundStarted = false;
             //PhotonNetwork.Disconnect();
         }
 
-        if(photonEvent.Code == PLACEBET)
+        if (photonEvent.Code == PLACEBET)
         {
-            Debug.Log((int)photonEvent.Sender);
-            var data = photonEvent.CustomData;
+            // Debug.Log((int)photonEvent.Sender);
+            var data = (Dictionary<byte, object>)photonEvent.CustomData;
+
+            PokerClientManager.instance.PlacePlayerBet(photonEvent.Sender, (float)data[0] + (float)data[1], true);
+            Debug.LogError("PlaceBetPlayer: " + photonEvent.Sender + " Amount: " + (float)data[0] + (float)data[1]);
         }
         if (photonEvent.Code == ACCEPTBET)
         {
-            Debug.Log("Playeraccept: "+(int)photonEvent.Sender);
+            //Debug.Log("Playeraccept: "+(int)photonEvent.Sender);
             var data = photonEvent.CustomData;
+            if ((float)data != 0)
+                PokerClientManager.instance.PlacePlayerBet(photonEvent.Sender, (float)data, true);
+            Debug.LogError("AcceptBetPlayer: " + photonEvent.Sender + " Amount: " + (float)data);
         }
         //Debug.Log(photonEvent.Code);
         if (photonEvent.Code == 12)
@@ -444,6 +451,49 @@ public class PokerOnlineManager : MonoBehaviour
         //
     }
 
+    private IEnumerator SwitchToPlayerTurn(int turnActorNo, float delay, float actorCallAmount )
+    {
+        yield return new WaitForSecondsRealtime(delay);
+        PokerClientManager.instance.InitializePlayerTurnImage(turnActorNo);
+        if (turnActorNo == PhotonNetwork.LocalPlayer.ActorNumber)
+        {
+            InfoText.text = "Your Turn";
+
+            isMyturn = true;
+            if (AutoCheck) CallORCheckButton();
+            currentCallAmount = actorCallAmount;
+            float remainingCoins = PokerClientManager.instance.DPokerRoomPlayers[PhotonNetwork.LocalPlayer.ActorNumber].playerData.Coins;
+            if (actorCallAmount >= remainingCoins)
+            {
+                currentCallAmount = remainingCoins;
+            }
+                
+            if (currentCallAmount > 0f)
+            {
+                CallCheckText.text = "CALL [" + currentCallAmount + "]";
+                if (actorCallAmount >= remainingCoins)
+                {
+                    CallCheckText.text = "ALL-IN [" + currentCallAmount + "]";
+                }
+
+            }
+            else
+            {
+                CallCheckText.text = "CHECK";
+            }
+
+
+
+            PokerUIManager.instance.ShowInPlayerChoicePanel();//PlayerChoicePanel.SetActive(true)
+        }
+        else
+        {
+            InfoText.text = "" + PokerClientManager.instance.DPokerRoomPlayers[turnActorNo].PlayerName + "'s Turn";
+            PokerUIManager.instance.HideOutPlayerChoicePanel();//PlayerChoicePanel.SetActive(false);
+            CallCheckText.text = "CHECK";
+            isMyturn = false;
+        }
+    }
 
 
     bool countDownTimer = false;

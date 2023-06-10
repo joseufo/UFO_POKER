@@ -118,3 +118,20 @@ public class Class1
         }
     }
 }
+potPlayers list
+
+add folded players
+
+while potPlayerlist.count !==0
+
+	take minBet min (potPlayer.playertotalbet)
+
+	foreach player in potplayerlist
+
+    {
+    player.playertotalbet -= minBet;
+    if (player.playertotalbet == 0)
+        potPlayerlist.remove(player)
+
+
+    }

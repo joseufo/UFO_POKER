@@ -1,10 +1,11 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using System;
 using UnityEngine;
 using System.Linq;
 using UnityEngine.UI;
 using TMPro;
+using DG.Tweening;
 [System.Serializable]
 public class PlayerData
 {
@@ -187,29 +188,59 @@ public class PokerClientManager : MonoBehaviour
     IEnumerator Playerblinds(int[] playerRolesActors, float smallBlindAmount, float bigBlindAmount)
     {
         DPokerRoomPlayers[playerRolesActors[0]].SetPlayerRole(0); DPokerRoomPlayers[playerRolesActors[1]].SetPlayerRole(1); DPokerRoomPlayers[playerRolesActors[2]].SetPlayerRole(2);
-        DPokerRoomPlayers[playerRolesActors[1]].PutOutCoins(smallBlindAmount); DPokerRoomPlayers[playerRolesActors[2]].PutOutCoins(bigBlindAmount);
+        DPokerRoomPlayers[playerRolesActors[1]].PlaceBetAmount(smallBlindAmount); DPokerRoomPlayers[playerRolesActors[2]].PlaceBetAmount(bigBlindAmount);
+        TotalPokerPot += smallBlindAmount + bigBlindAmount;
         yield return new WaitForSecondsRealtime(0.5f);
     }
-    public void RoundEnd()
+    public IEnumerator RoundEnd(Dictionary<int, float> winnerPlayersAmount)
     {
         //IEnumerable<PokerPlayer> query = PlayerList.OrderBy(player => player.PlayerHand[0]);
-
+        InitializePlayerTurnImage(-1);
         ShowPlayerHandRankings();
-        FindPokerWinner();
+        PotTotalSet();
+        yield return new WaitForSecondsRealtime(1f);
+        //FindPokerWinner();
+        foreach (var playerActor in winnerPlayersAmount.Keys)
+        {
+            var amount = winnerPlayersAmount[playerActor];
+            TotalPokerPot -= amount;
+            PokerTotalPotObject.transform.GetChild(0).GetComponent<TMP_Text>().text = TotalPokerPot.ToString();
+            DPokerRoomPlayers[playerActor].GivePlayerCoins(amount, PokerTotalPotObject.transform);
+        }
+
+       
+        ResetAll();
+        //rest.SetActive(true);
+    }
+    void ResetAll()
+    {
         flopCardsList.Clear();
         nextCardIndex = 0;
         CurrentRoundPlayers.Clear();
-        //rest.SetActive(true);
     }
-    public void ShowPlayerBet(int actor, float betAmount, bool isRaise)
+    [SerializeField] GameObject PokerTotalPotObject;
+    [SerializeField] GameObject PlayersPots;
+    private float TotalPokerPot = 0;
+    public void PlacePlayerBet(int actor, float betAmount, bool isRaise)
     {
-        DPokerRoomPlayers[actor].PutOutCoins(betAmount);
+        DPokerRoomPlayers[actor].PlaceBetAmount(betAmount);
+        TotalPokerPot += betAmount;
+    }
+    public void ClearPlayerBets()
+    {
+        foreach(var player in CurrentRoundPlayers)
+        {
+            player.ClearBets();
+        }
     }
 
     void printMapIndex() { string indd = ""; foreach (var id in mapIndex) { indd += ", " + id; } Debug.Log("MAPINDEX: " + indd); }
     int CardPhase=0;
-    public void SetBoardTableCard(List<Card> cardList , int cardPhase)
+
+    public IEnumerator SetPokerPhaseCards(List<Card> cardList , int cardPhase)
     {
+        InitializePlayerTurnImage(-1);
+       yield return new WaitForSecondsRealtime(1f);
         CardPhase = cardPhase;
         switch (cardPhase)
         {
@@ -242,9 +273,24 @@ public class PokerClientManager : MonoBehaviour
         if(cardPhase == 3)
         Debug.Log(tableCards);
         ShowLocalPlayerRanking();
+        PotTotalSet();
         //ShowPlayerHandRankings();
+        //ClearPlayerBets();
 
-
+    }
+    void PotTotalSet()
+    {
+        foreach (Transform gameObj in PlayersPots.transform)
+        {
+            if (gameObj.gameObject.activeSelf)
+            {
+                var currentTransform = gameObj.position;
+                gameObj.transform.DOMove(PokerTotalPotObject.transform.position, 0.5f).OnComplete(delegate {
+                    PokerTotalPotObject.transform.GetChild(0).GetComponent<TMP_Text>().text = "₹" + TotalPokerPot.ToString();
+                    gameObj.transform.position = currentTransform; ClearPlayerBets();
+                });
+            }
+        }
     }
     void ShowLocalPlayerRanking()
     {
@@ -308,6 +354,17 @@ public class PokerClientManager : MonoBehaviour
         }
 
     }
+    public void InitializePlayerTurnImage(int actorNo)
+    {
+        foreach (var actor in DPokerRoomPlayers.Keys)
+        {
+            if(actor != actorNo)
+            DPokerRoomPlayers[actor].playerUI.HidePlayerTimer();
+        }
+        if (actorNo == -1) return;
+        DPokerRoomPlayers[actorNo].playerUI.ShowPlayerTimer();
+    }
+   
     public void ShowPlayerHandRankings()
     {
         for (int i=0; i< CurrentRoundPlayers.Count; i++)

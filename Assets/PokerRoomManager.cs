@@ -13,20 +13,52 @@ public class PokerRoomManager : MonoBehaviourPunCallbacks , IOnEventCallback
     public Dictionary<int, Player> DRoomPlayers = new Dictionary<int, Player>();
     public override void OnEnable()
     {
-        base.OnEnable();
+        //base.OnEnable();
         PhotonNetwork.AddCallbackTarget(this);
         PokerManager = GetComponent<PokerOnlineManager>();
     }
     public override void OnDisable()
     {
-        base.OnEnable();
+        //base.OnEnable();
         PhotonNetwork.RemoveCallbackTarget(this);
+       
+    }
+    public void CallEvent(byte evCode, object DataContent, RaiseEventOptions raiseEventOptions, SendOptions sendOptions)
+    {
+        PhotonNetwork.RaiseEvent(evCode, DataContent, raiseEventOptions, sendOptions);
+        //switch (evCode)
+        //{
+
+        //    case ACCEPTBET:
+        //        PhotonNetwork.RaiseEvent(ACCEPTBET, null, null, SendOptions.SendReliable);
+        //        break;
+        //    case CHECK:
+        //        PhotonNetwork.RaiseEvent(CHECK, null, null, SendOptions.SendReliable);
+        //        //Debug.Log("Check Called");
+        //        break;
+        //    case FOLD:
+        //        PhotonNetwork.RaiseEvent(FOLD, null, null, SendOptions.SendReliable);
+        //        break;
+        //    case PLACEBET:
+        //        RaiseEventOptions raiseEventOptions = new RaiseEventOptions { Receivers = ReceiverGroup.Others };
+        //        PhotonNetwork.RaiseEvent(PLACEBET, DataContent, raiseEventOptions, SendOptions.SendReliable);
+        //        break;
+        //}
+
     }
     public void OnEvent(EventData photonEvent)
     {
         PokerManager.PokerEvent(photonEvent);
     }
-
+    public void CallRpc(object data)
+    {
+        this.photonView.RPC(nameof(SendDataRpc), RpcTarget.Others, data);
+    }
+    [PunRPC]
+    void SendDataRpc(object data)
+    {
+        Debug.LogError(data);
+    }
     public void ConnectToServer()
     {
         PhotonNetwork.ConnectUsingSettings();

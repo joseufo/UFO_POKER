@@ -14,14 +14,14 @@ public class PokerCard : MonoBehaviour
     void Start()
     {
 
-        backSprite = PokerCardManager.instance.BackSprite;
+        backSprite = PokerUIManager.instance.CardBackSprite;
        
 
     }
     public void ShowBack()
     {
         this.gameObject.SetActive(true);
-        this.GetComponent<SpriteRenderer>().sprite = PokerCardManager.instance.BackSprite;
+        this.GetComponent<SpriteRenderer>().sprite = PokerUIManager.instance.CardBackSprite;
     }
     public void SetAndShowCard(Card cardData)
     {
@@ -30,7 +30,7 @@ public class PokerCard : MonoBehaviour
         //SetCardSprite();
         
         this.gameObject.SetActive(true);
-        StartCoroutine(RotShowCard(this.transform, transform, PokerCardManager.instance.GetCardSprite(CardData.Suit, CardData.Value)));
+        StartCoroutine(RotShowCard(this.transform, transform, PokerUIManager.instance.GetCardSprite(CardData.Suit, CardData.Value)));
 
     }
 
@@ -46,7 +46,7 @@ public class PokerCard : MonoBehaviour
     }
     public void SetCardSprite()
     {
-        GetComponent<SpriteRenderer>().sprite = PokerCardManager.instance.GetCardSprite(CardData.Suit, CardData.Value);
+        GetComponent<SpriteRenderer>().sprite = PokerUIManager.instance.GetCardSprite(CardData.Suit, CardData.Value);
     }
     float uncoverTime=3;
     IEnumerator RotShowCard(Transform card, bool uncover, Sprite frontSprite)
@@ -54,6 +54,7 @@ public class PokerCard : MonoBehaviour
 
         float minAngle = uncover ? 0 : 180;
         float maxAngle = uncover ? 180 : 0;
+        //float xAngle = card.transform.rotation.x;
         card.gameObject.GetComponent<SpriteRenderer>().flipX = true;
         float t = 0;
         bool uncovered = false;
@@ -63,7 +64,8 @@ public class PokerCard : MonoBehaviour
             t += Time.deltaTime * uncoverTime; ;
 
             float angle = Mathf.LerpAngle(minAngle, maxAngle, t);
-            card.eulerAngles = new Vector3(0, angle, 0);
+            //float angle2 = Mathf.LerpAngle(xAngle, -1*xAngle, t);
+            card.localEulerAngles = new Vector3(0, angle, 0);
 
             if (((angle >= 90 && angle < 180) || (angle >= 270 && angle < 360)) && !uncovered)
             {

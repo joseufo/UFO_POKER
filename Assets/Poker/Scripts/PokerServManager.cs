@@ -102,7 +102,7 @@ public class PokerServManager : MonoBehaviour
                 SetRiverCard();
                 break;
             case 5:
-                PokerClientManager.instance.RoundEnd();
+                PokerClientManager.instance.RoundEnd(null);
                 break;
         }
 
@@ -204,7 +204,7 @@ public class PokerServManager : MonoBehaviour
             //TableCards[i].SetCardData(Ca)
             cardShown++;
         }
-        PokerClientManager.instance.SetBoardTableCard(cardlist,1);
+        //PokerClientManager.instance.SetPokerPhaseCards(cardlist,1);
         gameState = PokerGameState.Turn;
 
     }
@@ -217,7 +217,7 @@ public class PokerServManager : MonoBehaviour
         //cardlist[0] = TableCards[3];
         cardlist.Add(TableCards[3]);
         cardShown++;
-        PokerClientManager.instance.SetBoardTableCard(cardlist,2);
+        //PokerClientManager.instance.SetPokerPhaseCards(cardlist,2);
         gameState = PokerGameState.River;
 
     }
@@ -228,7 +228,7 @@ public class PokerServManager : MonoBehaviour
         List<Card> cardlist = new List<Card>();
         cardlist.Add(TableCards[4]);
         cardShown++;
-        PokerClientManager.instance.SetBoardTableCard(cardlist,3);
+        //PokerClientManager.instance.SetPokerPhaseCards(cardlist,3);
         gameState = PokerGameState.End;
     }
     private void Update()
