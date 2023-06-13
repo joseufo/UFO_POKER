@@ -88,15 +88,18 @@ public class PokerRoomManager : MonoBehaviourPunCallbacks , IOnEventCallback
         {
             DRoomPlayers.Add(roomPlayer.ActorNumber, roomPlayer);
         }
-        PokerManager.ClientJoinedRoom();
+        //PokerManager.ClientJoinedRoom();
         
     }
     public override void OnPlayerEnteredRoom(Player newPlayer)
     {
         DRoomPlayers.Add(newPlayer.ActorNumber, newPlayer);
 
-        PokerManager.PlayerEnteredRoom(newPlayer);
+        //PokerManager.PlayerEnteredRoom(newPlayer);
     }
+
+
+   
     #endregion
 
     #region PhotonFail_override_callbacks
@@ -115,7 +118,11 @@ public class PokerRoomManager : MonoBehaviourPunCallbacks , IOnEventCallback
     }
     public override void OnDisconnected(DisconnectCause cause)
     {
-        Debug.LogError(" Disconnected: " + cause);
+        Debug.LogError(" Disconnected: " + cause  );
+        if(cause != DisconnectCause.DisconnectByServerLogic && cause !=DisconnectCause.DisconnectByClientLogic)
+        {
+            PhotonNetwork.ReconnectAndRejoin();
+        }
     }
     #endregion
 

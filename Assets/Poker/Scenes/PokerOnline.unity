@@ -189,6 +189,7 @@ MonoBehaviour:
     isObserver: 0
   Card1: {fileID: 31564009687428064}
   Card2: {fileID: 2034658053111353166}
+  spawnIndex: -1
 --- !u!1 &53303234
 GameObject:
   m_ObjectHideFlags: 0
@@ -2542,6 +2543,7 @@ MonoBehaviour:
     isObserver: 0
   Card1: {fileID: 983768598670128099}
   Card2: {fileID: 1291303429538748237}
+  spawnIndex: -1
 --- !u!1 &497487830
 GameObject:
   m_ObjectHideFlags: 0
@@ -5864,6 +5866,7 @@ MonoBehaviour:
     isObserver: 0
   Card1: {fileID: 4418688472387603178}
   Card2: {fileID: 2386617761482337860}
+  spawnIndex: -1
 --- !u!1 &1237603364
 GameObject:
   m_ObjectHideFlags: 0
@@ -5930,6 +5933,7 @@ MonoBehaviour:
     isObserver: 0
   Card1: {fileID: 6798754718965569062}
   Card2: {fileID: 4762181199713546888}
+  spawnIndex: -1
 --- !u!1 &1295900723
 GameObject:
   m_ObjectHideFlags: 0
@@ -7353,7 +7357,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1480857860
 RectTransform:
   m_ObjectHideFlags: 0
@@ -7702,6 +7706,7 @@ MonoBehaviour:
     isObserver: 0
   Card1: {fileID: 510937063919389260}
   Card2: {fileID: 1971340209579831010}
+  spawnIndex: -1
 --- !u!1 &1644745820
 GameObject:
   m_ObjectHideFlags: 0

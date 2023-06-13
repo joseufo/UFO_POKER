@@ -16,10 +16,14 @@ public class PlayerStatsUI : MonoBehaviour
 
     [SerializeField] Image PlayerTurnFillImage;
 
+    GameObject InfoParentObj;
+
+
     Vector3 scaleTurnFill;
     private void Start()
     {
         scaleTurnFill = PlayerTurnFillImage.transform.localScale;
+        InfoParentObj = InfoText.transform.parent.gameObject;
     }
     public void SetInitPlayerData(PlayerData playerData)
     {
@@ -45,6 +49,13 @@ public class PlayerStatsUI : MonoBehaviour
 
     Tween fillTween ;
     
+    public void ShowPlayerchoice(string choice)
+    {
+        InfoText.text = choice;
+        InfoParentObj.transform.DOKill();
+        InfoParentObj.SetActive(true);
+        InfoParentObj.transform.DOScale(new Vector3(1.05f, 1.05f, 1.05f), 1.05f).OnComplete(delegate { InfoParentObj.transform.localScale = new Vector3(1, 1, 1); InfoParentObj.SetActive(false); });
+    }
     public void ShowPlayerTimer()
     {
         

@@ -23,7 +23,7 @@ public class PokerPlayer : MonoBehaviour
     public PlayerData playerData = new PlayerData();
     // Start is called before the first frame update
     [SerializeField] PokerCard Card1, Card2;
-
+    public int spawnIndex=-1;
     public Card[] PlayerHand = new Card[2];
     [System.NonSerialized] public int[] rankScores = new int[3] { 0, 0, 0, };
     
@@ -43,7 +43,15 @@ public class PokerPlayer : MonoBehaviour
     {
         PlayerUIObject.SetActive(true);
         playerUI.SetInitPlayerData(playerData);
+        ClearBets();
         //BetObject.SetActive(true);
+    }
+    public void RemovePlayer()
+    {
+        ShowBackCards();
+        UnshowCard();
+        
+        PlayerUIObject.SetActive(false);
     }
    
     float currentPlacedAmount=0;
@@ -57,7 +65,7 @@ public class PokerPlayer : MonoBehaviour
         BetObj.SetActive(true);
         BetObj.transform.position = betObjInitPosition;
         BetObj.transform.GetChild(0).GetComponent<TMP_Text>().text = "₹" + amount.ToString();
-        BetObj.transform.DOMove(TableBetObj.transform.position, 0.5f).OnComplete(delegate {amountPlacedtxt.text = "₹"+currentPlacedAmount.ToString(); BetObj.SetActive(false); TableBetObj.SetActive(true); });
+        BetObj.transform.DOMove(TableBetObj.transform.position, 0.2f).OnComplete(delegate {amountPlacedtxt.text = "₹"+currentPlacedAmount.ToString(); BetObj.SetActive(false); TableBetObj.SetActive(true); });
     }
     public void ClearBets()
     {

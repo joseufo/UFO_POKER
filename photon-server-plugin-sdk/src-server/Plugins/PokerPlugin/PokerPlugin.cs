@@ -23,7 +23,7 @@ namespace PokerPlugin
         Dictionary<byte, object> generalData = new Dictionary<byte, object>();
         Dictionary<byte, object> playerTurnData = new Dictionary<byte, object>();
 
-        float smallBlindAmount = 1, bigBlindAmount = 2, currentHighBetAmount, totalPotAmount, foldPlayerAmount; //maxRaiseAmount, pot limit
+        float smallBlindAmount = 1, bigBlindAmount = 2; //maxRaiseAmount, pot limit
 
         private IPluginLogger pluginLogger;
 
@@ -34,12 +34,12 @@ namespace PokerPlugin
         const int maxPlayers = 5, minPlayers = 2;
 
         // to clients-
-        const byte INITSEAT = 51, SEATPLAYER = 55, TIMERGAMESTART = 101, ROUNDSTART = 103, TURNSTART = 105, SWITCHTURN = 115, ROOMSTATE = 118,
-            FLOPCARDS = 121, TURNCARD = 122, RIVERCARD = 123, ROUNDEND = 125;
+        const byte INITSEAT = 51, SEATPLAYER = 55, PLAYERQUIT = 60, TIMERGAMESTART = 101, ROUNDSTART = 103, TURNSTART = 105, SWITCHTURN = 115, ROOMSTATE = 118,
+            TABLECARDPHASE = 121, ROUNDEND = 125;
         //to server
         const byte PLACEBET = 20, ACCEPTBET = 22, CHECK = 23, FOLD = 25;
 
-        private bool gameStarted = false, roundInProgress = false;
+        private bool gameStarted = false, roundInProgress = false, allfolded = false;
 
         private IList<int> currentRoundActors = (IList<int>)new List<int>();
 
@@ -75,7 +75,7 @@ namespace PokerPlugin
 
             photonGameState = PluginHost.GetSerializableGameState();
             //photonGameState.EmptyRoomTTL = 600000;
-            photonGameState.PlayerTTL = 30000;
+            photonGameState.PlayerTTL = -1;
             photonGameState.MaxPlayers = maxPlayers;
             //playerScores.Add(info.UserId, 0);           
 
@@ -191,12 +191,12 @@ namespace PokerPlugin
             }
             this.pluginLogger.InfoFormat("\n Table Cards {0},   \n", tableCardString);
 
-            currentRoundPlayers.Clear();
+
+
             foreach (var actor in DRoomPlayersData.Keys)
             {
-                if (DRoomPlayersData[actor].Coins < bigBlindAmount) continue;
+                if (DRoomPlayersData[actor].Coins < bigBlindAmount) { continue; }
                 currentRoundActors.Add(actor);
-
                 currentRoundPlayers.Add(DRoomPlayersData[actor]);
                 var playerData = DRoomPlayersData[actor];
 
@@ -212,15 +212,27 @@ namespace PokerPlugin
                 this.generalData[(byte)3] = playerData.card1.cardData;
 
             }
+            int[] roundActors = new int[currentRoundActors.Count];
+            for (int i = 0; i < currentRoundActors.Count; i++)
+                roundActors[i] = currentRoundActors[i];
+
             if (currentRoundPlayers.Count < 2) return; // ONLY ONE PLAYER -- MATCHMAKING
-            if (dealerIndex >= currentRoundPlayers.Count) dealerIndex = -1;
+            if (dealerIndex >= currentRoundPlayers.Count - 1) dealerIndex = -1;
             int indexCount = currentRoundPlayers.Count;
             dealerIndex = (dealerIndex + 1) % indexCount;
             smallBlindIndex = currentRoundPlayers.Count > 2 ? (dealerIndex + 1) % indexCount : dealerIndex;
             bigBlindIndex = (smallBlindIndex + 1) % indexCount;
             currentPlayerTurnIndex = bigBlindIndex;//currentPlayerTurnIndex = (bigBlindIndex + 1)% indexCount;
             this.pluginLogger.InfoFormat("\n DealerIndex: {0} , SBlindIndex: {1} , BBlindIndex: {2}   \n", dealerIndex, smallBlindIndex, bigBlindIndex);
-            this.generalData[(byte)0] = currentRoundActors[dealerIndex]; this.generalData[(byte)1] = currentRoundActors[smallBlindIndex]; this.generalData[(byte)2] = currentRoundActors[bigBlindIndex];
+
+            float[] blindAmounts = new float[2] { smallBlindAmount, bigBlindAmount };
+            this.generalData[(byte)0] = blindAmounts;
+            Dictionary<int, int> playerRolesofActors = new Dictionary<int, int>();
+            playerRolesofActors[currentRoundActors[dealerIndex]] = 0; playerRolesofActors[currentRoundActors[smallBlindIndex]] = 1; playerRolesofActors[currentRoundActors[bigBlindIndex]] = 2;
+            this.generalData[(byte)1] = playerRolesofActors;
+            this.generalData[(byte)2] = (int[])roundActors;
+
+            //this.generalData[(byte)0] = currentRoundActors[dealerIndex]; this.generalData[(byte)1] = currentRoundActors[smallBlindIndex]; this.generalData[(byte)2] = currentRoundActors[bigBlindIndex];
             //DRoomPlayersData[currentRoundActors[smallBlindIndex]].PlaceBet(smallBlindAmount); DRoomPlayersData[currentRoundActors[bigBlindIndex]].PlaceBet(bigBlindAmount);
             PlayerPlaceBet(currentRoundActors[smallBlindIndex], smallBlindAmount);
             PlayerAcceptBet(currentRoundActors[bigBlindIndex], currentRoundPlayers[bigBlindIndex].BetDebt);
@@ -239,7 +251,7 @@ namespace PokerPlugin
         private void TurnStartCardDistribute()
         {
             this.PluginHost.StopTimer(delayTimer);
-            foreach (var actor in DRoomPlayersData.Keys)
+            foreach (var actor in currentRoundActors)
             {
                 IList<int> temPlayer = new List<int>() { actor };
 
@@ -258,6 +270,7 @@ namespace PokerPlugin
                 this.PluginHost.BroadcastEvent(temPlayer, 0, TURNSTART, this.generalData, (byte)0);
 
             }
+
             SwitchPlayerTurn(currentRoundActors[currentPlayerTurnIndex]);
             currentRoundPlayers[bigBlindIndex].turnComplete = false;
 
@@ -274,7 +287,7 @@ namespace PokerPlugin
         {
             float totalPot = 0;
             string winPotMsg = "TotalPOT : ";
-            
+
             WinnersPrizes.Clear();
             while (PotPlayerList.Count > 0)
             {
@@ -282,7 +295,7 @@ namespace PokerPlugin
                 var minBet = PotPlayerList[0].TotalBet;
                 foreach (var player in PotPlayerList)
                 {
-                    
+
                     if (player.TotalBet < minBet)
                         minBet = player.TotalBet;
 
@@ -304,7 +317,7 @@ namespace PokerPlugin
                     PotPlayerList.Remove(player);
                 TotalPots.Add(potData);
             }
-           
+
             winPotMsg += totalPot.ToString() + "  RoundWinner(s):  ";
 
             foreach (var potData in TotalPots)
@@ -314,7 +327,7 @@ namespace PokerPlugin
                 foreach (var winnerPlayer in winners)
                 {
                     //WinnersPrizes
-                    
+
                     if (WinnersPrizes.ContainsKey(winnerPlayer.playerActorNo))
                         WinnersPrizes[winnerPlayer.playerActorNo] += (potData.PotAmount / split);
                     else
@@ -334,7 +347,7 @@ namespace PokerPlugin
             //this.PluginHost.StopTimer(delayTimer);
             Dictionary<int, int[]> allPlayerCards = new Dictionary<int, int[]>();
             string playerPots = "";
-
+            this.generalData.Clear();
             foreach (var player in currentRoundPlayers)
             {
                 int[] playerCards = new int[4];
@@ -342,10 +355,10 @@ namespace PokerPlugin
                 allPlayerCards.Add(player.playerActorNo, playerCards);
                 if (player.TotalBet > 0)
                     PotPlayerList.Add(player);
-                playerPots += "(" + player.playerActorNo + ")" + player.playerName + "[" + player.TotalBet + "]  ,  ";
+                playerPots += "|" + player.playerActorNo + "|" + player.playerName + "[" + player.TotalBet + "]::(" + player.Coins +")  ,  ";
             }
-            this.pluginLogger.InfoFormat("PlayerPots: {0}  \n", playerPots);
-            this.generalData[(byte)0] = allPlayerCards;
+            this.pluginLogger.InfoFormat("PlayerPotData: {0}  \n", playerPots);
+           
             foreach (var player in currentRoundPlayers)
             {
                 //this.pluginLogger.InfoFormat("{0} Cards: {1} , {2}  \n", player.playerName, player.card1data, player.card2data);
@@ -357,21 +370,36 @@ namespace PokerPlugin
             {
                 DRoomPlayersData[playerActor].Coins += WinnersPrizes[playerActor];
             }
-            this.generalData[(byte)1] = WinnersPrizes;
-            this.PluginHost.BroadcastEvent(currentRoundActors, 0, ROUNDEND, this.generalData, (byte)0);
+
             roundInProgress = false;
             pokerPhase = 0;
-            foreach (var player in currentRoundPlayers)
+            List<int> actorsToRemove = new List<int>();
+            foreach (var actor in DRoomPlayersData.Keys)
             {
-                player.TotalBet = 0;
-                player.CurrentBet = 0;
-                player.BetDebt = 0;
-                player.turnComplete = false;
-            } 
-            this.pluginLogger.InfoFormat("\n PokerRound END  \n");
+                DRoomPlayersData[actor].TotalBet = 0;
+                DRoomPlayersData[actor].CurrentBet = 0;
+                DRoomPlayersData[actor].BetDebt = 0;
+                DRoomPlayersData[actor].turnComplete = false;
+                DRoomPlayersData[actor].underAllin = false;
+                DRoomPlayersData[actor].isFolded = false;
+                if (DRoomPlayersData[actor].Coins < bigBlindAmount) actorsToRemove.Add(actor);
+            }
+            int[] playerQuitActors = new int[actorsToRemove.Count];
+            for (int i = 0; i < actorsToRemove.Count; i++)
+            {
+                playerQuitActors[i] = actorsToRemove[i];
+                RemovePlayerFromRoom(actorsToRemove[i], true);
+            }
+            if (allfolded) allPlayerCards.Clear();
+
+            this.generalData[(byte)0] = allPlayerCards;
+            this.generalData[(byte)1] = WinnersPrizes;
+            this.generalData[(byte)2] = playerQuitActors;
+            this.PluginHost.BroadcastEvent(currentRoundActors, 0, ROUNDEND, this.generalData, (byte)0);
+            this.pluginLogger.InfoFormat("\n PokerRound END {0} \n", allPlayerCards);
             this.currentRoundCard.Clear();
 
-
+            allfolded = false;
             //this.pluginLogger.InfoFormat("RoundWinner(s): {0}  \n", PokEval.ResultText);
             TableCards.Clear();
             currentRoundPlayers.Clear();
@@ -399,13 +427,14 @@ namespace PokerPlugin
             if (currentActor != currentRoundActors[currentPlayerTurnIndex]) return;
             bool cycleComplete = true;
             currentRoundPlayers[currentPlayerTurnIndex].turnComplete = true;
-            int allInCount = 0, foldedCount =0;
+            int allInCount = 0, foldedCount = 0;
             foreach (var player in currentRoundPlayers)
             {
+                if (player.underAllin) { allInCount++; player.turnComplete = true; }
+                if (player.isFolded) { foldedCount++; player.turnComplete = true; }
                 if (!player.turnComplete)
                     cycleComplete = false;
-                if (player.underAllin) allInCount++;
-                if (player.underAllin) foldedCount++;
+
             }
             //bool cycleComplete = currentPlayerTurn % currentRoundActors.Count == 0 ? true : false;
             //playerTurnIndex++;
@@ -422,33 +451,28 @@ namespace PokerPlugin
                     break;
 
             }
-            bool roundEnd = false;
-            if (foldedCount >= currentRoundPlayers.Count - 1) roundEnd = true;
-            if (allInCount >= currentRoundPlayers.Count - 1)
+           
+            if (foldedCount >= currentRoundPlayers.Count - 1)
             {
-                roundEnd = true;
-                while (pokerPhase <= 3)
-                {
-                    pokerPhase++;
-                    SendTableCardsToPlayers(pokerPhase);
-
-
-                }
+                allfolded = true;
                 
-                
-            }
-            if(roundEnd)
-            {
-                currentHighBetAmount = 0;
-               
                 EndPokerRound();
                 return;
             }
+            if (allInCount >= (currentRoundPlayers.Count - 1 - foldedCount))
+            {
+                
+                pokerPhase = 5; SendTableCardsToPlayers(pokerPhase);
+                //while (pokerPhase <= 3) { pokerPhase++; SendTableCardsToPlayers(pokerPhase); }               
+                EndPokerRound();
+                return;
+            }
+            
 
             this.pluginLogger.InfoFormat(" SWITCH PLAYER TURN TO: {0} , PokerPhase: {1} , PlayerDebt: {2}\n", currentRoundPlayers[currentPlayerTurnIndex].playerName, pokerPhase, currentRoundPlayers[currentPlayerTurnIndex].BetDebt);
             if (cycleComplete) //currentPlayerTurn >= (currentRoundPlayers.Count-1
             {
-                currentHighBetAmount = 0;
+
                 foreach (var player in currentRoundPlayers)
                 {
                     player.turnComplete = false;
@@ -489,12 +513,12 @@ namespace PokerPlugin
             this.PluginHost.BroadcastEvent(currentRoundActors, 0, SWITCHTURN, this.playerTurnData, (byte)0);
             this.playerTimer = this.PluginHost.CreateOneTimeTimer(null, new Action(this.PlayerTimerEndChoice), playerTimeMs);
         }
-        int playerTimeMs = 15000;
+        int playerTimeMs = 16000;
         object playerTimer;
         void PlayerTimerEndChoice()
         {
             this.PluginHost.StopTimer(playerTimer);
-
+            PlayerFold(currentRoundPlayers[currentPlayerTurnIndex].playerActorNo);
         }
 
         void PlayerPlaceBet(int actorNO, float betAmount)
@@ -504,7 +528,7 @@ namespace PokerPlugin
                 player.BetDebt += betAmount;
                 player.turnComplete = false;
             }
-            currentHighBetAmount += betAmount;
+
             DRoomPlayersData[actorNO].PlaceOrAcceptBet(betAmount);
             if (DRoomPlayersData[actorNO].BetDebt == 0)
                 DRoomPlayersData[actorNO].turnComplete = true;
@@ -525,6 +549,8 @@ namespace PokerPlugin
         void PlayerFold(int actorNo)
         {
             DRoomPlayersData[actorNo].isFolded = true;
+            this.generalData[(byte)0] = actorNo;
+            this.PluginHost.BroadcastEvent((byte)0, 0, (byte)0, FOLD, this.generalData, (byte)0);
             //int prevActorIndex = currentPlayerTurnIndex-1 ==-1? currentRoundActors.Count - 1 : currentPlayerTurnIndex -1;
             //var prevActor = currentRoundActors[prevActorIndex];
             //PlayerData foldedPlayer = DRoomPlayersData[actorNo];
@@ -532,6 +558,18 @@ namespace PokerPlugin
             //currentRoundActors.Remove(foldedPlayer.playerActorNo);
             //currentRoundPlayers.Remove(foldedPlayer);
             //currentPlayerTurnIndex = currentRoundActors.IndexOf(prevActor);
+            SwitchPlayerTurn(actorNo);
+        }
+        void RemovePlayerFromRoom(int actorNo, bool roundEnd)
+        {
+            DRoomPlayersData[actorNo].isFolded = true;
+            DRoomPlayersData.Remove(actorNo);
+            DActorPositon.Remove(actorNo);
+            this.PluginHost.RemoveActor(actorNo, "playerRemoval");
+            this.generalData[(byte)0] = actorNo;
+            if (!roundEnd)
+                this.PluginHost.BroadcastEvent((byte)0, 0, (byte)0, PLAYERQUIT, this.generalData, (byte)0);
+
         }
 
         int currentSeatPos = -1;
@@ -574,9 +612,9 @@ namespace PokerPlugin
             if (info.Request.EvCode == FOLD)
             {
 
-                this.pluginLogger.InfoFormat("\n Fold called by Actor {0} - {1} -FOLD, CurrentPlayerTurn {2} \n... RoundPlayercount:- {3}..\n", info.ActorNr, info.Nickname, currentPlayerTurnIndex, DRoomPlayersData[currentRoundActors[currentPlayerTurnIndex - 1]].playerName, currentRoundPlayers.Count);
+                this.pluginLogger.InfoFormat("\n Fold called by Actor {0} - {1} -FOLD, CurrentPlayerTurn {2} \n... RoundPlayercount:- {3}..\n", info.ActorNr, info.Nickname, currentPlayerTurnIndex, DRoomPlayersData[currentRoundActors[currentPlayerTurnIndex]].playerName, currentRoundPlayers.Count);
                 if (currentRoundActors[currentPlayerTurnIndex] != info.ActorNr) return;
-                PlayerFold(info.ActorNr); 
+                PlayerFold(info.ActorNr);//                SwitchPlayerTurn(info.ActorNr);
                 this.PluginHost.StopTimer(playerTimer);
 
             }
@@ -613,6 +651,8 @@ namespace PokerPlugin
         }
         void SendTableCardsToPlayers(int phase)
         {
+            this.generalData.Clear();
+            this.generalData[(byte)0] = (object)phase;
             switch (phase)
             {
                 case 1:
@@ -622,24 +662,33 @@ namespace PokerPlugin
                         cards[i] = TableCards[i].suit;
                         cards[i + 3] = TableCards[i].rank;
                     }
-                    this.generalData[(byte)0] = (object)cards;
-                    this.PluginHost.BroadcastEvent(currentRoundActors, 0, FLOPCARDS, this.generalData, (byte)0);
+                    this.generalData[(byte)1] = (object)cards;
+                    this.PluginHost.BroadcastEvent(currentRoundActors, 0, TABLECARDPHASE, this.generalData, (byte)0);
                     break;
                 case 2:
                     int[] card4 = new int[2];
                     card4[0] = TableCards[3].suit;
                     card4[1] = TableCards[3].rank;
-                    this.generalData[(byte)0] = card4;
-                    this.PluginHost.BroadcastEvent(currentRoundActors, 0, TURNCARD, this.generalData, (byte)0);
+                    this.generalData[(byte)2] = card4;
+                    this.PluginHost.BroadcastEvent(currentRoundActors, 0, TABLECARDPHASE, this.generalData, (byte)0);
                     break;
                 case 3:
                     int[] card5 = new int[2];
                     card5[0] = TableCards[4].suit;
                     card5[1] = TableCards[4].rank;
-                    this.generalData[(byte)0] = card5;
-                    this.PluginHost.BroadcastEvent(currentRoundActors, 0, RIVERCARD, this.generalData, (byte)0);
+                    this.generalData[(byte)3] = card5;
+                    this.PluginHost.BroadcastEvent(currentRoundActors, 0, TABLECARDPHASE, this.generalData, (byte)0);
                     break;
-
+                case 5:
+                    CardData[] AllTableCards = new CardData[5];
+                    for (int i = 0; i < 3; i++)
+                    {
+                        AllTableCards[i] = TableCards[i].cardData;
+                    }
+                    AllTableCards[3] = TableCards[3].cardData; AllTableCards[4] = TableCards[4].cardData;
+                    this.generalData[(byte)5] = AllTableCards;
+                    this.PluginHost.BroadcastEvent(currentRoundActors, 0, TABLECARDPHASE, this.generalData, (byte)0);
+                    break;
 
             }
             //this.delayTimer = this.PluginHost.CreateOneTimeTimer(null, new Action(this.SendSwitchTurnEvent), 1000);

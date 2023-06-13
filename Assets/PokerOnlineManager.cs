@@ -17,13 +17,13 @@ public class PokerOnlineManager : MonoBehaviour
     [SerializeField] GameObject PlayerChoicePanel;
     [SerializeField] TMP_Text CallCheckText;
     [SerializeField] TMP_Text BetText;
-    bool AutoCheck;
+    
     public TMP_InputField NameInput;
     public Button JoinCreateButton;
     public TMP_Text InfoText;
     // Photon Event Codes from Server
-    const byte INITSEAT = 51, SEATPLAYER = 55, TIMERGAMESTART = 101, ROUNDSTART = 103, TURNSTART = 105, SWITCHTURN = 115, ROOMSTATE = 118,
-            FLOPCARDS = 121, TURNCARD = 122, RIVERCARD = 123, ROUNDEND = 125;
+    const byte INITSEAT = 51, SEATPLAYER = 55, PLAYERQUIT = 60, TIMERGAMESTART = 101, ROUNDSTART = 103, TURNSTART = 105, SWITCHTURN = 115, ROOMSTATE = 118,
+            TABLECARDPHASE = 121, TURNCARD = 122, RIVERCARD = 123, ROUNDEND = 125;
     // Photon Event Codes from User
     const byte PLACEBET = 20, ACCEPTBET = 22, CHECK = 23, FOLD = 25;
 
@@ -94,68 +94,7 @@ public class PokerOnlineManager : MonoBehaviour
 
 
     }
-    public void ClientJoinedRoom()
-    {
-        return;
-        Debug.Log("Joined Room, Room ID: " + PhotonNetwork.CurrentRoom.Name + " \n UserId : " + PhotonNetwork.LocalPlayer.UserId + "\n ActNo : " + PhotonNetwork.LocalPlayer.ActorNumber);
-        InfoText.text = "Joined..." + (PhotonNetwork.CurrentRoom.PlayerCount >= minPlayers ? "Waiting to Start" : "Waiting For Players");
-        //if(PhotonNetwork.CurrentRoom.CustomProperties["cSeat"] != null)
-
-        int mySeat = (int)PhotonNetwork.CurrentRoom.CustomProperties["AvlSeat"];
-        Hashtable seat = PhotonNetwork.CurrentRoom.CustomProperties;
-        seat["AvlSeat"] = mySeat + 1;
-
-        //Debug.Log(mySeat);
-        PlayerData dataPlayer = new PlayerData();
-        dataPlayer.playerName = playerNametest;
-        dataPlayer.playerActorNo = PhotonNetwork.LocalPlayer.ActorNumber;
-        //dataPlayer.playerPosition = PhotonNetwork.LocalPlayer.ActorNumber;
-        dataPlayer.seatPos = mySeat;
-        PokerClientManager.instance.AddLocalPlayer(dataPlayer);
-        List<PlayerData> roomPlayerList = new List<PlayerData>();
-        foreach (var photonPlayer in PhotonNetwork.PlayerListOthers)
-        {
-            var playerdata = new PlayerData();
-            playerdata.playerName = photonPlayer.NickName;
-            playerdata.playerActorNo = photonPlayer.ActorNumber;
-            playerdata.seatPos = photonPlayer.ActorNumber;
-            Debug.Log(photonPlayer.NickName + " : " + photonPlayer.ActorNumber);
-            if (photonPlayer.CustomProperties.ContainsKey("position"))
-            {
-                playerdata.seatPos = (int)photonPlayer.CustomProperties["position"];
-            }
-            roomPlayerList.Add(playerdata);
-
-        }
-        PokerClientManager.instance.AddRoomOpponents(roomPlayerList);
-
-
-
-        countDownTimer = true;
-        //timeToBegin = PhotonNetwork.CurrentRoom.CustomProperties["timerTillStart"] != null ? int.Parse(PhotonNetwork.CurrentRoom.CustomProperties["timerTillStart"].ToString()) : -1;
-        //if (timeToBegin != -1)
-        //{
-        //    StartCoroutine(startTimer());
-        //}
-        //else
-        //{
-        //    stopTimer();
-        //}
-    }
-    public void PlayerEnteredRoom(Player newPlayer)
-    {
-        return;
-        Debug.Log("Player Joined -" + " \n UserId : " + newPlayer.UserId + "\n ActNo : " + newPlayer.ActorNumber);
-        if (!roundStarted)
-            InfoText.text = "Joined..." + (PhotonNetwork.CurrentRoom.PlayerCount >= minPlayers ? "Waiting to Start" : "Waiting For Players");
-        PlayerData player = new PlayerData();
-        player.playerName = newPlayer.NickName;
-        player.seatPos = newPlayer.ActorNumber;
-        player.playerActorNo = newPlayer.ActorNumber;
-        PokerClientManager.instance.AddOpponent(player);
-    }
-
-
+   
 
 
     #endregion
@@ -171,7 +110,7 @@ public class PokerOnlineManager : MonoBehaviour
         //PhotonNetwork.JoinRandomOrCreateRoom(roomProps,(byte)5,MatchmakingMode.SerialMatching, null,null,null, roomOptions,null);
         PhotonNetwork.JoinRandomOrCreateRoom();
     }
-    public void AutoCheckChange(bool value) { AutoCheck = value; if (isMyturn) CallORCheckButton(); }
+   
 
     float currentCallAmount;
     public void CallORCheckButton()
@@ -189,7 +128,7 @@ public class PokerOnlineManager : MonoBehaviour
     public void RaiseAmountConfig()
     {
         var playerDatas = PokerClientManager.instance.DPokerRoomPlayers;
-        RaiseSlider.maxValue = isMyturn ? playerDatas[PhotonNetwork.LocalPlayer.ActorNumber].playerData.Coins : 100f;
+        RaiseSlider.maxValue = playerDatas[PhotonNetwork.LocalPlayer.ActorNumber].playerData.Coins - currentCallAmount;
         RaiseSlider.minValue = BigBlindAmount;
         RaiseSlider.value = RaiseSlider.minValue;
         amountString = RaiseSlider.minValue.ToString();
@@ -227,7 +166,7 @@ public class PokerOnlineManager : MonoBehaviour
 
         RoomManager.CallEvent(FOLD, null, null, SendOptions.SendReliable);
         InfoText.text = " You Folded  ";
-        PokerClientManager.instance.Fold();
+        //PokerClientManager.instance.PlayerFold();
     }
 
 
@@ -316,11 +255,11 @@ public class PokerOnlineManager : MonoBehaviour
 
         if (photonEvent.Code == ROUNDSTART)
         {
-            int[] playerRolesActors = new int[3];
-            playerRolesActors[0] = (int)photonEvent.Parameters[0];
-            playerRolesActors[1] = (int)photonEvent.Parameters[1];
-            playerRolesActors[2] = (int)photonEvent.Parameters[2];
-            PokerClientManager.instance.RoundStart(playerRolesActors, SmallBlindAmount, BigBlindAmount);            
+            float[] blindAmounts =(float[])photonEvent.Parameters[0];
+            SmallBlindAmount = blindAmounts[0]; BigBlindAmount = blindAmounts[1];            
+            Dictionary<int, int> playerRolesActrs = (Dictionary<int, int>)photonEvent.Parameters[1];
+            int[] currentRoundActors = (int[])photonEvent.Parameters[2];
+            PokerClientManager.instance.RoundStart(playerRolesActrs, currentRoundActors, SmallBlindAmount, BigBlindAmount);
             roundStarted = true;
         }
         if (photonEvent.Code == TURNSTART)
@@ -360,7 +299,7 @@ public class PokerOnlineManager : MonoBehaviour
             //{
             //    PokerClientManager.instance.PlayerSitBack((int)photonEvent.Parameters[0]);
             //}
-            float playerCallAmount =(float)photonEvent.Parameters[0];
+            float playerCallAmount = (float)photonEvent.Parameters[0];
             bool cycleComplete = (bool)photonEvent.Parameters[1];
             int turnActorNo = (int)photonEvent.Parameters[2];
             if (cycleComplete) InfoText.text = "Cards Deal";
@@ -368,45 +307,55 @@ public class PokerOnlineManager : MonoBehaviour
             PokerUIManager.instance.HideOutPlayerChoicePanel();
             var playTurn = SwitchToPlayerTurn(turnActorNo, delay, playerCallAmount);
             StartCoroutine(playTurn);
-            
+
         }
-        if (photonEvent.Code == FLOPCARDS)
+        if (photonEvent.Code == TABLECARDPHASE)
         {
-            var cards = (int[])photonEvent.Parameters[0];
-            List<Card> flopCardList = new List<Card>();
-            for (int i = 0; i < 3; i++)
+            PokerUIManager.instance.HideOutPlayerChoicePanel();
+            int phase = (int)photonEvent.Parameters[0];
+            List<Card> tblCards = new List<Card>();
+            switch (phase)
             {
-                Card card = new Card(cards[i], cards[i + 3]);
-                flopCardList.Add(card);
+                case 1:  //flop cards
+                    var cards = (int[])photonEvent.Parameters[1];
+
+                    for (int i = 0; i < 3; i++)
+                    {
+                        Card card = new Card(cards[i], cards[i + 3]);
+                        tblCards.Add(card);
+                    }
+                    break;
+
+                case 2:
+                    var turnCard = (int[])photonEvent.Parameters[2];
+                    Card tcard = new Card(turnCard[0], turnCard[1]);
+                    tblCards.Add(tcard);
+                    break;
+
+                case 3:
+                    var riverCard = (int[])photonEvent.Parameters[3];
+                    Card rcard = new Card(riverCard[0], riverCard[1]);
+                    tblCards.Add(rcard);
+                    break;
+
+                case 5:var allCards = (CardData[])photonEvent.Parameters[5];
+                    foreach(var card in allCards)
+                    {
+                        tblCards.Add(new Card(card.suit, card.rank));
+                    }
+
+                    break;
             }
-            PokerUIManager.instance.HideOutPlayerChoicePanel();
-            var coroutine = PokerClientManager.instance.SetPokerPhaseCards(flopCardList, 1);
+            var coroutine = PokerClientManager.instance.SetPokerPhaseCards(tblCards, phase);
             StartCoroutine(coroutine);
 
+
         }
-        if (photonEvent.Code == TURNCARD)
+        if (photonEvent.Code == PLAYERQUIT)
         {
-            var cards = (int[])photonEvent.Parameters[0];
-            List<Card> turncard = new List<Card>();
-            Card card = new Card(cards[0], cards[1]);
-            turncard.Add(card);
-            PokerUIManager.instance.HideOutPlayerChoicePanel();
-            var coroutine = PokerClientManager.instance.SetPokerPhaseCards(turncard, 2);
-            StartCoroutine(coroutine);
 
         }
-        if (photonEvent.Code == RIVERCARD)
-        {
-            var cards = (int[])photonEvent.Parameters[0];
-            List<Card> rivercard = new List<Card>();
-            Card card = new Card(cards[0], cards[1]);
-            rivercard.Add(card);
-            PokerUIManager.instance.HideOutPlayerChoicePanel();
-            var coroutine = PokerClientManager.instance.SetPokerPhaseCards(rivercard, 3);
-            StartCoroutine(coroutine);
-
-
-        }
+        
         if (photonEvent.Code == ROUNDEND)
         {
             Debug.Log("RoundEnd");
@@ -414,6 +363,7 @@ public class PokerOnlineManager : MonoBehaviour
             isMyturn = false;
             var allPlayerCards = (Dictionary<int, int[]>)photonEvent.Parameters[0];
             var WinnersPlayers = (Dictionary<int, float>)photonEvent.Parameters[1];
+            var playerQuits = (int[])photonEvent.Parameters[2];
             foreach (var pactor in allPlayerCards.Keys)
             {
                 Card card1 = new Card(allPlayerCards[pactor][0], allPlayerCards[pactor][1]);
@@ -421,7 +371,7 @@ public class PokerOnlineManager : MonoBehaviour
                 PokerClientManager.instance.DPokerRoomPlayers[pactor].SetAndShowPlayerCards(card1, card2);
             }
             PokerUIManager.instance.HideOutPlayerChoicePanel();
-            var courotine = PokerClientManager.instance.RoundEnd(WinnersPlayers);
+            var courotine = PokerClientManager.instance.RoundEnd(WinnersPlayers, playerQuits, allPlayerCards.Keys.Count == 0);
             StartCoroutine(courotine);
             roundStarted = false;
             //PhotonNetwork.Disconnect();
@@ -433,15 +383,25 @@ public class PokerOnlineManager : MonoBehaviour
             var data = (Dictionary<byte, object>)photonEvent.CustomData;
 
             PokerClientManager.instance.PlacePlayerBet(photonEvent.Sender, (float)data[0] + (float)data[1], true);
-            Debug.LogError("PlaceBetPlayer: " + photonEvent.Sender + " Amount: " + (float)data[0] + (float)data[1]);
+            Debug.Log("PlaceBetPlayer: " + photonEvent.Sender + " Amount: " + (float)data[0] + (float)data[1]);
         }
         if (photonEvent.Code == ACCEPTBET)
         {
             //Debug.Log("Playeraccept: "+(int)photonEvent.Sender);
             var data = photonEvent.CustomData;
-            if ((float)data != 0)
-                PokerClientManager.instance.PlacePlayerBet(photonEvent.Sender, (float)data, true);
-            Debug.LogError("AcceptBetPlayer: " + photonEvent.Sender + " Amount: " + (float)data);
+           
+             PokerClientManager.instance.PlacePlayerBet(photonEvent.Sender, (float)data, false);
+            Debug.Log("AcceptBetPlayer: " + photonEvent.Sender + " Amount: " + (float)data);
+        }
+        if (photonEvent.Code == FOLD)
+        {
+             
+            int actor = photonEvent.Sender;
+            Debug.Log("PLAYERFOLD SENDER:  " + actor);
+            if (actor == -1)
+                actor = (int)photonEvent.Parameters[0];
+           
+            PokerClientManager.instance.PlayerFold(actor);
         }
         //Debug.Log(photonEvent.Code);
         if (photonEvent.Code == 12)
@@ -451,7 +411,7 @@ public class PokerOnlineManager : MonoBehaviour
         //
     }
 
-    private IEnumerator SwitchToPlayerTurn(int turnActorNo, float delay, float actorCallAmount )
+    private IEnumerator SwitchToPlayerTurn(int turnActorNo, float delay, float actorCallAmount)
     {
         yield return new WaitForSecondsRealtime(delay);
         PokerClientManager.instance.InitializePlayerTurnImage(turnActorNo);
@@ -460,14 +420,14 @@ public class PokerOnlineManager : MonoBehaviour
             InfoText.text = "Your Turn";
 
             isMyturn = true;
-            if (AutoCheck) CallORCheckButton();
+            
             currentCallAmount = actorCallAmount;
             float remainingCoins = PokerClientManager.instance.DPokerRoomPlayers[PhotonNetwork.LocalPlayer.ActorNumber].playerData.Coins;
             if (actorCallAmount >= remainingCoins)
             {
                 currentCallAmount = remainingCoins;
             }
-                
+
             if (currentCallAmount > 0f)
             {
                 CallCheckText.text = "CALL [" + currentCallAmount + "]";
@@ -528,5 +488,71 @@ public class PokerOnlineManager : MonoBehaviour
         countDownTimer = false;
         //InfoText.text = "";
     }
+
+
+
+
+    //public void ClientJoinedRoom()
+    //{
+    //    return;
+    //    Debug.Log("Joined Room, Room ID: " + PhotonNetwork.CurrentRoom.Name + " \n UserId : " + PhotonNetwork.LocalPlayer.UserId + "\n ActNo : " + PhotonNetwork.LocalPlayer.ActorNumber);
+    //    InfoText.text = "Joined..." + (PhotonNetwork.CurrentRoom.PlayerCount >= minPlayers ? "Waiting to Start" : "Waiting For Players");
+    //    //if(PhotonNetwork.CurrentRoom.CustomProperties["cSeat"] != null)
+
+    //    int mySeat = (int)PhotonNetwork.CurrentRoom.CustomProperties["AvlSeat"];
+    //    Hashtable seat = PhotonNetwork.CurrentRoom.CustomProperties;
+    //    seat["AvlSeat"] = mySeat + 1;
+
+    //    //Debug.Log(mySeat);
+    //    PlayerData dataPlayer = new PlayerData();
+    //    dataPlayer.playerName = playerNametest;
+    //    dataPlayer.playerActorNo = PhotonNetwork.LocalPlayer.ActorNumber;
+    //    //dataPlayer.playerPosition = PhotonNetwork.LocalPlayer.ActorNumber;
+    //    dataPlayer.seatPos = mySeat;
+    //    PokerClientManager.instance.AddLocalPlayer(dataPlayer);
+    //    List<PlayerData> roomPlayerList = new List<PlayerData>();
+    //    foreach (var photonPlayer in PhotonNetwork.PlayerListOthers)
+    //    {
+    //        var playerdata = new PlayerData();
+    //        playerdata.playerName = photonPlayer.NickName;
+    //        playerdata.playerActorNo = photonPlayer.ActorNumber;
+    //        playerdata.seatPos = photonPlayer.ActorNumber;
+    //        Debug.Log(photonPlayer.NickName + " : " + photonPlayer.ActorNumber);
+    //        if (photonPlayer.CustomProperties.ContainsKey("position"))
+    //        {
+    //            playerdata.seatPos = (int)photonPlayer.CustomProperties["position"];
+    //        }
+    //        roomPlayerList.Add(playerdata);
+
+    //    }
+    //    PokerClientManager.instance.AddRoomOpponents(roomPlayerList);
+
+
+
+    //    countDownTimer = true;
+    //    //timeToBegin = PhotonNetwork.CurrentRoom.CustomProperties["timerTillStart"] != null ? int.Parse(PhotonNetwork.CurrentRoom.CustomProperties["timerTillStart"].ToString()) : -1;
+    //    //if (timeToBegin != -1)
+    //    //{
+    //    //    StartCoroutine(startTimer());
+    //    //}
+    //    //else
+    //    //{
+    //    //    stopTimer();
+    //    //}
+    //}
+    //public void PlayerEnteredRoom(Player newPlayer)
+    //{
+    //    return;
+    //    Debug.Log("Player Joined -" + " \n UserId : " + newPlayer.UserId + "\n ActNo : " + newPlayer.ActorNumber);
+    //    if (!roundStarted)
+    //        InfoText.text = "Joined..." + (PhotonNetwork.CurrentRoom.PlayerCount >= minPlayers ? "Waiting to Start" : "Waiting For Players");
+    //    PlayerData player = new PlayerData();
+    //    player.playerName = newPlayer.NickName;
+    //    player.seatPos = newPlayer.ActorNumber;
+    //    player.playerActorNo = newPlayer.ActorNumber;
+    //    PokerClientManager.instance.AddOpponent(player);
+    //}
+
+
 
 }
